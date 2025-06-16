@@ -1,2 +1,9 @@
-/* For information on how to create your own theme, please see:
-http://ionicframework.com/docs/theming/ */
+* {
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+    background: none;
+    user-select: none;
+    text-decoration: none;
+    list-style: none;
+}
