@@ -1,0 +1,30 @@
+.home-page {
+    background-color: var(--background-color);
+    width: 100%;
+    height: 100dvh;
+}
+.title-app {
+    color: var(--primary-color);
+    font-size: 2rem;
+    text-shadow: 2px 1px 1px var(--secondary-color);
+}
+.ion-segment {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+.ion-width-icon-home {
+    width: 25px;
+    height: 25px;
+}
+.ion-nav-link {
+    margin-top: 1rem !important;
+    color: var(--co-black-1);
+}
+.register-txt {
+    color: var(--primary-color);
+    text-decoration: underline;
+    margin-left: .5rem;
+    font-weight: bold;
+}
