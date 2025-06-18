@@ -2,8 +2,7 @@
 
 .login-content {
   --background: var(--background-color);
-  --padding-top: 0;
-  --padding-bottom: 0;
+  height: 10dvh;
 }
 
 .illustration-container {
@@ -26,11 +25,18 @@
   background: var(--co-white);
   border-radius: 24px 24px 0 0;
   padding: 1rem !important;
-  margin-top: -20px;
-  position: relative;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
   z-index: 10;
-  min-height: 60vh;
-  box-shadow: 0 -2px 5px 1px var(--secondary-color);
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  box-shadow: 0 -1px 10px 1px var(--secondary-color);
 }
 
 .welcome-text {
@@ -41,38 +47,37 @@
 .welcome-text h1 {
   font-size: 24px;
   font-weight: 600;
-  color: #2d3748;
+  color: var(--primary-color);
   margin: 0 0 8px 0;
 }
 
 .welcome-text p {
   font-size: 16px;
-  color: #718096;
+  color: var(--co-gray);
   margin: 0;
 }
 
 .input-container {
-  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 1rem;
 }
 
 .email-input,
+.name-input,
 .password-input {
-  --background: #f0f9f0;
-  --border-radius: 12px;
+  border-radius: 8px;
   --padding-start: 16px;
   --padding-end: 16px;
   --min-height: 54px;
+  width: 100%;
   margin-bottom: 16px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--co-back-gray);
+  /* background-color: var(--background-color) !important; */
 }
 
-.email-input {
-  --background: #f0f9f0;
-}
-
-.password-input {
-  --background: #f0f9f0;
-}
 
 .email-input ion-input,
 .password-input ion-input {
@@ -82,8 +87,10 @@
 }
 
 .password-toggle {
-  color: #718096;
+  color: var(--primary-color);
   font-size: 20px;
+  position: absolute;
+  right: 0;
   cursor: pointer;
 }
 
@@ -100,9 +107,9 @@
 }
 
 .continue-button {
-  --background: #9ccc65;
-  --background-activated: #8bc34a;
-  --color: white;
+  --background: var(--primary-color);
+  --background-activated: var(--secondary-color);
+  --color: var(--co-back-gray);
   --border-radius: 12px;
   --padding-top: 16px;
   --padding-bottom: 16px;
@@ -111,12 +118,37 @@
   margin-bottom: 24px;
   text-transform: none;
 }
+.auth-divider {
+  text-align: center;
+  margin: 2rem 0 1.5rem 0;
+  position: relative;
+}
 
+.auth-divider::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--co-back-gray-3);
+}
+
+.auth-divider span {
+  background: var(--co-white);
+  padding: .2rem 1.5rem !important;
+  border-radius: 10px;
+  box-shadow: 0 0 20px 1px var(--co-white);
+  color: var(--co-gray);
+  font-size: 0.9rem;
+  position: relative;
+  z-index: 1;
+}
 .google-button {
   --background: transparent;
   --background-activated: #f7fafc;
-  --color: #4a5568;
-  --border-color: #e2e8f0;
+  --color: var(--co-gray);
+  --border-color: var(--co-back-gray);
   --border-radius: 12px;
   --padding-top: 16px;
   --padding-bottom: 16px;
@@ -134,6 +166,7 @@
 ion-header.ion-no-border {
   box-shadow: none;
   background-color: var(--background-color);
+  /* position: fixed; */
 }
 
 ion-toolbar[color="transparent"] {
@@ -144,15 +177,17 @@ ion-toolbar[color="transparent"] {
 ion-back-button {
   --color: #2d3748;
 }
-
+.input-icon {
+  margin-right: 1rem !important;
+  color: var(--primary-color);
+}
 @media (max-height: 700px) {
   .illustration-container {
-    height: 35vh;
+    height: 24dvh;
   }
   
   .form-container {
-    min-height: 65vh;
-    padding: 24px 20px;
+    height: 70dvh;
   }
   
   .welcome-text {

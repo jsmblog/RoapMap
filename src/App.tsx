@@ -21,9 +21,9 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
-import SignIn from './auth/SignIn';
 import Landing from './auth/Landing';
-import Login from './auth/Login';
+import Auth from './auth/Auth';
+import RoomWaiting from './auth/RoomWaiting';
 
 setupIonicReact();
 
@@ -32,12 +32,12 @@ const App: React.FC = () => (
     <IonReactRouter>
       <IonRouterOutlet>
         <Route exact path="/">
-          <Redirect to="/" />
+          <Landing />
         </Route>
-        <Route exact path="/" component={Landing} />
-        <Route path="/login" component={Login} />
-        <Route path="/signin" component={SignIn} />
+        <Route path="/auth/:mode" component={Auth} />
         <Route path="/home" component={Home} />
+        <Route path='/area/waiting' component={RoomWaiting}  />
+        <Route render={() => <Redirect to="/" />} />
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>

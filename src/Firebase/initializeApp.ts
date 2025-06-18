@@ -5,7 +5,7 @@ import {
     VITE_FIREBASE_MESSAGING_SENDER_ID,
     VITE_FIREBASE_PROJECT_ID,
     VITE_FIREBASE_STORAGE_BUCKET,
-  } from '../config/config.js';
+  } from '../config/config';
 
 import { initializeApp } from 'firebase/app';
 import {
