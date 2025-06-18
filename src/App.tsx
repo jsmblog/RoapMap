@@ -24,6 +24,7 @@ import './theme/variables.css';
 import Landing from './auth/Landing';
 import Auth from './auth/Auth';
 import RoomWaiting from './auth/RoomWaiting';
+import Tabs from './Components/Tabs';
 
 setupIonicReact();
 
@@ -34,8 +35,8 @@ const App: React.FC = () => (
         <Route exact path="/">
           <Landing />
         </Route>
+         <Route path="/tab" component={Tabs}/>
         <Route path="/auth/:mode" component={Auth} />
-        <Route path="/home" component={Home} />
         <Route path='/area/waiting' component={RoomWaiting}  />
         <Route render={() => <Redirect to="/" />} />
       </IonRouterOutlet>

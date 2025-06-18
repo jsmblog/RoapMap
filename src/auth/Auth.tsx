@@ -24,7 +24,7 @@ const Auth: React.FC = () => {
   const { mode } = useParams<AuthParams>();
   const isLogin = mode === 'login';
   const { showToast, ToastComponent } = useToast();
-  const navigate = useIonRouter();
+  const router = useIonRouter();
 
   const [showPassword, setShowPassword] = useState(false);
   const [form, setForm] = useState({ name: '', email: '', password: '' });
@@ -57,6 +57,7 @@ const Auth: React.FC = () => {
     try {
       if (isLogin) {
         await signInWithEmailAndPassword(AUTH_USER, form.email, form.password);
+        router.push("/tab/home","root")
       } else {
         const cred = await createUserWithEmailAndPassword(AUTH_USER, form.email, form.password);
         await sendEmailVerification(cred.user);
@@ -70,8 +71,8 @@ const Auth: React.FC = () => {
         };
         await setDoc(doc(collection(db, 'USERS'), cred.user.uid), userDoc, { merge: true });
         showToast('Registro exitoso. Verifica tu correo.', 3000);
+        router.push('/area/waiting', 'root');
       }
-      navigate.push('/area/waiting', 'forward', 'push');
     } catch (err) {
       console.error(err);
       showToast(isLogin
@@ -80,7 +81,7 @@ const Auth: React.FC = () => {
     } finally {
       clearForm();
     }
-  }, [form, isLogin, navigate, showToast, validate, clearForm]);
+  }, [form, isLogin, router, showToast, validate, clearForm]);
 
   const title    = isLogin ? 'Bienvenido de Nuevo'     : 'Bienvenido';
   const subtitle = isLogin

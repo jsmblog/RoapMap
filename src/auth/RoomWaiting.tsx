@@ -9,7 +9,7 @@ import { useToast } from "../hooks/UseToast";
 
 const RoomWaiting:React.FC = () => {
   const auth = getAuth();
-  const navigate = useIonRouter();
+  const router = useIonRouter();
   const [isVerified, setIsVerified] = useState(auth?.currentUser?.emailVerified || false);
   const [isFirestoreUpdated, setIsFirestoreUpdated] = useState(false); 
   const {showToast,ToastComponent} = useToast();
@@ -17,9 +17,9 @@ const RoomWaiting:React.FC = () => {
 
   useEffect(() => {
     if (currentUserData?.verified) {          
-      navigate.push('/home' ,'forward', 'push');
+      router.push('/tab/home' ,'root');
     }
-  }, [currentUserData?.verified, navigate]);
+  }, [currentUserData?.verified, router]);
 
   useEffect(() => {
     if (isVerified && isFirestoreUpdated) return; 
@@ -48,7 +48,7 @@ const RoomWaiting:React.FC = () => {
 
     const interval = setInterval(checkVerification, 5000);
     return () => clearInterval(interval); 
-  }, [isVerified, isFirestoreUpdated, navigate]);
+  }, [isVerified, isFirestoreUpdated, router]);
 
   const reenviarCorreo = async () => {
     try {
