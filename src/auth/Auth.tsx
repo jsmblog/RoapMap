@@ -24,6 +24,7 @@ const Auth: React.FC = () => {
   const { mode } = useParams<AuthParams>();
   const isLogin = mode === 'login';
   const { showToast, ToastComponent } = useToast();
+  const [loading, setLoading] = useState(false);
   const navigate = useIonRouter();
 
   const [showPassword, setShowPassword] = useState(false);
@@ -57,6 +58,7 @@ const Auth: React.FC = () => {
     try {
       if (isLogin) {
         await signInWithEmailAndPassword(AUTH_USER, form.email, form.password);
+        navigate.push('/home', 'forward', 'push');
       } else {
         const cred = await createUserWithEmailAndPassword(AUTH_USER, form.email, form.password);
         await sendEmailVerification(cred.user);
@@ -149,7 +151,6 @@ const Auth: React.FC = () => {
                   onIonInput={onChange}
                   required
                   fill="outline"
-                  className="email-input-field"
                 />
                 {f.toggle && (
                   <IonIcon
@@ -167,8 +168,10 @@ const Auth: React.FC = () => {
               <span>¿Olvidaste tu contraseña?</span>
             </div>
           )}
-          <IonButton expand="block" className="continue-button" onClick={handleAuth}>
-            {action}
+          <IonButton expand="block" 
+          disabled={loading} 
+          className="continue-button" onClick={handleAuth}>
+            {loading ? "Entrando..." : action}
           </IonButton>
           {isLogin && (
             <>

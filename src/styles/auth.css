@@ -64,17 +64,14 @@
   width: 100%;
   gap: 1rem;
 }
-
 .email-input,
 .name-input,
 .password-input {
   border-radius: 8px;
-  --padding-start: 16px;
   --padding-end: 16px;
-  --min-height: 54px;
+  --min-height: 70px;
   width: 100%;
-  margin-bottom: 16px;
-  border: 1px solid var(--co-back-gray);
+  border: 1px solid var(--co-back-gray) !important;
   /* background-color: var(--background-color) !important; */
 }
 
@@ -178,14 +175,16 @@ ion-back-button {
   --color: #2d3748;
 }
 .input-icon {
-  margin-right: 1rem !important;
+  margin-right: .5rem !important;
   color: var(--primary-color);
 }
 @media (max-height: 700px) {
   .illustration-container {
-    height: 24dvh;
+    height: 25dvh;
   }
-  
+  .forest-image {
+    margin-bottom: 2.5rem !important;
+  }
   .form-container {
     height: 70dvh;
   }

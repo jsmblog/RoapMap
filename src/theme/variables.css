@@ -4,6 +4,7 @@
     padding: 0 !important;
     box-sizing: border-box !important;
     background: none;
+    border:none !important;
     /* user-select: none; */
     font-family: "Sanchez", serif;
     font-weight: 400;
