@@ -2,6 +2,7 @@ export const wizardSteps = [
     {
         title: "¿Cómo planeas usar RoadMap?",
         subtitle: "Selecciona una opción para continuar.",
+        maxSelect: 2,
         options: [
             {
                 label: "Visitante curioso o turista explorador",
@@ -83,6 +84,7 @@ export const wizardSteps = [
     {
         title: "¿Qué tipos de lugares o actividades te interesan?",
         subtitle: "Elige lo que más te atraiga para personalizar tu experiencia.",
+        maxSelect: 4,
         options: [
             { label: "Restaurantes", value: "restaurantes", category: "actividad" },
             { label: "Bares y vida nocturna", value: "vida_nocturna", category: "actividad" },
@@ -100,6 +102,7 @@ export const wizardSteps = [
     {
         title: "¿Tienes alguna preferencia o restricción alimentaria?",
         subtitle: "Selecciona tus restricciones o preferencias alimentarias si las tienes.",
+        maxSelect: 3,
         options: [
             { label: "Vegetariano/a", value: "vegetariano", category: "alimentacion" },
             { label: "Vegano/a", value: "vegano", category: "alimentacion" },
@@ -114,19 +117,21 @@ export const wizardSteps = [
     {
         title: "¿Qué tipo de comida te interesa?",
         subtitle: "Selecciona tus preferencias gastronómicas.",
+        maxSelect: 7,
         options: [
             { label: "Comida local", value: "comida_local", category: "comida" },
             { label: "Internacional", value: "internacional", category: "comida" },
             { label: "Alta cocina", value: "alta_cocina", category: "comida" },
             { label: "Comida rápida", value: "comida_rapida", category: "comida" },
-            { label: "Dulces", value: "dulces", category: "comida" },
-            { label: "Postres", value: "postres", category: "comida" },
-            { label: "Café", value: "cafe", category: "comida" }
+            { label: "Dulces", value: "dulces", category: "dulces" },
+            { label: "Postres", value: "postres", category: "postres" },
+            { label: "Café", value: "cafe", category: "bebidas" }
         ]
     },
     {
         title: "¿Cuándo sueles tener tiempo libre?",
         subtitle: "Esto nos ayuda a recomendarte actividades disponibles.",
+        maxSelect: 2,
         options: [
             { label: "Mañana (08:00 - 12:00)", value: "manana", category: "tiempo" },
             { label: "Tarde (12:00 - 18:00)", value: "tarde", category: "tiempo" },
@@ -138,18 +143,20 @@ export const wizardSteps = [
     {
         title: "¿Qué tipo de ambiente prefieres?",
         subtitle: "Escoge el tipo de ambiente ideal para ti.",
+        maxSelect: 2,
         options: [
             { label: "Relajado", value: "relajado", category: "ambiente" },
             { label: "Aventura", value: "aventura", category: "ambiente" },
             { label: "Romántico", value: "romantico", category: "ambiente" },
             { label: "Familiar", value: "familiar", category: "ambiente" },
-            { label: "Social", value: "social", category: "ambiente" },
-            { label: "Cultural", value: "cultural", category: "ambiente" }
+            { label: "Social", value: "social", category: "social" },
+            { label: "Cultural", value: "cultural", category: "cultural" }
         ]
     },
     {
         title: "¿Con que frecuencia te gustaría recibir sugerencias?",
         subtitle: "Selecciona la frecuencia con la que te gustaría recibir recomendaciones.",
+        maxSelect: 1,
         options: [
             { label: "Diariamente", value: "diariamente", category: "frecuencia" },
             { label: "Semanalmente", value: "semanalmente", category: "frecuencia" },

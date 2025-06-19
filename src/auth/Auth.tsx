@@ -25,7 +25,7 @@ const Auth: React.FC = () => {
   const isLogin = mode === 'login';
   const { showToast, ToastComponent } = useToast();
   const [loading, setLoading] = useState(false);
-  const navigate = useIonRouter();
+  const router = useIonRouter();
 
   const [showPassword, setShowPassword] = useState(false);
   const [form, setForm] = useState({ name: '', email: '', password: '' });
@@ -54,11 +54,11 @@ const Auth: React.FC = () => {
 
   const handleAuth = useCallback(async () => {
     if (!validate()) return;
-
+    setLoading(true);
     try {
       if (isLogin) {
         await signInWithEmailAndPassword(AUTH_USER, form.email, form.password);
-        navigate.push('/home', 'forward', 'push');
+        router.push('/tab/home', 'root');
       } else {
         const cred = await createUserWithEmailAndPassword(AUTH_USER, form.email, form.password);
         await sendEmailVerification(cred.user);
@@ -67,13 +67,14 @@ const Auth: React.FC = () => {
           n: form.name,
           ca: createdAt,
           uid: cred.user.uid,
+          pre: [],
           v: false,
           p: { ip: false, d: '', t: 'free' },
         };
         await setDoc(doc(collection(db, 'USERS'), cred.user.uid), userDoc, { merge: true });
         showToast('Registro exitoso. Verifica tu correo.', 3000);
+        router.push('/area/waiting', 'root');
       }
-      navigate.push('/area/waiting', 'forward', 'push');
     } catch (err) {
       console.error(err);
       showToast(isLogin
@@ -81,8 +82,9 @@ const Auth: React.FC = () => {
         : 'Error al registrarse. Inténtalo de nuevo.', 3000);
     } finally {
       clearForm();
+      setLoading(false);
     }
-  }, [form, isLogin, navigate, showToast, validate, clearForm]);
+  }, [form, isLogin, router, showToast, validate, clearForm]);
 
   const title    = isLogin ? 'Bienvenido de Nuevo'     : 'Bienvenido';
   const subtitle = isLogin

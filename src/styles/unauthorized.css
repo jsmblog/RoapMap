@@ -1,0 +1,40 @@
+.unauthorized-page {
+  --background: #f8f9fa;
+}
+
+.unauthorized-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+}
+
+.unauthorized-icon {
+  font-size: 4rem;
+  color: #dc3545;
+  margin-bottom: 1rem;
+}
+
+.unauthorized-title {
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+  color: #343a40;
+}
+
+.unauthorized-text {
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  color: #6c757d;
+}
+
+.unauthorized-button {
+  --background: #007bff;
+  --background-activated: #0069d9;
+  --border-radius: 8px;
+  --padding-start: 1rem;
+  --padding-end: 1rem;
+  --color: #ffffff;
+  font-weight: 600;
+}

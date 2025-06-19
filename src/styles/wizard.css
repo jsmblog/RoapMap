@@ -1,0 +1,206 @@
+.wizard-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: .5rem;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  background-color: var(--background-color);
+  padding: 5rem .75rem .75rem .75rem !important;
+}
+.wizard-title {
+  font-size: 1.4rem !important;
+  font-weight: 600 !important;
+  color: var(--primary-color) !important;
+  text-align: center;
+}
+
+.wizard-subtitle {
+  margin-bottom: 2.5rem;
+  font-size: 1.2rem;
+  color: var(--primary-color);
+  font-weight: 500;
+  text-align: center;
+  line-height: 1.6;
+  opacity: 0.85;
+  position: relative;
+  z-index: 1;
+}
+
+.options-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.option {
+  --border-radius: 25px;
+  --background: var(--co-white);
+  --color: var(--primary-color);
+  --border-color: var(--co-back-gray);
+  --border-width: 1px;
+  max-width: 75%;
+  --border-style: solid;
+  --box-shadow: 1px 2px 4px 1px var(--secondary-color);
+
+}
+
+.option:hover {
+  --background: rgba(255, 255, 255, 0.95);
+  --border-color: var(--secondary-color);
+  --box-shadow: 0 8px 24px rgba(49, 87, 44, 0.15), 0 4px 8px rgba(0, 0, 0, 0.05);
+  transform: translateY(-2px);
+}
+.skip {
+  --border-color: var(--secondary-color);
+  --border-width: 1px;
+  --border-style: solid;  
+}
+.text-center {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  margin-bottom: 1rem !important;
+}
+.max-select {
+  align-self: flex-end;
+}
+.option-selected {
+  --background: var(--secondary-color);
+  --color: var(--primary-color);
+  --border-radius: 25px;
+  --padding-start: 1.25rem;
+  --padding-end: 1.25rem;
+  --padding-top: 0.875rem;
+  --padding-bottom: 0.875rem;
+  --border-color: var(--secondary-color);
+  --border-width: 1px;
+  --border-style: solid;
+  --box-shadow: 0 3px 10px rgba(176, 219, 156, 0.3);
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-align: left;
+  min-width: 100%;
+  justify-content: flex-start;
+  position: relative;
+  overflow: hidden;
+}
+
+.option-selected::after {
+  content: '✓';
+  position: absolute;
+  top: 0.5rem;
+  right: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: bold;
+  opacity: 0.9;
+}
+
+.wizard-footer {
+  --background: var(--background-color);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(49, 87, 44, 0.1);
+  display: flex;
+  width: 100%;
+  gap: .5rem;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.wizard-footer ion-button[fill="clear"] {
+  --color: var(--primary-color);
+  --border-radius: 12px;
+  --padding-start: 1.25rem;
+  --padding-end: 1.25rem;
+  --padding-top: 0.75rem;
+  --padding-bottom: 0.75rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.3px;
+  transition: all 0.25s ease;
+  opacity: 0.8;
+}
+
+.wizard-footer ion-button[fill="clear"]:hover {
+  --background: rgba(49, 87, 44, 0.08);
+  opacity: 1;
+}
+
+.wizard-footer ion-button:not([fill="clear"]) {
+  --background: linear-gradient(135deg, var(--primary-color) 0%, #2a4a26 100%);
+  --color: var(--co-white);
+  --border-radius: 12px;
+  --padding-start: 2rem;
+  --padding-end: 2rem;
+  --padding-top: 0.875rem;
+  --padding-bottom: 0.875rem;
+  --box-shadow: 0 4px 12px rgba(49, 87, 44, 0.3), 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.wizard-footer ion-button:not([fill="clear"]):hover {
+  --box-shadow: 0 6px 16px rgba(49, 87, 44, 0.4), 0 3px 6px rgba(0, 0, 0, 0.15);
+}
+
+.wizard-footer ion-button:not([fill="clear"]):active {
+  --box-shadow: 0 2px 8px rgba(49, 87, 44, 0.3), 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .wizard-subtitle {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .options-grid {
+    gap: 0.75rem;
+  }
+  
+  .option,
+  .option-selected {
+    --padding-start: 1.125rem;
+    --padding-end: 1.125rem;
+    --padding-top: 0.8rem;
+    --padding-bottom: 0.8rem;
+    font-size: 0.875rem;
+  }
+  
+  .wizard-footer {
+    padding: 1rem 1rem;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  
+  .wizard-footer ion-button:not([fill="clear"]) {
+    --padding-start: 1.5rem;
+    --padding-end: 1.5rem;
+    --padding-top: 0.75rem;
+    --padding-bottom: 0.75rem;
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .options-grid {
+    gap: 0.625rem;
+  }
+  
+  .wizard-footer {
+    padding: 0.875rem 0.75rem;
+  }
+  
+  .wizard-footer ion-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+}

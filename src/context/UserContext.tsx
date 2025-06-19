@@ -25,6 +25,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     name: string;
     createAccount: any;
     paid: Record<string, any>;
+    preferences: any[];
     verified: boolean;
     uid: string;
   }
@@ -61,6 +62,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           name: data.n,
           createAccount: data.ca,
           paid: typeof data.p === "object" ? data.p : {},
+          preferences: data.pre || [],
           verified: data.v,
           uid: data.uid,
         });
