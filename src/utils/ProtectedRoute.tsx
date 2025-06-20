@@ -4,6 +4,7 @@ import { useAuthContext } from '../context/UserContext';
 
 interface ProtectedRouteProps extends RouteProps {
   publicOnly?: boolean;
+  children: React.ReactNode;
 }
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
@@ -11,24 +12,31 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   publicOnly = false,
   ...rest
 }) => {
-  const { authUser } = useAuthContext();
+  const { authUser, currentUserData } = useAuthContext();
 
   return (
     <Route
       {...rest}
       render={({ location }) => {
         if (publicOnly) {
-          return authUser
-            ? <Redirect to="/tab/home" />
-            : (React.isValidElement(children) ? children : <>{children}</>);
+          if (authUser && currentUserData?.verified) {
+            return <Redirect to="/tab/home" />;
+          }
+          return children;
         }
 
-        return authUser
-          ? (React.isValidElement(children) ? children : <>{children}</>)
-          : <Redirect to={{
-              pathname: '/unauthorized',
-              state: { from: location }
-            }} />;
+        if (authUser) {
+          return children;
+        }
+
+        return (
+          <Redirect
+            to={{
+              pathname: '/',
+              state: { from: location },
+            }}
+          />
+        );
       }}
     />
   );

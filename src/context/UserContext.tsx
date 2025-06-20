@@ -1,10 +1,11 @@
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState, ReactNode } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, onSnapshot } from "firebase/firestore";
 import { AUTH_USER, db } from "../Firebase/initializeApp";
+import type { User } from "firebase/auth";
 
 interface AuthContextType {
-  authUser: any;
+  authUser: User | null;
   currentUserData: any;
   isLoading: boolean;
 }
@@ -15,32 +16,18 @@ const AuthContext = createContext<AuthContextType>({
   isLoading: true,
 });
 
-import { ReactNode } from "react";
-
-import type { User } from "firebase/auth";
-
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [authUser, setAuthUser] = useState<User | null>(null);
-  interface CurrentUserData {
-    name: string;
-    createAccount: any;
-    paid: Record<string, any>;
-    preferences: any[];
-    verified: boolean;
-    uid: string;
-  }
-  
-  const [currentUserData, setCurrentUserData] = useState<CurrentUserData | null>(null);
+  const [currentUserData, setCurrentUserData] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const unsubscribeAuth = onAuthStateChanged(AUTH_USER, (user) => {
       setAuthUser(user);
-      setIsLoading(true);
       if (!user) {
         setCurrentUserData(null);
-        setIsLoading(false);
       }
+      setIsLoading(false);
     });
 
     return () => unsubscribeAuth();
@@ -48,15 +35,16 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     if (!authUser) return;
+    setIsLoading(true);
     const userDocRef = doc(db, "USERS", authUser.uid);
     const unsubscribe = onSnapshot(
       userDocRef,
       (docSnap) => {
         if (!docSnap.exists()) {
+          setCurrentUserData(null);
           setIsLoading(false);
           return;
         }
-        
         const data = docSnap.data();
         setCurrentUserData({
           name: data.n,
@@ -74,10 +62,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         setIsLoading(false);
       }
     );
-    
     return () => unsubscribe();
   }, [authUser]);
-  
+
   const value = useMemo(
     () => ({ authUser, currentUserData, isLoading }),
     [authUser, currentUserData, isLoading]

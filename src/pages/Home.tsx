@@ -1,5 +1,4 @@
-
-
+// src/pages/Home.tsx
 import { signOut } from 'firebase/auth';
 import './Home.css';
 import { IonPage, useIonRouter } from '@ionic/react';
@@ -8,25 +7,28 @@ import { useLoading } from '../hooks/UseLoading';
 
 const Home: React.FC = () => {
   const router = useIonRouter();
-    const { showLoading, hideLoading } = useLoading();
-  
+  const { showLoading, hideLoading } = useLoading();
+
   const handleLogout = async () => {
-  showLoading('Cerrando sesión...');
-   try {
-    await signOut(AUTH_USER);
-    router.push('/');
-   } catch (error) {
-    console.log(error)
-   } finally {
+    showLoading('Cerrando sesión...');
+    try {
+      await signOut(AUTH_USER);
+      await hideLoading();
+      router.push('/', 'root', 'replace');
+    } catch (error) {
+      console.error(error);
       await hideLoading();
     }
   };
+
   return (
     <IonPage>
- hola
- <button onClick={handleLogout}>
-  cerrar sesión
- </button>
+      <div className="home-container">
+        <h1>Hola</h1>
+        <button onClick={handleLogout}>
+          Cerrar sesión
+        </button>
+      </div>
     </IonPage>
   );
 };
