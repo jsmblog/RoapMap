@@ -3,6 +3,7 @@ import { home, location, people, person, settings } from 'ionicons/icons'
 import React from 'react'
 import { Redirect, Route } from 'react-router'
 import Home from '../pages/Home'
+import Profile from '../pages/EditProfile'
 
 const Tabs:React.FC = () => {
   return (
@@ -12,7 +13,6 @@ const Tabs:React.FC = () => {
         <Route exact path="/tab/home" component={Home} />
          <Route exact path="/tab/location" />
          <Route exact path="/tab/peopleGroup"/>
-         <Route exact path="/tab/user" />
          <Route exact path="/tab/settings"  />
         <Redirect exact from="/tab" to="/tab/home" />
       </IonRouterOutlet>
@@ -26,9 +26,6 @@ const Tabs:React.FC = () => {
         </IonTabButton>
         <IonTabButton className="taButton" tab="peopleGroup" href="/tab/peopleGroup">
           <IonIcon icon={people} />
-        </IonTabButton>
-        <IonTabButton  className="tabButton" tab="user" href="/tab/user">
-         <IonIcon icon={person}/>
         </IonTabButton>
         <IonTabButton  className="tabButton" tab="settings" href="/tab/settings">
           <IonIcon icon={settings} />
