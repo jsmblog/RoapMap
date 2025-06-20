@@ -5,14 +5,17 @@ export function useToast() {
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState<string>('');
   const [duration, setDuration] = useState<number>(3000);
-  const showToast = (msg: string, dur: number = 3000) => {
+  const [type, setType] = useState<string>('dark');
+  const showToast = (msg: string, dur: number = 3000,type:string = 'dark') => {
     setMessage(msg);
     setDuration(dur);
     setIsOpen(true);
+    setType(type);
   };
 
   const ToastComponent: ReactElement = (
     <IonToast
+      color={type}
       isOpen={isOpen}
       message={message}
       duration={duration}

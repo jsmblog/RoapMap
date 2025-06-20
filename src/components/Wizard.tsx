@@ -7,7 +7,7 @@ import {
   IonIcon,
   useIonRouter,
 } from '@ionic/react';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { wizardSteps } from '../functions/wizardSteps';
 import '../styles/wizard.css';
 import { chevronBackOutline } from 'ionicons/icons';
@@ -39,14 +39,14 @@ const Wizard: React.FC = () => {
       const exists = list.some(s => s.v === v);
 
       if (exists) {
-        return { 
+        return {
           ...prev,
           [step]: list.filter(s => s.v !== v)
         };
       }
 
       if (list.length >= current.maxSelect) {
-        showToast(`Puedes seleccionar máximo ${current.maxSelect} opciones`);
+        showToast(`Puedes seleccionar máximo ${current.maxSelect} opciones`, 4000, 'warning');
         return prev;
       }
 
@@ -69,7 +69,7 @@ const Wizard: React.FC = () => {
       await updateDoc(refUser, { pre: allSelections });
     } catch (error) {
       console.error(error);
-      showToast('Error al finalizar el wizard. Inténtalo de nuevo.');
+      showToast('Error al finalizar el wizard. Inténtalo de nuevo.', 3000, 'danger');
       return;
     } finally {
       await hideLoading();
@@ -87,6 +87,16 @@ const Wizard: React.FC = () => {
   };
 
   const selectedVs = (answers[step] ?? []).map(s => s.v);
+
+  useEffect(() => {
+    if (currentUserData?.pre && currentUserData.pre.length > 0) {
+      router.push('/tab/home', 'root');
+    }
+
+    if (!currentUserData?.verified) {
+      router.push('/area/waiting', 'root');
+    }
+  }, [currentUserData, router]);
 
   return (
     <IonPage className="wizard-page">

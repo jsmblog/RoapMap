@@ -29,15 +29,13 @@ const App: React.FC = () => (
     <Landing />
   </ProtectedRoute>
 
-  {/** 2) Auth público y sala de espera */}
   <ProtectedRoute path="/auth/:mode" publicOnly>
     <Auth />
   </ProtectedRoute>
-  <ProtectedRoute path="/area/waiting" publicOnly>
+  <ProtectedRoute path="/area/waiting" >
     <RoomWaiting />
   </ProtectedRoute>
 
-  {/** 3) Rutas protegidas */}
   <ProtectedRoute exact path="/wizard/steps">
     <Wizard />
   </ProtectedRoute>

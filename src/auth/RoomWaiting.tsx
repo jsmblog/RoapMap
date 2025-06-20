@@ -55,12 +55,12 @@ const RoomWaiting:React.FC = () => {
       const currentUser = auth.currentUser;
       if (currentUser) {
         await sendEmailVerification(currentUser);
-        showToast("Correo de verificación reenviado.");
+        showToast("Correo de verificación reenviado.", 3000, 'success');
       } else {
-        showToast("No hay un usuario autenticado.");
+        showToast("No hay un usuario autenticado.", 3000, 'warning');
       }
     } catch (error) {
-      showToast("Error al reenviar el correo.");
+      showToast("Error al reenviar el correo.", 5000, 'danger');
       console.error(error);
     }
   };

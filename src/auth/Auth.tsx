@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useState, useCallback, useMemo, useEffect } from 'react';
 import {
   IonPage, IonHeader, IonToolbar, IonButtons, IonBackButton,
   IonContent, IonItem, IonIcon, IonInput, IonButton, useIonRouter
@@ -17,14 +17,15 @@ import { AUTH_USER, db } from '../Firebase/initializeApp';
 import { formatDateTime } from '../functions/formatDate';
 import { collection, doc, setDoc } from 'firebase/firestore';
 import '../styles/auth.css';
+import { useRequestLocationPermission } from '../hooks/UseRequestLocationPermission';
 
 type AuthParams = { mode: 'login' | 'signup' };
-
 const Auth: React.FC = () => {
   const { mode } = useParams<AuthParams>();
   const isLogin = mode === 'login';
   const { showToast, ToastComponent } = useToast();
   const [loading, setLoading] = useState(false);
+  const {location,getLocation} = useRequestLocationPermission();
   const router = useIonRouter();
 
   const [showPassword, setShowPassword] = useState(false);
@@ -42,11 +43,11 @@ const Auth: React.FC = () => {
 
   const validate = useCallback(() => {
     if (!form.email || !form.password || (!isLogin && !form.name)) {
-      showToast('Por favor, complete todos los campos.', 3000);
+      showToast('Por favor, complete todos los campos.', 3000 , 'danger');
       return false;
     }
     if (!isLogin && form.password.length < 8) {
-      showToast('La contraseña debe tener al menos 8 caracteres.', 3000);
+      showToast('La contraseña debe tener al menos 8 caracteres.', 3000,'warning');
       return false;
     }
     return true;
@@ -69,22 +70,23 @@ const Auth: React.FC = () => {
           uid: cred.user.uid,
           pre: [],
           v: false,
-          p: { ip: false, d: '', t: 'free' },
+          loc: location,
+          // p: { ip: false, d: '', t: 'free' },
         };
         await setDoc(doc(collection(db, 'USERS'), cred.user.uid), userDoc, { merge: true });
-        showToast('Registro exitoso. Verifica tu correo.', 3000);
+        showToast('Registro exitoso. Verifica tu correo.', 3000, 'success');
         router.push('/area/waiting', 'root');
       }
     } catch (err) {
       console.error(err);
       showToast(isLogin
         ? 'Error al iniciar sesión, credenciales incorrectas.'
-        : 'Error al registrarse. Inténtalo de nuevo.', 3000);
+        : 'Error al registrarse. Inténtalo de nuevo.', 3000, 'danger');
     } finally {
       clearForm();
       setLoading(false);
     }
-  }, [form, isLogin, router, showToast, validate, clearForm]);
+  }, [form, isLogin,location, router, showToast, validate, clearForm]);
 
   const title    = isLogin ? 'Bienvenido de Nuevo'     : 'Bienvenido';
   const subtitle = isLogin
@@ -119,6 +121,10 @@ const Auth: React.FC = () => {
       toggle: true,
     },
   ].filter(Boolean), [form, isLogin, showPassword]);
+
+   useEffect(() => {
+    if(!isLogin) getLocation();
+  }, []);
 
   return (
     <IonPage>
