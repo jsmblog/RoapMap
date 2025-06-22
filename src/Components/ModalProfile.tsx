@@ -17,7 +17,6 @@ import { informationCircle } from "ionicons/icons";
 import { useAuthContext } from "../context/UserContext";
 import ModalPrivacy from "./ModalPrivacy";
 
-// Le pasamos "isOpen" y "onClose" como props
 const ModalProfile: React.FC<ModalProfileProps> = ({ isOpen, onClose }) => {
   const { currentUserData } = useAuthContext();
   console.log("datos del usuario", currentUserData);

@@ -16,6 +16,8 @@ import { useLoading } from '../hooks/UseLoading';
 import { doc, updateDoc } from 'firebase/firestore';
 import { db } from '../Firebase/initializeApp';
 import { useAuthContext } from '../context/UserContext';
+import { connection } from '../connection/connection_to_backend';
+import { buildPayload } from '../functions/buildPayload';
 
 interface Selection {
   v: string;
@@ -27,10 +29,10 @@ const Wizard: React.FC = () => {
   const [answers, setAnswers] = useState<Record<number, Selection[]>>({});
   const current = wizardSteps[step];
   const [loading, setLoading] = useState<boolean>(false);
-
   const { showToast, ToastComponent } = useToast();
   const { showLoading, hideLoading } = useLoading();
   const { currentUserData } = useAuthContext();
+  console.log(currentUserData);
   const router = useIonRouter();
 
   const toggleOption = (v: string, c: string) => {
@@ -67,6 +69,10 @@ const Wizard: React.FC = () => {
       const refUser = doc(db, 'USERS', currentUserData!.uid);
       const allSelections = Object.values(answers).flat();
       await updateDoc(refUser, { pre: allSelections });
+      const payload = buildPayload(currentUserData,allSelections)
+      const {data} = await connection.post('/send/request/ai',payload);
+      console.log('Respuesta de AI:', data);
+      await updateDoc(refUser, { d: data.message });
     } catch (error) {
       console.error(error);
       showToast('Error al finalizar el wizard. Inténtalo de nuevo.', 3000, 'danger');

@@ -48,6 +48,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         const data = docSnap.data();
         setCurrentUserData({
           name: data.n,
+          description: data.d || "",
           createAccount: data.ca,
           paid: typeof data.p === "object" ? data.p : {},
           preferences: data.pre || [],
