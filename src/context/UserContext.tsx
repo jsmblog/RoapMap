@@ -60,7 +60,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         console.error("Error fetching user data:", error);
         setCurrentUserData(null);
         setIsLoading(false);
-      }
+      } 
     );
     return () => unsubscribe();
   }, [authUser]);

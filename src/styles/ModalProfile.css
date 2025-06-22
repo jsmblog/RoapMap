@@ -1,0 +1,104 @@
+.modal-privacy,
+.modal-profile {
+  width: 100%;
+  height: 100%;
+}
+.modal-privacy::part(content),
+.modal-profile::part(content) {
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  overflow: hidden; /* evita que contenido sobresalga */
+}
+.card-profile {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  width: 100% !important;
+  position: relative !important;
+  height: 100% !important;
+  padding: 1rem !important;
+  gap: 1rem !important;
+  box-shadow: none;
+}
+.profile-avatar {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-top: .8rem !important;
+}
+.profile-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  color: var(--primary-color);
+}
+.modal-privacy-content,
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem !important;
+}
+.profile-subtitle {
+  font-size: 1rem;
+   color: var(--primary-color);
+  font-weight: bold;
+  text-transform: none;
+}
+.profile-text {
+  font-size: 0.9rem;
+  color: var( --co-gray);
+  text-align: justify;
+}
+.footer-profile{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: fixed;
+  bottom: 12%;
+  box-shadow: none;
+  margin: .5rem !important;
+}
+.btn-edit-profile {
+  margin-left: 1rem !important;
+  width: 200px;
+  font-size: 1rem;
+  color: var(--color-btns-text);
+  --background: var(--color-btns);
+  --border-radius: 10px;
+  --box-shadow: 2px 2px var(--primary-color);
+  text-transform: none;
+}
+.icon-information{
+  width: 100px !important;
+  height: 30px !important;
+  color: var(--primary-color);
+}
+.modal-privacy-content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .7rem;
+}
+.modal-title{
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: var(--primary-color);
+  text-align: center;
+  margin: .5rem !important;
+}
+.imgPrivacy{
+  width:150px;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: var(--box-shadow);
+}
+.modal-note{
+  font-size: 13px;
+  color: var( --co-gray);
+  text-align: justify;
+  padding: 0 1rem !important;
+}

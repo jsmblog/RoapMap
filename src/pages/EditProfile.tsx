@@ -3,11 +3,11 @@ import React from "react";
 import "../styles/EditProfile.css";
 
 const EditProfile: React.FC = () => {
+
   return (
     <IonPage>
       <IonContent className="ion-padding">
-        hola
-        
+        <h2>Editar Perfil</h2>
       </IonContent>
     </IonPage>
   );

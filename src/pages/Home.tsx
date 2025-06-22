@@ -5,8 +5,11 @@ import ModalProfile from "../Components/ModalProfile";
 import { useLoading } from "../hooks/UseLoading";
 import { signOut } from "firebase/auth";
 import { AUTH_USER } from "../Firebase/initializeApp";
+import { useAuthContext } from "../context/UserContext";
 
 const Home: React.FC = () => {
+ const {currentUserData}= useAuthContext();
+
   const router = useIonRouter();
   const { showLoading, hideLoading } = useLoading();
 
@@ -41,7 +44,7 @@ const Home: React.FC = () => {
           </IonButton>
 
           <div className="user-info">
-            <h2 className="user-name">Ines Perado</h2>
+            <h2 className="user-name">¡Hola,{currentUserData.name}!</h2>
             <p className="user-hora">viernes, 30 junio</p>
           </div>
         </div>
@@ -51,7 +54,8 @@ const Home: React.FC = () => {
           Cerrar sesión
         </button>
 
-       <ModalProfile isOpen={isModalOpen}
+       <ModalProfile 
+       isOpen={isModalOpen}
        onClose={()=>setIsModalOpen(false)} />
 
       </IonContent>

@@ -1,9 +1,9 @@
 import { IonIcon, IonRouterOutlet, IonTabBar, IonTabButton, IonTabs } from '@ionic/react'
-import { home, location, people, person, settings } from 'ionicons/icons'
+import { home, location, people, settings } from 'ionicons/icons'
 import React from 'react'
 import { Redirect, Route } from 'react-router'
 import Home from '../pages/Home'
-import Profile from '../pages/EditProfile'
+import Setting from '../pages/Setting'
 
 const Tabs:React.FC = () => {
   return (
@@ -13,7 +13,7 @@ const Tabs:React.FC = () => {
         <Route exact path="/tab/home" component={Home} />
          <Route exact path="/tab/location" />
          <Route exact path="/tab/peopleGroup"/>
-         <Route exact path="/tab/settings"  />
+         <Route exact path="/tab/settings" component={Setting} />
         <Redirect exact from="/tab" to="/tab/home" />
       </IonRouterOutlet>
 
