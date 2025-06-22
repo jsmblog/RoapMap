@@ -67,6 +67,7 @@ const Auth: React.FC = () => {
         const userDoc = {
           n: form.name,
           ca: createdAt,
+          d:'',
           uid: cred.user.uid,
           pre: [],
           v: false,
