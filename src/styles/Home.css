@@ -1,0 +1,35 @@
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  margin: 1rem;
+  padding: 1rem;
+  gap: 10px;
+}
+.user-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: .5rem;
+  object-fit: cover;
+  border: 2px solid #4CAF50;
+}
+.user-info {
+  display: flex;
+  flex-direction: column;
+}
+.user-name {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+}
+.user-hora{
+  font-size: 0.9rem;
+  color: #888;
+  margin: 0.2rem 0 0;
+}
+.button-modal{
+ --background:none ;
+ --box-shadow: none;
+}

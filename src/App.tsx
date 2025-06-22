@@ -10,9 +10,9 @@ import ProtectedRoute from './utils/ProtectedRoute';
 import Landing from './auth/Landing';
 import Auth from './auth/Auth';
 import RoomWaiting from './auth/RoomWaiting';
-import Wizard from './components/Wizard';
-import Tabs from './components/Tabs';
-import PageNotFound from './components/PageNotFound';
+import Wizard from './Components/Wizard';
+import Tabs from './Components/Tabs';
+import PageNotFound from './Components/PageNotFound';
 
 import '@ionic/react/css/core.css';
 import './theme/variables.css';
