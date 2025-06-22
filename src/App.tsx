@@ -13,7 +13,6 @@ import "@ionic/react/css/core.css";
 import "./theme/variables.css";
 import Unauthorized from "./utils/Unauthorized";
 import EditProfile from "./pages/EditProfile";
-import ModalProfile from "./Components/ModalProfile";
 
 setupIonicReact();
 
@@ -42,9 +41,6 @@ const App: React.FC = () => (
 
         <ProtectedRoute path="/edit-profile">
           <EditProfile />
-        </ProtectedRoute>
-        <ProtectedRoute path="/modal-profile">
-          <ModalProfile isOpen={true} onClose={() => {}} />
         </ProtectedRoute>
 
         {/** 4) Vistas de error */}
