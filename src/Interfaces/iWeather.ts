@@ -12,7 +12,6 @@ export  interface IWeatherData {
         gust: number; 
         speed: number; 
     };
-
     main?: { 
         feels_like: number;
         grnd_level: number;

@@ -13,24 +13,29 @@ import {
 import React, { useState } from "react";
 import { ModalProfileProps } from "../Interfaces/iProps";
 import "../styles/ModalProfile.css";
-import { informationCircle } from "ionicons/icons";
+import { informationCircle, location } from "ionicons/icons";
 import { useAuthContext } from "../context/UserContext";
 import ModalPrivacy from "./ModalPrivacy";
+import { UseOpenWeather } from "../hooks/UseOpenWeather";
 
 const ModalProfile: React.FC<ModalProfileProps> = ({ isOpen, onClose }) => {
   const { currentUserData } = useAuthContext();
   console.log("datos del usuario", currentUserData);
+  const description = currentUserData?.description;
+
+  const { weather } = UseOpenWeather();
   const [isModalOpenPrivacy, setIsModalOpenPrivacy] = useState(false);
 
   return (
-    <IonModal
+   <IonModal
       className="modal-profile"
       trigger="open-modal"
-      initialBreakpoint={0.9} // Ocupa 85% de la pantalla
-      breakpoints={[0, 0.3, 0.5, 0.75]}
-      handleBehavior="cycle"
       isOpen={isOpen}
       onDidDismiss={onClose}
+      initialBreakpoint={0.94} // Ocupa 85% de la pantalla
+       breakpoints={[0, 0.94]}
+       handleBehavior="none"
+        backdropDismiss={true}
     >
       <IonContent className="ion-padding">
         <IonCard className="card-profile">
@@ -49,21 +54,22 @@ const ModalProfile: React.FC<ModalProfileProps> = ({ isOpen, onClose }) => {
               Sobre mi
             </IonCardSubtitle>
             <p className="profile-text">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolores
-              neque earum sit maiores repellat quisquam esse quod hic. In unde
-              magnam quae alias, sed repellendus doloribus inventore culpa velit
-              mollitia.
+              {description.replace(/\*/g, '')}
             </p>
             <IonCardSubtitle className="profile-subtitle">
               Ubicación
             </IonCardSubtitle>
-            <p>Chone, Manabí, Ecuador, 9:30pm</p>
+            <p> <IonIcon icon={location} />  {weather?.name}, {weather?.sys.country}</p>
             <IonCardSubtitle className="profile-subtitle">
               Logros
             </IonCardSubtitle>
             <p>🏆 1000 puntos de experiencia</p>
+            <p>🏆 50 misiones completadas </p>
+            <p>🏆 10 amigos en la comunidad</p>
           </IonCardContent>
-          <IonFooter className="footer-profile">
+        </IonCard>
+
+        <IonFooter className="footer-profile">
             <IonButton className="btn-edit-profile" routerLink="/edit-profile">
               Editar Perfil
             </IonButton>
@@ -77,7 +83,6 @@ const ModalProfile: React.FC<ModalProfileProps> = ({ isOpen, onClose }) => {
               <IonIcon className="icon-information" icon={informationCircle} />
             </IonButton>
           </IonFooter>
-        </IonCard>
 
         <ModalPrivacy
           isOpen={isModalOpenPrivacy}
