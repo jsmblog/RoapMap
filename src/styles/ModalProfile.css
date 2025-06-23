@@ -21,8 +21,8 @@
   box-shadow: none;
 }
 .profile-avatar {
-  width: 130px;
-  height: 130px;
+  width: 110px;
+  height: 110px;
   border-radius: 50%;
   object-fit: cover;
   margin-top: .8rem !important;
