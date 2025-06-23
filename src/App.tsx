@@ -6,13 +6,13 @@ import ProtectedRoute from "./utils/ProtectedRoute";
 import Landing from "./auth/Landing";
 import Auth from "./auth/Auth";
 import RoomWaiting from "./auth/RoomWaiting";
-import Tabs from "./Components/Tabs";
-import PageNotFound from "./Components/PageNotFound";
+import Tabs from "./components/Tabs";
+import PageNotFound from "./components/PageNotFound";
 import "@ionic/react/css/core.css";
 import "./theme/variables.css";
 import Unauthorized from "./utils/Unauthorized";
 import EditProfile from "./pages/EditProfile";
-import Wizard from "./Components/Wizard";
+import Wizard from "./components/Wizard";
 
 setupIonicReact();
 

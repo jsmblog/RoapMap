@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "../styles/Home.css";
 import { IonButton, IonContent, IonIcon, IonList, IonPage, IonSearchbar, IonToolbar, useIonRouter } from "@ionic/react";
-import ModalProfile from "../Components/ModalProfile";
+import ModalProfile from "../components/ModalProfile";
 import { useLoading } from "../hooks/UseLoading";
 import { signOut } from "firebase/auth";
 import { AUTH_USER } from "../Firebase/initializeApp";
