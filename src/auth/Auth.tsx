@@ -194,7 +194,7 @@ const Auth: React.FC = () => {
           className="continue-button" onClick={handleAuth}>
             {loading ? "Entrando..." : action}
           </IonButton>
-          {isLogin && (
+          {/* {isLogin && ( */}
             <>
               <div className="auth-divider"><span>O</span></div>
               <IonButton expand="block" fill="outline" className="google-button"
@@ -203,7 +203,7 @@ const Auth: React.FC = () => {
                 <span>Continuar con Google</span>
               </IonButton>
             </>
-          )}
+          {/* )} */}
         </div>
       </IonContent>
     </IonPage>

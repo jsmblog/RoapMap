@@ -46,26 +46,25 @@ const Home: React.FC = () => {
   };
   return (
     <IonPage>
-      <IonHeader className="custom-header">
+      <div>
         <IonToolbar className="toolbar-with-avatar">
-          <IonSearchbar
+          <div className="banner">
+            <IonSearchbar
             className="custom-searchbar"
             animated
             debounce={500}
             showCancelButton="focus"
-            cancelButtonText="Cancelar"
             placeholder="Buscar un lugar..."
           />
-          <div className="avatar-wrapper" onClick={() => setIsModalOpen(true)}>
-            <IonAvatar>
+            <IonAvatar onClick={() => setIsModalOpen(true)}>
               <IonImg
                 src="https://ionicframework.com/docs/img/demos/avatar.svg"
                 alt="avatar"
-              />
+                />
             </IonAvatar>
-          </div>
+            </div>
         </IonToolbar>
-      </IonHeader>
+      </div>
 
       <IonContent className="ion-padding" fullscreen>
         <IonList className="list-categories">

@@ -46,7 +46,7 @@ const ModalProfile: React.FC<ModalProfileProps> = ({ isOpen, onClose }) => {
           />
           <IonCardHeader>
             <IonCardTitle className="profile-name">
-              {currentUserData.name}{" "}
+              {currentUserData?.name}{" "}
             </IonCardTitle>
           </IonCardHeader>
           <IonCardContent className="profile-info">
