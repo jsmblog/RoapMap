@@ -163,4 +163,4 @@ const Wizard: React.FC = () => {
   );
 };
 
-export default React.memo(Wizard);
+export default Wizard;
