@@ -54,7 +54,7 @@ const ModalProfile: React.FC<ModalProfileProps> = ({ isOpen, onClose }) => {
               Sobre mi
             </IonCardSubtitle>
             <p className="profile-text">
-              {description.replace(/\*/g, '')}
+              {description?.replace(/\*/g, '')}
             </p>
             <IonCardSubtitle className="profile-subtitle">
               Ubicación

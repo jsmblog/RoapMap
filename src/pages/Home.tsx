@@ -1,32 +1,77 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "../styles/Home.css";
 import {
-  IonAvatar,
-  IonButton,
   IonContent,
   IonHeader,
-  IonIcon,
-  IonImg,
-  IonList,
   IonPage,
-  IonSearchbar,
-  IonToolbar,
   useIonRouter,
 } from "@ionic/react";
+import { GoogleMap } from '@capacitor/google-maps';
 import ModalProfile from "../components/ModalProfile";
 import { useLoading } from "../hooks/UseLoading";
 import { signOut } from "firebase/auth";
 import { AUTH_USER } from "../Firebase/initializeApp";
-import { UseOpenWeather } from "../hooks/UseOpenWeather";
-import { thermometerOutline } from "ionicons/icons";
-import { categories } from "../functions/categories";
+import { useAuthContext } from "../context/UserContext";
+import { VITE_API_KEY_GOOGLE } from "../config/config";
+import ListCategories from "../components/ListCategories";
+import WeatherCard from "../components/WeatherCard";
+import SearchBar from "../components/SearchBar";
 
 const Home: React.FC = () => {
   const router = useIonRouter();
   const { showLoading, hideLoading } = useLoading();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { weather } = UseOpenWeather();
-  console.log(weather);
+  const { currentUserData } = useAuthContext();
+  const location = currentUserData?.location;
+
+  const mapRef = useRef<HTMLDivElement>(null);
+  const [map, setMap] = useState<GoogleMap>();
+
+  useEffect(() => {
+    if (!mapRef.current || !location) return;
+
+    GoogleMap.create({
+      id: 'home-map',
+      element: mapRef.current,
+      apiKey: VITE_API_KEY_GOOGLE,
+      config: {
+        center: { lat: location.lat, lng: location.lng },
+        zoom: 20,
+        disableDefaultUI: false,
+        clickableIcons: true,
+        disableDoubleClickZoom: false,
+        draggable: true,
+        keyboardShortcuts: false,
+        scrollwheel: true,
+        zoomControl: true,
+        fullscreenControl: false,
+        mapTypeControl: false,
+        streetViewControl: false,
+        styles: [
+          {
+            featureType: "poi",
+            elementType: "labels",
+            stylers: [{ visibility: "on" }]
+          }
+        ]
+      },
+    }).then(createdMap => {
+      setMap(createdMap);
+
+      createdMap.addMarker({
+        coordinate: { lat: location.lat, lng: location.lng },
+        title: 'Tu ubicación',
+        snippet: 'Estás aquí',
+      });
+    });
+
+    return () => {
+      if (map) {
+        map.destroy();
+      }
+    };
+  }, [location]);
+
   const handleLogout = async () => {
     showLoading("Cerrando sesión...");
     try {
@@ -38,60 +83,21 @@ const Home: React.FC = () => {
       await hideLoading();
     }
   };
-  const convertToCelsius = (kelvin: number) => {
-    return Math.round(kelvin - 273.15);
-  };
-  const convertToFahrenheit = (kelvin: number) => {
-    return Math.round(((kelvin - 273.15) * 9) / 5 + 32);
-  };
+
   return (
     <IonPage>
-      <div>
-        <IonToolbar className="toolbar-with-avatar">
-          <div className="banner">
-            <IonSearchbar
-            className="custom-searchbar"
-            animated
-            debounce={500}
-            showCancelButton="focus"
-            placeholder="Buscar un lugar..."
+      <IonContent className="ion-no-padding" fullscreen>
+        <div className="map-container">
+          <div
+            ref={mapRef}
+            className="full-screen-map"
           />
-            <IonAvatar onClick={() => setIsModalOpen(true)}>
-              <IonImg
-                src="https://ionicframework.com/docs/img/demos/avatar.svg"
-                alt="avatar"
-                />
-            </IonAvatar>
-            </div>
-        </IonToolbar>
-      </div>
-
-      <IonContent className="ion-padding" fullscreen>
-        <IonList className="list-categories">
-          {categories.map((c) => (
-            <button className="btn-item" key={c.id}>
-              <IonIcon size="small" icon={Object.values(c.icon)[0]} />
-              <h4 className="name-item">{c.name}</h4>
-            </button>
-          ))}
-        </IonList>
-
-        <div className="weather-box">
-          <IonImg
-            className="weather-icon"
-            src={`http://openweathermap.org/img/wn/${weather?.weather[0].icon}@4x.png`}
-          />
-          <p className="weather-temp">
-            <IonIcon icon={thermometerOutline} />{" "}
-            {convertToCelsius(weather?.main.temp)}°C /{" "}
-            {convertToFahrenheit(weather?.main.temp)}°F
-          </p>
+          <IonHeader className="floating-header">
+            <SearchBar setIsModalOpen={setIsModalOpen} />
+          </IonHeader>
+          <ListCategories />
         </div>
-
-        <IonButton expand="block" color="medium" onClick={handleLogout}>
-          Cerrar sesión
-        </IonButton>
-
+        <WeatherCard />
         <ModalProfile
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}

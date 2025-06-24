@@ -4,10 +4,10 @@ import React from 'react'
 import { Redirect, Route } from 'react-router'
 import Home from '../pages/Home'
 import Setting from '../pages/Setting'
-
+import '../styles/tabs.css'
 const Tabs:React.FC = () => {
   return (
-    <IonTabs>
+    <IonTabs className='ion-tab'>
     {/**esto logra la redireccion */}
       <IonRouterOutlet> 
         <Route exact path="/tab/home" component={Home} />
