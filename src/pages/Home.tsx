@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import "../styles/Home.css";
 import {
   IonContent,
@@ -6,71 +6,25 @@ import {
   IonPage,
   useIonRouter,
 } from "@ionic/react";
-import { GoogleMap } from '@capacitor/google-maps';
 import ModalProfile from "../components/ModalProfile";
 import { useLoading } from "../hooks/UseLoading";
 import { signOut } from "firebase/auth";
 import { AUTH_USER } from "../Firebase/initializeApp";
-import { useAuthContext } from "../context/UserContext";
-import { VITE_API_KEY_GOOGLE } from "../config/config";
+import SearchBar from "../components/SearchBar";
 import ListCategories from "../components/ListCategories";
 import WeatherCard from "../components/WeatherCard";
-import SearchBar from "../components/SearchBar";
+import Map from "../components/Map";
 
 const Home: React.FC = () => {
   const router = useIonRouter();
+    const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+
   const { showLoading, hideLoading } = useLoading();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { currentUserData } = useAuthContext();
-  const location = currentUserData?.location;
 
-  const mapRef = useRef<HTMLDivElement>(null);
-  const [map, setMap] = useState<GoogleMap>();
+  const [placeMarkers, setPlaceMarkers] = useState<any[]>([]);
 
-  useEffect(() => {
-    if (!mapRef.current || !location) return;
-
-    GoogleMap.create({
-      id: 'home-map',
-      element: mapRef.current,
-      apiKey: VITE_API_KEY_GOOGLE,
-      config: {
-        center: { lat: location.lat, lng: location.lng },
-        zoom: 20,
-        disableDefaultUI: false,
-        clickableIcons: true,
-        disableDoubleClickZoom: false,
-        draggable: true,
-        keyboardShortcuts: false,
-        scrollwheel: true,
-        zoomControl: true,
-        fullscreenControl: false,
-        mapTypeControl: false,
-        streetViewControl: false,
-        styles: [
-          {
-            featureType: "poi",
-            elementType: "labels",
-            stylers: [{ visibility: "on" }]
-          }
-        ]
-      },
-    }).then(createdMap => {
-      setMap(createdMap);
-
-      createdMap.addMarker({
-        coordinate: { lat: location.lat, lng: location.lng },
-        title: 'Tu ubicación',
-        snippet: 'Estás aquí',
-      });
-    });
-
-    return () => {
-      if (map) {
-        map.destroy();
-      }
-    };
-  }, [location]);
+   const searchInputRef = useRef<HTMLIonSearchbarElement>(null);
 
   const handleLogout = async () => {
     showLoading("Cerrando sesión...");
@@ -78,30 +32,26 @@ const Home: React.FC = () => {
       await signOut(AUTH_USER);
       await hideLoading();
       router.push("/", "root", "replace");
-    } catch (error) {
-      console.error(error);
+    } catch {
       await hideLoading();
     }
   };
 
   return (
     <IonPage>
-      <IonContent className="ion-no-padding" fullscreen>
+      <IonContent className="ion-no-padding" fullscreen scrollEvents={false}>
         <div className="map-container">
-          <div
-            ref={mapRef}
-            className="full-screen-map"
-          />
+           <Map searchInputRef={searchInputRef} selectedCategory={selectedCategory} placeMarkers={placeMarkers} setPlaceMarkers={setPlaceMarkers} />
           <IonHeader className="floating-header">
-            <SearchBar setIsModalOpen={setIsModalOpen} />
+            <SearchBar setIsModalOpen={setIsModalOpen} searchInputRef={searchInputRef} />
           </IonHeader>
-          <ListCategories />
+
+          <ListCategories selectedCategory={selectedCategory} onCategorySelect={setSelectedCategory} />
         </div>
+
         <WeatherCard />
-        <ModalProfile
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-        />
+
+        <ModalProfile isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
       </IonContent>
     </IonPage>
   );

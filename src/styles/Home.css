@@ -168,6 +168,9 @@ ion-avatar:hover {
   align-items: center;
 }
 
+.btn-item-selected {
+  background-color: var(--secondary-color);
+}
 @media (max-width: 768px) {
   .categories-overlay {
     top: 75px;
