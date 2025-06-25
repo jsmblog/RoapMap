@@ -1,3 +1,9 @@
+ion-header {
+  --background: transparent;
+  --border-color: transparent;
+  box-shadow: none !important;
+  backdrop-filter: blur(10px);
+}
 .custom-searchbar {
   --background: var(--co-back-gray-2);
   --color: var(--primary-color);
@@ -7,7 +13,6 @@
   margin-top: 0;
   backdrop-filter: blur(10px);
 }
-
 .floating-header {
   position: absolute;
   top: 0;

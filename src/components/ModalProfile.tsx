@@ -9,6 +9,7 @@ import {
   IonFooter,
   IonIcon,
   IonModal,
+  IonToolbar,
 } from "@ionic/react";
 import React, { useState } from "react";
 import { ModalProfileProps } from "../Interfaces/iProps";
@@ -21,7 +22,6 @@ import { UseOpenWeather } from "../hooks/UseOpenWeather";
 const ModalProfile: React.FC<ModalProfileProps> = ({ isOpen, onClose }) => {
   const { currentUserData } = useAuthContext();
   console.log("datos del usuario", currentUserData);
-  const description = currentUserData?.description;
 
   const { weather } = UseOpenWeather();
   const [isModalOpenPrivacy, setIsModalOpenPrivacy] = useState(false);
@@ -29,7 +29,6 @@ const ModalProfile: React.FC<ModalProfileProps> = ({ isOpen, onClose }) => {
   return (
    <IonModal
       className="modal-profile"
-      trigger="open-modal"
       isOpen={isOpen}
       onDidDismiss={onClose}
       initialBreakpoint={0.94} // Ocupa 85% de la pantalla
@@ -37,7 +36,7 @@ const ModalProfile: React.FC<ModalProfileProps> = ({ isOpen, onClose }) => {
        handleBehavior="none"
         backdropDismiss={true}
     >
-      <IonContent className="ion-padding">
+      <IonContent className="ion-padding" fullscreen={true}>
         <IonCard className="card-profile">
           <img
             className="profile-avatar"
@@ -54,7 +53,7 @@ const ModalProfile: React.FC<ModalProfileProps> = ({ isOpen, onClose }) => {
               Sobre mi
             </IonCardSubtitle>
             <p className="profile-text">
-              {description?.replace(/\*/g, '')}
+              {currentUserData?.description?.replace(/\*/g, '')}
             </p>
             <IonCardSubtitle className="profile-subtitle">
               Ubicación
@@ -70,11 +69,13 @@ const ModalProfile: React.FC<ModalProfileProps> = ({ isOpen, onClose }) => {
         </IonCard>
 
         <IonFooter className="footer-profile">
-            <IonButton className="btn-edit-profile" routerLink="/edit-profile">
+           <IonToolbar className="toolbar-profile">
+             <IonButton className="btn-edit-profile" routerLink="/edit-profile">
               Editar Perfil
             </IonButton>
-            <IonButton
-              className="icon-information"
+           </IonToolbar>
+           <IonToolbar className="toolbar-icon">
+             <IonButton
               expand="block"
               onClick={() => setIsModalOpenPrivacy(true)}
               id="open-modal-privacy"
@@ -82,6 +83,7 @@ const ModalProfile: React.FC<ModalProfileProps> = ({ isOpen, onClose }) => {
             >
               <IonIcon className="icon-information" icon={informationCircle} />
             </IonButton>
+           </IonToolbar>
           </IonFooter>
 
         <ModalPrivacy

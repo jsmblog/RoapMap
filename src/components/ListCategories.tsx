@@ -1,10 +1,8 @@
 import { IonIcon, IonList } from "@ionic/react";
 import { categories } from "../functions/categories";
+import { ListCategoriesProps } from "../Interfaces/iGoogleMaps";
 
-interface ListCategoriesProps {
-  onCategorySelect: (category: string | null) => void;
-  selectedCategory: string | null;
-}
+
 
 const ListCategories: React.FC<ListCategoriesProps> = ({ onCategorySelect, selectedCategory }) => (
   <div className="categories-overlay">

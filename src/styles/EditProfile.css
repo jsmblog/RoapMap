@@ -1,0 +1,23 @@
+/* 🎯 Aplica al IonToolbar, no al IonHeader directamente */
+.edit-profile-toolbar {
+  --background: linear-gradient(135deg, #e0f7fa, #fce4ec);
+  --color: #222;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* 🎯 Clase aplicada correctamente en IonContent */
+.edit-profile-content {
+  --background: #fafafa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+/* ✨ Título */
+.edit-profile-wrapper h2 {
+  font-size: 1.5rem;
+  color: #333;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}

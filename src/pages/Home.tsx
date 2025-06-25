@@ -1,11 +1,6 @@
 import { useRef, useState } from "react";
 import "../styles/Home.css";
-import {
-  IonContent,
-  IonHeader,
-  IonPage,
-  useIonRouter,
-} from "@ionic/react";
+import { IonContent, IonHeader, IonPage, useIonRouter } from "@ionic/react";
 import ModalProfile from "../components/ModalProfile";
 import { useLoading } from "../hooks/UseLoading";
 import { signOut } from "firebase/auth";
@@ -14,17 +9,18 @@ import SearchBar from "../components/SearchBar";
 import ListCategories from "../components/ListCategories";
 import WeatherCard from "../components/WeatherCard";
 import Map from "../components/Map";
+import { PlaceMarker } from "../Interfaces/iGoogleMaps";
 
 const Home: React.FC = () => {
   const router = useIonRouter();
-    const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   const { showLoading, hideLoading } = useLoading();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const [placeMarkers, setPlaceMarkers] = useState<any[]>([]);
+  const [placeMarkers, setPlaceMarkers] = useState<PlaceMarker[]>([]);
 
-   const searchInputRef = useRef<HTMLIonSearchbarElement>(null);
+  const searchInputRef = useRef<HTMLIonSearchbarElement>(null);
 
   const handleLogout = async () => {
     showLoading("Cerrando sesión...");
@@ -41,17 +37,31 @@ const Home: React.FC = () => {
     <IonPage>
       <IonContent className="ion-no-padding" fullscreen scrollEvents={false}>
         <div className="map-container">
-           <Map searchInputRef={searchInputRef} selectedCategory={selectedCategory} placeMarkers={placeMarkers} setPlaceMarkers={setPlaceMarkers} />
+          <Map
+            searchInputRef={searchInputRef}
+            selectedCategory={selectedCategory}
+            placeMarkers={placeMarkers}
+            setPlaceMarkers={setPlaceMarkers}
+          />
           <IonHeader className="floating-header">
-            <SearchBar setIsModalOpen={setIsModalOpen} searchInputRef={searchInputRef} />
+            <SearchBar
+              setIsModalOpen={setIsModalOpen}
+              searchInputRef={searchInputRef}
+            />
           </IonHeader>
 
-          <ListCategories selectedCategory={selectedCategory} onCategorySelect={setSelectedCategory} />
+          <ListCategories
+            selectedCategory={selectedCategory}
+            onCategorySelect={setSelectedCategory}
+          />
         </div>
 
         <WeatherCard />
 
-        <ModalProfile isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+        <ModalProfile
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+        />
       </IonContent>
     </IonPage>
   );

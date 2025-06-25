@@ -8,7 +8,6 @@ import {
   IonImg,
   IonModal,
   IonNote,
-  IonTitle,
 } from "@ionic/react";
 import React from "react";
 import { ModalProfileProps } from "../Interfaces/iProps";
@@ -18,7 +17,6 @@ const ModalPrivacy: React.FC<ModalProfileProps> = ({ isOpen, onClose }) => {
   return (
     <IonModal
       className="modal-privacy"
-      trigger="open-modal-privacy"
       isOpen={isOpen}
       onDidDismiss={onClose}
       backdropDismiss={true}
@@ -27,9 +25,9 @@ const ModalPrivacy: React.FC<ModalProfileProps> = ({ isOpen, onClose }) => {
       handleBehavior="none" // 👈 Evita ciclo de breakpoints
     >
       <IonContent>
-        <IonCard className="modal-privacy-content">
+        <IonCard className="card-privacy">
           <IonCardHeader>
-            <IonCardTitle className="modal-title">Nota de Privacidad</IonCardTitle>
+            <IonCardTitle className="modal-title tile-privacity">Nota de Privacidad</IonCardTitle>
             <IonImg
               className="imgPrivacy"
               src={img_privacy}

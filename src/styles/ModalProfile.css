@@ -9,10 +9,7 @@
   border-top-right-radius: 20px;
   overflow: hidden; /* evita que contenido sobresalga */
 }
-.modal-privacy .modal-wrapper {
-  border-radius: 16px 16px 0 0;
-  overflow: hidden;
-}
+.card-privacy,
 .card-profile {
   display: flex !important;
   flex-direction: column !important;
@@ -41,12 +38,12 @@
 .profile-info {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: .8rem;
   padding: 1rem !important;
 }
 .profile-subtitle {
   font-size: 1rem;
-   color: var(--primary-color);
+  color: var(--primary-color);
   font-weight: bold;
   text-transform: none;
 }
@@ -57,24 +54,36 @@
 }
 .footer-profile{
   display: flex;
-  justify-content: space-around;
   align-items: center;
   position: fixed;
   bottom: 6%;
   box-shadow: none;
-  margin: .5rem !important;
+  width: 100%;
+  padding: 1rem;
+  --background: none !important;
+  --box-shadow: none;
+}
+.toolbar-profile{
+  width:80%;
+  --background: none !important;
+  --box-shadow: none;
+}
+.toolbar-icon{
+  width: 20%;
+  --background: none !important;
+   --box-shadow: none;
 }
 .btn-edit-profile {
-  width: 200px;
+  width: 230px;
   font-size: 1rem;
-  color: var(--color-btns-text);
+  --color: var(--co-black-1);
   --background: var(--color-btns);
   --border-radius: 10px;
   --box-shadow: 2px 2px var(--primary-color);
   text-transform: none;
 }
 .icon-information{
-  width: 100px !important;
+  width: 50px !important;
   height: 30px !important;
   color: var(--primary-color);
 }
@@ -90,13 +99,16 @@
   font-weight: bold;
   color: var(--primary-color);
   text-align: center;
-  margin: .5rem !important;
+}
+.tile-privacity{
+  margin: 1rem;
 }
 .imgPrivacy{
   width:150px;
   height: auto;
   object-fit: cover;
   border-radius: 10px;
+  margin: .5rem;
 }
 .modal-note{
   font-size: 11.5px;
