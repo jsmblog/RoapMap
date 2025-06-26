@@ -18,7 +18,7 @@ const Home: React.FC = () => {
   const { showLoading, hideLoading } = useLoading();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const [placeMarkers, setPlaceMarkers] = useState<PlaceMarker[]>([]);
+  const [placeMarkers, setPlaceMarkers] = useState<google.maps.Marker[]>([]);
   const [shouldRefocus, setShouldRefocus] = useState<boolean>(false); 
   
 const handleSearchClear = () => {
