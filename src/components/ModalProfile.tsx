@@ -21,7 +21,6 @@ import { UseOpenWeather } from "../hooks/UseOpenWeather";
 
 const ModalProfile: React.FC<ModalProfileProps> = ({ isOpen, onClose }) => {
   const { currentUserData } = useAuthContext();
-  console.log("datos del usuario", currentUserData);
 
   const { weather } = UseOpenWeather();
   const [isModalOpenPrivacy, setIsModalOpenPrivacy] = useState(false);

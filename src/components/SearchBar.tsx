@@ -4,9 +4,14 @@ import React from "react";
 interface SearchBarProps {
   setIsModalOpen: (open: boolean) => void;
   searchInputRef: React.RefObject<HTMLIonSearchbarElement | null>;
+  onClear: () => void; 
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ setIsModalOpen, searchInputRef }) => (
+const SearchBar: React.FC<SearchBarProps> = ({
+  setIsModalOpen,
+  searchInputRef,
+  onClear,
+}) => (
   <div className="banner">
     <IonSearchbar
       id="search-bar"
@@ -16,6 +21,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ setIsModalOpen, searchInputRef })
       debounce={500}
       showCancelButton="focus"
       placeholder="Busca un lugar..."
+      onIonClear={onClear} 
     />
     <IonAvatar onClick={() => setIsModalOpen(true)}>
       <IonImg
