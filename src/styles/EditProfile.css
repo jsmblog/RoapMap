@@ -1,23 +1,75 @@
-/* 🎯 Aplica al IonToolbar, no al IonHeader directamente */
 .edit-profile-toolbar {
   --background: linear-gradient(135deg, #e0f7fa, #fce4ec);
-  --color: #222;
+  --color: var(--primary-color);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
-
-/* 🎯 Clase aplicada correctamente en IonContent */
+.ion-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--primary-color);
+}
 .edit-profile-content {
-  --background: #fafafa;
+  --background: var(--background-color);
+  --padding: 1rem;
+  --padding-top: 16px;
+}
+.edit-profile-info-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+}
+.edit-profile-avatar {
+  width: 130px;
+  height: 130px;
+  margin-bottom: 40px;
+  position: relative;
+}
+.edit-profile-camera-icon {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  bottom: 3px;
+  right: 0px;
+  color: var(--co-white);
+  border-radius: 50%;
+  padding: 8px;
+  background-color: var(--primary-color);
+}
+.edit-profile-item {
+  width: 100%;
+  max-width: 500px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+}
+.description-value {
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 1rem;
+  justify-content: space-between;
+  width: 100%;
+  gap: 8px;
+  text-align: right;
 }
-
-/* ✨ Título */
-.edit-profile-wrapper h2 {
-  font-size: 1.5rem;
-  color: #333;
-  font-weight: 600;
-  margin-bottom: 1rem;
+.description-label {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 17px;
+  max-width: 200px;
+}
+.ion-label {
+  font-size: 16px;
+  color: var(--primary-color);
+  font-weight: 500;
+}
+.edit-profile-button{
+  border: 1px solid red !important;
+}
+.chevron-icon {
+  width: 25px;
+  height: 25px;
+  color: var(--primary-color);
 }

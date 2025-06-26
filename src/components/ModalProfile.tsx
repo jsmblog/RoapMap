@@ -27,14 +27,14 @@ const ModalProfile: React.FC<ModalProfileProps> = ({ isOpen, onClose }) => {
   const [isModalOpenPrivacy, setIsModalOpenPrivacy] = useState(false);
 
   return (
-   <IonModal
+    <IonModal
       className="modal-profile"
       isOpen={isOpen}
       onDidDismiss={onClose}
       initialBreakpoint={0.94} // Ocupa 85% de la pantalla
-       breakpoints={[0, 0.94]}
-       handleBehavior="none"
-        backdropDismiss={true}
+      breakpoints={[0, 0.94]}
+      handleBehavior="none"
+      backdropDismiss={true}
     >
       <IonContent className="ion-padding" fullscreen={true}>
         <IonCard className="card-profile">
@@ -53,12 +53,16 @@ const ModalProfile: React.FC<ModalProfileProps> = ({ isOpen, onClose }) => {
               Sobre mi
             </IonCardSubtitle>
             <p className="profile-text">
-              {currentUserData?.description?.replace(/\*/g, '')}
+              {currentUserData?.description?.replace(/\*/g, "")}
             </p>
             <IonCardSubtitle className="profile-subtitle">
               Ubicación
             </IonCardSubtitle>
-            <p> <IonIcon icon={location} />  {weather?.name}, {weather?.sys.country}</p>
+            <p>
+              {" "}
+              <IonIcon icon={location} /> {weather?.name},{" "}
+              {weather?.sys.country}
+            </p>
             <IonCardSubtitle className="profile-subtitle">
               Logros
             </IonCardSubtitle>
@@ -69,22 +73,21 @@ const ModalProfile: React.FC<ModalProfileProps> = ({ isOpen, onClose }) => {
         </IonCard>
 
         <IonFooter className="footer-profile">
-           <IonToolbar className="toolbar-profile">
-             <IonButton className="btn-edit-profile" routerLink="/edit-profile">
+          <IonToolbar className="toolbar-profile">
+            <IonButton className="btn-edit-profile" routerLink="/edit-profile">
               Editar Perfil
             </IonButton>
-           </IonToolbar>
-           <IonToolbar className="toolbar-icon">
-             <IonButton
+          </IonToolbar>
+          <IonToolbar className="toolbar-icon">
+            <IonButton
               expand="block"
               onClick={() => setIsModalOpenPrivacy(true)}
-              id="open-modal-privacy"
               fill="clear"
             >
               <IonIcon className="icon-information" icon={informationCircle} />
             </IonButton>
-           </IonToolbar>
-          </IonFooter>
+          </IonToolbar>
+        </IonFooter>
 
         <ModalPrivacy
           isOpen={isModalOpenPrivacy}
