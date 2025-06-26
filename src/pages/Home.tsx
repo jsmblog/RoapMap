@@ -19,9 +19,14 @@ const Home: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [placeMarkers, setPlaceMarkers] = useState<PlaceMarker[]>([]);
+  const [shouldRefocus, setShouldRefocus] = useState<boolean>(false); 
+  
+const handleSearchClear = () => {
+  setShouldRefocus(true); 
+};
+
 
   const searchInputRef = useRef<HTMLIonSearchbarElement>(null);
-
   const handleLogout = async () => {
     showLoading("Cerrando sesión...");
     try {
@@ -38,15 +43,19 @@ const Home: React.FC = () => {
       <IonContent className="ion-no-padding" fullscreen scrollEvents={false}>
         <div className="map-container">
           <Map
-            searchInputRef={searchInputRef}
-            selectedCategory={selectedCategory}
-            placeMarkers={placeMarkers}
-            setPlaceMarkers={setPlaceMarkers}
-          />
+  searchInputRef={searchInputRef}
+  selectedCategory={selectedCategory}
+  placeMarkers={placeMarkers}
+  setPlaceMarkers={setPlaceMarkers}
+  shouldRefocus={shouldRefocus}
+  setShouldRefocus={setShouldRefocus}
+/>
+
           <IonHeader className="floating-header">
             <SearchBar
               setIsModalOpen={setIsModalOpen}
               searchInputRef={searchInputRef}
+              onClear={handleSearchClear}
             />
           </IonHeader>
 

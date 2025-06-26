@@ -6,10 +6,12 @@ export interface PlaceMarker {
 }
 
 export interface MapProps {
-  searchInputRef: React.RefObject<HTMLIonSearchbarElement>;
+  searchInputRef: React.RefObject<any>;
   selectedCategory: string | null;
-  placeMarkers: PlaceMarker[];
-  setPlaceMarkers: React.Dispatch<React.SetStateAction<PlaceMarker[]>>;
+  placeMarkers: google.maps.Marker[];
+  setPlaceMarkers: React.Dispatch<React.SetStateAction<google.maps.Marker[]>>;
+  shouldRefocus?: boolean;
+  setShouldRefocus?: (v: boolean) => void;
 }
 export interface ListCategoriesProps {
   onCategorySelect: (category: string | null) => void;
