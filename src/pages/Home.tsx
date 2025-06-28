@@ -49,6 +49,7 @@ const handleSearchClear = () => {
   setPlaceMarkers={setPlaceMarkers}
   shouldRefocus={shouldRefocus}
   setShouldRefocus={setShouldRefocus}
+  
 />
 
           <IonHeader className="floating-header">

@@ -17,7 +17,6 @@ import { doc, updateDoc } from 'firebase/firestore';
 import { db } from '../Firebase/initializeApp';
 import { useAuthContext } from '../context/UserContext';
 import { connection } from '../connection/connection_to_backend';
-import { buildPayload } from '../functions/buildPayload';
 
 interface Selection {
   v: string;
@@ -32,7 +31,6 @@ const Wizard: React.FC = () => {
   const { showToast, ToastComponent } = useToast();
   const { showLoading, hideLoading } = useLoading();
   const { currentUserData } = useAuthContext();
-  console.log(currentUserData);
   const router = useIonRouter();
 
   const toggleOption = (v: string, c: string) => {
@@ -69,9 +67,14 @@ const Wizard: React.FC = () => {
       const refUser = doc(db, 'USERS', currentUserData!.uid);
       const allSelections = Object.values(answers).flat();
       await updateDoc(refUser, { pre: allSelections });
-      const payload = buildPayload(currentUserData,allSelections)
+      const payload = {
+        mod:'redactor',
+      data_to_analyze : {
+          name: currentUserData?.name,
+          formattedPrefs: allSelections.map(pref => `${pref.c}: ${pref.v}`).join(', ')
+        }
+      }
       const {data} = await connection.post('/send/request/ai',payload);
-      console.log('Respuesta de AI:', data);
       await updateDoc(refUser, { d: data.message });
     } catch (error) {
       console.error(error);
