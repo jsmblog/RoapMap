@@ -1,7 +1,6 @@
 .edit-profile-toolbar {
-  --background: linear-gradient(135deg, #e0f7fa, #fce4ec);
+  --background: var(--background-color);
   --color: var(--primary-color);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 .ion-title {
   font-size: 20px;
@@ -18,6 +17,8 @@
   flex-direction: column;
   align-items: center;
   padding: 16px;
+  width: 100%;
+  height: 100%;
 }
 .edit-profile-avatar {
   width: 130px;
@@ -34,13 +35,15 @@
   color: var(--co-white);
   border-radius: 50%;
   padding: 8px;
-  background-color: var(--primary-color);
+  background: linear-gradient(135deg, #a8e063, #56ab2f, #0bab63);
 }
 .edit-profile-item {
   width: 100%;
   max-width: 500px;
   margin-bottom: 10px;
   border-radius: 8px;
+  --background: white;
+  --box-shadow: none;
 }
 .description-value {
   display: flex;
@@ -65,11 +68,83 @@
   color: var(--primary-color);
   font-weight: 500;
 }
-.edit-profile-button{
+.edit-profile-button {
   border: 1px solid red !important;
 }
 .chevron-icon {
   width: 25px;
   height: 25px;
   color: var(--primary-color);
+}
+.modal-edit-profile {
+  width: 100%;
+  height: 100%;
+}
+.modal-edit-profile::part(content) {
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  overflow: hidden;
+}
+.modal-edit-profile-content {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  border-radius: 20px;
+  max-width: 500px;
+  margin: auto;
+  gap: 2rem;
+}
+.IonInput,
+.custom-datetime,
+.IonSearchbar,
+.IonSelect,
+.IonTextarea {
+  --border-radius: 12px;
+  --border-color: #a5d6a7; /* verde suave */
+  --highlight-color-focused: #43a047; /* verde enfocado */
+  --padding-start: 12px;
+  --padding-end: 12px;
+  --background: var(--background-color);
+}
+.IonInput {
+  --border-width: 1px;
+}
+.custom-datetime {
+  --width: 100%;
+  --min-height: 100px !important;
+  max-width: 300px;
+  margin: 0 auto;
+  --border-width: 1px;
+  --border-color: #a5d6a7;
+  --background: white;
+  border-radius: 12px;
+}
+.IonTextarea{
+  width: 100%;
+  min-height: 150px; 
+  max-height: 250px; 
+  resize: vertical;  
+  --padding-start: 12px;
+  --padding-end: 12px;
+  --border-radius: 12px;
+  --border-color: #a5d6a7;
+  --highlight-color-focused: #43a047;
+}
+.modal-edit-profile-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: auto;
+}
+.cancel,
+.save {
+  flex: 1;
+  --border-radius: 12px;
+  --background: var(--color-btns);
+  --color: white;
+  font-weight: 600;
+}
+.cancel {
+  --background: red !important;
+  --color: white;
 }
