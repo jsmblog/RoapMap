@@ -226,7 +226,8 @@ export const connection = axios.create({
 endpoint -> const { data } = await connection.post('/send/request/ai', payload);
 
 # 🚧 Protección de Rutas
-El componente ProtectedRoute asegura que sólo usuarios autenticados (y opcionalmente verificados) puedan acceder a ciertas rutas:
+
+El componente **ProtectedRoute** asegura que sólo usuarios autenticados (y opcionalmente verificados) puedan acceder a ciertas rutas:
 
 import { Route, Redirect, RouteProps } from 'react-router-dom';
 import { useAuthContext } from '../context/UserContext';
