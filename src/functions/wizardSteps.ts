@@ -46,12 +46,12 @@ export const wizardSteps = [
             },
             {
                 label: "Conocer la cultura local en profundidad",
-                value: "cultura_local",
+                value: "conocer_cultura_local",
                 category: "interes"
             },
             {
                 label: "Participar en actividades emocionantes",
-                value: "actividades_emocionantes",
+                value: "participar_en_actividades_emocionantes",
                 category: "interes"
             },
             {
@@ -72,12 +72,12 @@ export const wizardSteps = [
             {
                 label: "Vivir experiencias divertidas y sociales",
                 value: "lugares_diversion",
-                category: "servicio"
+                category: "experiencias"
             },
             {
                 label: "Asistir a eventos únicos y culturales",
                 value: "eventos_locales",
-                category: "servicio"
+                category: "interes"
             }
         ]
     },
@@ -87,7 +87,7 @@ export const wizardSteps = [
         maxSelect: 4,
         options: [
             { label: "Restaurantes", value: "restaurantes", category: "actividad" },
-            { label: "Bares y vida nocturna", value: "vida_nocturna", category: "actividad" },
+            { label: "Bares y vida nocturna", value: "vida_nocturna", category: "actividad_nocturna" },
             { label: "Cafeterías", value: "cafeterias", category: "actividad" },
             { label: "Museos y cultura", value: "museos_cultura", category: "actividad" },
             { label: "Naturaleza y parques", value: "naturaleza_parques", category: "actividad" },
@@ -119,13 +119,13 @@ export const wizardSteps = [
         subtitle: "Selecciona tus preferencias gastronómicas.",
         maxSelect: 7,
         options: [
-            { label: "Comida local", value: "comida_local", category: "comida" },
-            { label: "Internacional", value: "internacional", category: "comida" },
-            { label: "Alta cocina", value: "alta_cocina", category: "comida" },
-            { label: "Comida rápida", value: "comida_rapida", category: "comida" },
-            { label: "Dulces", value: "dulces", category: "dulces" },
-            { label: "Postres", value: "postres", category: "postres" },
-            { label: "Café", value: "cafe", category: "bebidas" }
+            { label: "Comida local", value: "comida_local", category: "interes_comida" },
+            { label: "Internacional", value: "internacional", category: "interes_comida" },
+            { label: "Alta cocina", value: "alta_cocina", category: "interes_comida" },
+            { label: "Comida rápida", value: "comida_rapida", category: "interes_comida" },
+            { label: "Dulces", value: "dulces", category: "interes_dulces" },
+            { label: "Postres", value: "postres", category: "interes_postres" },
+            { label: "Café", value: "cafe", category: "interes_bebidas" }
         ]
     },
     {
@@ -133,11 +133,11 @@ export const wizardSteps = [
         subtitle: "Esto nos ayuda a recomendarte actividades disponibles.",
         maxSelect: 2,
         options: [
-            { label: "Mañana (08:00 - 12:00)", value: "manana", category: "tiempo" },
-            { label: "Tarde (12:00 - 18:00)", value: "tarde", category: "tiempo" },
-            { label: "Noche (18:00 - 22:00)", value: "noche", category: "tiempo" },
-            { label: "Fines de semana", value: "fin_semana", category: "tiempo" },
-            { label: "Entre semana", value: "entre_semana", category: "tiempo" }
+            { label: "Mañana (08:00 - 12:00)", value: "manana_08:00_12:00", category: "tiempo_libre" },
+            { label: "Tarde (12:00 - 18:00)", value: "tarde_12:00_18:00", category: "tiempo_libre" },
+            { label: "Noche (18:00 - 22:00)", value: "noche_18:00_22:00", category: "tiempo_libre" },
+            { label: "Fines de semana", value: "fines_de_semana", category: "tiempo_libre" },
+            { label: "Entre semana", value: "entre_semana", category: "tiempo_libre" }
         ]
     },
     {
@@ -158,10 +158,10 @@ export const wizardSteps = [
         subtitle: "Selecciona la frecuencia con la que te gustaría recibir recomendaciones.",
         maxSelect: 1,
         options: [
-            { label: "Diariamente", value: "diariamente", category: "frecuencia" },
-            { label: "Semanalmente", value: "semanalmente", category: "frecuencia" },
-            { label: "Mensualmente", value: "mensualmente", category: "frecuencia" },
-            { label: "Solo cuando hay novedades", value: "novedades", category: "frecuencia" }
+            { label: "Diariamente", value: "diariamente", category: "frecuencia_para_recibir_notificaciones" },
+            { label: "Semanalmente", value: "semanalmente", category: "frecuencia_para_recibir_notificaciones" },
+            { label: "Mensualmente", value: "mensualmente", category: "frecuencia_para_recibir_notificaciones" },
+            { label: "Solo cuando hay novedades", value: "cuando_hay_novedades", category: "frecuencia_para_recibir_notificaciones" }
         ]
     }
 ];

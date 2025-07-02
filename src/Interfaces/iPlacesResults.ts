@@ -5,3 +5,12 @@ export interface PlacesResultProps {
     setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
     setExpandedIdx: React.Dispatch<React.SetStateAction<number | null>>;
 }
+
+export interface NearestPlaceProps {
+  info: {
+    distance: string;
+    duration: string;
+    place: google.maps.places.PlaceResult | null;
+  };
+  setInfo: (info: any) => void;
+}
