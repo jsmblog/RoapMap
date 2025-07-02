@@ -20,7 +20,6 @@ import {
   cameraReverse,
   chevronBack,
   chevronForwardOutline,
-  options,
 } from "ionicons/icons";
 import { UseOpenWeather } from "../hooks/UseOpenWeather";
 import ModalEditInfoProfile from "../components/ModalEditInfoProfile";
@@ -30,110 +29,136 @@ const EditProfile: React.FC = () => {
   const { currentUserData } = useAuthContext();
   const { weather } = UseOpenWeather();
   const [isModalOpenEditProfile, setIsModalOpenEditProfile] = useState(false);
- const [info,setInfo] = useState<EditingObjectType>({
+  const [info, setInfo] = useState<EditingObjectType>({
+    initialBreakpoint: 0,
+    breakpoints: 0,
     title: "",
     label: "",
+    label2: "",
     placeholder: "",
-    type: "",
+    placeholder2: "",
+    type: "text",
     result1: "",
     result2: "",
     options: [],
     isRequired: true,
-    icon: "",
   });
 
   const openModalEditProfile = (editingField: string) => {
     setIsModalOpenEditProfile(true);
     let objectEditing: EditingObjectType = {
+      initialBreakpoint: 0,
+      breakpoints: 0,
       title: "",
-      label:"",
+      label: "",
+      label2: "",
       placeholder: "",
-      type: "",
+      placeholder2: "",
+      type: "text",
       result1: "",
       result2: "",
       options: [],
       isRequired: true,
-      icon:"",
     };
 
-    switch(editingField) {
+    switch (editingField) {
       case "name":
         objectEditing = {
-          title: "Editar Nombre",
+          initialBreakpoint: 0.5,
+          breakpoints: 0.5,
+          title: "Editar Nombre ",
           label: "Nombre",
+          label2: "Apellido",
           placeholder: "Ingresa tu nombre",
+          placeholder2: "Ingresa tu aplliddo",
           type: "text",
+          result1: "",
+          result2: "",
           isRequired: true,
-          icon: options,
         };
         break;
-        case "gender":
-          objectEditing = {
-            title: "Editar Género",
-            label: "Género",
-            placeholder: "Selecciona tu género",
-            type: "select",
-            options: [
-              { label: "Masculino", value: "male" },
-              { label: "Femenino", value: "female" },
-              { label: "No Binario", value: "Not Binario" },
-              { label: "LBGTQ+", value: "LBGTQ+" },
-              { label: "Prefiero no decirlo", value: "Prefer not to say" },
-            ],
-            isRequired: true,
-            icon: options,
-          };
-          break;
-        case "birthdate":
-          objectEditing = {
-            title: "Editar Fecha de Nacimiento",
-            label: "Fecha de Nacimiento",
-            placeholder: "Ingresa tu fecha de nacimiento",
-            type: "date",
-            isRequired: true,
-            icon: options,
-          };
-          break;
-        case "location":
-          objectEditing = {
-            title: "Editar Ubicación",
-            label: "Ubicación",
-            placeholder: "Ingresa tu ubicación",
-            type: "text",
-            isRequired: true,
-            icon: options,
-          };
-          break;
-        case "description":
-          objectEditing = {
-            title: "Editar Descripción",
-            label: "Descripción",
-            placeholder: "Ingresa una breve descripción",
-            type: "textarea",
-            isRequired: true,
-            icon: options,
-          };
-          break;
-        case "password":
-          objectEditing = {
-            title: "Editar Contraseña",
-            label: "Contraseña",
-            placeholder: "Ingresa tu nueva contraseña",
-            type: "password",
-            result1: "Nueva Contraseña",
-            result2: "Confirmar Contraseña",
-            isRequired: true,
-            icon: options,
-          };
-          break;
-      }
-      setInfo(objectEditing);
+      case "gender":
+        objectEditing = {
+          initialBreakpoint: 0.3,
+          breakpoints: 0.3,
+          title: "Editar Género",
+          label: "Género",
+          placeholder: "Selecciona tu género",
+          placeholder2: "",
+          type: "select",
+          result1: "",
+          options: [
+            { label: "Masculino", value: "male" },
+            { label: "Femenino", value: "female" },
+            { label: "No Binario", value: "Not Binario" },
+            { label: "LBGTQ+", value: "LBGTQ+" },
+            { label: "Prefiero no decirlo", value: "Prefer not to say" },
+          ],
+          isRequired: true,
+        };
+        break;
+      case "birthdate":
+        objectEditing = {
+          initialBreakpoint: 0.72,
+          breakpoints: 0.72,
+          title: "Editar Fecha de Nacimiento",
+          label: "",
+          placeholder: "",
+          placeholder2: "",
+          type: "date",
+          result1: "",
+          isRequired: true,
+        };
+        break;
+      case "location":
+        objectEditing = {
+          initialBreakpoint: 0.5,
+          breakpoints: 0.5,
+          title: "Editar Ubicación",
+          label: "Ubicación",
+          placeholder: "Ingresa tu ubicación",
+          placeholder2: "",
+          type: "search",
+          result1: "",
+          isRequired: true,
+        };
+        break;
+      case "description":
+        objectEditing = {
+          initialBreakpoint: 0.5,
+          breakpoints: 0.5,
+          title: "Editar Descripción",
+          label: "Descripción",
+          placeholder: "Ingresa una breve descripción",
+          placeholder2: "",
+          type: "textarea",
+          result1: "",
+          isRequired: true,
+        };
+        break;
+      case "password":
+        objectEditing = {
+          initialBreakpoint: 0.5,
+          breakpoints: 0.5,
+          title: "Editar Contraseña",
+          label: "Nueva Contraseña",
+          label2: "Confirmar Contraseña",
+          placeholder: "Ingresa tu nueva contraseña",
+          placeholder2: "Confirmar Contraseña",
+          type: "password",
+          result1: "",
+          result2: "",
+          isRequired: true,
+        };
+        break;
     }
+    setInfo(objectEditing);
+  };
 
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar className="edit-profile-header">
+        <IonToolbar className="edit-profile-toolbar">
           <IonButtons slot="start">
             <IonBackButton defaultHref="/tab/home" icon={chevronBack} />
           </IonButtons>
@@ -156,7 +181,7 @@ const EditProfile: React.FC = () => {
             </IonAvatar>
           </div>
 
-          <IonItem className="edit-profile-item">
+          <IonItem className="edit-profile-item ">
             <IonLabel className="ion-label" slot="start">
               Nombre
             </IonLabel>
@@ -166,7 +191,8 @@ const EditProfile: React.FC = () => {
               slot="end"
               expand="block"
               fill="clear"
-              onClick={() => openModalEditProfile("name")}>
+              onClick={() => openModalEditProfile("name")}
+            >
               <IonIcon slot="end" icon={chevronForwardOutline} />
             </IonButton>
           </IonItem>
@@ -266,7 +292,6 @@ const EditProfile: React.FC = () => {
       </IonContent>
     </IonPage>
   );
- 
 };
 
 export default EditProfile;
