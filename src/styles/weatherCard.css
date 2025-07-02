@@ -1,0 +1,295 @@
+.weather-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 6.9rem;
+  z-index: 999;
+  right: .3rem;
+  padding: 0 .75rem;
+  border-radius: 20px;
+  background: var(--co-back-gray-7);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 5px 1px var(--co-back-gray);
+}
+
+.weather-icon {
+  width: 45px;
+  height: 45px;
+  filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.15));
+}
+
+.weather-temp {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+}
+@media (hover: hover) {
+  .btn-item {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .weather-box {
+    transition: all 0.3s ease;
+  }
+  
+  .weather-box:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.12);
+  }
+}
+
+.recommendation-modal {
+  --backdrop-opacity: 0.5;
+  --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.recommendation-modal .modal-wrapper {
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  max-width: 500px;
+  margin: auto;
+}
+
+.modal-header {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.modal-header {
+  --background: transparent;
+  --border-color: transparent;
+}
+
+.modal-title {
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: var(--primary-color);
+  text-align: center;
+}
+
+.close-button {
+  color: var(--co-back-gray) !important;
+}
+
+.modal-content {
+  --background: var(--co-white);
+  --padding-start: 0;
+  --padding-end: 0;
+  --padding-top: 0;
+  --padding-bottom: 0;
+}
+
+.modal-body {
+  padding: 20px;
+  min-height: 100%;
+}
+
+.recommendation-card {
+  --background: var(--co-white);
+  border-radius: 12px;
+  margin: 0;
+}
+
+.recommendation-card ion-card-content {
+  padding: 24px;
+}
+
+.weather-summary {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.weather-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.modal-weather-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--background-color) 100%);
+  padding: 8px;
+  box-shadow: 0 4px 15px var(--co-back-gray);
+}
+
+.weather-details h3 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1e293b;
+  background: linear-gradient(135deg, var(--primary-color), var(--background-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.weather-details p {
+  font-size: 0.9rem;
+  color: var(--co-gray);
+  text-transform: capitalize;
+  font-weight: 500;
+}
+
+.recommendation-content {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+.recommendation-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-color);
+  padding: 12px 16px;
+  background: linear-gradient(135deg, var(--co-back-gray), var(--co-back-gray-2));
+  border-radius: 8px;
+}
+
+.recommendation-title ion-icon {
+  font-size: 1.2rem;
+  color: #667eea;
+}
+
+.recommendation-text {
+  font-size: 1.25rem !important;
+  line-height: 1.5;
+  color: var(--text-color);
+  text-align: justify;
+  padding: 15px;
+  background: var(--co-white);
+  border-radius: 8px;
+  border: 1px solid var(--co-back-gray);
+  position: relative;
+  font-weight: 400;
+}
+
+.recommendation-text::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(135deg, var(--primary-color), var(--co-back-gray-2));
+  border-radius: 0 2px 2px 0;
+}
+
+.recommendation-button {
+  --color: var(--primary-color);
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.recommendation-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);
+}
+
+/* Animaciones */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.heartbeat {
+	-webkit-animation: heartbeat 1.5s ease-in-out infinite both;
+	        animation: heartbeat 1.5s ease-in-out infinite both;
+}
+@-webkit-keyframes heartbeat {
+  from {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    -webkit-transform-origin: center center;
+            transform-origin: center center;
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+  }
+  10% {
+    -webkit-transform: scale(0.91);
+            transform: scale(0.91);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  17% {
+    -webkit-transform: scale(0.98);
+            transform: scale(0.98);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+  }
+  33% {
+    -webkit-transform: scale(0.87);
+            transform: scale(0.87);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  45% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+  }
+}
+@keyframes heartbeat {
+  from {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    -webkit-transform-origin: center center;
+            transform-origin: center center;
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+  }
+  10% {
+    -webkit-transform: scale(0.91);
+            transform: scale(0.91);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  17% {
+    -webkit-transform: scale(0.98);
+            transform: scale(0.98);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+  }
+  33% {
+    -webkit-transform: scale(0.87);
+            transform: scale(0.87);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  45% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+  }
+}
+
+@media (max-width: 768px) {
+  .modal-body {
+    padding: 16px;
+  }
+  
+  .recommendation-card ion-card-content {
+    padding: 20px;
+  }
+  
+  .weather-details h3 {
+    font-size: 1.8rem;
+  }
+  
+  .modal-weather-icon {
+    width: 50px;
+    height: 50px;
+  }
+}

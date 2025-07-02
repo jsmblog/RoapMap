@@ -9,7 +9,6 @@ import SearchBar from "../components/SearchBar";
 import ListCategories from "../components/ListCategories";
 import WeatherCard from "../components/WeatherCard";
 import Map from "../components/Map";
-import { PlaceMarker } from "../Interfaces/iGoogleMaps";
 
 const Home: React.FC = () => {
   const router = useIonRouter();

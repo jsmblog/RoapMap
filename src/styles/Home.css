@@ -143,35 +143,6 @@ ion-avatar:hover {
   pointer-events: auto;
 }
 
-.weather-box {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 6.9rem;
-  z-index: 999;
-  right: .3rem;
-  padding: 0 .75rem;
-  border-radius: 20px;
-  background: var(--co-back-gray-7);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 0 5px 1px var(--co-back-gray);
-}
-
-.weather-icon {
-  width: 70px;
-  height: 70px;
-  filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.15));
-}
-
-.weather-temp {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--primary-color);
-  display: flex;
-  align-items: center;
-}
 
 .btn-item-selected {
   background-color: var(--secondary-color);
@@ -293,22 +264,7 @@ ion-avatar:hover {
   animation: slideInDown 0.5s ease-out;
 }
 
-/* Mejoras visuales adicionales */
 .custom-searchbar::part(native) {
   border-radius: 12px;
 }
 
-@media (hover: hover) {
-  .btn-item {
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  
-  .weather-box {
-    transition: all 0.3s ease;
-  }
-  
-  .weather-box:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.12);
-  }
-}

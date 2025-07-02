@@ -14,6 +14,9 @@ import NearestPlace from './NearestPlace';
 interface DetailedPlace extends google.maps.places.PlaceResult {
   photos?: google.maps.places.PlacePhoto[];
   reviews?: google.maps.places.PlaceReview[];
+  formatted_phone_number?: string;
+  opening_hours?: google.maps.places.PlaceOpeningHours;
+  website?: string;
 }
 
 const Map: React.FC<
@@ -40,20 +43,22 @@ const Map: React.FC<
 
   const userLocation = permLocation ?? currentUserData?.location;
 
-  // Solicita permiso de ubicación al montar
   useEffect(() => {
     getLocation();
   }, []);
 
-  // Inicializa el mapa y DirectionsRenderer
   useEffect(() => {
     if (!mapRef.current || !userLocation) return;
     const center = { lat: userLocation.lat, lng: userLocation.lng };
     const libs: LoaderOptions['libraries'] = ['places', 'geometry'];
 
     if (Capacitor.getPlatform() !== 'web') {
-      GoogleMap.create({ id: 'home-map', element: mapRef.current, apiKey: VITE_API_KEY_GOOGLE, config: { center, zoom: 16 } })
-        .then(m => m.addMarker({ coordinate: center, title: 'Tu ubicación' }));
+      GoogleMap.create({
+        id: 'home-map',
+        element: mapRef.current,
+        apiKey: VITE_API_KEY_GOOGLE,
+        config: { center, zoom: 16 }
+      }).then(m => m.addMarker({ coordinate: center, title: 'Tu ubicación' }));
     } else {
       new Loader({ apiKey: VITE_API_KEY_GOOGLE, libraries: libs }).load().then(() => {
         const map = new google.maps.Map(mapRef.current!, {
@@ -66,13 +71,18 @@ const Map: React.FC<
         setPlacesService(new google.maps.places.PlacesService(map));
         new google.maps.Marker({ map, position: center, title: 'Tu ubicación' });
 
-        const dr = new google.maps.DirectionsRenderer({ map });
+        const dr = new google.maps.DirectionsRenderer({
+          map,
+          polylineOptions: {
+            strokeColor: "#E14434",
+            strokeWeight: 8,
+          },
+        });
         setDirectionsRenderer(dr);
       });
     }
   }, [userLocation]);
 
-  // Autocompletado de direcciones
   useEffect(() => {
     if (!jsMap || !searchInputRef.current) return;
     searchInputRef.current.getInputElement().then((input: HTMLInputElement) => {
@@ -89,7 +99,6 @@ const Map: React.FC<
     });
   }, [jsMap]);
 
-  // Recentrar al limpiar búsqueda
   useEffect(() => {
     if (shouldRefocus && jsMap && userLocation) {
       jsMap.panTo({ lat: userLocation.lat, lng: userLocation.lng });
@@ -98,7 +107,6 @@ const Map: React.FC<
     }
   }, [shouldRefocus, jsMap, userLocation, setShouldRefocus]);
 
-  // Función de recenter simple
   const recenterMap = () => {
     if (jsMap && userLocation) {
       jsMap.panTo({ lat: userLocation.lat, lng: userLocation.lng });
@@ -106,18 +114,16 @@ const Map: React.FC<
     }
   };
 
-  // Limpia marcadores y ruta
   const clearMarkersAndRoute = () => {
     if (!jsMap) return;
     placeMarkers.forEach(m => m.setMap(null));
     setPlaceMarkers([]);
     setPlaces([]);
     setExpandedIdx(null);
-    directionsRenderer?.setDirections(null);
+    directionsRenderer?.set('directions', null);
     setInfo({ distance: '', duration: '', place: null });
   };
 
-  // Busca lugares cercanos y traza la ruta al más cercano
   useEffect(() => {
     if (!selectedCategory || !jsMap || !placesService || !userLocation) {
       clearMarkersAndRoute();
@@ -127,21 +133,18 @@ const Map: React.FC<
     placesService.nearbySearch(
       {
         location: new google.maps.LatLng(userLocation.lat, userLocation.lng),
-        radius: 5000,
+        radius: 10000,
         keyword: selectedCategory,
       },
       (results, status) => {
         if (status === google.maps.places.PlacesServiceStatus.OK && results) {
           clearMarkersAndRoute();
 
-          // Coloca marcadores
           const markers = results.map(r =>
             new google.maps.Marker({ map: jsMap, position: r.geometry!.location!, title: r.name })
           );
-          setPlaces(results)
           setPlaceMarkers(markers as any);
 
-          // Encuentra el más cercano
           const distances = results.map(r =>
             google.maps.geometry.spherical.computeDistanceBetween(
               r.geometry!.location!,
@@ -154,39 +157,50 @@ const Map: React.FC<
           jsMap.panTo(nearest.geometry!.location!);
           jsMap.setZoom(15);
 
-          // Detalles y ruta
           const fields: (keyof google.maps.places.PlaceResult)[] = [
             'name', 'vicinity', 'rating', 'user_ratings_total',
             'photos', 'reviews', 'formatted_phone_number',
             'opening_hours', 'website', 'types',
           ];
-          placesService.getDetails({ placeId: nearest.place_id!, fields }, detail => {
-            if (detail) {
-              setInfo(prev => ({ ...prev, place: detail }));
 
-              const ds = new google.maps.DirectionsService();
-              ds.route(
-                {
-                  origin: new google.maps.LatLng(userLocation.lat, userLocation.lng),
-                  destination: nearest.geometry!.location!,
-                  travelMode: google.maps.TravelMode.DRIVING,
-                },
-                (res, status2) => {
-                  if (status2 === 'OK' && res) {
-                    directionsRenderer?.setDirections(res);
-                    const leg = res.routes[0].legs[0];
-                    setInfo({
-                      distance: leg.distance?.text || '',
-                      duration: leg.duration?.text || '',
-                      place: detail,
-                    });
-                  }
+          const enrichedPlacesPromises = results.map(
+            r =>
+              new Promise<DetailedPlace>((resolve) => {
+                placesService.getDetails({ placeId: r.place_id!, fields }, (detail) => {
+                  if (detail) resolve(detail as DetailedPlace);
+                  else resolve(r as DetailedPlace);
+                });
+              })
+          );
+
+          Promise.all(enrichedPlacesPromises).then(enrichedPlaces => {
+            setPlaces(enrichedPlaces);
+
+            const nearestDetail = enrichedPlaces[minIdx];
+            setInfo(prev => ({ ...prev, place: nearestDetail }));
+
+            const ds = new google.maps.DirectionsService();
+            ds.route(
+              {
+                origin: new google.maps.LatLng(userLocation.lat, userLocation.lng),
+                destination: nearest.geometry!.location!,
+                travelMode: google.maps.TravelMode.DRIVING,
+              },
+              (res, status2) => {
+                if (status2 === 'OK' && res) {
+                  directionsRenderer?.setDirections(res);
+                  const leg = res.routes[0].legs[0];
+                  setInfo({
+                    distance: leg.distance?.text || '',
+                    duration: leg.duration?.text || '',
+                    place: nearestDetail,
+                  });
                 }
-              );
-            }
-          });
+              }
+            );
 
-          setIsModalOpen(true);
+            setIsModalOpen(true);
+          });
         }
       }
     );
