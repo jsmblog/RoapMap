@@ -1,110 +1,71 @@
-import { bandageOutline, barbellOutline, bedOutline, beerOutline, bookOutline, cafeOutline, cartOutline, cloudyNightOutline, gameControllerOutline, leafOutline, musicalNoteOutline, restaurantOutline, shirtOutline, ticketOutline, waterOutline } from "ionicons/icons";
+import {
+  restaurantOutline,
+  cafeOutline,
+  beerOutline,
+  bedOutline,
+  cloudyNightOutline,
+  waterOutline,
+  cartOutline,
+  ticketOutline,
+  bandageOutline,
+  bookOutline,
+  shirtOutline,
+  barbellOutline,
+  gameControllerOutline,
+  leafOutline,
+  musicalNoteOutline,
+  cashOutline,
+  schoolOutline,
+  businessOutline,
+  trainOutline,
+  busOutline,
+  airplaneOutline,
+  medicalOutline,
+  mailOutline,
+  pawOutline,
+  carOutline,
+  busSharp,
+  homeOutline,
+} from 'ionicons/icons';
 
 let i = 1;
 export const categories = [
-  {
-    id: i++,
-    name:'Restaurantes',
-    icon: {restaurantOutline},
-    type:'comida y bebida',
-    place:'restaurant'
-  },
-  {
-    id: i++,
-    name:'Cafetería',
-    icon: {cafeOutline},
-    type:'comida y bebida',
-    place:'cafe'
-  },
-  {
-    id: i++,
-    name:'Bares',
-    icon: {beerOutline},
-    type:'comida y bebida',
-    place:'bar'
-  },
-  {
-    id: i++,
-    name:'Hoteles',
-    icon: {bedOutline},
-    type:'servicios',
-    place:'lodging'
-  },
-   {
-    id: i++,
-    name:'Clubes nocturnos',
-    icon: {cloudyNightOutline},
-    type:'actividades',
-    place:'night_club'
-  },
-  {
-    id: i++,
-    name:'Gasolineras',
-    icon: {waterOutline},
-    type:'servicios',
-    place:'gas_station'
-  },
-  {
-    id: i++,
-    name:'Supermercados',
-    icon: {cartOutline},
-    type:'compras',
-    place:'supermarket'
-  },
-  {
-    id: i++,
-    name:'Cines',
-    icon: {ticketOutline},
-    type:'actividades',
-    place:'movie_theater'
-  },
-  {
-    id: i++,
-    name:'Farmacias',
-    icon: {bandageOutline},
-    type:'servicios',
-    place:'pharmacy'
-  },
-  {
-    id:i++,
-    name:'Bibliotecas',
-    icon:{bookOutline},
-    type:'actividades',
-    place:'library'
-  },
-  {
-    id: i++,
-    name:'Ropa',
-    icon: {shirtOutline},
-    type:'compras',
-    place:'clothing_store'
-  },
-  {
-    id: i++,
-    name:'Gimnasios',
-    icon: {barbellOutline},
-    type:'actividades',
-    place:'gym'
-  },
-  {
-    id: i++,
-    name:'Atracciones',
-    icon: {gameControllerOutline},
-    type:'actividades',
-    place:'amusement_park'
-  },
-  {
-    id: i++,
-    name:'Parques',
-    icon: {leafOutline},
-    type:'actividades',
-    place:'park'
-  },
-  {
-    id:i++,
-    name:'Música',
-    icon:{musicalNoteOutline},
-    type:'actividades',
-    place:'music_store'
-  }
-]
+  // Comida y bebida
+  { id: i++, name: 'Restaurantes',       icon: restaurantOutline,  type: 'comida',         place: 'restaurant' },
+  { id: i++, name: 'Cafeterías',         icon: cafeOutline,        type: 'comida',         place: 'cafe' },
+  { id: i++, name: 'Bares',              icon: beerOutline,        type: 'comida',         place: 'bar' },
+  { id: i++, name: 'Supermercados',      icon: cartOutline,        type: 'compras',        place: 'supermarket' },
+  { id: i++, name: 'Tiendas de ropa',    icon: shirtOutline,       type: 'compras',        place: 'clothing_store' },
+  { id: i++, name: 'Farmacias',          icon: bandageOutline,     type: 'servicios',      place: 'pharmacy' },
+  { id: i++, name: 'Gasolineras',        icon: waterOutline,       type: 'servicios',      place: 'gas_station' },
+  // Alojamiento
+  { id: i++, name: 'Hoteles',            icon: bedOutline,         type: 'alojamiento',    place: 'lodging' },
+  // Salud y cuidado
+  { id: i++, name: 'Hospitales',         icon: medicalOutline,     type: 'salud',          place: 'hospital' },
+  { id: i++, name: 'Clínicas dentales',  icon: medicalOutline,     type: 'salud',          place: 'dentist' },
+  { id: i++, name: 'Veterinarias',       icon: pawOutline,         type: 'salud',          place: 'veterinary_care' },
+  // Educación
+  { id: i++, name: 'Escuelas',           icon: schoolOutline,      type: 'educación',      place: 'school' },
+  { id: i++, name: 'Universidades',      icon: schoolOutline,      type: 'educación',      place: 'university' },
+  { id: i++, name: 'Bibliotecas',        icon: bookOutline,        type: 'actividades',    place: 'library' },
+  // Transporte
+  { id: i++, name: 'Cajeros automáticos',icon: cashOutline,        type: 'servicios',      place: 'atm' },
+  { id: i++, name: 'Bancos',             icon: businessOutline,    type: 'servicios',      place: 'bank' },
+  { id: i++, name: 'Estación de tren',   icon: trainOutline,       type: 'transporte',     place: 'train_station' },
+  { id: i++, name: 'Estación de bus',    icon: busOutline,         type: 'transporte',     place: 'bus_station' },
+  { id: i++, name: 'Aeropuertos',        icon: airplaneOutline,    type: 'transporte',     place: 'airport' },
+  { id: i++, name: 'Parqueadero',        icon: carOutline,         type: 'servicios',      place: 'parking' },
+  // Ocio y cultura
+  { id: i++, name: 'Cines',              icon: ticketOutline,      type: 'ocio',           place: 'movie_theater' },
+  { id: i++, name: 'Museos',             icon: homeOutline,        type: 'ocio',           place: 'museum' },
+  { id: i++, name: 'Parques',            icon: leafOutline,        type: 'ocio',           place: 'park' },
+  { id: i++, name: 'Museos de arte',     icon: homeOutline,        type: 'ocio',           place: 'art_gallery' },
+  { id: i++, name: 'Atracciones',        icon: gameControllerOutline, type: 'ocio',        place: 'amusement_park' },
+  { id: i++, name: 'Conciertos / Música',icon: musicalNoteOutline, type: 'ocio',           place: 'music_store' },
+  { id: i++, name: 'Clubes nocturnos',   icon: cloudyNightOutline, type: 'ocio',           place: 'night_club' },
+  // Otros servicios
+  { id: i++, name: 'Oficinas de correos',icon: mailOutline,        type: 'servicios',      place: 'post_office' },
+  { id: i++, name: 'Policía',            icon: homeOutline,        type: 'servicios',      place: 'police' },
+  { id: i++, name: 'Bomberos',           icon: bandageOutline,     type: 'servicios',      place: 'fire_station' },
+  { id: i++, name: 'Tiendas de conveniencia', icon: cartOutline, type: 'compras',        place: 'convenience_store' },
+];

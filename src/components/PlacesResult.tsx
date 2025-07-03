@@ -29,7 +29,8 @@ import {
     call,
     time,
     checkmarkCircle,
-    closeCircle
+    closeCircle,
+    globe
 } from 'ionicons/icons';
 import '../styles/placesResults.css';
 import { PlacesResultProps } from '../Interfaces/iPlacesResults';
@@ -104,7 +105,7 @@ const PlacesResult: React.FC<PlacesResultProps> = ({
                             fill="clear"
                             onClick={() => {
                                 setIsModalOpen(false)
-                                
+
                             }}
                             className="close-modal-places-result"
                         >
@@ -184,7 +185,12 @@ const PlacesResult: React.FC<PlacesResultProps> = ({
                                             )}
                                             {
                                                 place.website && (
-                                                    <h4>sitio web: <a href={place.website} target="_blank" rel="noopener noreferrer"></a>{place.website}</h4>
+                                                    <div className="contact-item">
+                                                        <IonIcon icon={globe} className="contact-icon" />
+                                                        <a href={place.website} target="_blank" rel="noreferrer" className="website-link">
+                                                            Sitio web
+                                                        </a>
+                                                    </div>
                                                 )
                                             }
                                             {place.opening_hours && (

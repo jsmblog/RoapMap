@@ -133,7 +133,7 @@ const Map: React.FC<
     placesService.nearbySearch(
       {
         location: new google.maps.LatLng(userLocation.lat, userLocation.lng),
-        radius: 10000,
+        radius: 5000,
         keyword: selectedCategory,
       },
       (results, status) => {
