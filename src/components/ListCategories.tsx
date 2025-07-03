@@ -16,7 +16,7 @@ const ListCategories: React.FC<ListCategoriesProps> = ({ onCategorySelect, selec
             key={c.id}
             onClick={() => onCategorySelect(isSelected ? null : c.place)}
           >
-            <IonIcon size="small" icon={Object.values(c.icon)[0]} />
+            <IonIcon size="small" icon={c.icon} />
             <h4 className="name-item">{c.name}</h4>
           </button>
         );
