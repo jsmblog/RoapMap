@@ -41,6 +41,7 @@ const EditProfile: React.FC = () => {
     result1: "",
     result2: "",
     options: [],
+    name:"",
     isRequired: true,
   });
 
@@ -58,6 +59,7 @@ const EditProfile: React.FC = () => {
       result1: "",
       result2: "",
       options: [],
+      name:"",
       isRequired: true,
     };
 
@@ -66,7 +68,7 @@ const EditProfile: React.FC = () => {
         objectEditing = {
           initialBreakpoint: 0.5,
           breakpoints: 0.5,
-          title: "Editar Nombre ",
+          title: "Editar nombre y apellido",
           label: "Nombre",
           label2: "Apellido",
           placeholder: "Ingresa tu nombre",
@@ -74,14 +76,16 @@ const EditProfile: React.FC = () => {
           type: "text",
           result1: "",
           result2: "",
+          name:"n",
           isRequired: true,
+          
         };
         break;
       case "gender":
         objectEditing = {
-          initialBreakpoint: 0.3,
-          breakpoints: 0.3,
-          title: "Editar Género",
+          initialBreakpoint: 0.35,
+          breakpoints: 0.35,
+          title: "Editar género",
           label: "Género",
           placeholder: "Selecciona tu género",
           placeholder2: "",
@@ -94,19 +98,21 @@ const EditProfile: React.FC = () => {
             { label: "LBGTQ+", value: "LBGTQ+" },
             { label: "Prefiero no decirlo", value: "Prefer not to say" },
           ],
+          name:"g",
           isRequired: true,
         };
         break;
       case "birthdate":
         objectEditing = {
-          initialBreakpoint: 0.72,
-          breakpoints: 0.72,
-          title: "Editar Fecha de Nacimiento",
+          initialBreakpoint: 0.76,
+          breakpoints: 0.76,
+          title: "Editar fecha de nacimiento",
           label: "",
           placeholder: "",
           placeholder2: "",
           type: "date",
           result1: "",
+          name:"b",
           isRequired: true,
         };
         break;
@@ -114,12 +120,13 @@ const EditProfile: React.FC = () => {
         objectEditing = {
           initialBreakpoint: 0.5,
           breakpoints: 0.5,
-          title: "Editar Ubicación",
+          title: "Editar ubicación",
           label: "Ubicación",
-          placeholder: "Ingresa tu ubicación",
+          placeholder: "Busca tu ubicación...",
           placeholder2: "",
           type: "search",
           result1: "",
+          name:"ubi",
           isRequired: true,
         };
         break;
@@ -127,12 +134,13 @@ const EditProfile: React.FC = () => {
         objectEditing = {
           initialBreakpoint: 0.5,
           breakpoints: 0.5,
-          title: "Editar Descripción",
+          title: "Editar descripción",
           label: "Descripción",
           placeholder: "Ingresa una breve descripción",
           placeholder2: "",
           type: "textarea",
           result1: "",
+          name:"des",
           isRequired: true,
         };
         break;
@@ -140,14 +148,15 @@ const EditProfile: React.FC = () => {
         objectEditing = {
           initialBreakpoint: 0.5,
           breakpoints: 0.5,
-          title: "Editar Contraseña",
-          label: "Nueva Contraseña",
-          label2: "Confirmar Contraseña",
+          title: "Editar contraseña",
+          label: "Nueva contraseña",
+          label2: "Confirmar contraseña",
           placeholder: "Ingresa tu nueva contraseña",
-          placeholder2: "Confirmar Contraseña",
+          placeholder2: "Confirma tu nueva contraseña",
           type: "password",
           result1: "",
           result2: "",
+          name:"",
           isRequired: true,
         };
         break;

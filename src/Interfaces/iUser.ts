@@ -30,5 +30,6 @@ export interface EditingObjectType {
     result1?: string;
     result2?: string;
     options?: OptionType[];
+    name:string;
     isRequired: boolean;
 };

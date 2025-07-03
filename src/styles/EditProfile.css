@@ -1,6 +1,7 @@
 .edit-profile-toolbar {
   --background: var(--background-color);
   --color: var(--primary-color);
+  padding: 0.5rem !important;
 }
 .ion-title {
   font-size: 20px;
@@ -76,6 +77,7 @@
   height: 25px;
   color: var(--primary-color);
 }
+/*Modal para editar la informacion del user*/
 .modal-edit-profile {
   width: 100%;
   height: 100%;
@@ -85,13 +87,16 @@
   border-top-right-radius: 20px;
   overflow: hidden;
 }
+.modal-edit-profile-toolbar{
+  padding: 0.5rem !important;
+  --color: var(--primary-color);
+}
 .modal-edit-profile-content {
   display: flex;
   flex-direction: column;
-  padding: 1.5rem;
+  padding: 1rem;
   border-radius: 20px;
   max-width: 500px;
-  margin: auto;
   gap: 2rem;
 }
 .IonInput,
@@ -99,12 +104,20 @@
 .IonSearchbar,
 .IonSelect,
 .IonTextarea {
-  --border-radius: 12px;
+  --border-radius: 12px !important;
   --border-color: #a5d6a7; /* verde suave */
   --highlight-color-focused: #43a047; /* verde enfocado */
   --padding-start: 12px;
   --padding-end: 12px;
   --background: var(--background-color);
+  --color: var(--co-black-1);
+  transition: all 0.3s ease-in-out;
+}
+.label-text-wrapper,
+.input-group .label-floating {
+  font-weight: 300;
+  transition: all 0.3s ease-in-out !important;
+  font-size: 15px;
 }
 .IonInput {
   --border-width: 1px;
@@ -130,6 +143,15 @@
   --border-color: #a5d6a7;
   --highlight-color-focused: #43a047;
 }
+.ion-list-ubicion{
+  display:flex ;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.ion-list-ubicion p{
+  font-size: 15px !important;
+  padding-left: 1rem;
+}
 .modal-edit-profile-buttons {
   display: flex;
   justify-content: space-between;
@@ -141,10 +163,12 @@
   flex: 1;
   --border-radius: 12px;
   --background: var(--color-btns);
-  --color: white;
   font-weight: 600;
 }
 .cancel {
-  --background: red !important;
-  --color: white;
+  --background: none;
+   --color: red;
+   --box-shadow: none;
+   text-transform: none;
+   font-size: 1.2rem;
 }

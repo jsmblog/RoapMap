@@ -6,8 +6,7 @@ import {
   IonDatetime,
   IonHeader,
   IonInput,
-  IonItem,
-  IonLabel,
+  IonList,
   IonModal,
   IonSearchbar,
   IonSelect,
@@ -17,7 +16,7 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import { chevronBack } from "ionicons/icons";
-import React from "react";
+import React, { useState } from "react";
 import { ModalEditInfoProfileProps } from "../Interfaces/iProps";
 import { getSafeType } from "../functions/EditProfile";
 import "../styles/EditProfile.css";
@@ -28,6 +27,13 @@ const ModalEditInfoProfile: React.FC<ModalEditInfoProfileProps> = ({
   info,
 }) => {
   console.log("ModalEditInfoProfile", info);
+  const [InfoUser,setInfoUser] = useState("");
+  console.log("Datos por enviar", InfoUser);
+
+  const handleSave = (e: CustomEvent) => {
+   const { value } = e.detail;
+   setInfoUser(value);
+  }
   return (
     <IonModal
       className="modal-edit-profile"
@@ -39,15 +45,15 @@ const ModalEditInfoProfile: React.FC<ModalEditInfoProfileProps> = ({
       handleBehavior="none"
     >
       <IonHeader>
-        <IonToolbar>
+        <IonToolbar className="modal-edit-profile-toolbar" >
           <IonButtons slot="start">
             <IonBackButton defaultHref="/edit-profile" icon={chevronBack} />
           </IonButtons>
-          <IonTitle >{info.title}</IonTitle>
+          <IonTitle className="ion-title">{info.title}</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen={true} >
-        <div className="modal-edit-profile-content">
+        <div className="modal-edit-profile-content animacion-slide-top">
           {info.type === "text" || info.type === "password" ? (
             <>
               <IonInput
@@ -59,6 +65,7 @@ const ModalEditInfoProfile: React.FC<ModalEditInfoProfileProps> = ({
                 placeholder={info.placeholder}
                 value={info.result1}
                 required={info.isRequired}
+                onChange={() => handleSave}
               />
               <IonInput
               className="IonInput"
@@ -80,9 +87,17 @@ const ModalEditInfoProfile: React.FC<ModalEditInfoProfileProps> = ({
               </IonDatetime>
           ):null}
           {info.type === "search" ? (
+            <>
             <IonSearchbar
             className="IonSearchbar"
+            placeholder={info.placeholder}
             ></IonSearchbar>
+            <IonList className="ion-list-ubicion">
+               <p>Calceta</p>
+               <p>chone</p>
+               <p>Canuto</p>
+            </IonList>
+            </>
           ):null}
           {info.type === "select" ? (
             <IonSelect
@@ -106,7 +121,7 @@ const ModalEditInfoProfile: React.FC<ModalEditInfoProfileProps> = ({
           ):null}
           <div className="modal-edit-profile-buttons">
             <IonButton className="cancel">Cancelar</IonButton>
-            <IonButton className="save">Guardar</IonButton>
+            <IonButton className="save btn-edit-profile">Guardar</IonButton>
           </div>
         </div>
       </IonContent>
