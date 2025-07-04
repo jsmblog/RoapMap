@@ -5,6 +5,7 @@ import {
   IonContent,
   IonDatetime,
   IonHeader,
+  IonIcon,
   IonInput,
   IonList,
   IonModal,
@@ -16,24 +17,73 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import { chevronBack } from "ionicons/icons";
-import React, { useState } from "react";
+import React from "react";
 import { ModalEditInfoProfileProps } from "../Interfaces/iProps";
 import { getSafeType } from "../functions/EditProfile";
 import "../styles/EditProfile.css";
+import { doc, setDoc } from "firebase/firestore";
+import { AUTH_USER, db } from "../Firebase/initializeApp";
+import { useAuthContext } from "../context/UserContext";
+import { useToast } from "../hooks/UseToast";
+import { updatePassword } from "firebase/auth";
 
 const ModalEditInfoProfile: React.FC<ModalEditInfoProfileProps> = ({
   isOpen,
   onClose,
   info,
+  setInfo
 }) => {
-  console.log("ModalEditInfoProfile", info);
-  const [InfoUser,setInfoUser] = useState("");
-  console.log("Datos por enviar", InfoUser);
+  const {currentUserData} = useAuthContext();
+  const {ToastComponent,showToast} = useToast();
 
-  const handleSave = (e: CustomEvent) => {
-   const { value } = e.detail;
-   setInfoUser(value);
+const handleSave = (field: "result1" | "result2") => (e: CustomEvent) => {
+  const { value } = e.detail;
+  setInfo((prev) => ({
+    ...prev,
+    [field]: value
+  }));
+};
+
+const upInfoUser = async () => {
+    try {
+      const { name: field, result1, result2 } = info;
+      let value = result1 || "";
+
+      if (field === "pass" && AUTH_USER.currentUser) {
+        if (value !== result2) {
+          showToast("Las contraseñas no coinciden", 4000, "danger");
+          return;
+        }
+          await updatePassword(AUTH_USER.currentUser, value);
+          showToast("Contraseña actualizada", 4000, "success");
+          return;
+        }
+
+      if (field === "n") {
+        if(!result2){
+          return showToast('Añade tu apellido',3000,'danger')
+        }
+        value = `${value} ${result2}`;
+      }
+
+      const refDocUser = doc(db, "USERS", currentUserData?.uid);
+      await setDoc(refDocUser, { [field]: value }, { merge: true });
+      showToast("Campo actualizado con éxito", 4000, "success");
+    } catch (error) {
+      console.error(error);
+      showToast("Error al intentar actualizar", 4000, "danger");
+    }
+  };
+  const handleCancel = ()=>{
+     setInfo((prev) => ({
+      ...prev,
+      result1:'',
+      result2:''
+     }))
+     onClose();
   }
+
+  console.log(info)
   return (
     <IonModal
       className="modal-edit-profile"
@@ -46,14 +96,17 @@ const ModalEditInfoProfile: React.FC<ModalEditInfoProfileProps> = ({
     >
       <IonHeader>
         <IonToolbar className="modal-edit-profile-toolbar" >
-          <IonButtons slot="start">
-            <IonBackButton defaultHref="/edit-profile" icon={chevronBack} />
+          <IonButtons className="ion-buttons-modal-edit-profile" slot="start" onClick={onClose} >
+             <IonIcon 
+             className="chevron-icon"
+             icon={chevronBack}/>
           </IonButtons>
           <IonTitle className="ion-title">{info.title}</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen={true} >
-        <div className="modal-edit-profile-content animacion-slide-top">
+        {ToastComponent}
+        <form className="modal-edit-profile-content animacion-slide-top">
           {info.type === "text" || info.type === "password" ? (
             <>
               <IonInput
@@ -64,8 +117,8 @@ const ModalEditInfoProfile: React.FC<ModalEditInfoProfileProps> = ({
                 label={info.label}
                 placeholder={info.placeholder}
                 value={info.result1}
-                required={info.isRequired}
-                onChange={() => handleSave}
+                required={true}
+                onIonInput={handleSave('result1')}
               />
               <IonInput
               className="IonInput"
@@ -75,7 +128,8 @@ const ModalEditInfoProfile: React.FC<ModalEditInfoProfileProps> = ({
                 label={info.label2}
                 placeholder={info.placeholder2}
                 value={info.result2}
-                required={info.isRequired}
+                required={true}
+                onIonInput={handleSave('result2')}
               />
             </>
           ):null}
@@ -83,6 +137,7 @@ const ModalEditInfoProfile: React.FC<ModalEditInfoProfileProps> = ({
             <IonDatetime 
               presentation="date"
               className="custom-datetime"
+              onIonChange={handleSave('result1')}
               >
               </IonDatetime>
           ):null}
@@ -103,7 +158,8 @@ const ModalEditInfoProfile: React.FC<ModalEditInfoProfileProps> = ({
             <IonSelect
             className="IonSelect"
             placeholder={info.placeholder}
-            required={info.isRequired}
+            required={true}
+            onIonChange={handleSave('result1')}
             >
               {info.options?.map((option) => (
                 <IonSelectOption key={option.value} value={option.value}>
@@ -116,14 +172,15 @@ const ModalEditInfoProfile: React.FC<ModalEditInfoProfileProps> = ({
             <IonTextarea
             className="IonTextarea"
               placeholder={info.placeholder}
-              required={info.isRequired}
+              required={true}
+              onIonChange={handleSave('result1')}
             />
           ):null}
           <div className="modal-edit-profile-buttons">
-            <IonButton className="cancel">Cancelar</IonButton>
-            <IonButton className="save btn-edit-profile">Guardar</IonButton>
+            <IonButton onClick={handleCancel} className="cancel">Cancelar</IonButton>
+            <IonButton disabled={!info.result1} onClick={upInfoUser} className="save btn-edit-profile">Guardar</IonButton>
           </div>
-        </div>
+        </form>
       </IonContent>
     </IonModal>
   );

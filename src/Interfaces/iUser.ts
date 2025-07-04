@@ -31,5 +31,10 @@ export interface EditingObjectType {
     result2?: string;
     options?: OptionType[];
     name:string;
-    isRequired: boolean;
 };
+
+export interface AuthContextType {
+  authUser: User | null;
+  currentUserData: any;
+  isLoading: boolean;
+}

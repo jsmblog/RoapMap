@@ -143,6 +143,10 @@
   --border-color: #a5d6a7;
   --highlight-color-focused: #43a047;
 }
+.ion-buttons-modal-edit-profile{
+ width: 30px !important;
+ margin: 1em;
+}
 .ion-list-ubicion{
   display:flex ;
   flex-direction: column;

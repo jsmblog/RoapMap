@@ -3,12 +3,9 @@ import { onAuthStateChanged } from "firebase/auth";
 import { doc, onSnapshot } from "firebase/firestore";
 import { AUTH_USER, db } from "../Firebase/initializeApp";
 import type { User } from "firebase/auth";
+import { AuthContextType } from "../Interfaces/iUser";
 
-interface AuthContextType {
-  authUser: User | null;
-  currentUserData: any;
-  isLoading: boolean;
-}
+
 
 const AuthContext = createContext<AuthContextType>({
   authUser: null,
@@ -50,6 +47,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           name: data.n,
           email: data.e,
           description: data.d || "",
+          birth: data.b || "",
+          gender: data.g || "",
           createAccount: data.ca,
           paid: typeof data.p === "object" ? data.p : {},
           preferences: data.pre || [],

@@ -8,4 +8,4 @@ export interface ModalEditInfoProfileProps {
   isOpen: boolean;
   onClose: () => void;
   info: EditingObjectType;
-}
+setInfo: React.Dispatch<React.SetStateAction<EditingObjectType>>;}

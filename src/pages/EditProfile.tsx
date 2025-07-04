@@ -42,7 +42,6 @@ const EditProfile: React.FC = () => {
     result2: "",
     options: [],
     name:"",
-    isRequired: true,
   });
 
   const openModalEditProfile = (editingField: string) => {
@@ -60,7 +59,6 @@ const EditProfile: React.FC = () => {
       result2: "",
       options: [],
       name:"",
-      isRequired: true,
     };
 
     switch (editingField) {
@@ -77,7 +75,6 @@ const EditProfile: React.FC = () => {
           result1: "",
           result2: "",
           name:"n",
-          isRequired: true,
           
         };
         break;
@@ -92,14 +89,13 @@ const EditProfile: React.FC = () => {
           type: "select",
           result1: "",
           options: [
-            { label: "Masculino", value: "male" },
-            { label: "Femenino", value: "female" },
-            { label: "No Binario", value: "Not Binario" },
+            { label: "Masculino", value: "Masculino" },
+            { label: "Femenino", value: "Femenino" },
+            { label: "No Binario", value: "No Binario" },
             { label: "LBGTQ+", value: "LBGTQ+" },
-            { label: "Prefiero no decirlo", value: "Prefer not to say" },
+            { label: "Prefiero no decirlo", value: "Prefiero no decirlo" },
           ],
           name:"g",
-          isRequired: true,
         };
         break;
       case "birthdate":
@@ -113,7 +109,6 @@ const EditProfile: React.FC = () => {
           type: "date",
           result1: "",
           name:"b",
-          isRequired: true,
         };
         break;
       case "location":
@@ -127,7 +122,6 @@ const EditProfile: React.FC = () => {
           type: "search",
           result1: "",
           name:"ubi",
-          isRequired: true,
         };
         break;
       case "description":
@@ -140,8 +134,7 @@ const EditProfile: React.FC = () => {
           placeholder2: "",
           type: "textarea",
           result1: "",
-          name:"des",
-          isRequired: true,
+          name:"d",
         };
         break;
       case "password":
@@ -156,8 +149,7 @@ const EditProfile: React.FC = () => {
           type: "password",
           result1: "",
           result2: "",
-          name:"",
-          isRequired: true,
+          name:"pass",
         };
         break;
     }
@@ -210,7 +202,7 @@ const EditProfile: React.FC = () => {
             <IonLabel className="ion-label" slot="start">
               Género
             </IonLabel>
-            <span>Ninguno</span>
+            <span>{currentUserData.gender}</span>
             <IonButton
               className="chevron-icon"
               slot="end"
@@ -226,7 +218,7 @@ const EditProfile: React.FC = () => {
             <IonLabel className="ion-label" slot="start">
               Fecha de Nacimiento
             </IonLabel>
-            <span>01/01/2000</span>
+            <span>{currentUserData.birth.split("T")[0]}</span>
             <IonButton
               className="chevron-icon"
               slot="end"
@@ -240,7 +232,7 @@ const EditProfile: React.FC = () => {
 
           <IonItem className="edit-profile-item">
             <IonLabel className="ion-label" slot="start">
-              Ubicación{" "}
+              Ubicación
             </IonLabel>
             <span>
               {weather?.name}, {weather?.sys.country}
@@ -297,6 +289,7 @@ const EditProfile: React.FC = () => {
           isOpen={isModalOpenEditProfile}
           onClose={() => setIsModalOpenEditProfile(false)}
           info={info}
+          setInfo={setInfo}
         />
       </IonContent>
     </IonPage>
