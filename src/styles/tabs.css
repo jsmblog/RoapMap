@@ -4,17 +4,18 @@
   left: 0;
   width: 100%;
   z-index: 1000;
-  background: var(--co-back-gray-7);
+  background: var(--color-btns);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
 }
-
 ion-content {
   padding-bottom: 70px !important; 
 }
-
 .ion-tab {
   height: 100vh;
   display: flex;
   flex-direction: column;
+}
+.icons-tab{
+  color: var(--primary-color);
 }

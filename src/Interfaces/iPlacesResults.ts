@@ -14,3 +14,24 @@ export interface NearestPlaceProps {
   };
   setInfo: (info: any) => void;
 }
+
+export interface FilterOptions {
+  types: string[];
+  radius: number;
+  openNow: boolean;
+  minRating: number;
+  priceLevels: number[];
+  accessibility: boolean;
+  parking: boolean;
+  wifi: boolean;
+  takeout: boolean;
+  delivery: boolean;
+  sortBy: 'distance' | 'rating' | 'relevance' | 'price';
+}
+
+export interface SearchBarProps {
+  setIsModalOpen: (open: boolean) => void;
+  searchInputRef: React.RefObject<HTMLIonSearchbarElement | null>;
+  onClear: () => void;
+  onFilterChange?: (options: FilterOptions) => void;
+}

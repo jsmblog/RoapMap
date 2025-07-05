@@ -143,7 +143,7 @@ const EditProfile: React.FC = () => {
 
   return (
     <IonPage>
-      <IonHeader>
+      <IonHeader className="edit-profile-hearder">
         <IonToolbar className="edit-profile-toolbar">
           <IonButtons slot="start">
             <IonBackButton defaultHref="/tab/home" icon={chevronBack} />

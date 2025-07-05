@@ -11,15 +11,11 @@ import {
   IonToolbar,
   IonTitle,
   IonContent,
-  IonList,
-  IonItem,
   IonLabel,
   IonCheckbox,
   IonFooter,
   IonRange,
   IonToggle,
-  IonSelect,
-  IonSelectOption,
   IonChip,
   IonBadge,
   IonSegment,
@@ -39,27 +35,7 @@ import {
 } from 'ionicons/icons';
 import { categories } from '../functions/categories';
 import '../styles/searchbar.css';
-
-interface FilterOptions {
-  types: string[];
-  radius: number;
-  openNow: boolean;
-  minRating: number;
-  priceLevels: number[];
-  accessibility: boolean;
-  parking: boolean;
-  wifi: boolean;
-  takeout: boolean;
-  delivery: boolean;
-  sortBy: 'distance' | 'rating' | 'relevance' | 'price';
-}
-
-interface SearchBarProps {
-  setIsModalOpen: (open: boolean) => void;
-  searchInputRef: React.RefObject<HTMLIonSearchbarElement | null>;
-  onClear: () => void;
-  onFilterChange?: (options: FilterOptions) => void;
-}
+import { SearchBarProps } from '../Interfaces/iPlacesResults';
 
 const SearchBar: React.FC<SearchBarProps> = ({
   setIsModalOpen,

@@ -13,7 +13,7 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import { chevronBack } from "ionicons/icons";
+import {  close } from "ionicons/icons";
 import React from "react";
 import { ModalEditInfoProfileProps } from "../Interfaces/iProps";
 import { getSafeType } from "../functions/EditProfile";
@@ -90,14 +90,14 @@ const ModalEditInfoProfile: React.FC<ModalEditInfoProfileProps> = ({
       breakpoints={[0, info.breakpoints]}
       handleBehavior="none"
     >
-      <IonHeader>
+      <IonHeader className="edit-profile-hearder">
         <IonToolbar className="modal-edit-profile-toolbar">
           <IonButtons
             className="ion-buttons-modal-edit-profile"
             slot="start"
             onClick={onClose}
           >
-            <IonIcon className="chevron-icon" icon={chevronBack} />
+            <IonIcon className="chevron-icon" icon={close} />
           </IonButtons>
           <IonTitle className="ion-title">{info.title}</IonTitle>
         </IonToolbar>

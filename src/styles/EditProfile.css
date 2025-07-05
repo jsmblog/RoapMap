@@ -1,3 +1,6 @@
+.edit-profile-hearder{
+  box-shadow: none;
+}
 .edit-profile-toolbar {
   --background: var(--background-color);
   --color: var(--primary-color);
