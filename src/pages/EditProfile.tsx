@@ -21,14 +21,13 @@ import {
   chevronBack,
   chevronForwardOutline,
 } from "ionicons/icons";
-import { UseOpenWeather } from "../hooks/UseOpenWeather";
 import ModalEditInfoProfile from "../components/ModalEditInfoProfile";
 import { EditingObjectType } from "../Interfaces/iUser";
 
 const EditProfile: React.FC = () => {
-  const { currentUserData } = useAuthContext();
-  const { weather } = UseOpenWeather();
+  const { currentUserData, locationDetails } = useAuthContext();
   const [isModalOpenEditProfile, setIsModalOpenEditProfile] = useState(false);
+
   const [info, setInfo] = useState<EditingObjectType>({
     initialBreakpoint: 0,
     breakpoints: 0,
@@ -41,7 +40,7 @@ const EditProfile: React.FC = () => {
     result1: "",
     result2: "",
     options: [],
-    name:"",
+    name: "",
   });
 
   const openModalEditProfile = (editingField: string) => {
@@ -58,7 +57,7 @@ const EditProfile: React.FC = () => {
       result1: "",
       result2: "",
       options: [],
-      name:"",
+      name: "",
     };
 
     switch (editingField) {
@@ -74,8 +73,7 @@ const EditProfile: React.FC = () => {
           type: "text",
           result1: "",
           result2: "",
-          name:"n",
-          
+          name: "n",
         };
         break;
       case "gender":
@@ -95,7 +93,7 @@ const EditProfile: React.FC = () => {
             { label: "LBGTQ+", value: "LBGTQ+" },
             { label: "Prefiero no decirlo", value: "Prefiero no decirlo" },
           ],
-          name:"g",
+          name: "g",
         };
         break;
       case "birthdate":
@@ -108,33 +106,20 @@ const EditProfile: React.FC = () => {
           placeholder2: "",
           type: "date",
           result1: "",
-          name:"b",
-        };
-        break;
-      case "location":
-        objectEditing = {
-          initialBreakpoint: 0.5,
-          breakpoints: 0.5,
-          title: "Editar ubicación",
-          label: "Ubicación",
-          placeholder: "Busca tu ubicación...",
-          placeholder2: "",
-          type: "search",
-          result1: "",
-          name:"ubi",
+          name: "b",
         };
         break;
       case "description":
         objectEditing = {
-          initialBreakpoint: 0.5,
-          breakpoints: 0.5,
+          initialBreakpoint: 0.55,
+          breakpoints: 0.55,
           title: "Editar descripción",
           label: "Descripción",
           placeholder: "Ingresa una breve descripción",
           placeholder2: "",
           type: "textarea",
           result1: "",
-          name:"d",
+          name: "d",
         };
         break;
       case "password":
@@ -149,7 +134,7 @@ const EditProfile: React.FC = () => {
           type: "password",
           result1: "",
           result2: "",
-          name:"pass",
+          name: "pass",
         };
         break;
     }
@@ -186,7 +171,7 @@ const EditProfile: React.FC = () => {
             <IonLabel className="ion-label" slot="start">
               Nombre
             </IonLabel>
-            <span>{currentUserData?.name}</span>
+            <span>{currentUserData.name}</span>
             <IonButton
               className="chevron-icon"
               slot="end"
@@ -232,29 +217,11 @@ const EditProfile: React.FC = () => {
 
           <IonItem className="edit-profile-item">
             <IonLabel className="ion-label" slot="start">
-              Ubicación
-            </IonLabel>
-            <span>
-              {weather?.name}, {weather?.sys.country}
-            </span>
-            <IonButton
-              className="chevron-icon"
-              slot="end"
-              expand="block"
-              fill="clear"
-              onClick={() => openModalEditProfile("location")}
-            >
-              <IonIcon slot="end" icon={chevronForwardOutline} />
-            </IonButton>
-          </IonItem>
-
-          <IonItem className="edit-profile-item">
-            <IonLabel className="ion-label" slot="start">
               Descripción
             </IonLabel>
             <div className="description-value">
               <span className="description-label">
-                {currentUserData?.description?.replace(/\*/g, "")}
+                {currentUserData.description.replace(/\*/g, "")}
               </span>
             </div>
             <IonButton
@@ -282,6 +249,17 @@ const EditProfile: React.FC = () => {
             >
               <IonIcon slot="end" icon={chevronForwardOutline} />
             </IonButton>
+          </IonItem>
+
+          <IonItem className="edit-profile-item">
+            <IonLabel className="ion-label" slot="start">
+              Ubicación
+            </IonLabel>
+            <span>
+              {locationDetails
+                ? `${locationDetails.city}, ${locationDetails.state}, ${locationDetails.country}`
+                : "Cargando ubicación"}
+            </span>
           </IonItem>
         </div>
 

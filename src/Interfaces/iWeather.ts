@@ -27,6 +27,4 @@ export  interface IWeatherData {
         sunrise: number; 
         sunset: number 
     };
-
-    // Add more fields as needed
   }

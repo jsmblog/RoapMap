@@ -18,12 +18,11 @@ const Home: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [placeMarkers, setPlaceMarkers] = useState<google.maps.Marker[]>([]);
-  const [shouldRefocus, setShouldRefocus] = useState<boolean>(false); 
-  
-const handleSearchClear = () => {
-  setShouldRefocus(true); 
-};
+  const [shouldRefocus, setShouldRefocus] = useState<boolean>(false);
 
+  const handleSearchClear = () => {
+    setShouldRefocus(true);
+  };
 
   const searchInputRef = useRef<HTMLIonSearchbarElement>(null);
   const handleLogout = async () => {
@@ -42,14 +41,13 @@ const handleSearchClear = () => {
       <IonContent className="ion-no-padding" fullscreen scrollEvents={false}>
         <div className="map-container">
           <Map
-  searchInputRef={searchInputRef}
-  selectedCategory={selectedCategory}
-  placeMarkers={placeMarkers}
-  setPlaceMarkers={setPlaceMarkers}
-  shouldRefocus={shouldRefocus}
-  setShouldRefocus={setShouldRefocus}
-  
-/>
+            searchInputRef={searchInputRef}
+            selectedCategory={selectedCategory}
+            placeMarkers={placeMarkers}
+            setPlaceMarkers={setPlaceMarkers}
+            shouldRefocus={shouldRefocus}
+            setShouldRefocus={setShouldRefocus}
+          />
 
           <IonHeader className="floating-header">
             <SearchBar

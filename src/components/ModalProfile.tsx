@@ -13,16 +13,15 @@ import {
 } from "@ionic/react";
 import React, { useState } from "react";
 import { ModalProfileProps } from "../Interfaces/iProps";
-import "../styles/ModalProfile.css";
 import { informationCircle, location } from "ionicons/icons";
 import { useAuthContext } from "../context/UserContext";
 import ModalPrivacy from "./ModalPrivacy";
-import { UseOpenWeather } from "../hooks/UseOpenWeather";
+
+import "../styles/ModalProfile.css";
 
 const ModalProfile: React.FC<ModalProfileProps> = ({ isOpen, onClose }) => {
-  const { currentUserData } = useAuthContext();
+  const { currentUserData, locationDetails } = useAuthContext();
 
-  const { weather } = UseOpenWeather();
   const [isModalOpenPrivacy, setIsModalOpenPrivacy] = useState(false);
 
   return (
@@ -38,7 +37,7 @@ const ModalProfile: React.FC<ModalProfileProps> = ({ isOpen, onClose }) => {
       <IonContent className="ion-padding" fullscreen={true}>
         <IonCard className="card-profile">
           <img
-            className="profile-avatar"
+            className="modal-profile-avatar"
             src="https://ionicframework.com/docs/img/demos/avatar.svg"
             alt="avatar"
           />
@@ -57,11 +56,12 @@ const ModalProfile: React.FC<ModalProfileProps> = ({ isOpen, onClose }) => {
             <IonCardSubtitle className="profile-subtitle">
               Ubicación
             </IonCardSubtitle>
-            <p>
-              {" "}
-              <IonIcon icon={location} /> {weather?.name},{" "}
-              {weather?.sys.country}
-            </p>
+            <span className="profile-ubicacion">
+                 <IonIcon className="location-icon" icon={location} /> 
+              {locationDetails
+                ? `${locationDetails.city}, ${locationDetails.state}, ${locationDetails.country}`
+                : "Cargando ubicación"}
+            </span>
             <IonCardSubtitle className="profile-subtitle">
               Logros
             </IonCardSubtitle>

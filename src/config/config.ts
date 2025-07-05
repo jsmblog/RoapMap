@@ -8,3 +8,4 @@ export const CUSTOM_KEY:string = import.meta.env.VITE_CUSTOM_KEY;
 export const VITE_LINK_FIREBASE_FUNCTIONS:string = import.meta.env.VITE_LINK_FIREBASE_FUNCTIONS;
 export const VITE_API_KEY_OPEN_WHEATER:string = import.meta.env.VITE_API_KEY_OPEN_WHEATER;
 export const VITE_API_KEY_GOOGLE:string = import.meta.env.VITE_API_KEY_GOOGLE;
+
