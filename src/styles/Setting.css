@@ -1,0 +1,33 @@
+.setting-toolbar {
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  --background: var(--background-color);
+}
+.settings-ion-title {
+  font-weight: bold;
+  color: var(--primary-color);
+}
+.setting-content {
+  background-color: var(--background-color);
+}
+.setting-options {
+  padding: 1rem;
+  background-color: var(--background-color);
+}
+.ion-list-header {
+  margin: 16px 8px 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+.options {
+  --background: transparent;
+}
+.options:hover,
+.options.ion-focused {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+.setting-icons {
+  font-size: 20px;
+  color: var(--primary-color);
+  margin-right: 5px;
+}

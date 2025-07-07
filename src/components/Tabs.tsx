@@ -1,5 +1,5 @@
 import { IonIcon, IonRouterOutlet, IonTabBar, IonTabButton, IonTabs } from '@ionic/react'
-import { chatbubble, chatbubbles, compass, compassOutline, home, location, people, settings } from 'ionicons/icons'
+import { chatbubbles, compass, home, people, settings } from 'ionicons/icons'
 import React from 'react'
 import { Redirect, Route } from 'react-router'
 import Home from '../pages/Home'
@@ -7,7 +7,7 @@ import Setting from '../pages/Setting'
 import '../styles/tabs.css'
 const Tabs:React.FC = () => {
   return (
-    <IonTabs className='ion-tab'>
+    <IonTabs>
     {/**esto logra la redireccion */}
       <IonRouterOutlet> 
         <Route exact path="/tab/home" component={Home} />
