@@ -13,7 +13,7 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import {  close } from "ionicons/icons";
+import { close } from "ionicons/icons";
 import React from "react";
 import { ModalEditInfoProfileProps } from "../Interfaces/iProps";
 import { getSafeType } from "../functions/EditProfile";
@@ -23,6 +23,7 @@ import { AUTH_USER, db } from "../Firebase/initializeApp";
 import { useAuthContext } from "../context/UserContext";
 import { useToast } from "../hooks/UseToast";
 import { updatePassword } from "firebase/auth";
+import { useAchievements } from "../hooks/UseAchievements";
 
 const ModalEditInfoProfile: React.FC<ModalEditInfoProfileProps> = ({
   isOpen,
@@ -31,6 +32,8 @@ const ModalEditInfoProfile: React.FC<ModalEditInfoProfileProps> = ({
   setInfo,
 }) => {
   const { currentUserData } = useAuthContext();
+  const { unlockAchievement,AchievementPopup, isAchievementUnlocked } = useAchievements();
+
   const { ToastComponent, showToast } = useToast();
 
   const handleSave = (field: "result1" | "result2") => (e: CustomEvent) => {
@@ -43,9 +46,11 @@ const ModalEditInfoProfile: React.FC<ModalEditInfoProfileProps> = ({
 
   const upInfoUser = async () => {
     try {
+      if (!isAchievementUnlocked("first_change")) {
+        unlockAchievement("first_change");
+      }
       const { name: field, result1, result2 } = info;
       let value = result1 || "";
-      
 
       if (field === "pass" && AUTH_USER.currentUser) {
         if (value !== result2) {
@@ -70,6 +75,24 @@ const ModalEditInfoProfile: React.FC<ModalEditInfoProfileProps> = ({
     } catch (error) {
       console.error(error);
       showToast("Error al intentar actualizar", 3000, "danger");
+    } finally {
+      onClose();
+      setInfo(
+        {
+          initialBreakpoint: 0,
+          breakpoints: 0,
+          title: "",
+          label: "",
+          label2: "",
+          placeholder: "",
+          placeholder2: "",
+          type: "text",
+          result1: "",
+          result2: "",
+          options: [],
+          name: "",
+        }
+      )
     }
   };
   const handleCancel = () => {
@@ -81,8 +104,11 @@ const ModalEditInfoProfile: React.FC<ModalEditInfoProfileProps> = ({
     onClose();
   };
   return (
+    <>
+    {AchievementPopup}
+    {ToastComponent}
     <IonModal
-      className="modal-edit-profile"     
+      className="modal-edit-profile"
       isOpen={isOpen}
       onDidDismiss={onClose}
       backdropDismiss={true}
@@ -96,14 +122,13 @@ const ModalEditInfoProfile: React.FC<ModalEditInfoProfileProps> = ({
             className="ion-buttons-modal-edit-profile"
             slot="start"
             onClick={onClose}
-          >
+            >
             <IonIcon className="chevron-icon" icon={close} />
           </IonButtons>
           <IonTitle className="ion-title">{info.title}</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen={true}>
-        {ToastComponent}
         <form className="modal-edit-profile-content animacion-slide-top">
           {info.type === "text" || info.type === "password" ? (
             <>
@@ -166,7 +191,7 @@ const ModalEditInfoProfile: React.FC<ModalEditInfoProfileProps> = ({
               </p>
             </>
           ) : null}
-   
+
           <div className="modal-edit-profile-buttons">
             <IonButton onClick={handleCancel} className="cancel">
               Cancelar
@@ -182,6 +207,7 @@ const ModalEditInfoProfile: React.FC<ModalEditInfoProfileProps> = ({
         </form>
       </IonContent>
     </IonModal>
+    </>
   );
 };
 

@@ -105,7 +105,7 @@ const Map: React.FC<
             map,
             polylineOptions: {
               strokeColor: "#E14434",
-              strokeWeight: 8,
+              strokeWeight: 4,
             },
           });
           setDirectionsRenderer(dr);

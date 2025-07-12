@@ -84,6 +84,7 @@ const Auth: React.FC = () => {
           pre: [],
           v: false,
           loc: location,
+          fav:[]
           // p: { ip: false, d: '', t: 'free' },
         };
         await setDoc(doc(collection(db, 'USERS'), cred.user.uid), userDoc, { merge: true });

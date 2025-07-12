@@ -22,10 +22,12 @@ import {
 import { UseOpenWeather } from '../hooks/UseOpenWeather';
 import { connection } from '../connection/connection_to_backend';
 import '../styles/weatherCard.css';
+import { useAchievements } from '../hooks/UseAchievements';
 
 const WeatherCard: React.FC = () => {
   const { weather } = UseOpenWeather();
   const [recommendation, setRecommendation] = useState<string>('');
+  const { unlockAchievement, AchievementPopup, isAchievementUnlocked } = useAchievements();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -38,6 +40,9 @@ const WeatherCard: React.FC = () => {
   const handleOpenCardRecommendation = () => {
     setIsModalOpen(true);
     setApplyAnimation(true);
+     if (!isAchievementUnlocked("weather_checked")) {
+      unlockAchievement("weather_checked");
+    }
   };
 
   useEffect(() => {
@@ -146,6 +151,7 @@ const WeatherCard: React.FC = () => {
         </IonHeader>
 
         <IonContent className="modal-content">
+          {AchievementPopup}
           <IonCard className="recommendation-card">
             <IonCardContent>
               <div className="weather-summary">

@@ -23,12 +23,87 @@ import {
 } from "ionicons/icons";
 import ModalEditInfoProfile from "../components/ModalEditInfoProfile";
 import { EditingObjectType } from "../Interfaces/iUser";
+import { useDarkMode } from "../context/DarkModeContext";
 
 const EditProfile: React.FC = () => {
-  const { currentUserData, locationDetails } = useAuthContext();
-  const [isModalOpenEditProfile, setIsModalOpenEditProfile] = useState(false);
+const { currentUserData, locationDetails } = useAuthContext();
+const [isModalOpenEditProfile, setIsModalOpenEditProfile] = useState(false);
+const { toggleDarkMode } = useDarkMode()
+const [info, setInfo] = useState<EditingObjectType>({
+  initialBreakpoint: 0,
+  breakpoints: 0,
+  title: "",
+  label: "",
+  label2: "",
+  placeholder: "",
+  placeholder2: "",
+  type: "text",
+  result1: "",
+  result2: "",
+  options: [],
+  name: "",
+});
 
-  const [info, setInfo] = useState<EditingObjectType>({
+const fieldConfigMap: Record<string, Partial<EditingObjectType>> = {
+  name: {
+    initialBreakpoint: 0.5,
+    breakpoints: 0.5,
+    title: "Editar nombre y apellido",
+    label: "Nombre",
+    label2: "Apellido",
+    placeholder: "Ingresa tu nombre",
+    placeholder2: "Ingresa tu aplliddo",
+    type: "text",
+    name: "n",
+  },
+  gender: {
+    initialBreakpoint: 0.35,
+    breakpoints: 0.35,
+    title: "Editar género",
+    label: "Género",
+    placeholder: "Selecciona tu género",
+    type: "select",
+    options: [
+      { label: "Masculino", value: "Masculino" },
+      { label: "Femenino", value: "Femenino" },
+      { label: "No Binario", value: "No Binario" },
+      { label: "LBGTQ+", value: "LBGTQ+" },
+      { label: "Prefiero no decirlo", value: "Prefiero no decirlo" },
+    ],
+    name: "g",
+  },
+  birthdate: {
+    initialBreakpoint: 0.76,
+    breakpoints: 0.76,
+    title: "Editar fecha de nacimiento",
+    type: "date",
+    name: "b",
+  },
+  description: {
+    initialBreakpoint: 0.55,
+    breakpoints: 0.55,
+    title: "Editar descripción",
+    label: "Descripción",
+    placeholder: "Ingresa una breve descripción",
+    type: "textarea",
+    name: "d",
+  },
+  password: {
+    initialBreakpoint: 0.5,
+    breakpoints: 0.5,
+    title: "Editar contraseña",
+    label: "Nueva contraseña",
+    label2: "Confirmar contraseña",
+    placeholder: "Ingresa tu nueva contraseña",
+    placeholder2: "Confirma tu nueva contraseña",
+    type: "password",
+    name: "pass",
+  },
+};
+
+const openModalEditProfile = (editingField: string) => {
+  setIsModalOpenEditProfile(true);
+  const baseObject: EditingObjectType = {
     initialBreakpoint: 0,
     breakpoints: 0,
     title: "",
@@ -41,105 +116,13 @@ const EditProfile: React.FC = () => {
     result2: "",
     options: [],
     name: "",
-  });
-
-  const openModalEditProfile = (editingField: string) => {
-    setIsModalOpenEditProfile(true);
-    let objectEditing: EditingObjectType = {
-      initialBreakpoint: 0,
-      breakpoints: 0,
-      title: "",
-      label: "",
-      label2: "",
-      placeholder: "",
-      placeholder2: "",
-      type: "text",
-      result1: "",
-      result2: "",
-      options: [],
-      name: "",
-    };
-
-    switch (editingField) {
-      case "name":
-        objectEditing = {
-          initialBreakpoint: 0.5,
-          breakpoints: 0.5,
-          title: "Editar nombre y apellido",
-          label: "Nombre",
-          label2: "Apellido",
-          placeholder: "Ingresa tu nombre",
-          placeholder2: "Ingresa tu aplliddo",
-          type: "text",
-          result1: "",
-          result2: "",
-          name: "n",
-        };
-        break;
-      case "gender":
-        objectEditing = {
-          initialBreakpoint: 0.35,
-          breakpoints: 0.35,
-          title: "Editar género",
-          label: "Género",
-          placeholder: "Selecciona tu género",
-          placeholder2: "",
-          type: "select",
-          result1: "",
-          options: [
-            { label: "Masculino", value: "Masculino" },
-            { label: "Femenino", value: "Femenino" },
-            { label: "No Binario", value: "No Binario" },
-            { label: "LBGTQ+", value: "LBGTQ+" },
-            { label: "Prefiero no decirlo", value: "Prefiero no decirlo" },
-          ],
-          name: "g",
-        };
-        break;
-      case "birthdate":
-        objectEditing = {
-          initialBreakpoint: 0.76,
-          breakpoints: 0.76,
-          title: "Editar fecha de nacimiento",
-          label: "",
-          placeholder: "",
-          placeholder2: "",
-          type: "date",
-          result1: "",
-          name: "b",
-        };
-        break;
-      case "description":
-        objectEditing = {
-          initialBreakpoint: 0.55,
-          breakpoints: 0.55,
-          title: "Editar descripción",
-          label: "Descripción",
-          placeholder: "Ingresa una breve descripción",
-          placeholder2: "",
-          type: "textarea",
-          result1: "",
-          name: "d",
-        };
-        break;
-      case "password":
-        objectEditing = {
-          initialBreakpoint: 0.5,
-          breakpoints: 0.5,
-          title: "Editar contraseña",
-          label: "Nueva contraseña",
-          label2: "Confirmar contraseña",
-          placeholder: "Ingresa tu nueva contraseña",
-          placeholder2: "Confirma tu nueva contraseña",
-          type: "password",
-          result1: "",
-          result2: "",
-          name: "pass",
-        };
-        break;
-    }
-    setInfo(objectEditing);
   };
+
+  const config = fieldConfigMap[editingField] || {};
+  const merged = { ...baseObject, ...config };
+
+  setInfo(merged);
+};
 
   return (
     <IonPage>
@@ -161,6 +144,7 @@ const EditProfile: React.FC = () => {
                 alt="Avatar"
               />
               <IonIcon
+                onClick={toggleDarkMode}
                 className="edit-profile-camera-icon"
                 icon={cameraReverse}
               />

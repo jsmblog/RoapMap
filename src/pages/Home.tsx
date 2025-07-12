@@ -1,6 +1,6 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "../styles/Home.css";
-import { IonContent, IonHeader, IonPage, useIonRouter } from "@ionic/react";
+import { IonContent, IonPage, useIonRouter } from "@ionic/react";
 import ModalProfile from "../components/ModalProfile";
 import { useLoading } from "../hooks/UseLoading";
 import { signOut } from "firebase/auth";
@@ -9,22 +9,29 @@ import SearchBar from "../components/SearchBar";
 import ListCategories from "../components/ListCategories";
 import WeatherCard from "../components/WeatherCard";
 import Map from "../components/Map";
+import { useAchievements } from "../hooks/UseAchievements";
 
 const Home: React.FC = () => {
   const router = useIonRouter();
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-
+  const { unlockAchievement, AchievementPopup, isAchievementUnlocked } = useAchievements();
   const { showLoading, hideLoading } = useLoading();
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   const [placeMarkers, setPlaceMarkers] = useState<google.maps.Marker[]>([]);
   const [shouldRefocus, setShouldRefocus] = useState<boolean>(false);
+
+  const searchInputRef = useRef<HTMLIonSearchbarElement>(null);
+
+  useEffect(() => {
+    if (!isAchievementUnlocked("welcome")) {
+      unlockAchievement("welcome");
+    }
+  }, [isAchievementUnlocked, unlockAchievement]);
 
   const handleSearchClear = () => {
     setShouldRefocus(true);
   };
 
-  const searchInputRef = useRef<HTMLIonSearchbarElement>(null);
   const handleLogout = async () => {
     showLoading("Cerrando sesión...");
     try {
@@ -38,6 +45,7 @@ const Home: React.FC = () => {
 
   return (
     <IonPage>
+      {AchievementPopup}
       <IonContent className="ion-no-padding" fullscreen scrollEvents={false}>
         <div className="map-container">
           <Map
@@ -49,13 +57,13 @@ const Home: React.FC = () => {
             setShouldRefocus={setShouldRefocus}
           />
 
-          <IonHeader className="floating-header">
+          <div className="floating-header">
             <SearchBar
               setIsModalOpen={setIsModalOpen}
               searchInputRef={searchInputRef}
               onClear={handleSearchClear}
             />
-          </IonHeader>
+          </div>
 
           <ListCategories
             selectedCategory={selectedCategory}

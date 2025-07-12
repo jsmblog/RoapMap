@@ -20,6 +20,7 @@
     "@capacitor/haptics": "7.0.1",
     "@capacitor/ios": "^7.4.1",
     "@capacitor/keyboard": "7.0.1",
+    "@capacitor/preferences": "^7.0.1",
     "@capacitor/splash-screen": "^7.0.1",
     "@capacitor/status-bar": "7.0.1",
     "@googlemaps/js-api-loader": "^1.16.8",
