@@ -1,0 +1,47 @@
+.achievement-popup {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  background: var(--text-color);
+  color: var(--co-white);
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 10px var(--co-back-gray-2);
+  max-width: 320px;
+  z-index: 9999;
+  animation: slideIn 0.3s ease;
+  font-family: "Segoe UI", sans-serif;
+  border: 1px solid var(--ion-color-medium, #444);
+}
+
+.achievement-title {
+  font-size: 1.1rem;
+  color: var(--ion-color-primary, #3880ff);
+  margin-bottom: 0.25rem;
+}
+
+.achievement-description {
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: var(--ion-color-step-600, #ccc);
+}
+
+.achievement-points {
+  display: block;
+  margin: 0.5rem 1rem 1rem;
+  font-size: 1rem;
+  color: var(--co-green-1, #4ade80);
+  font-weight: bold;
+  text-align: right;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

@@ -1,9 +1,7 @@
 .floating-header {
-  position: absolute;
+  position: fixed !important;
   top: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
+  z-index: 1;
   background: transparent !important;
   --background: transparent !important;
   box-shadow: none;
@@ -11,15 +9,15 @@
 
 .map-container {
   position: relative;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
+  top: 0;
+  width: 100dvw;
+  height: 90dvh;
 }
 
 .full-screen-map {
   width: 100% !important;
-  height: 96vh !important;
-  position: absolute;
+  height: 100dvh !important;
+  position: relative;
   top: 0;
   left: 0;
   z-index: 1;
