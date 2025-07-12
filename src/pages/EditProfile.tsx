@@ -9,6 +9,7 @@ import {
   IonImg,
   IonItem,
   IonLabel,
+  IonList,
   IonPage,
   IonTitle,
   IonToolbar,
@@ -153,7 +154,7 @@ const EditProfile: React.FC = () => {
       </IonHeader>
 
       <IonContent className="edit-profile-content" fullscreen>
-        <div className="edit-profile-info-container">
+        <IonList className="edit-profile-info-container">
           <div className="edit-profile-avatar-wrapper">
             <IonAvatar className="edit-profile-avatar">
               <IonImg
@@ -167,55 +168,59 @@ const EditProfile: React.FC = () => {
             </IonAvatar>
           </div>
 
-          <IonItem className="edit-profile-item ">
+          <IonItem
+            className="edit-profile-item"
+            button
+            onClick={() => openModalEditProfile("name")}
+          >
             <IonLabel className="ion-label" slot="start">
               Nombre
             </IonLabel>
             <span>{currentUserData.name}</span>
-            <IonButton
+            <IonIcon
               className="chevron-icon"
               slot="end"
-              expand="block"
-              fill="clear"
-              onClick={() => openModalEditProfile("name")}
-            >
-              <IonIcon slot="end" icon={chevronForwardOutline} />
-            </IonButton>
+              icon={chevronForwardOutline}
+            />
           </IonItem>
 
-          <IonItem className="edit-profile-item">
+          <IonItem
+            className="edit-profile-item"
+            button
+            onClick={() => openModalEditProfile("gender")}
+          >
             <IonLabel className="ion-label" slot="start">
               Género
             </IonLabel>
             <span>{currentUserData.gender}</span>
-            <IonButton
+            <IonIcon
               className="chevron-icon"
               slot="end"
-              expand="block"
-              fill="clear"
-              onClick={() => openModalEditProfile("gender")}
-            >
-              <IonIcon slot="end" icon={chevronForwardOutline} />
-            </IonButton>
+              icon={chevronForwardOutline}
+            />
           </IonItem>
 
-          <IonItem className="edit-profile-item">
+          <IonItem
+            className="edit-profile-item"
+            button
+            onClick={() => openModalEditProfile("birthdate")}
+          >
             <IonLabel className="ion-label" slot="start">
               Fecha de Nacimiento
             </IonLabel>
             <span>{currentUserData.birth.split("T")[0]}</span>
-            <IonButton
+            <IonIcon
               className="chevron-icon"
               slot="end"
-              expand="block"
-              fill="clear"
-              onClick={() => openModalEditProfile("birthdate")}
-            >
-              <IonIcon slot="end" icon={chevronForwardOutline} />
-            </IonButton>
+              icon={chevronForwardOutline}
+            />
           </IonItem>
 
-          <IonItem className="edit-profile-item">
+          <IonItem
+            className="edit-profile-item"
+            button
+            onClick={() => openModalEditProfile("description")}
+          >
             <IonLabel className="ion-label" slot="start">
               Descripción
             </IonLabel>
@@ -224,31 +229,27 @@ const EditProfile: React.FC = () => {
                 {currentUserData.description.replace(/\*/g, "")}
               </span>
             </div>
-            <IonButton
+            <IonIcon
               className="chevron-icon"
               slot="end"
-              expand="block"
-              fill="clear"
-              onClick={() => openModalEditProfile("description")}
-            >
-              <IonIcon slot="end" icon={chevronForwardOutline} />
-            </IonButton>
+              icon={chevronForwardOutline}
+            />
           </IonItem>
 
-          <IonItem className="edit-profile-item">
+          <IonItem
+            className="edit-profile-item"
+            button
+            onClick={() => openModalEditProfile("password")}
+          >
             <IonLabel className="ion-label" slot="start">
               Contraseña
             </IonLabel>
             <span>********</span>
-            <IonButton
+            <IonIcon
               className="chevron-icon"
               slot="end"
-              expand="block"
-              fill="clear"
-              onClick={() => openModalEditProfile("password")}
-            >
-              <IonIcon slot="end" icon={chevronForwardOutline} />
-            </IonButton>
+              icon={chevronForwardOutline}
+            />
           </IonItem>
 
           <IonItem className="edit-profile-item">
@@ -261,7 +262,7 @@ const EditProfile: React.FC = () => {
                 : "Cargando ubicación"}
             </span>
           </IonItem>
-        </div>
+        </IonList>
 
         <ModalEditInfoProfile
           isOpen={isModalOpenEditProfile}
