@@ -11,8 +11,9 @@ import { useAchievements } from "../hooks/UseAchievements";
 const Home: React.FC = () => {
  
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const { unlockAchievement, AchievementPopup, isAchievementUnlocked } = useAchievements();
 
+  const { unlockAchievement, AchievementPopup, isAchievementUnlocked } = useAchievements();
+  const { showLoading, hideLoading } = useLoading();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [placeMarkers, setPlaceMarkers] = useState<google.maps.Marker[]>([]);
   const [shouldRefocus, setShouldRefocus] = useState<boolean>(false);
@@ -27,6 +28,17 @@ const Home: React.FC = () => {
 
   const handleSearchClear = () => {
     setShouldRefocus(true);
+  };
+
+  const handleLogout = async () => {
+    showLoading("Cerrando sesión...");
+    try {
+      await signOut(AUTH_USER);
+      await hideLoading();
+      router.push("/", "root", "replace");
+    } catch {
+      await hideLoading();
+    }
   };
 
   return (
