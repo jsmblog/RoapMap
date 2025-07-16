@@ -11,6 +11,9 @@ import { IonButton, IonIcon } from "@ionic/react";
 import { locationOutline } from "ionicons/icons";
 import NearestPlace from "./NearestPlace";
 import { getLocationDetails } from "../functions/geocoding";
+import { doc, setDoc, arrayUnion } from "firebase/firestore";
+import { db } from "../Firebase/initializeApp";
+import { useAchievements } from "../hooks/UseAchievements";
 
 const Map: React.FC<
   MapProps & {
@@ -26,9 +29,11 @@ const Map: React.FC<
   setShouldRefocus,
 }) => {
   const mapRef = useRef<HTMLDivElement>(null);
-  const { currentUserData } = useAuthContext();
+  const { authUser, currentUserData, setLocationDetails } = useAuthContext();
   const { location: permLocation, getLocation } =
     useRequestLocationPermission();
+  const {unlockAchievement,
+        isAchievementUnlocked,AchievementPopup} = useAchievements();
   const [jsMap, setJsMap] = useState<google.maps.Map>();
   const [placesService, setPlacesService] =
     useState<google.maps.places.PlacesService>();
@@ -44,16 +49,15 @@ const Map: React.FC<
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [expandedIdx, setExpandedIdx] = useState<number | null>(null);
 
-  const { locationDetails, setLocationDetails } = useAuthContext();//para obtener lo necesario para la ubicacion pais/provincia/ciudad
-
   const userLocation = permLocation ?? currentUserData?.location;
 
+  // Obtener permisos de ubicación
   useEffect(() => {
     getLocation();
   }, []);
 
+  // Obtener detalles de ubicación (país, provincia, ciudad)
   useEffect(() => {
-    //ESTE ES EL USE EFECT PARA QUE FUNCIONE GETLOCATIONDETAILS
     if (permLocation) {
       (async () => {
         const details = await getLocationDetails(
@@ -63,12 +67,12 @@ const Map: React.FC<
         );
         if (details) {
           setLocationDetails(details);
-          console.log("Ubicación detallada en tiempo real:", details);
         }
       })();
     }
   }, [permLocation, setLocationDetails]);
 
+  // Inicializar mapa
   useEffect(() => {
     if (!mapRef.current || !userLocation) return;
     const center = { lat: userLocation.lat, lng: userLocation.lng };
@@ -105,7 +109,7 @@ const Map: React.FC<
             map,
             polylineOptions: {
               strokeColor: "#E14434",
-              strokeWeight: 4,
+              strokeWeight: 5,
             },
           });
           setDirectionsRenderer(dr);
@@ -114,12 +118,12 @@ const Map: React.FC<
   }, [userLocation]);
 
   useEffect(() => {
-    if (!jsMap || !searchInputRef.current) return;
+    if (!jsMap || !searchInputRef.current || !authUser) return;
     searchInputRef.current.getInputElement().then((input: HTMLInputElement) => {
       const auto = new google.maps.places.Autocomplete(input, {
         types: ["geocode"],
       });
-      auto.addListener("place_changed", () => {
+      auto.addListener("place_changed", async () => {
         const place = auto.getPlace();
         if (!place.geometry?.location) return;
         const lat = place.geometry.location.lat();
@@ -131,10 +135,28 @@ const Map: React.FC<
           position: { lat, lng },
           title: place.name,
         });
+
+        // Guardar en historial de Firestore
+        try {
+          await setDoc(
+            doc(db, 'USERS', authUser.uid),
+            { h: arrayUnion(place.name || input.value) },
+            { merge: true }
+          );
+          if (!isAchievementUnlocked("first_search")) {
+            unlockAchievement("first_search");
+          }
+          if(currentUserData?.history?.length === 4 && !isAchievementUnlocked("five_searches")) {
+            unlockAchievement("five_searches");
+          }
+        } catch (err) {
+          console.error('Error guardando historial:', err);
+        }
       });
     });
-  }, [jsMap]);
+  }, [jsMap, searchInputRef, authUser]);
 
+  // Reenfocar mapa cuando se limpia
   useEffect(() => {
     if (shouldRefocus && jsMap && userLocation) {
       jsMap.panTo({ lat: userLocation.lat, lng: userLocation.lng });
@@ -160,6 +182,7 @@ const Map: React.FC<
     setInfo({ distance: "", duration: "", place: null });
   };
 
+  // Búsqueda por categoría
   useEffect(() => {
     if (!selectedCategory || !jsMap || !placesService || !userLocation) {
       clearMarkersAndRoute();
@@ -262,6 +285,7 @@ const Map: React.FC<
 
   return (
     <>
+    {AchievementPopup}
       <div ref={mapRef} className="full-screen-map" />
       {selectedCategory && (
         <div className="my_location">
@@ -278,7 +302,6 @@ const Map: React.FC<
         setIsModalOpen={setIsModalOpen}
         setExpandedIdx={setExpandedIdx}
       />
-
     </>
   );
 };

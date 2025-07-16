@@ -77,6 +77,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           verified: data.v,
           favorites:data.fav || [],
           location: data.loc || {},
+          history: data.h || [],
           uid: data.uid,
         });
         setIsLoading(false);

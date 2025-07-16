@@ -132,6 +132,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
     return descriptions[level] || '';
   };
 
+  
   return (
     <>
       <div className="search-container">

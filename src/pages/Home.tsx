@@ -1,10 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import "../styles/Home.css";
-import { IonContent, IonPage, useIonRouter } from "@ionic/react";
+import { IonContent, IonPage } from "@ionic/react";
 import ModalProfile from "../components/ModalProfile";
-import { useLoading } from "../hooks/UseLoading";
-import { signOut } from "firebase/auth";
-import { AUTH_USER } from "../Firebase/initializeApp";
 import SearchBar from "../components/SearchBar";
 import ListCategories from "../components/ListCategories";
 import WeatherCard from "../components/WeatherCard";
@@ -12,10 +9,10 @@ import Map from "../components/Map";
 import { useAchievements } from "../hooks/UseAchievements";
 
 const Home: React.FC = () => {
-  const router = useIonRouter();
+ 
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const { unlockAchievement, AchievementPopup, isAchievementUnlocked } = useAchievements();
-  const { showLoading, hideLoading } = useLoading();
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [placeMarkers, setPlaceMarkers] = useState<google.maps.Marker[]>([]);
   const [shouldRefocus, setShouldRefocus] = useState<boolean>(false);
@@ -30,17 +27,6 @@ const Home: React.FC = () => {
 
   const handleSearchClear = () => {
     setShouldRefocus(true);
-  };
-
-  const handleLogout = async () => {
-    showLoading("Cerrando sesión...");
-    try {
-      await signOut(AUTH_USER);
-      await hideLoading();
-      router.push("/", "root", "replace");
-    } catch {
-      await hideLoading();
-    }
   };
 
   return (
