@@ -1,63 +1,81 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "../styles/Home.css";
-import { IonButton, IonContent, IonPage, useIonRouter } from "@ionic/react";
-import ModalProfile from "../Components/ModalProfile";
-import { useLoading } from "../hooks/UseLoading";
-import { signOut } from "firebase/auth";
+import { IonContent, IonPage } from "@ionic/react";
+import ModalProfile from "../components/ModalProfile";
+import SearchBar from "../components/SearchBar";
+import ListCategories from "../components/ListCategories";
+import WeatherCard from "../components/WeatherCard";
+import Map from "../components/Map";
+import { useAchievements } from "../hooks/UseAchievements";
 import { AUTH_USER } from "../Firebase/initializeApp";
-import { useAuthContext } from "../context/UserContext";
 
 const Home: React.FC = () => {
- const {currentUserData}= useAuthContext();
+ 
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
-  const router = useIonRouter();
-  const { showLoading, hideLoading } = useLoading();
-
-  const handleLogout = async () => {
-    showLoading('Cerrando sesión...');
-    try {
-      await signOut(AUTH_USER);
-      await hideLoading();
-      router.push('/', 'root', 'replace');
-    } catch (error) {
-      console.error(error);
-      await hideLoading();
-    }
-  };
+  const { unlockAchievement, AchievementPopup, isAchievementUnlocked } = useAchievements();
+  // const { showLoading, hideLoading } = useLoading();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [placeMarkers, setPlaceMarkers] = useState<google.maps.Marker[]>([]);
+  const [shouldRefocus, setShouldRefocus] = useState<boolean>(false);
+
+  const searchInputRef = useRef<HTMLIonSearchbarElement>(null);
+
+  useEffect(() => {
+    if (!isAchievementUnlocked("welcome")) {
+      unlockAchievement("welcome");
+    }
+  }, [isAchievementUnlocked, unlockAchievement]);
+
+  const handleSearchClear = () => {
+    setShouldRefocus(true);
+  };
+
+  // const handleLogout = async () => {
+  //   showLoading("Cerrando sesión...");
+  //   try {
+  //     await signOut(AUTH_USER);
+  //     await hideLoading();
+  //     router.push("/", "root", "replace");
+  //   } catch {
+  //     await hideLoading();
+  //   }
+  // };
 
   return (
     <IonPage>
-      <IonContent className="ion-padding" fullscreen>
-        <div className="user-profile">
-          <IonButton 
-          className="button-modal"
-          onClick={()=>setIsModalOpen(true)}
-          id="open-modal" 
-          expand="block"
-          >
-            <img
-              className="user-avatar"
-              src="https://ionicframework.com/docs/img/demos/avatar.svg"
-              alt="avatar"
-            />
-          </IonButton>
+      {AchievementPopup}
+      <IonContent className="ion-no-padding" fullscreen scrollEvents={false}>
+        <div className="map-container">
+          <Map
+            searchInputRef={searchInputRef}
+            selectedCategory={selectedCategory}
+            placeMarkers={placeMarkers}
+            setPlaceMarkers={setPlaceMarkers}
+            shouldRefocus={shouldRefocus}
+            setShouldRefocus={setShouldRefocus}
+          />
 
-          <div className="user-info">
-            <h2 className="user-name">¡Hola,{currentUserData.name}!</h2>
-            <p className="user-hora">viernes, 30 junio</p>
+          <div className="floating-header">
+            <SearchBar
+              setIsModalOpen={setIsModalOpen}
+              searchInputRef={searchInputRef}
+              onClear={handleSearchClear}
+            />
           </div>
+
+          <ListCategories
+            selectedCategory={selectedCategory}
+            onCategorySelect={setSelectedCategory}
+          />
         </div>
 
+        <WeatherCard />
 
-       <button onClick={handleLogout}>
-          Cerrar sesión
-        </button>
-
-       <ModalProfile 
-       isOpen={isModalOpen}
-       onClose={()=>setIsModalOpen(false)} />
-
+        <ModalProfile
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+        />
       </IonContent>
     </IonPage>
   );

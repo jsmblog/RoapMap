@@ -1,0 +1,70 @@
+.setting-toolbar {
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  --background: var(--background-color);
+}
+.settings-ion-title {
+  font-weight: bold;
+  color: var(--primary-color);
+}
+.setting-content {
+  background-color: var(--background-color);
+}
+.setting-options {
+  padding: 1rem;
+  background-color: var(--background-color);
+}
+.ion-list-header {
+  margin: 16px 8px 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+.options {
+  --background: transparent;
+  border-radius: 8px;
+}
+.options.ion-focused {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+.setting-icons {
+  font-size: 20px;
+  color: var(--primary-color);
+  margin-right: 5px;
+}
+/*Modal para ediatar los ajustes*/
+.modal-setting-options{
+  width: 100%;
+  height: 100%;
+}
+.modal-setting-options::part(content) {
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  overflow: hidden;
+}
+.modal-contente-setting{
+  padding: 20px !important;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+.option-selected-setting {
+  --background:var(--background-color); /* verde muy suave */
+  --border-radius: 10px;
+  padding: 6px 12px; /* menos padding */
+  transform: scale(1); /* sutil reducción de tamaño */
+  transition: 0.3s ease-in-out, transform 0.2s ease-in-out;
+  position: relative;
+}
+.option-selected-setting .checkmark {
+  opacity: 1;
+  right: 10px;
+}
+.checkmark {
+  position: absolute;
+  right: 8px;
+  font-size: 1rem;
+  color: var(--ion-color-success); /* o el color que desees */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+

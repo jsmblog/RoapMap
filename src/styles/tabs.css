@@ -1,0 +1,6 @@
+.tab {
+ background: var(--color-btns);
+}
+.icons-tab{
+  color: var(--primary-color);
+}

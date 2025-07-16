@@ -1,0 +1,195 @@
+.edit-profile-hearder{
+  box-shadow: none;
+}
+.edit-profile-toolbar {
+  --background: var(--background-color);
+  --color: var(--primary-color);
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+.ion-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+.edit-profile-content {
+  --background: var(--background-color);
+  --padding: 1rem;
+  --padding-top: 16px;
+}
+.edit-profile-info-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+  width: 100%;
+  height: 100%;
+  background: var(--background-color);
+}
+.edit-profile-avatar {
+  width: 130px;
+  height: 130px;
+  margin-bottom: 40px;
+  position: relative;
+}
+.edit-profile-camera-icon {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  bottom: 3px;
+  right: 0px;
+  color: var(--co-white);
+  border-radius: 50%;
+  padding: 8px;
+  background: linear-gradient(135deg, #a8e063, #56ab2f, #0bab63);
+}
+.edit-profile-item {
+  width: 100%;
+  max-width: 500px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  --background: var(--background-color);
+}
+.edit-profile-item.ion-focused {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+.description-value {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 8px;
+  text-align: right;
+}
+.description-label {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 17px;
+  max-width: 200px;
+}
+.ion-label {
+  font-size: 16px;
+  color: var(--primary-color);
+  font-weight: 500;
+}
+.edit-profile-button {
+  border: 1px solid red !important;
+}
+.chevron-icon {
+  width: 25px;
+  height: 25px;
+  color: var(--primary-color);
+}
+/*Modal para editar la informacion del user*/
+.modal-edit-profile {
+  width: 100%;
+  height: 100%;
+}
+.modal-edit-profile::part(content) {
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  overflow: hidden;
+}
+.modal-edit-profile-toolbar{
+  padding: 0.5rem !important;
+  --color: var(--primary-color);
+}
+.modal-edit-profile-content {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  border-radius: 20px;
+  max-width: 500px;
+  gap: 2rem;
+}
+.IonInput,
+.custom-datetime,
+.IonSearchbar,
+.IonSelect,
+.IonTextarea {
+  --border-radius: 12px !important;
+  --border-color: #a5d6a7; /* verde suave */
+  --highlight-color-focused: #43a047; /* verde enfocado */
+  --padding-start: 12px;
+  --padding-end: 12px;
+  --background: var(--background-color);
+  --color: var(--co-black-1);
+  transition: all 0.3s ease-in-out;
+}
+.label-text-wrapper,
+.input-group .label-floating {
+  font-weight: 300;
+  transition: all 0.3s ease-in-out !important;
+  font-size: 15px;
+}
+.IonInput {
+  --border-width: 1px;
+}
+.custom-datetime {
+  --width: 100%;
+  --min-height: 100px !important;
+  max-width: 300px;
+  margin: 0 auto;
+  --border-width: 1px;
+  --border-color: #a5d6a7;
+  --background: white;
+  border-radius: 12px;
+}
+.IonTextarea{
+  width: 100%;
+  min-height: 150px; 
+  max-height: 250px; 
+  resize: vertical;  
+  --padding-start: 12px;
+  --padding-end: 12px;
+  --border-radius: 12px;
+  --border-color: #a5d6a7;
+  --highlight-color-focused: #43a047;
+
+  position: relative;
+  margin-bottom: 3px;
+}
+.ion-buttons-modal-edit-profile{
+ width: 30px !important;
+ margin: 1em;
+}
+.ion-list-ubicion{
+  display:flex ;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.ion-list-ubicion p{
+  font-size: 15px !important;
+  padding-left: 1rem;
+}
+.modal-edit-profile-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: auto;
+}
+.cancel,
+.save {
+  flex: 1;
+  --border-radius: 12px;
+  --background: var(--color-btns);
+  font-weight: 600;
+}
+.cancel {
+  --background: none;
+   --color: red;
+   --box-shadow: none;
+   text-transform: none;
+   font-size: 1.2rem;
+}
+.char-counter {
+  font-size: 12px;
+  color: #888;
+  text-align: right;
+  padding-top: 2px;
+  margin-right: 4px;
+}
+

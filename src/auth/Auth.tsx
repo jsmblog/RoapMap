@@ -18,6 +18,7 @@ import { formatDateTime } from '../functions/formatDate';
 import { collection, doc, setDoc } from 'firebase/firestore';
 import '../styles/auth.css';
 import { useRequestLocationPermission } from '../hooks/UseRequestLocationPermission';
+import { hasNameCompleted } from '../functions/hasNameCompleted';
 
 type AuthParams = { mode: 'login' | 'signup' };
 const Auth: React.FC = () => {
@@ -46,6 +47,16 @@ const Auth: React.FC = () => {
       showToast('Por favor, complete todos los campos.', 3000 , 'danger');
       return false;
     }
+    if (!hasNameCompleted(form.name) && !isLogin) {
+      showToast('Añada al menos un nombre y un apellido.', 3000, 'warning');
+      setForm(f => ({ ...f, name: '' }));
+      return false;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
+      showToast('Correo electrónico inválido.', 3000, 'warning');
+      setForm(f => ({ ...f, email: '' }));
+      return false;
+    }
     if (!isLogin && form.password.length < 8) {
       showToast('La contraseña debe tener al menos 8 caracteres.', 3000,'warning');
       return false;
@@ -67,11 +78,13 @@ const Auth: React.FC = () => {
         const userDoc = {
           n: form.name,
           ca: createdAt,
+          e: form.email,
           d:'',
           uid: cred.user.uid,
           pre: [],
           v: false,
           loc: location,
+          fav:[]
           // p: { ip: false, d: '', t: 'free' },
         };
         await setDoc(doc(collection(db, 'USERS'), cred.user.uid), userDoc, { merge: true });
@@ -100,7 +113,7 @@ const Auth: React.FC = () => {
       name: 'name',
       icon: person,
       type: 'text',
-      placeholder: 'Nombre de Usuario',
+      placeholder: 'Ejm: Juan Pérez',
       label: 'Nombre',
       value: form.name,
     },
@@ -182,7 +195,7 @@ const Auth: React.FC = () => {
           className="continue-button" onClick={handleAuth}>
             {loading ? "Entrando..." : action}
           </IonButton>
-          {isLogin && (
+          {/* {isLogin && ( */}
             <>
               <div className="auth-divider"><span>O</span></div>
               <IonButton expand="block" fill="outline" className="google-button"
@@ -191,7 +204,7 @@ const Auth: React.FC = () => {
                 <span>Continuar con Google</span>
               </IonButton>
             </>
-          )}
+          {/* )} */}
         </div>
       </IonContent>
     </IonPage>
