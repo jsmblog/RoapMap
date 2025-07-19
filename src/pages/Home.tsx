@@ -7,14 +7,14 @@ import ListCategories from "../components/ListCategories";
 import WeatherCard from "../components/WeatherCard";
 import Map from "../components/Map";
 import { useAchievements } from "../hooks/UseAchievements";
+import { AUTH_USER } from "../Firebase/initializeApp";
 
 const Home: React.FC = () => {
  
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   const { unlockAchievement, AchievementPopup, isAchievementUnlocked } = useAchievements();
-  
-
+  // const { showLoading, hideLoading } = useLoading();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [placeMarkers, setPlaceMarkers] = useState<google.maps.Marker[]>([]);
   const [shouldRefocus, setShouldRefocus] = useState<boolean>(false);
@@ -31,6 +31,19 @@ const Home: React.FC = () => {
     setShouldRefocus(true);
   };
 
+<<<<<<< HEAD
+=======
+  // const handleLogout = async () => {
+  //   showLoading("Cerrando sesión...");
+  //   try {
+  //     await signOut(AUTH_USER);
+  //     await hideLoading();
+  //     router.push("/", "root", "replace");
+  //   } catch {
+  //     await hideLoading();
+  //   }
+  // };
+>>>>>>> 87199766a14b1e5fabd363e809e7432db200549b
 
   return (
     <IonPage>

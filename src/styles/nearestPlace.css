@@ -1,6 +1,6 @@
 .nearest-place-card {
     position: absolute;
-    bottom: 4rem;
+    bottom: 3rem;
     left: 1rem;
     right: 1rem;
     background: rgba(255, 255, 255, 0.98);
@@ -116,7 +116,7 @@
     font-size: 1.2rem;
 }
 
-.share-btn ion-icon {
+.save-btn ion-icon {
     color: #4ecdc4;
     font-size: 1.2rem;
 }
@@ -323,7 +323,7 @@
     .nearest-place-card {
         left: 0.5rem;
         right: 0.5rem;
-        bottom: 3rem;
+        bottom: 0;
     }
     
     .card-content {

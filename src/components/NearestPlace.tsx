@@ -11,16 +11,18 @@ import {
   heart,
   share,
   close,
+  shareSocial,
 } from 'ionicons/icons';
 import { useAchievements } from '../hooks/UseAchievements';
 import { useAuthContext } from '../context/UserContext';
-import { doc, updateDoc } from 'firebase/firestore';
+import { arrayUnion, doc, setDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../Firebase/initializeApp';
+import { useToast } from '../hooks/UseToast';
 
 const NearestPlace: React.FC<NearestPlaceProps> = ({ info, setInfo }) => {
   const { unlockAchievement, AchievementPopup, isAchievementUnlocked } = useAchievements();
-  const { authUser, currentUserData } = useAuthContext();
-
+  const { currentUserData } = useAuthContext();
+  const { showToast, ToastComponent } = useToast();
   const formatRating = (rating: number) => {
     return '★'.repeat(Math.floor(rating)) + '☆'.repeat(5 - Math.floor(rating));
   };
@@ -41,52 +43,54 @@ const NearestPlace: React.FC<NearestPlaceProps> = ({ info, setInfo }) => {
     }
   };
 
-  const handleShare = async () => {
-    if (navigator.share && info.place) {
-      try {
-        await navigator.share({
-          title: info.place.name,
-          text: `${info.place.name} - ${info.place.vicinity}`,
-          url: info.place.website || window.location.href,
-        });
-      } catch (error) {
-        console.log('Error sharing:', error);
+  const handleSave = async () => {
+    if (!info.place) return;
+    try {
+      const savedPlace = {
+        name: info.place.name,
+        loc: info.destination,
+      };
+      const docRef = doc(db, 'USERS', currentUserData?.uid);
+      await setDoc(docRef, { sp: arrayUnion(savedPlace) }, { merge: true });
+      showToast("Lugar guardado en tu lista");
+      if (isAchievementUnlocked("saved_place")) {
+        return showToast("Ya has guardado este lugar en tu lista", 4000, 'danger');
       }
+      unlockAchievement("saved_place");
+    } catch (error) {
+      console.log(error);
     }
   };
 
   const handleFavorite = async () => {
-    if (!authUser || !currentUserData || !info.place) return;
-
+    if (!info.place) return;
     const place = info.place;
-
-    if (!place.name || !place.vicinity || !place.place_id) {
-      console.warn("Faltan campos obligatorios en el lugar.");
-      return;
+    interface FavPlace {
+      name: string;
+      vicinity: string;
     }
 
-    const location = place.geometry?.location;
-    const latLng = location && typeof location.lat === 'function' && typeof location.lng === 'function'
-      ? location.toJSON()
-      : null;
-
+    const hasAddPlaceFav: boolean = currentUserData.favorites.some((pl: FavPlace) => pl.name === place.name);
+    if(hasAddPlaceFav) {
+      return showToast("Ya tienes este lugar en favoritos",3000,'danger');
+    }
+ 
     const favPlace = {
       name: place.name,
       vicinity: place.vicinity,
-      location: latLng,
-      rating: place.rating ?? null,
-      user_ratings_total: place.user_ratings_total ?? null,
-      place_id: place.place_id,
-    };
-
+      loc:info.destination,
+      };
+    if(currentUserData.favorites.length === 4 && !isAchievementUnlocked("five_favorites")) {
+        unlockAchievement("five_favorites");
+    }
     try {
       await updateDoc(
-        doc(db, "USERS", authUser.uid),
+        doc(db, "USERS", currentUserData?.uid),
         {
-          fav: [...(currentUserData.favorites || []), favPlace],
+          fav:arrayUnion(favPlace),
         }
       );
-
+      showToast("Lugar agregado a favoritos");
       if (!isAchievementUnlocked("first_favorite")) {
         unlockAchievement("first_favorite");
       }
@@ -98,7 +102,7 @@ const NearestPlace: React.FC<NearestPlaceProps> = ({ info, setInfo }) => {
   return (
     <>
       {AchievementPopup}
-
+      {ToastComponent}
       {info.place && (
         <div className="nearest-place-card">
           <button onClick={clearInfo} className="close-nearest-place-card">
@@ -129,11 +133,18 @@ const NearestPlace: React.FC<NearestPlaceProps> = ({ info, setInfo }) => {
                     <IonIcon icon={heart} />
                   </button>
                   <button
-                    className="action-btn share-btn"
-                    onClick={handleShare}
+                    className="action-btn save-btn"
+                    onClick={handleSave}
                     aria-label="Compartir"
                   >
                     <IonIcon icon={share} />
+                  </button>
+                  <button
+                    className="action-btn share-btn"
+                    // onClick={handleShare}
+                    aria-label="share"
+                  >
+                    <IonIcon icon={shareSocial} />
                   </button>
                 </div>
               </div>

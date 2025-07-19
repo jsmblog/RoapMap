@@ -38,7 +38,7 @@ const ModalProfile: React.FC<ModalProfileProps> = ({ isOpen, onClose }) => {
         <IonCard className="card-profile">
           <img
             className="modal-profile-avatar"
-            src="https://ionicframework.com/docs/img/demos/avatar.svg"
+            src={currentUserData.photo ? currentUserData.photo : "https://ionicframework.com/docs/img/demos/avatar.svg"}
             alt="avatar"
           />
           <IonCardHeader>

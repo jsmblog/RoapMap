@@ -14,7 +14,15 @@ import { db } from '../Firebase/initializeApp';
 
 type AchievementKey = keyof typeof achievements;
 
-export const useAchievements = () => {
+interface UseAchievementsResult {
+    unlockAchievement: (key: AchievementKey) => Promise<void>;
+    isAchievementUnlocked: (key: AchievementKey) => boolean;
+    unlockedAchievements: AchievementKey[];
+    currentPoints: number;
+    AchievementPopup: any | null;
+}
+
+export const useAchievements = (): UseAchievementsResult => {
     const { authUser, currentUserData } = useAuthContext();
     const [localUnlocked, setLocalUnlocked] = useState<AchievementKey[]>([]);
     const [showAchievement, setShowAchievement] = useState(false);
@@ -68,7 +76,7 @@ export const useAchievements = () => {
         setTimeout(() => {
             setShowAchievement(false);
             setUnlockedData(null);
-        }, 6000);
+        }, 7000);
     };
 
     const isAchievementUnlocked = (key: AchievementKey): boolean => {
