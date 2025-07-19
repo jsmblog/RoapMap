@@ -11,10 +11,11 @@ import {
   heart,
   share,
   close,
+  shareSocial,
 } from 'ionicons/icons';
 import { useAchievements } from '../hooks/UseAchievements';
 import { useAuthContext } from '../context/UserContext';
-import { arrayUnion, doc, updateDoc } from 'firebase/firestore';
+import { arrayUnion, doc, setDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../Firebase/initializeApp';
 import { useToast } from '../hooks/UseToast';
 
@@ -42,17 +43,22 @@ const NearestPlace: React.FC<NearestPlaceProps> = ({ info, setInfo }) => {
     }
   };
 
-  const handleShare = async () => {
-    if (navigator.share && info.place) {
-      try {
-        await navigator.share({
-          title: info.place.name,
-          text: `${info.place.name} - ${info.place.vicinity}`,
-          url: info.place.website || window.location.href,
-        });
-      } catch (error) {
-        console.log('Error sharing:', error);
+  const handleSave = async () => {
+    if (!info.place) return;
+    try {
+      const savedPlace = {
+        name: info.place.name,
+        loc: info.destination,
+      };
+      const docRef = doc(db, 'USERS', currentUserData?.uid);
+      await setDoc(docRef, { sp: arrayUnion(savedPlace) }, { merge: true });
+      showToast("Lugar guardado en tu lista");
+      if (isAchievementUnlocked("saved_place")) {
+        return showToast("Ya has guardado este lugar en tu lista", 4000, 'danger');
       }
+      unlockAchievement("saved_place");
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -72,6 +78,7 @@ const NearestPlace: React.FC<NearestPlaceProps> = ({ info, setInfo }) => {
     const favPlace = {
       name: place.name,
       vicinity: place.vicinity,
+      loc:info.destination,
       };
     if(currentUserData.favorites.length === 4 && !isAchievementUnlocked("five_favorites")) {
         unlockAchievement("five_favorites");
@@ -126,11 +133,18 @@ const NearestPlace: React.FC<NearestPlaceProps> = ({ info, setInfo }) => {
                     <IonIcon icon={heart} />
                   </button>
                   <button
-                    className="action-btn share-btn"
-                    onClick={handleShare}
+                    className="action-btn save-btn"
+                    onClick={handleSave}
                     aria-label="Compartir"
                   >
                     <IonIcon icon={share} />
+                  </button>
+                  <button
+                    className="action-btn share-btn"
+                    // onClick={handleShare}
+                    aria-label="share"
+                  >
+                    <IonIcon icon={shareSocial} />
                   </button>
                 </div>
               </div>

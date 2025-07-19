@@ -36,6 +36,7 @@ import {
 import { categories } from '../functions/categories';
 import '../styles/searchbar.css';
 import { SearchBarProps } from '../Interfaces/iPlacesResults';
+import { useAuthContext } from '../context/UserContext';
 
 const SearchBar: React.FC<SearchBarProps> = ({
   setIsModalOpen,
@@ -43,6 +44,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
   onClear,
   onFilterChange,
 }) => {
+  const {  currentUserData } = useAuthContext();
   const [showFilter, setShowFilter] = useState(false);
   const [selectedTypes, setSelectedTypes] = useState<Set<string>>(new Set());
   const [radius, setRadius] = useState(1000);
@@ -160,7 +162,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
             </IonButton>
             <IonAvatar className="profile-avatar" onClick={() => setIsModalOpen(true)}>
               <IonImg
-                src="https://ionicframework.com/docs/img/demos/avatar.svg"
+                src={currentUserData.photo ? currentUserData.photo : "https://ionicframework.com/docs/img/demos/avatar.svg"}
                 alt="avatar"
               />
             </IonAvatar>

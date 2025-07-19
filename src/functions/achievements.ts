@@ -1,9 +1,9 @@
 export const achievements = {
   welcome: {
-  title: "¡Bienvenido a RoadMap!",
-  description: "Tu primera acción en RoadMap ha sido registrada. ¡Gracias por formar parte del camino!",
-  points: 10,
-},
+    title: "¡Bienvenido a RoadMap!",
+    description: "Tu primera acción en RoadMap ha sido registrada. ¡Gracias por formar parte del camino!",
+    points: 10,
+  },
   first_change: {
     title: "Primer cambio",
     description: "Has realizado tu primer cambio en la app.",
@@ -15,10 +15,10 @@ export const achievements = {
     points: 10,
   },
   weather_checked: {
-  title: "Clima consultado",
-  description: "Has consultado la recomendación del clima por primera vez.",
-  points: 10,
-},
+    title: "Clima consultado",
+    description: "Has consultado la recomendación del clima por primera vez.",
+    points: 10,
+  },
   five_searches: {
     title: "Explorador frecuente",
     description: "Has buscado lugares 5 veces.",
@@ -37,6 +37,16 @@ export const achievements = {
   five_favorites: {
     title: "Coleccionista",
     description: "Has guardado 5 lugares como favoritos.",
+    points: 30,
+  },
+  saved_place: {
+    title: "Lugar guardado",
+    description: "Has guardado un lugar en tu lista.",
+    points: 15,
+  },
+  five_saved_places: {
+    title: "Explorador de lugares",
+    description: "Has guardado 5 lugares en tu lista.",
     points: 30,
   },
   share_location: {

@@ -1,0 +1,325 @@
+.create-post-modal {
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.create-post-modal .modal-wrapper {
+  overflow: hidden;
+  background: var(--co-white);
+}
+
+/* Header Styles */
+.create-post-modal .modal-header {
+  background: linear-gradient(135deg, var(--primary-color) 0%, #2d4a28 100%);
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--co-back-gray-6);
+}
+
+.create-post-modal .modal-title {
+  color: var(--co-white);
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.create-post-modal .close-button {
+  --background: transparent;
+  --color: var(--co-white);
+  --border-radius: 50%;
+  --padding: 8px;
+  --transition: var(--transition);
+  width: 45px;
+  height: 45px;
+  margin: 0;
+}
+
+.create-post-modal .close-button:hover {
+  --background: rgba(255, 255, 255, 0.1);
+  transform: scale(1.05);
+}
+
+/* Content Styles */
+.create-post-modal .modal-content {
+  background: var(--background-color);
+  padding: 1.5rem;
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* User Info Section */
+.create-post-modal .user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 1rem;
+  background: var(--co-white);
+  border-radius: 12px;
+  border: 1px solid var(--co-back-gray-6);
+}
+
+.create-post-modal .user-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--secondary-color) 0%, var(--co-green-1) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-color);
+  font-weight: 600;
+  font-size: 1.2rem;
+  border: 2px solid var(--co-white);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.create-post-modal .user-name {
+  color: var(--text-color);
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.create-post-modal .text-input-container {
+  background: var(--co-white);
+  padding: 1rem;
+  transition: var(--transition);
+}
+
+.create-post-modal .text-input {
+  --background: transparent;
+  --color: var(--text-color);
+  --placeholder-color: var(--co-gray);
+  --border-width: 0;
+  --padding: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  height: 120px;
+  resize: none;
+}
+
+.create-post-modal .text-input textarea {
+  border: none;
+  outline: none;
+  resize: vertical;
+  height: 120px;
+}
+
+.create-post-modal .media-preview {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 0 .5rem;
+  border: 1px solid var(--co-back-gray-6);
+}
+
+.create-post-modal .media-preview img,
+.create-post-modal .media-preview video {
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  object-fit: cover;
+  display: block;
+}
+
+.create-post-modal .media-remove {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  --background: rgba(0, 0, 0, 0.6);
+  --color: var(--co-white);
+  --border-radius: 50%;
+  --padding: 8px;
+  z-index: 999;
+  backdrop-filter: blur(4px);
+  transition: var(--transition);
+}
+
+.create-post-modal .media-remove:hover {
+  --background: rgba(0, 0, 0, 0.8);
+  transform: scale(1.1);
+}
+
+/* File Upload Styles */
+.create-post-modal .file-upload-container {
+  background: var(--co-white);
+  border-radius: 12px;
+  border: 2px dashed var(--co-back-gray-3) !important;
+  padding: 1rem;
+  margin: 0 .5rem;
+  text-align: center;
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.create-post-modal .file-upload-container:hover {
+  border-color: var(--primary-color);
+  background: var(--co-back-gray-4);
+}
+
+.create-post-modal .file-upload-container.drag-over {
+  border-color: var(--co-green-1);
+  background: rgba(74, 222, 128, 0.05);
+}
+
+.create-post-modal .file-upload-icon {
+  font-size: 2.5rem;
+  color: var(--co-gray);
+  margin-bottom: 1rem;
+}
+
+.create-post-modal .file-upload-text {
+  color: var(--text-color);
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.create-post-modal .file-upload-hint {
+  color: var(--co-gray);
+  font-size: 0.875rem;
+}
+
+.create-post-modal .file-upload-button {
+  --background: var(--color-btns);
+  --color: var(--color-btns-text);
+  --border-radius: 8px;
+  --padding: 0.5rem .5rem;
+  font-weight: 500;
+  margin-top: 1rem;
+  transition: var(--transition);
+}
+
+.create-post-modal .file-upload-button:hover {
+  --background: var(--secondary-color);
+  transform: translateY(-1px);
+}
+
+/* Actions Styles */
+.create-post-modal .modal-actions {
+  display: flex;
+  gap: 1rem;
+  background: var(--co-white);
+  border-top: 1px solid var(--co-back-gray-6);
+}
+
+
+.create-post-modal .publish-button {
+  --background: linear-gradient(135deg, var(--primary-color) 0%, #2d4a28 100%);
+  --color: var(--co-white);
+  --border-radius: 8px;
+  --padding: 0.875rem 1.5rem;
+  font-weight: 600;
+  flex: 2;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.create-post-modal .publish-button:hover:not([disabled]) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(49, 87, 44, 0.3);
+}
+
+.create-post-modal .publish-button[disabled] {
+  --background: var(--co-back-gray-3);
+  --color: var(--co-gray);
+  cursor: not-allowed;
+}
+
+.create-post-modal .publish-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.create-post-modal .publish-button:hover::before {
+  left: 100%;
+}
+
+/* Loading Styles */
+.create-post-modal .loading-spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-right: 8px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Character Counter */
+.create-post-modal .character-counter {
+  text-align: right;
+  color: var(--co-gray);
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+}
+
+.create-post-modal .character-counter.warning {
+  color: #f59e0b;
+}
+
+.create-post-modal .character-counter.error {
+  color: #ef4444;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .create-post-modal .modal-content {
+    padding: 1rem;
+    gap: 1rem;
+  }
+  
+  .create-post-modal .modal-actions {
+    padding: 1rem;
+    flex-direction: column;
+  }
+  
+  .create-post-modal .publish-button {
+    flex: 1;
+  }
+}
+
+/* Animations */
+.create-post-modal .fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.create-post-modal .slide-up {
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -78,7 +78,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           favorites:data.fav || [],
           location: data.loc || {},
           history: data.h || [],
+          savedPlaces: data.sp || [],
           uid: data.uid,
+          photo: data.pt || "",
         });
         setIsLoading(false);
       },

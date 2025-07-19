@@ -10,6 +10,7 @@ export interface NearestPlaceProps {
   info: {
     distance: string;
     duration: string;
+    destination: any;
     place: google.maps.places.PlaceResult | null;
   };
   setInfo: (info: any) => void;

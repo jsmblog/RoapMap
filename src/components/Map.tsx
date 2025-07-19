@@ -14,6 +14,7 @@ import { getLocationDetails } from "../functions/geocoding";
 import { doc, setDoc, arrayUnion } from "firebase/firestore";
 import { db } from "../Firebase/initializeApp";
 import { useAchievements } from "../hooks/UseAchievements";
+import { useToast } from "../hooks/UseToast";
 
 const Map: React.FC<
   MapProps & {
@@ -38,17 +39,19 @@ const Map: React.FC<
   const [placesService, setPlacesService] =
     useState<google.maps.places.PlacesService>();
   const [places, setPlaces] = useState<DetailedPlace[]>([]);
-
+  
   const [directionsRenderer, setDirectionsRenderer] =
     useState<google.maps.DirectionsRenderer>();
   const [info, setInfo] = useState<{
     distance: string;
     duration: string;
+    destination: any;
     place: DetailedPlace | null;
-  }>({ distance: "", duration: "", place: null });
+  }>({ distance: "", duration: "", destination: null, place: null });
+  console.log(info)
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [expandedIdx, setExpandedIdx] = useState<number | null>(null);
-
+const { showToast, ToastComponent } = useToast();
   const userLocation = permLocation ?? currentUserData?.location;
 
   // Obtener permisos de ubicación
@@ -178,113 +181,127 @@ const Map: React.FC<
     setPlaceMarkers([]);
     setPlaces([]);
     setExpandedIdx(null);
-    directionsRenderer?.set("directions", null);
-    setInfo({ distance: "", duration: "", place: null });
+    setInfo({ distance: "", duration: "", destination: null, place: null });
+    setInfo({ distance: "", duration: "",destination:null, place: null });
   };
 
   // Búsqueda por categoría
   useEffect(() => {
-    if (!selectedCategory || !jsMap || !placesService || !userLocation) {
+  if (!selectedCategory || !jsMap || !placesService || !userLocation) {
+    clearMarkersAndRoute();
+    return;
+  }
+
+  placesService.nearbySearch(
+    {
+      location: new google.maps.LatLng(userLocation.lat, userLocation.lng),
+      radius: 5000,
+      keyword: selectedCategory,
+    },
+    (results, status) => {
+      if (!results || results.length === 0) {
+      showToast("No se encontraron lugares cercanos", 3000, "warning");
       clearMarkersAndRoute();
       return;
     }
+      if (status === google.maps.places.PlacesServiceStatus.OK && results) {
+        clearMarkersAndRoute();
 
-    placesService.nearbySearch(
-      {
-        location: new google.maps.LatLng(userLocation.lat, userLocation.lng),
-        radius: 5000,
-        keyword: selectedCategory,
-      },
-      (results, status) => {
-        if (status === google.maps.places.PlacesServiceStatus.OK && results) {
-          clearMarkersAndRoute();
+        const markers = results.map(
+          (r) =>
+            new google.maps.Marker({
+              map: jsMap,
+              position: r.geometry!.location!,
+              title: r.name,
+            })
+        );
+        setPlaceMarkers(markers as any);
 
-          const markers = results.map(
-            (r) =>
-              new google.maps.Marker({
-                map: jsMap,
-                position: r.geometry!.location!,
-                title: r.name,
-              })
-          );
-          setPlaceMarkers(markers as any);
+        const distances = results.map((r) =>
+          google.maps.geometry.spherical.computeDistanceBetween(
+            r.geometry!.location!,
+            new google.maps.LatLng(userLocation.lat, userLocation.lng)
+          )
+        );
+        const minIdx = distances.indexOf(Math.min(...distances));
+        const nearest = results[minIdx];
 
-          const distances = results.map((r) =>
-            google.maps.geometry.spherical.computeDistanceBetween(
-              r.geometry!.location!,
-              new google.maps.LatLng(userLocation.lat, userLocation.lng)
-            )
-          );
-          const minIdx = distances.indexOf(Math.min(...distances));
-          const nearest = results[minIdx];
+        jsMap.panTo(nearest.geometry!.location!);
+        jsMap.setZoom(15);
 
-          jsMap.panTo(nearest.geometry!.location!);
-          jsMap.setZoom(15);
+        const fields: (keyof google.maps.places.PlaceResult)[] = [
+          "name",
+          "vicinity",
+          "rating",
+          "user_ratings_total",
+          "photos",
+          "reviews",
+          "formatted_phone_number",
+          "opening_hours",
+          "website",
+          "types",
+        ];
 
-          const fields: (keyof google.maps.places.PlaceResult)[] = [
-            "name",
-            "vicinity",
-            "rating",
-            "user_ratings_total",
-            "photos",
-            "reviews",
-            "formatted_phone_number",
-            "opening_hours",
-            "website",
-            "types",
-          ];
-
-          const enrichedPlacesPromises = results.map(
-            (r) =>
-              new Promise<DetailedPlace>((resolve) => {
-                placesService.getDetails(
-                  { placeId: r.place_id!, fields },
-                  (detail) => {
-                    if (detail) resolve(detail as DetailedPlace);
-                    else resolve(r as DetailedPlace);
-                  }
-                );
-              })
-          );
-
-          Promise.all(enrichedPlacesPromises).then((enrichedPlaces) => {
-            setPlaces(enrichedPlaces);
-
-            const nearestDetail = enrichedPlaces[minIdx];
-            setInfo((prev) => ({ ...prev, place: nearestDetail }));
-
-            const ds = new google.maps.DirectionsService();
-            ds.route(
-              {
-                origin: new google.maps.LatLng(
-                  userLocation.lat,
-                  userLocation.lng
-                ),
-                destination: nearest.geometry!.location!,
-                travelMode: google.maps.TravelMode.DRIVING,
-              },
-              (res, status2) => {
-                if (status2 === "OK" && res) {
-                  directionsRenderer?.setDirections(res);
-                  const leg = res.routes[0].legs[0];
-                  setInfo({
-                    distance: leg.distance?.text || "",
-                    duration: leg.duration?.text || "",
-                    place: nearestDetail,
-                  });
+        const enrichedPlacesPromises = results.map(
+          (r) =>
+            new Promise<DetailedPlace>((resolve) => {
+              placesService.getDetails(
+                { placeId: r.place_id!, fields },
+                (detail) => {
+                  if (detail) resolve(detail as DetailedPlace);
+                  else resolve(r as DetailedPlace);
                 }
-              }
-            );
+              );
+            })
+        );
 
-            setIsModalOpen(true);
-          });
-        }
+        Promise.all(enrichedPlacesPromises).then((enrichedPlaces) => {
+          setPlaces(enrichedPlaces);
+
+          const nearestDetail = enrichedPlaces[minIdx];
+          const lat = nearest.geometry!.location!.lat();
+          const lng = nearest.geometry!.location!.lng();
+
+          setInfo((prev) => ({
+            ...prev,
+            place: nearestDetail,
+            destination: { lat, lng }, // <-- Aquí almacenas lat y lng en destination
+          }));
+
+          const ds = new google.maps.DirectionsService();
+          ds.route(
+            {
+              origin: new google.maps.LatLng(
+                userLocation.lat,
+                userLocation.lng
+              ),
+              destination: nearest.geometry!.location!,
+              travelMode: google.maps.TravelMode.DRIVING,
+            },
+            (res, status2) => {
+              if (status2 === "OK" && res) {
+                directionsRenderer?.setDirections(res);
+                const leg = res.routes[0].legs[0];
+                setInfo({
+                  distance: leg.distance?.text || "",
+                  duration: leg.duration?.text || "",
+                  destination: { lat, lng }, // <-- También aquí si quieres mantenerlo actualizado
+                  place: nearestDetail,
+                });
+              }
+            }
+          );
+
+          setIsModalOpen(true);
+        });
       }
-    );
-  }, [selectedCategory, jsMap, placesService, userLocation]);
+    }
+  );
+}, [selectedCategory, jsMap, placesService, userLocation]);
 
   return (
     <>
+    {ToastComponent}
     {AchievementPopup}
       <div ref={mapRef} className="full-screen-map" />
       {selectedCategory && (
