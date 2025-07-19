@@ -20,19 +20,19 @@ const Tabs:React.FC = () => {
 
       <IonTabBar className="tab" slot="bottom">
         <IonTabButton className="tabButton" tab="home" href="/tab/home">
-          <IonIcon className='icons-tab' icon={home} />
+          <IonIcon className='icons-tab iconos-oscuros' icon={home} />
         </IonTabButton>
         <IonTabButton className="tabButton" tab="descubir" href="/tab/descubir">
-          <IonIcon className='icons-tab' icon={compass} />
+          <IonIcon className='icons-tab iconos-oscuros' icon={compass} />
         </IonTabButton>
         <IonTabButton className="taButton" tab="peopleGroup" href="/tab/peopleGroup">
-          <IonIcon className='icons-tab' icon={people} />
+          <IonIcon className='icons-tab iconos-oscuros' icon={people} />
         </IonTabButton>
         <IonTabButton className="taButton" tab="community" href="/tab/community">
-          <IonIcon className='icons-tab' icon={chatbubbles} />
+          <IonIcon className='icons-tab iconos-oscuros' icon={chatbubbles} />
         </IonTabButton>
         <IonTabButton  className="tabButton" tab="settings" href="/tab/settings">
-          <IonIcon className='icons-tab' icon={settings} />
+          <IonIcon className='icons-tab iconos-oscuros' icon={settings} />
         </IonTabButton>
       </IonTabBar>
     </IonTabs>

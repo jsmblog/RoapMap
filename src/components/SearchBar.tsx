@@ -21,8 +21,7 @@ import {
   IonSegment,
   IonSegmentButton,
 } from '@ionic/react';
-import { 
-  filterOutline, 
+import {  
   closeOutline, 
   locationOutline,
   timeOutline,
@@ -31,7 +30,8 @@ import {
   accessibilityOutline,
   carOutline,
   wifiOutline,
-  restaurantOutline
+  restaurantOutline,
+  funnel
 } from 'ionicons/icons';
 import { categories } from '../functions/categories';
 import '../styles/searchbar.css';
@@ -152,7 +152,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
               className="filter-button"
               onClick={() => setShowFilter(true)}
             >
-              <IonIcon icon={filterOutline} />
+              <IonIcon icon={funnel} />
               {getActiveFiltersCount() > 0 && (
                 <IonBadge className="filter-badge">{getActiveFiltersCount()}</IonBadge>
               )}
@@ -204,7 +204,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
       <IonModal isOpen={showFilter} onDidDismiss={() => setShowFilter(false)} className="filter-modal">
         <IonHeader className="modal-header">
           <IonToolbar>
-            <IonTitle>Filtros de búsqueda</IonTitle>
+            <IonTitle className='texto-quinto'>Filtros de búsqueda</IonTitle>
             <IonButtons slot="end">
               <IonButton fill="clear" onClick={cancelFilters}>
                 <IonIcon slot="icon-only" icon={closeOutline} />
@@ -214,40 +214,40 @@ const SearchBar: React.FC<SearchBarProps> = ({
         </IonHeader>
 
         <IonContent ref={scrollRef} className="filter-content">
-          <div className="filter-tabs">
+          <div className="filter-tabs tema-oscuro2">
             <IonSegment 
               value={activeFilterTab} 
               onIonChange={e => setActiveFilterTab(e.detail.value as any)}
               className="filter-segment"
             >
-              <IonSegmentButton value="categories">
-                <IonLabel>Categorías</IonLabel>
+              <IonSegmentButton  value="categories">
+                <IonLabel className='texto-quinto'>Categorías</IonLabel>
               </IonSegmentButton>
               <IonSegmentButton value="features">
-                <IonLabel>Características</IonLabel>
+                <IonLabel className='texto-quinto'>Características</IonLabel>
               </IonSegmentButton>
               <IonSegmentButton value="preferences">
-                <IonLabel>Preferencias</IonLabel>
+                <IonLabel className='texto-quinto'>Preferencias</IonLabel>
               </IonSegmentButton>
             </IonSegment>
           </div>
 
           {/* Categories Tab */}
           {activeFilterTab === 'categories' && (
-            <div className="filter-section">
+            <div className="filter-section tema-oscuro2">
               <div className="section-header">
-                <h3>Tipos de lugares</h3>
-                <p>Selecciona las categorías que te interesan</p>
+                <h3 className='texto-quinto'>Tipos de lugares</h3>
+                <p className='texto-secundario'>Selecciona las categorías que te interesan</p>
               </div>
               <div className="categories-grid">
                 {categories.map(cat => (
                   <div 
                     key={cat.id} 
-                    className={`category-card ${selectedTypes.has(cat.place) ? 'selected' : ''}`}
+                    className={`category-card ${selectedTypes.has(cat.place) ? 'selected' : ''} tema-oscuro3`}
                     onClick={() => toggleType(cat.place)}
                   >
                     <div className="category-content">
-                      <span className="category-name">{cat.name}</span>
+                      <span className="category-name iconos-oscuros">{cat.name}</span>
                       <IonCheckbox
                         checked={selectedTypes.has(cat.place)}
                         onIonChange={() => toggleType(cat.place)}
@@ -261,12 +261,12 @@ const SearchBar: React.FC<SearchBarProps> = ({
 
           {/* Features Tab */}
           {activeFilterTab === 'features' && (
-            <div className="filter-section">
+            <div className="filter-section tema-oscuro2">
               <div className="section-header">
-                <h3>Distancia y horarios</h3>
+                <h3 className='texto-quinto'>Distancia y horarios</h3>
               </div>
               
-              <div className="feature-item">
+              <div className="feature-item tema-oscuro3">
                 <div className="feature-header">
                   <IonIcon icon={locationOutline} className="feature-icon" />
                   <div>
@@ -285,7 +285,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
                 />
               </div>
 
-              <div className="feature-item">
+              <div className="feature-item tema-oscuro3">
                 <div className="feature-toggle">
                   <div className="toggle-info">
                     <IonIcon icon={timeOutline} className="feature-icon" />
@@ -303,10 +303,10 @@ const SearchBar: React.FC<SearchBarProps> = ({
               </div>
 
               <div className="section-header">
-                <h3>Calidad y precio</h3>
+                <h3 className='texto-quinto'>Calidad y precio</h3>
               </div>
 
-              <div className="feature-item">
+              <div className="feature-item tema-oscuro3">
                 <div className="feature-header">
                   <IonIcon icon={starOutline} className="feature-icon" />
                   <div>
@@ -327,12 +327,12 @@ const SearchBar: React.FC<SearchBarProps> = ({
                 </div>
               </div>
 
-              <div className="feature-item">
+              <div className="feature-item tema-oscuro3">
                 <div className="feature-header">
                   <IonIcon icon={cardOutline} className="feature-icon" />
                   <div>
                     <IonLabel className="feature-title">Rango de precios</IonLabel>
-                    <p className="feature-subtitle">Selecciona los precios que te convengan</p>
+                    <p className="feature-subtitle texto-secundario">Selecciona los precios que te convengan</p>
                   </div>
                 </div>
                 <div className="price-grid">
@@ -357,19 +357,19 @@ const SearchBar: React.FC<SearchBarProps> = ({
 
           {/* Preferences Tab */}
           {activeFilterTab === 'preferences' && (
-            <div className="filter-section">
+            <div className="filter-section tema-oscuro2">
               <div className="section-header">
-                <h3>Servicios adicionales</h3>
-                <p>Características especiales que buscas</p>
+                <h3 className='texto-quinto'>Servicios adicionales</h3>
+                <p className='texto-secundario'>Características especiales que buscas</p>
               </div>
 
               <div className="preferences-list">
-                <div className="preference-item">
+                <div className="preference-item tema-oscuro3">
                   <div className="preference-info">
                     <IonIcon icon={accessibilityOutline} className="preference-icon" />
                     <div>
-                      <IonLabel className="preference-title">Accesible</IonLabel>
-                      <p className="preference-subtitle">Lugares accesibles para personas con discapacidad</p>
+                      <IonLabel className="preference-title texto-terciario">Accesible</IonLabel>
+                      <p className="preference-subtitle texto-cuaternario">Lugares accesibles para personas con discapacidad</p>
                     </div>
                   </div>
                   <IonToggle
@@ -379,12 +379,12 @@ const SearchBar: React.FC<SearchBarProps> = ({
                   />
                 </div>
 
-                <div className="preference-item">
+                <div className="preference-item tema-oscuro3">
                   <div className="preference-info">
                     <IonIcon icon={carOutline} className="preference-icon" />
                     <div>
-                      <IonLabel className="preference-title">Estacionamiento</IonLabel>
-                      <p className="preference-subtitle">Lugares con parking disponible</p>
+                      <IonLabel className="preference-title texto-terciario">Estacionamiento</IonLabel>
+                      <p className="preference-subtitle texto-cuaternario">Lugares con parking disponible</p>
                     </div>
                   </div>
                   <IonToggle
@@ -394,12 +394,12 @@ const SearchBar: React.FC<SearchBarProps> = ({
                   />
                 </div>
 
-                <div className="preference-item">
+                <div className="preference-item tema-oscuro3">
                   <div className="preference-info">
                     <IonIcon icon={wifiOutline} className="preference-icon" />
                     <div>
-                      <IonLabel className="preference-title">WiFi gratuito</IonLabel>
-                      <p className="preference-subtitle">Conexión a internet disponible</p>
+                      <IonLabel className="preference-title texto-terciario">WiFi gratuito</IonLabel>
+                      <p className="preference-subtitle texto-cuaternario">Conexión a internet disponible</p>
                     </div>
                   </div>
                   <IonToggle
@@ -409,12 +409,12 @@ const SearchBar: React.FC<SearchBarProps> = ({
                   />
                 </div>
 
-                <div className="preference-item">
+                <div className="preference-item tema-oscuro3">
                   <div className="preference-info">
                     <IonIcon icon={restaurantOutline} className="preference-icon" />
                     <div>
-                      <IonLabel className="preference-title">Para llevar</IonLabel>
-                      <p className="preference-subtitle">Lugares que ofrecen comida para llevar</p>
+                      <IonLabel className="preference-title texto-terciario">Para llevar</IonLabel>
+                      <p className="preference-subtitle texto-cuaternario">Lugares que ofrecen comida para llevar</p>
                     </div>
                   </div>
                   <IonToggle
@@ -424,12 +424,12 @@ const SearchBar: React.FC<SearchBarProps> = ({
                   />
                 </div>
 
-                <div className="preference-item">
+                <div className="preference-item tema-oscuro3">
                   <div className="preference-info">
                     <IonIcon icon={restaurantOutline} className="preference-icon" />
                     <div>
-                      <IonLabel className="preference-title">Entrega a domicilio</IonLabel>
-                      <p className="preference-subtitle">Servicio de delivery disponible</p>
+                      <IonLabel className="preference-title texto-terciario">Entrega a domicilio</IonLabel>
+                      <p className="preference-subtitle texto-cuaternario">Servicio de delivery disponible</p>
                     </div>
                   </div>
                   <IonToggle
@@ -441,8 +441,8 @@ const SearchBar: React.FC<SearchBarProps> = ({
               </div>
 
               <div className="section-header">
-                <h3>Ordenar resultados</h3>
-                <p>¿Cómo prefieres ver los resultados?</p>
+                <h3 className='texto-quinto'>Ordenar resultados</h3>
+                <p className='texto-secundario'>¿Cómo prefieres ver los resultados?</p>
               </div>
 
               <div className="sort-options">
@@ -454,12 +454,12 @@ const SearchBar: React.FC<SearchBarProps> = ({
                 ].map(option => (
                   <div
                     key={option.value}
-                    className={`sort-option ${sortBy === option.value ? 'selected' : ''}`}
+                    className={`sort-option ${sortBy === option.value ? 'selected' : ''} tema-oscuro3`}
                     onClick={() => setSortBy(option.value as any)}
                   >
                     <div className="sort-content">
-                      <IonLabel className="sort-title">{option.label}</IonLabel>
-                      <p className="sort-subtitle">{option.subtitle}</p>
+                      <IonLabel className="sort-title texto-terciario">{option.label}</IonLabel>
+                      <p className="sort-subtitle texto-cuaternario">{option.subtitle}</p>
                     </div>
                     <div className="sort-radio">
                       <div className={`radio-dot ${sortBy === option.value ? 'active' : ''}`} />
@@ -477,7 +477,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
               <IonButton 
                 fill="clear" 
                 onClick={clearAllFilters}
-                className="clear-button"
+                className="clear-button texto-secundario"
                 disabled={getActiveFiltersCount() === 0}
               >
                 Limpiar todo

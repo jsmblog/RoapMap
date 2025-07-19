@@ -123,9 +123,9 @@ const ModalEditInfoProfile: React.FC<ModalEditInfoProfileProps> = ({
             slot="start"
             onClick={onClose}
             >
-            <IonIcon className="chevron-icon" icon={close} />
+            <IonIcon className="chevron-icon iconos-oscuros" icon={close} />
           </IonButtons>
-          <IonTitle className="ion-title">{info.title}</IonTitle>
+          <IonTitle className="ion-title texto-quinto">{info.title}</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen={true}>
@@ -133,7 +133,7 @@ const ModalEditInfoProfile: React.FC<ModalEditInfoProfileProps> = ({
           {info.type === "text" || info.type === "password" ? (
             <>
               <IonInput
-                className="IonInput"
+                className="IonInput inputs-background"
                 labelPlacement="floating"
                 fill="outline"
                 type={getSafeType(info.type)}
@@ -144,7 +144,7 @@ const ModalEditInfoProfile: React.FC<ModalEditInfoProfileProps> = ({
                 onIonInput={handleSave("result1")}
               />
               <IonInput
-                className="IonInput"
+                className="IonInput inputs-background"
                 labelPlacement="floating"
                 fill="outline"
                 type={getSafeType(info.type)}
@@ -165,7 +165,8 @@ const ModalEditInfoProfile: React.FC<ModalEditInfoProfileProps> = ({
           ) : null}
           {info.type === "select" ? (
             <IonSelect
-              className="IonSelect"
+              className="IonSelect inputs-background"
+              interface="popover"
               placeholder={info.placeholder}
               required={true}
               onIonChange={handleSave("result1")}
@@ -180,7 +181,7 @@ const ModalEditInfoProfile: React.FC<ModalEditInfoProfileProps> = ({
           {info.type === "textarea" ? (
             <>
               <IonTextarea
-                className="IonTextarea"
+                className="IonTextarea inputs-background"
                 placeholder={info.placeholder}
                 required={true}
                 maxlength={500}

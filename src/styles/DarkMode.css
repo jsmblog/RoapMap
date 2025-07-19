@@ -1,0 +1,137 @@
+/* dark-mode.css */
+
+body.dark-mode {
+  --ion-background-color: #121212;
+  --ion-background-color-rgb: 18, 18, 18;
+
+  --ion-text-color: #e0e0e0;
+  --ion-text-color-rgb: 224, 224, 224;
+
+  --ion-color-primary: #4caf50;
+  --ion-color-primary-rgb: 76, 175, 80;
+
+  --ion-color-secondary: #66bb6a;
+
+  --ion-color-step-50: #2a2a2a;
+  --ion-color-step-100: #252525;
+  --ion-color-step-150: #222222;
+  --ion-color-step-200: #1e1e1e;
+  --ion-color-step-250: #1c1c1c;
+  --ion-color-step-300: #191919;
+  --ion-color-step-350: #171717;
+  --ion-color-step-400: #141414;
+  --ion-color-step-450: #121212;
+  --ion-color-step-500: #101010;
+  --ion-color-step-550: #0d0d0d;
+  --ion-color-step-600: #0a0a0a;
+  --ion-color-step-650: #080808;
+  --ion-color-step-700: #050505;
+  --ion-color-step-750: #030303;
+  --ion-color-step-800: #010101;
+  --ion-color-step-850: #000000;
+  --ion-color-step-900: #000000;
+
+  color: var(--ion-text-color);
+  background: var(--ion-background-color);
+}
+/*compoente settings*/
+.dark-mode .option-selected-setting {
+  --background: var(--co-gray); /* verde muy suave */
+}
+.dark-mode .checkmark {
+  color: black; /* o el color que desees */
+}
+/*compoente modal perfil*/
+.dark-mode .btn-edit-profile {
+  --background: var(--primary-color);
+  --box-shadow: 2px 2px var(--co-gray);
+}
+/*componente search bar*/
+.dark-mode .apply-button {
+  --background: var(--primary-color);
+  --box-shadow: 2px 2px var(--co-gray);
+  --color: var(--Texto-primario);
+}
+/*general*/
+.dark-mode .tema-oscuro {
+  --background: var(--tema-oscuro) !important;
+}
+.dark-mode .tema-oscuro2 {
+  background-color: var(--tema-oscuro) !important;
+}
+.dark-mode .tema-oscuro3 {
+  background-color: var(--co-back-gray-6);
+}
+.dark-mode .tema-oscuro4 {
+  background-color: var(--co-gray);
+}
+.dark-mode .texto-primario {
+  color: var(--Texto-primario) !important;
+}
+.dark-mode .texto-secundario {
+  color: var(--Texto-secundario) !important;
+}
+.dark-mode .texto-terciario,
+.dark-mode .feature-title {
+  color: var(--primary-color) !important;
+}
+.dark-mode .texto-cuaternario{
+  color: var(--co-black-1);
+}
+.dark-mode .texto-quinto {
+  color: var(--color-btns);
+}
+.dark-mode .recommendation-button {
+  --color: black;
+}
+.dark-mode .iconos-oscuros {
+ color: var(--color-btns);
+}
+.dark-mode .inputs-background {
+  --background: var(--co-back-gray-8);
+}
+.dark-mode .label-text-wrapper,
+.dark-mode .label-floating,
+.dark-mode .inputs-background::placeholder,
+.dark-mode .IonTextarea::placeholder{
+  color: var(--Texto-secundario) !important;
+}
+/* falta Estilo para los textos superiores del IonDatetime (mes, año, días) */
+
+/* Día activo seleccionado */
+.dark-mode ion-datetime::part(calendar-day-active) {
+  color: #4caf50 !important;
+  border: 1px solid #4caf50;
+  border-radius: 50%;
+  font-weight: bold;
+}
+.dark-mode .modal-edit-profile,
+.dark-mode .modal-profile,
+.dark-mode .modal-privacy,
+.dark-mode .modal-setting-options {
+  --background: rgba(18, 18, 18, 0.9);
+  backdrop-filter: blur(12px);
+  color: var(--Texto-primario) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.4s ease-in-out;
+}
+.dark-mode .modern-searchbar {
+  --color: var(--Texto-primario) !important;
+  --background: var(--co-back-gray-8);
+  --placeholder-color: var(--Texto-primario) !important;
+  --icon-color: var(--Texto-secundario);
+  --clear-button-color: var(--Texto-secundario);
+}
+.dark-mode .modern-searchbar:focus-within {
+  --box-shadow: 0 4px 16px rgba(117, 121, 116, 0.26);
+  border-color: var(--secondary-color);
+}
+.dark-mode .btn-item {
+  background: var(--co-back-gray-8);
+  color: var(--Texto-secundario) !important;
+}
+
+/*tab bar*/
+.dark-mode .tab {
+  background: var(--co-back-gray-8);
+}

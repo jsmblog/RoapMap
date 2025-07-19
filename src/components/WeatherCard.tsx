@@ -90,12 +90,13 @@ const WeatherCard: React.FC = () => {
   if (!weather) {
     return (
       <div className="weather-box loading-container">
-        <IonSpinner name="crescent" />
-        <p>Obteniendo datos climáticos...</p>
+        <IonSpinner name="crescent" className='texto-terciario' />
+        <p className='texto-terciario'>Obteniendo datos climáticos...</p>
       </div>
     );
   }
 
+  
   return (
     <>
       <div className="weather-box">
@@ -144,15 +145,15 @@ const WeatherCard: React.FC = () => {
             <IonTitle className="modal-title">Recomendación Climática</IonTitle>
             <IonButtons slot="end">
               <IonButton fill="clear" onClick={() => setIsModalOpen(false)}>
-                <IonIcon icon={closeOutline} />
+                <IonIcon className='setting-icons' icon={closeOutline} />
               </IonButton>
             </IonButtons>
           </IonToolbar>
         </IonHeader>
 
-        <IonContent className="modal-content">
+        <IonContent className="modal-content tema-oscuro">
           {AchievementPopup}
-          <IonCard className="recommendation-card">
+          <IonCard className="recommendation-card ">
             <IonCardContent>
               <div className="weather-summary">
                 <div className="weather-info">
@@ -163,8 +164,8 @@ const WeatherCard: React.FC = () => {
                   />
                   <div className="weather-details">
                     <h3>{convertToCelsius(weather.main.temp)}°C</h3>
-                    <p>{weather.weather[0].description}</p>
-                    <p className="weather-subdetails">
+                    <p className='texto-secundario'>{weather.weather[0].description}</p>
+                    <p className="weather-subdetails texto-secundario">
                       Humedad: {weather.main.humidity}% | 
                       Viento: {weather.wind.speed} m/s
                     </p>
@@ -176,7 +177,7 @@ const WeatherCard: React.FC = () => {
                 <h4 className="recommendation-title">
                   <IonIcon icon={informationCircleOutline} /> Recomendación con IA
                 </h4>
-                <p className="recommendation-text">{recommendation}</p>
+                <p className="recommendation-text tema-oscuro2 texto-secundario ">{recommendation}</p>
                 
                 {error && (
                   <div className="retry-container">

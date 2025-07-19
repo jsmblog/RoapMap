@@ -27,7 +27,7 @@ const ModalPrivacy: React.FC<ModalProfileProps> = ({ isOpen, onClose }) => {
       <IonContent>
         <IonCard className="card-privacy">
           <IonCardHeader>
-            <IonCardTitle className="modal-title tile-privacity">Nota de Privacidad</IonCardTitle>
+            <IonCardTitle className="modal-title tile-privacity texto-primario">Nota de Privacidad</IonCardTitle>
             <IonImg
               className="imgPrivacy"
               src={img_privacy}

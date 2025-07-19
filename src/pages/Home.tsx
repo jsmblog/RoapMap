@@ -31,9 +31,6 @@ const Home: React.FC = () => {
     setShouldRefocus(true);
   };
 
-  const searchInputRef = useRef<HTMLIonSearchbarElement>(null);
- 
-
 
   return (
     <IonPage>

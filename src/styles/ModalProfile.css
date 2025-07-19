@@ -2,7 +2,7 @@
 .modal-profile {
   width: 100%;
   height: 100%;
-}
+} 
 .modal-privacy::part(content),
 .modal-profile::part(content) {
   border-top-left-radius: 20px;
@@ -65,7 +65,7 @@
   display: flex;
   align-items: center;
   position: fixed;
-  bottom: 6%;
+  bottom: 7.4%;
   box-shadow: none;
   width: 100%;
   padding: 1rem;
@@ -73,7 +73,7 @@
   --box-shadow: none;
 }
 .toolbar-profile{
-  width:80%;
+  width:70%;
   --background: none !important;
   --box-shadow: none;
 }
@@ -83,7 +83,7 @@
   --box-shadow: none;
 }
 .btn-edit-profile {
-  width: 210px;
+  width: 180px;
   font-size: 1rem;
   --color: var(--co-black-1);
   --background: var(--color-btns);
