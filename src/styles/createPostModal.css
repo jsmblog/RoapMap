@@ -201,7 +201,6 @@
   display: flex;
   gap: 1rem;
   background: var(--co-white);
-  border-top: 1px solid var(--co-back-gray-6);
 }
 
 

@@ -9,7 +9,7 @@ import {
 } from '@ionic/react';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { close, folderOpen, image, videocam, trashOutline } from 'ionicons/icons';
-import { collection, doc, setDoc } from 'firebase/firestore';
+import { collection, doc, serverTimestamp, setDoc } from 'firebase/firestore';
 import { db, STORAGE } from '../Firebase/initializeApp';
 import { generateUUID } from '../functions/uuid';
 import { useAuthContext } from '../context/UserContext';
@@ -151,15 +151,17 @@ const CreatePostModal: React.FC<Props> = ({ isOpen, onClose }) => {
         ft: fileType || '',
         img: currentUserData.photo || '',
         n: currentUserData.name || 'Usuario',
-        likes: 0,
+        likes: [],
         comments: [],
-        share: 0,
+        share: [],
       };
 
       const postsRef = collection(db, 'POSTS', currentUserData.uid, 'posts');
-      await setDoc(doc(postsRef, generateUUID()), {
+      const postId = generateUUID();
+      await setDoc(doc(postsRef, postId), {
         post: postData,
-        d: formatDateTime(new Date()),
+        c: serverTimestamp(),
+        id: postId,
       }, { merge: true });
 
       showToast('¡Publicación creada exitosamente!', 3000, 'success');
