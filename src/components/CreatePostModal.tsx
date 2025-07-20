@@ -162,6 +162,7 @@ const CreatePostModal: React.FC<Props> = ({ isOpen, onClose }) => {
         post: postData,
         c: serverTimestamp(),
         id: postId,
+        uid: currentUserData.uid,
       }, { merge: true });
 
       showToast('¡Publicación creada exitosamente!', 3000, 'success');

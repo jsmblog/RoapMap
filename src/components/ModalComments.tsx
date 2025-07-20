@@ -50,7 +50,7 @@ const ModalComments: React.FC<ModalCommentsProps> = ({ post, isOpen, onClose }) 
       c: formatDateTime(new Date()),
     };
     try {
-      const postRef = doc(db, 'POSTS', currentUserData.uid, 'posts', post.id);
+      const postRef = doc(db, 'POSTS', post.uid, 'posts', post.id);
       await updateDoc(postRef, {
         'post.comments': arrayUnion(comment)
       });

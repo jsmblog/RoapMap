@@ -7,8 +7,6 @@ import ListCategories from "../components/ListCategories";
 import WeatherCard from "../components/WeatherCard";
 import Map from "../components/Map";
 import { useAchievements } from "../hooks/UseAchievements";
-import { AUTH_USER } from "../Firebase/initializeApp";
-
 const Home: React.FC = () => {
  
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -30,18 +28,6 @@ const Home: React.FC = () => {
   const handleSearchClear = () => {
     setShouldRefocus(true);
   };
-
-  // const handleLogout = async () => {
-  //   showLoading("Cerrando sesión...");
-  //   try {
-  //     await signOut(AUTH_USER);
-  //     await hideLoading();
-  //     router.push("/", "root", "replace");
-  //   } catch {
-  //     await hideLoading();
-  //   }
-  // };
-
   return (
     <IonPage>
       {AchievementPopup}

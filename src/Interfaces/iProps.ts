@@ -20,7 +20,7 @@ export interface ModalOptionSettingProps{
   info: SettingObjectType;
   setInfo: React.Dispatch<React.SetStateAction<SettingObjectType>>;
 }
-type OptionSettingType = {icon:string, label:string, value: string };
+type OptionSettingType = {icon:string, label:string, value: string, action?: () => void };
 export interface SettingObjectType {
   initialBreakpoint: number,
   breakpoints: number,

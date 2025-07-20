@@ -2,7 +2,6 @@ import {
   IonButton,
   IonButtons,
   IonContent,
-  IonFooter,
   IonHeader,
   IonIcon,
   IonItem,
@@ -39,10 +38,14 @@ const ModalOptionSetting: React.FC<ModalOptionSettingProps> = ({
     >
       <IonHeader className="edit-profile-hearder">
         <IonToolbar className="modal-edit-profile-toolbar">
-          <IonButtons className="ion-buttons-modal-edit-profile" slot="start" onClick={onClose}>
-            <IonIcon className="chevron-icon" icon={close} />
+          <IonButtons
+            className="ion-buttons-modal-edit-profile"
+            slot="start"
+            onClick={onClose}
+          >
+            <IonIcon className="chevron-icon  iconos-oscuros" icon={close} />
           </IonButtons>
-          <IonTitle className="ion-title">{info.title}</IonTitle>
+          <IonTitle className="ion-title texto-quinto">{info.title}</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent className="animacion-slide-top">
@@ -52,22 +55,28 @@ const ModalOptionSetting: React.FC<ModalOptionSettingProps> = ({
             <IonItem
               key={index}
               button
-              onClick={() => setSelectedOptionIndex(index)}
-              className={selectedOptionIndex === index ? "option-selected-setting" : ""}
-            >
+              onClick={() => {
+                setSelectedOptionIndex(index);
+                if (option.action) {
+                  option.action(); // cambia tema aquí
+                }
+              }}
+              className={
+                selectedOptionIndex === index ? "option-selected-setting" : ""
+              }
+            > 
               {option.icon === "none" ? (
-                <div>
-                  <IonLabel>
-                    {option.label}
-                  </IonLabel>
-                </div>
+                <IonLabel className="texto-quinto">{option.label}</IonLabel>
               ) : (
-                <>
-                  <IonIcon className="setting-icons" icon={option.icon} />
-                  <IonLabel>{option.label} </IonLabel>
-                </>
+                <IonButton
+                  className="button-options"
+                  fill="clear"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <IonIcon className="setting-icons iconos-oscuros" icon={option.icon} />
+                  <IonLabel className="texto-quinto">{option.label}</IonLabel>
+                </IonButton>
               )}
-              {/* Este span será el visto ✔️ */}
               <span className="checkmark">✔</span>
             </IonItem>
           ))}

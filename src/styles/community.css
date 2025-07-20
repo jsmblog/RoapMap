@@ -168,13 +168,6 @@
   transition: all 0.3s ease;
 }
 
-.action-icon:hover {
-  background: var(--secondary-color);
-  color: var(--primary-color);
-  border-color: var(--secondary-color);
-  box-shadow: 0 6px 20px rgba(176, 219, 156, 0.6);
-}
-
 /* Badge de contadores */
 .video-actions ion-badge {
   --color: var(--co-white);
@@ -288,7 +281,7 @@ ion-fab-button ion-icon {
 }
 
 .liked {
-  color:#FB4141;
+  color:var(--co-red-1);
 }
 .top-tab-bar {
   position: absolute;

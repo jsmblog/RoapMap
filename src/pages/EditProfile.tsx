@@ -2,10 +2,6 @@ import {
   IonAvatar,
   IonBackButton,
   IonButtons,
-  IonButton,
-  IonCard,
-  IonCardContent,
-  IonCardHeader,
   IonContent,
   IonHeader,
   IonIcon,
@@ -195,21 +191,21 @@ const EditProfile: React.FC = () => {
     setInfo({ ...base, ...config });
   };
 
-  return (
+  return ( 
     <IonPage>
       <IonHeader className="edit-profile-hearder">
-        <IonToolbar className="edit-profile-toolbar">
+        <IonToolbar className="edit-profile-toolbar tema-oscuro ">
           <IonButtons slot="start">
-            <IonBackButton defaultHref="/tab/home" icon={chevronBack} />
+            <IonBackButton defaultHref="/tab/home" className="iconos-oscuros" icon={chevronBack} text='' />
           </IonButtons>
-          <IonTitle className="ion-title">Editar Perfil</IonTitle>
+          <IonTitle className="ion-title texto-quinto">Editar Perfil</IonTitle>
         </IonToolbar>
       </IonHeader>
 
-      <IonContent className="edit-profile-content" fullscreen>
-        {ToastComponent}
-        <IonList className="edit-profile-info-container">
-          <div className="edit-profile-avatar-wrapper">
+      <IonContent className="edit-profile-content tema-oscuro" fullscreen>
+        <IonList>
+        <div className="edit-profile-info-container tema-oscuro">
+          <div className="edit-profile-avatar-wrapper tema-oscuro">
             <IonAvatar className="edit-profile-avatar">
               <IonImg src={previewURL ? previewURL : currentUserData.photo ? currentUserData.photo : "https://ionicframework.com/docs/img/demos/avatar.svg"} alt="Avatar" />
               <IonIcon
@@ -245,83 +241,100 @@ const EditProfile: React.FC = () => {
           />
 
           <IonItem
-            className="edit-profile-item"
+            className="edit-profile-item tema-oscuro"
             button
             onClick={() => openModalEditProfile("name")}
           >
             <IonLabel className="ion-label" slot="start">
               Nombre
             </IonLabel>
-            <span>{currentUserData.name}</span>
+            <span className="texto-secundario">{currentUserData.name}</span>
             <IonIcon
-              className="chevron-icon"
+              className="chevron-icon iconos-oscuros"
               slot="end"
               icon={chevronForwardOutline}
             />
           </IonItem>
 
           <IonItem
-            className="edit-profile-item"
+            className="edit-profile-item tema-oscuro" 
             button
             onClick={() => openModalEditProfile("gender")}
           >
             <IonLabel className="ion-label" slot="start">
               Género
             </IonLabel>
-            <span>{currentUserData.gender}</span>
-            <IonIcon className="chevron-icon" slot="end" icon={chevronForwardOutline} />
+            <span className="texto-secundario">{currentUserData.gender}</span>
+            <IonIcon
+              className="chevron-icon iconos-oscuros"
+              slot="end"
+              icon={chevronForwardOutline}
+            />
           </IonItem>
 
           <IonItem
-            className="edit-profile-item"
+            className="edit-profile-item tema-oscuro"
             button
             onClick={() => openModalEditProfile("birthdate")}
           >
             <IonLabel className="ion-label" slot="start">
               Fecha de Nacimiento
             </IonLabel>
-            <span>{currentUserData.birth.split("T")[0]}</span>
-            <IonIcon className="chevron-icon" slot="end" icon={chevronForwardOutline} />
+            <span className="texto-secundario">{currentUserData.birth.split("T")[0]}</span>
+            <IonIcon
+              className="chevron-icon iconos-oscuros"
+              slot="end"
+              icon={chevronForwardOutline}
+            />
           </IonItem>
 
           <IonItem
-            className="edit-profile-item"
+            className="edit-profile-item tema-oscuro"
             button
             onClick={() => openModalEditProfile("description")}
           >
             <IonLabel className="ion-label" slot="start">
               Descripción
             </IonLabel>
-            <div className="description-value">
+            <div className="description-value texto-secundario">
               <span className="description-label">
                 {currentUserData.description.replace(/\*/g, "")}
               </span>
             </div>
-            <IonIcon className="chevron-icon" slot="end" icon={chevronForwardOutline} />
+            <IonIcon
+              className="chevron-icon iconos-oscuros"
+              slot="end"
+              icon={chevronForwardOutline}
+            />
           </IonItem>
 
           <IonItem
-            className="edit-profile-item"
+            className="edit-profile-item tema-oscuro"
             button
             onClick={() => openModalEditProfile("password")}
           >
             <IonLabel className="ion-label" slot="start">
               Contraseña
             </IonLabel>
-            <span>********</span>
-            <IonIcon className="chevron-icon" slot="end" icon={chevronForwardOutline} />
+            <span className="texto-secundario">********</span>
+            <IonIcon
+              className="chevron-icon iconos-oscuros"
+              slot="end"
+              icon={chevronForwardOutline}
+            />
           </IonItem>
 
-          <IonItem className="edit-profile-item">
+          <IonItem className="edit-profile-item tema-oscuro">
             <IonLabel className="ion-label" slot="start">
               Ubicación
             </IonLabel>
-            <span>
+            <span className="texto-secundario">
               {locationDetails
                 ? `${locationDetails.city}, ${locationDetails.state}, ${locationDetails.country}`
                 : "Cargando ubicación"}
             </span>
           </IonItem>
+        </div>
 
           <ModalEditInfoProfile
             isOpen={isModalOpenEditProfile}

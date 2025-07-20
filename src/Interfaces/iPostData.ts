@@ -1,5 +1,6 @@
 export interface PostData {
   id: string;
+  uid:string;
   post: {
     txt: string;
     ht: string[];
@@ -7,9 +8,9 @@ export interface PostData {
     ft: string;
     img: string;
     n: string;
-    likes: number;
+    likes: any[];
     comments: any[];
-    share: number;
+    share: any[];
   };
   d: string;
 }
