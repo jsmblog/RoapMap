@@ -19,7 +19,6 @@ import {
   chevronForward,
   colorPalette,
   documentText,
-  happyOutline,
   heart,
   helpCircleOutline,
   language,
@@ -41,7 +40,6 @@ import { useLoading } from "../hooks/UseLoading";
 import { signOut } from "firebase/auth";
 import { AUTH_USER } from "../Firebase/initializeApp";
 import { useDarkMode } from "../context/DarkModeContext";
-
 
 const Setting: React.FC = () => {
   const { showLoading, hideLoading } = useLoading();
@@ -69,7 +67,6 @@ const Setting: React.FC = () => {
     subtitle: "",
     options: [],
     result1: "",
-    funct: ""
   });
   const openModalSetting = (settingOption: string) => {
     setIsOpenModalOptionSetting(true);
@@ -80,7 +77,6 @@ const Setting: React.FC = () => {
       subtitle: "",
       options: [],
       result1: "",
-      funct: ""
     };
 
     switch (settingOption) {
@@ -91,60 +87,35 @@ const Setting: React.FC = () => {
           title: "Cambiar tema de la app",
           subtitle: "Escoge una opcion",
           options: [
-            { icon: sunny, label: "Tema Claro", value: "" , action: disableDarkMode},
-            { icon: moon, label: "Tema Oscuro", value: "" , action: enableDarkMode },
+            {
+              icon: sunny,
+              label: "Tema Claro",
+              value: "",
+              action: disableDarkMode,
+            },
+            {
+              icon: moon,
+              label: "Tema Oscuro",
+              value: "",
+              action: enableDarkMode,
+            },
           ],
           result1: "",
-          funct:""
         };
         break;
       case "idioma":
         objectSetting = {
-          initialBreakpoint: 0.46,
-          breakpoints: 0.46,
+          initialBreakpoint: 0.38,
+          breakpoints: 0.38,
           title: "Cambiar idioma de la app",
           subtitle: "Escoge una opcion",
           options: [
-            { icon: "none", label: "Español", value: "Español" },
-            { icon: "none", label: "Ingles", value: "Ingles" },
-            {
-              icon: "none",
-              label: "Idioma del  dispositivo",
-              value: "Idioma del  dispositivo",
-            },
+            { icon: "none", label: "Español", value: "es" },
+            { icon: "none", label: "Inglés", value: "en" },
           ],
           result1: "",
-          funct:""
         };
         break;
-      case "calificacnos":
-        objectSetting = {
-          initialBreakpoint: 0.64,
-          breakpoints: 0.64,
-          title: "Enviar mi opinión",
-          subtitle:
-            "Escoge la carita que te haga sentir sastifescho con nuestra app",
-          options: [
-            { icon: "none", label: "😄 Excelente", value: "Excelente" },
-            { icon: "none", label: "😊 Buena", value: "Buena" },
-            { icon: "none", label: "😐 Nuetro", value: "Nuetro" },
-            { icon: "none", label: "☹️ Mala", value: "Mala" },
-            { icon: "none", label: "😠 Muy mala", value: "Muy mala" },
-          ],
-          result1: "",
-          funct:""
-        };
-        break;
-      case "info":
-        objectSetting = {
-          initialBreakpoint: 0.80,
-          breakpoints: 0.80,
-          title: "Información de la app",
-          subtitle: "",
-          options: [],
-          result1:"",
-          funct:""
-        }
     }
     setInfo(objectSetting);
   };
@@ -154,9 +125,15 @@ const Setting: React.FC = () => {
       <IonHeader className="edit-profile-hearder">
         <IonToolbar className="setting-toolbar tema-oscuro">
           <IonButtons slot="start">
-            <IonBackButton defaultHref="/tab/home" className="iconos-oscuros" icon={chevronBack} />
+            <IonBackButton
+              defaultHref="/tab/home"
+              className="iconos-oscuros"
+              icon={chevronBack}
+            />
           </IonButtons>
-          <IonTitle className="settings-ion-title texto-quinto">Ajustes </IonTitle>
+          <IonTitle className="settings-ion-title texto-quinto">
+            Ajustes{" "}
+          </IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent className="setting-content" fullscreen>
@@ -176,16 +153,28 @@ const Setting: React.FC = () => {
               icon={colorPalette}
             />
             <IonLabel>Tema del sistema</IonLabel>
-            <IonIcon className="setting-icons iconos-oscuros" slot="end" icon={chevronForward} />
+            <IonIcon
+              className="setting-icons iconos-oscuros"
+              slot="end"
+              icon={chevronForward}
+            />
           </IonItem>
           <IonItem
             className="options"
             button
             onClick={() => openModalSetting("idioma")}
           >
-            <IonIcon className="setting-icons iconos-oscuros" slot="start" icon={language} />
+            <IonIcon
+              className="setting-icons iconos-oscuros"
+              slot="start"
+              icon={language}
+            />
             <IonLabel>Idioma</IonLabel>
-            <IonIcon className="setting-icons iconos-oscuros" slot="end" icon={chevronForward} />
+            <IonIcon
+              className="setting-icons iconos-oscuros"
+              slot="end"
+              icon={chevronForward}
+            />
           </IonItem>
 
           {/* ---- Notificaciones ---- */}
@@ -199,7 +188,11 @@ const Setting: React.FC = () => {
               icon={notifications}
             />
             <IonLabel>Notificaciones</IonLabel>
-            <IonIcon className="setting-icons iconos-oscuros" slot="end" icon={chevronForward} />
+            <IonIcon
+              className="setting-icons iconos-oscuros"
+              slot="end"
+              icon={chevronForward}
+            />
           </IonItem>
 
           {/* ---- Tu Actividad ---- */}
@@ -207,36 +200,49 @@ const Setting: React.FC = () => {
             Tu Actividad
           </IonListHeader>
           <IonItem className="options" button>
-            <IonIcon className="setting-icons iconos-oscuros" slot="start" icon={time} />
-            <IonLabel>Historial</IonLabel>
-            <IonIcon className="setting-icons iconos-oscuros" slot="end" icon={chevronForward} />
-          </IonItem>
-          <IonItem className="options" button>
-            <IonIcon className="setting-icons iconos-oscuros" slot="start" icon={heart} />
-            <IonLabel>Favoritos</IonLabel>
-            <IonIcon className="setting-icons iconos-oscuros" slot="end" icon={chevronForward} />
-          </IonItem>
-          <IonItem className="options" button>
-            <IonIcon className="setting-icons iconos-oscuros" slot="start" icon={bookmark} />
-            <IonLabel>Guardados</IonLabel>
-            <IonIcon className="setting-icons iconos-oscuros" slot="end" icon={chevronForward} />
-          </IonItem>
-
-          {/* ---- Soporte ---- */}
-          <IonListHeader className="ion-list-header texto-quinto">Soporte</IonListHeader>
-          <IonItem
-            className="options"
-            button
-            onClick={() => openModalSetting("calificacnos")}
-          >
             <IonIcon
               className="setting-icons iconos-oscuros"
               slot="start"
-              icon={happyOutline}
+              icon={time}
             />
-            <IonLabel>Envianos tu opinión</IonLabel>
-            <IonIcon className="setting-icons iconos-oscuros" slot="end" icon={chevronForward} />
+            <IonLabel>Historial</IonLabel>
+            <IonIcon
+              className="setting-icons iconos-oscuros"
+              slot="end"
+              icon={chevronForward}
+            />
           </IonItem>
+          <IonItem className="options" button>
+            <IonIcon
+              className="setting-icons iconos-oscuros"
+              slot="start"
+              icon={heart}
+            />
+            <IonLabel>Favoritos</IonLabel>
+            <IonIcon
+              className="setting-icons iconos-oscuros"
+              slot="end"
+              icon={chevronForward}
+            />
+          </IonItem>
+          <IonItem className="options" button>
+            <IonIcon
+              className="setting-icons iconos-oscuros"
+              slot="start"
+              icon={bookmark}
+            />
+            <IonLabel>Guardados</IonLabel>
+            <IonIcon
+              className="setting-icons iconos-oscuros"
+              slot="end"
+              icon={chevronForward}
+            />
+          </IonItem>
+
+          {/* ---- Soporte ---- */}
+          <IonListHeader className="ion-list-header texto-quinto">
+            Soporte
+          </IonListHeader>
           <IonItem className="options" button>
             <IonIcon
               className="setting-icons iconos-oscuros"
@@ -244,15 +250,29 @@ const Setting: React.FC = () => {
               icon={helpCircleOutline}
             />
             <IonLabel>Ayuda y soporte</IonLabel>
-            <IonIcon className="setting-icons iconos-oscuros" slot="end" icon={chevronForward} />
+            <IonIcon
+              className="setting-icons iconos-oscuros"
+              slot="end"
+              icon={chevronForward}
+            />
           </IonItem>
 
           {/* ---- Legal ---- */}
-          <IonListHeader className="ion-list-header texto-quinto">Legal</IonListHeader>
+          <IonListHeader className="ion-list-header texto-quinto">
+            Legal
+          </IonListHeader>
           <IonItem className="options" button>
-            <IonIcon className="setting-icons iconos-oscuros" slot="start" icon={server} />
+            <IonIcon
+              className="setting-icons iconos-oscuros"
+              slot="start"
+              icon={server}
+            />
             <IonLabel>Política de Privacidad</IonLabel>
-            <IonIcon className="setting-icons iconos-oscuros" slot="end" icon={chevronForward} />
+            <IonIcon
+              className="setting-icons iconos-oscuros"
+              slot="end"
+              icon={chevronForward}
+            />
           </IonItem>
           <IonItem className="options" button>
             <IonIcon
@@ -261,23 +281,29 @@ const Setting: React.FC = () => {
               icon={documentText}
             />
             <IonLabel>Términos y Condiciones</IonLabel>
-            <IonIcon className="setting-icons iconos-oscuros" slot="end" icon={chevronForward} />
+            <IonIcon
+              className="setting-icons iconos-oscuros"
+              slot="end"
+              icon={chevronForward}
+            />
           </IonItem>
-          <IonItem 
-          className="options" 
-          button
-          onClick={() => openModalSetting("info")}
-          >
+          <IonItem className="options" button routerLink="/info-app">
             <IonIcon
               className="setting-icons iconos-oscuros"
               slot="start"
               icon={informationCircleOutline}
             />
             <IonLabel>Informacion de la app</IonLabel>
-            <IonIcon className="setting-icons iconos-oscuros" slot="end" icon={chevronForward} />
+            <IonIcon
+              className="setting-icons iconos-oscuros"
+              slot="end"
+              icon={chevronForward}
+            />
           </IonItem>
           {/* ---- Cuenta ---- */}
-          <IonListHeader className="ion-list-header texto-quinto">Cuenta</IonListHeader>
+          <IonListHeader className="ion-list-header texto-quinto">
+            Cuenta
+          </IonListHeader>
           <IonItem
             className="options"
             button
@@ -289,12 +315,13 @@ const Setting: React.FC = () => {
               icon={personCircleOutline}
             />
             <IonLabel>Infomacion del pefil</IonLabel>
-            <IonIcon className="setting-icons iconos-oscuros" slot="end" icon={chevronForward} />
+            <IonIcon
+              className="setting-icons iconos-oscuros"
+              slot="end"
+              icon={chevronForward}
+            />
           </IonItem>
-          <IonItem 
-          className="options" 
-          button
-          onClick={handleLogout}>
+          <IonItem className="options" button onClick={handleLogout}>
             <IonIcon
               className="setting-icons iconos-oscuros"
               slot="start"

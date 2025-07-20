@@ -28,5 +28,4 @@ export interface SettingObjectType {
   subtitle?: string;
   options?: OptionSettingType[];
   result1?: string;
-  funct: any;
 }

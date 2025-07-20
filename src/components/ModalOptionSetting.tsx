@@ -64,7 +64,7 @@ const ModalOptionSetting: React.FC<ModalOptionSettingProps> = ({
               className={
                 selectedOptionIndex === index ? "option-selected-setting" : ""
               }
-            >
+            > 
               {option.icon === "none" ? (
                 <IonLabel className="texto-quinto">{option.label}</IonLabel>
               ) : (
