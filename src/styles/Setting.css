@@ -6,9 +6,7 @@
   font-weight: bold;
   color: var(--primary-color);
 }
-.setting-content {
-  background-color: var(--background-color);
-}
+
 .setting-options {
   padding: 1rem;
   background-color: var(--background-color);
@@ -46,6 +44,9 @@
   display: flex;
   flex-direction: column;
   gap: .5rem;
+}
+.button-options{
+  text-transform: none;
 }
 .option-selected-setting {
   --background:var(--background-color); /* verde muy suave */

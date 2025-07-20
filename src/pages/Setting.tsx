@@ -19,7 +19,6 @@ import {
   chevronForward,
   colorPalette,
   documentText,
-  happyOutline,
   heart,
   helpCircleOutline,
   language,
@@ -30,9 +29,7 @@ import {
   time,
   sunny,
   moon,
-  phonePortraitOutline,
   informationCircleOutline,
-  peopleOutline,
 } from "ionicons/icons";
 import React, { useState } from "react";
 import "../styles/Setting.css";
@@ -42,10 +39,14 @@ import ModalProfile from "../components/ModalProfile";
 import { useLoading } from "../hooks/UseLoading";
 import { signOut } from "firebase/auth";
 import { AUTH_USER } from "../Firebase/initializeApp";
+import { useDarkMode } from "../context/DarkModeContext";
+import { useTranslation } from "react-i18next";
 
 const Setting: React.FC = () => {
   const { showLoading, hideLoading } = useLoading();
   const router = useIonRouter();
+  const { t } = useTranslation();
+  const { enableDarkMode, disableDarkMode } = useDarkMode();
 
   const handleLogout = async () => {
     showLoading("Cerrando sesión...");
@@ -66,7 +67,7 @@ const Setting: React.FC = () => {
     title: "",
     subtitle: "",
     options: [],
-    result1: "",
+    isLanguage:false,
   });
   const openModalSetting = (settingOption: string) => {
     setIsOpenModalOptionSetting(true);
@@ -76,72 +77,46 @@ const Setting: React.FC = () => {
       title: "",
       subtitle: "",
       options: [],
-      result1: "",
+      isLanguage:false,
     };
 
     switch (settingOption) {
       case "tema":
         objectSetting = {
-          initialBreakpoint: 0.46,
-          breakpoints: 0.46,
-          title: "Cambiar tema de la app",
-          subtitle: "Escoge una opcion",
+          initialBreakpoint: 0.39,
+          breakpoints: 0.39,
+          title: t("changeAppTheme"),
+          subtitle: t("chooseOption"),
           options: [
-            { icon: sunny, label: "Tema Claro", value: "Tema Claro" },
-            { icon: moon, label: "Tema Oscuro", value: "Tema Oscuro" },
             {
-              icon: phonePortraitOutline,
-              label: "Tema del Sistema",
-              value: "Tema del Sistema",
+              icon: sunny,
+              label: t("lightTheme"),
+              value: "",
+              action: disableDarkMode,
+            },
+            {
+              icon: moon,
+              label: t("darkTheme"),
+              value: "",
+              action: enableDarkMode,
             },
           ],
-          result1: "",
+          isLanguage:false,
         };
         break;
       case "idioma":
         objectSetting = {
-          initialBreakpoint: 0.46,
-          breakpoints: 0.46,
-          title: "Cambiar idioma de la app",
-          subtitle: "Escoge una opcion",
+          initialBreakpoint: 0.38,
+          breakpoints: 0.38,
+          title: t("changeLanguage"),
+          subtitle: t("chooseOption"),
           options: [
-            { icon: "none", label: "Español", value: "Español" },
-            { icon: "none", label: "Ingles", value: "Ingles" },
-            {
-              icon: "none",
-              label: "Idioma del  dispositivo",
-              value: "Idioma del  dispositivo",
-            },
+            { icon: "none", label: "Español", value: "es" },
+            { icon: "none", label: "English", value: "en" },
           ],
-          result1: "",
+          isLanguage:true,
         };
         break;
-      case "calificacnos":
-        objectSetting = {
-          initialBreakpoint: 0.64,
-          breakpoints: 0.64,
-          title: "Enviar mi opinión",
-          subtitle:
-            "Escoge la carita que te haga sentir sastifescho con nuestra app",
-          options: [
-            { icon: "none", label: "😄 Excelente", value: "Excelente" },
-            { icon: "none", label: "😊 Buena", value: "Buena" },
-            { icon: "none", label: "😐 Nuetro", value: "Nuetro" },
-            { icon: "none", label: "☹️ Mala", value: "Mala" },
-            { icon: "none", label: "😠 Muy mala", value: "Muy mala" },
-          ],
-          result1: "",
-        };
-        break;
-      case "info":
-        objectSetting = {
-          initialBreakpoint: 0.80,
-          breakpoints: 0.80,
-          title: "Información de la app",
-          subtitle: "",
-          options: [],
-          result1:"",
-        }
     }
     setInfo(objectSetting);
   };
@@ -149,18 +124,24 @@ const Setting: React.FC = () => {
   return (
     <IonPage>
       <IonHeader className="edit-profile-hearder">
-        <IonToolbar className="setting-toolbar">
+        <IonToolbar className="setting-toolbar tema-oscuro">
           <IonButtons slot="start">
-            <IonBackButton defaultHref="/tab/home" icon={chevronBack} />
+            <IonBackButton
+              defaultHref="/tab/home"
+              className="iconos-oscuros"
+              icon={chevronBack}
+            />
           </IonButtons>
-          <IonTitle className="settings-ion-title">Ajustes </IonTitle>
+          <IonTitle className="settings-ion-title texto-quinto">
+            {t("settings")}
+          </IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent className="setting-content" fullscreen>
-        <IonList className="setting-options ">
+        <IonList className="setting-options tema-oscuro2">
           {/* ---- Preferencias ---- */}
-          <IonListHeader className="ion-list-header">
-            Preferencias
+          <IonListHeader className="ion-list-header texto-quinto">
+            {t("preferences")}
           </IonListHeader>
           <IonItem
             className="options "
@@ -168,145 +149,186 @@ const Setting: React.FC = () => {
             onClick={() => openModalSetting("tema")}
           >
             <IonIcon
-              className="setting-icons"
+              className="setting-icons iconos-oscuros"
               slot="start"
               icon={colorPalette}
             />
-            <IonLabel>Tema del sistema</IonLabel>
-            <IonIcon slot="end" icon={chevronForward} />
+            <IonLabel>{t("systemTheme")}</IonLabel>
+            <IonIcon
+              className="setting-icons iconos-oscuros"
+              slot="end"
+              icon={chevronForward}
+            />
           </IonItem>
           <IonItem
             className="options"
             button
             onClick={() => openModalSetting("idioma")}
           >
-            <IonIcon className="setting-icons" slot="start" icon={language} />
-            <IonLabel>Idioma</IonLabel>
-            <IonIcon slot="end" icon={chevronForward} />
+            <IonIcon
+              className="setting-icons iconos-oscuros"
+              slot="start"
+              icon={language}
+            />
+            <IonLabel>{t("language")}</IonLabel>
+            <IonIcon
+              className="setting-icons iconos-oscuros"
+              slot="end"
+              icon={chevronForward}
+            />
           </IonItem>
 
           {/* ---- Notificaciones ---- */}
-          <IonListHeader className="ion-list-header">
-            Notificaciones
+          <IonListHeader className="ion-list-header texto-quinto">
+            {t("notifications")}
           </IonListHeader>
           <IonItem className="options" button>
             <IonIcon
-              className="setting-icons"
+              className="setting-icons iconos-oscuros"
               slot="start"
               icon={notifications}
             />
-            <IonLabel>Notificaciones</IonLabel>
-            <IonIcon slot="end" icon={chevronForward} />
+            <IonLabel>{t("notifications")}</IonLabel>
+            <IonIcon
+              className="setting-icons iconos-oscuros"
+              slot="end"
+              icon={chevronForward}
+            />
           </IonItem>
 
           {/* ---- Tu Actividad ---- */}
-          <IonListHeader className="ion-list-header">
-            Tu Actividad
+          <IonListHeader className="ion-list-header texto-quinto">
+            {t("yourActivity")}
           </IonListHeader>
           <IonItem className="options" button>
-            <IonIcon className="setting-icons" slot="start" icon={time} />
-            <IonLabel>Historial</IonLabel>
-            <IonIcon slot="end" icon={chevronForward} />
+            <IonIcon
+              className="setting-icons iconos-oscuros"
+              slot="start"
+              icon={time}
+            />
+            <IonLabel>{t("history")}</IonLabel>
+            <IonIcon
+              className="setting-icons iconos-oscuros"
+              slot="end"
+              icon={chevronForward}
+            />
           </IonItem>
           <IonItem className="options" button>
-            <IonIcon className="setting-icons" slot="start" icon={heart} />
-            <IonLabel>Favoritos</IonLabel>
-            <IonIcon slot="end" icon={chevronForward} />
+            <IonIcon
+              className="setting-icons iconos-oscuros"
+              slot="start"
+              icon={heart}
+            />
+            <IonLabel>{t("favorites")}</IonLabel>
+            <IonIcon
+              className="setting-icons iconos-oscuros"
+              slot="end"
+              icon={chevronForward}
+            />
           </IonItem>
           <IonItem className="options" button>
-            <IonIcon className="setting-icons" slot="start" icon={bookmark} />
-            <IonLabel>Guardados</IonLabel>
-            <IonIcon slot="end" icon={chevronForward} />
+            <IonIcon
+              className="setting-icons iconos-oscuros"
+              slot="start"
+              icon={bookmark} 
+            />
+            <IonLabel>{t("saved")}</IonLabel>
+            <IonIcon
+              className="setting-icons iconos-oscuros"
+              slot="end"
+              icon={chevronForward}
+            />
           </IonItem>
 
           {/* ---- Soporte ---- */}
-          <IonListHeader className="ion-list-header">Soporte</IonListHeader>
-          <IonItem
-            className="options"
-            button
-            onClick={() => openModalSetting("calificacnos")}
-          >
-            <IonIcon
-              className="setting-icons"
-              slot="start"
-              icon={happyOutline}
-            />
-            <IonLabel>Envianos tu opinión</IonLabel>
-            <IonIcon slot="end" icon={chevronForward} />
-          </IonItem>
+           <IonListHeader className="ion-list-header texto-quinto">
+            {t("support")}
+          </IonListHeader>
           <IonItem className="options" button>
             <IonIcon
-              className="setting-icons"
+              className="setting-icons iconos-oscuros"
               slot="start"
               icon={helpCircleOutline}
             />
-            <IonLabel>Ayuda y soporte</IonLabel>
-            <IonIcon slot="end" icon={chevronForward} />
+           <IonLabel>{t("helpSupport")}</IonLabel>
+            <IonIcon
+              className="setting-icons iconos-oscuros"
+              slot="end"
+              icon={chevronForward}
+            />
           </IonItem>
 
           {/* ---- Legal ---- */}
-          <IonListHeader className="ion-list-header">Legal</IonListHeader>
+           <IonListHeader className="ion-list-header texto-quinto">
+            {t("legal")}
+          </IonListHeader>
           <IonItem className="options" button>
-            <IonIcon className="setting-icons" slot="start" icon={server} />
-            <IonLabel>Política de Privacidad</IonLabel>
-            <IonIcon slot="end" icon={chevronForward} />
+            <IonIcon
+              className="setting-icons iconos-oscuros"
+              slot="start"
+              icon={server}
+            />
+            <IonLabel>{t("privacyPolicy")}</IonLabel>
+            <IonIcon
+              className="setting-icons iconos-oscuros"
+              slot="end"
+              icon={chevronForward}
+            />
           </IonItem>
           <IonItem className="options" button>
             <IonIcon
-              className="setting-icons"
+              className="setting-icons iconos-oscuros"
               slot="start"
               icon={documentText}
             />
-            <IonLabel>Términos y Condiciones</IonLabel>
-            <IonIcon slot="end" icon={chevronForward} />
-          </IonItem>
-          <IonItem 
-          className="options" 
-          button
-          onClick={() => openModalSetting("info")}
-          >
+             <IonLabel>{t("termsConditions")}</IonLabel>
             <IonIcon
-              className="setting-icons"
+              className="setting-icons iconos-oscuros"
+              slot="end"
+              icon={chevronForward}
+            />
+          </IonItem>
+          <IonItem className="options" button routerLink="/info-app">
+            <IonIcon
+              className="setting-icons iconos-oscuros"
               slot="start"
               icon={informationCircleOutline}
             />
-            <IonLabel>Informacion de la app</IonLabel>
-            <IonIcon slot="end" icon={chevronForward} />
-          </IonItem>
-          <IonItem className="options" button>
-             <IonIcon
-              className="setting-icons"
-              slot="start"
-              icon={peopleOutline}
+            <IonLabel>{t("appInfo")}</IonLabel>
+            <IonIcon
+              className="setting-icons iconos-oscuros"
+              slot="end"
+              icon={chevronForward}
             />
-            <IonLabel>Quienes somos</IonLabel>
-            <IonIcon slot="end" icon={chevronForward} />
           </IonItem>
           {/* ---- Cuenta ---- */}
-          <IonListHeader className="ion-list-header">Cuenta</IonListHeader>
+         <IonListHeader className="ion-list-header texto-quinto">
+            {t("account")}
+          </IonListHeader>
           <IonItem
             className="options"
             button
             onClick={() => setIsOpenModalProfile(true)}
           >
             <IonIcon
-              className="setting-icons"
+              className="setting-icons iconos-oscuros"
               slot="start"
               icon={personCircleOutline}
             />
-            <IonLabel>Infomacion del pefil</IonLabel>
-            <IonIcon slot="end" icon={chevronForward} />
-          </IonItem>
-          <IonItem 
-          className="options" 
-          button
-          onClick={handleLogout}>
+            <IonLabel>{t("profileInfo")}</IonLabel>
             <IonIcon
-              className="setting-icons"
+              className="setting-icons iconos-oscuros"
+              slot="end"
+              icon={chevronForward}
+            />
+          </IonItem>
+          <IonItem className="options" button onClick={handleLogout}>
+            <IonIcon
+              className="setting-icons iconos-oscuros"
               slot="start"
               icon={logOutOutline}
             />
-            <IonLabel>Cerrar sesión</IonLabel>
+            <IonLabel>{t("logout")}</IonLabel>
           </IonItem>
         </IonList>
 
@@ -314,7 +336,6 @@ const Setting: React.FC = () => {
           isOpen={isOpneModalProfile}
           onClose={() => setIsOpenModalProfile(false)}
         />
-
         <ModalOptionSetting
           isOpen={isOpenModalOptionSetting}
           onClose={() => setIsOpenModalOptionSetting(false)}

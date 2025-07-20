@@ -3,6 +3,7 @@ import React, {
   useContext,
   useState,
   useEffect,
+  useCallback,
 } from 'react';
 import { Preferences } from '@capacitor/preferences';
 import { DarkModeContextType, DarkModeProviderProps } from '../Interfaces/iDarkMode';
@@ -11,53 +12,47 @@ const DarkModeContext = createContext<DarkModeContextType | undefined>(undefined
 
 export const DarkModeProvider: React.FC<DarkModeProviderProps> = ({ children }) => {
   const [darkMode, setDarkMode] = useState<boolean>(false);
-
-  useEffect(() => {
-    const loadPreference = async () => {
-      const { value } = await Preferences.get({ key: 'darkMode' });
-
-      if (value !== null) {
-        setDarkMode(value === 'true');
-      } else {
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        setDarkMode(prefersDark);
-      }
-    };
-
-    loadPreference();
+  
+  const applyTheme = useCallback(async (mode: boolean) => {
+    const method = mode ? 'add' : 'remove';
+    document.body.classList[method]('dark-mode');
+    await Preferences.set({ key: 'darkMode', value: String(mode) });
+    setDarkMode(mode);
   }, []);
 
-  useEffect(() => {
-    const updateTheme = async () => {
-      const classMethod = darkMode ? 'add' : 'remove';
-      document.body.classList[classMethod]('dark-mode');
-      await Preferences.set({ key: 'darkMode', value: String(darkMode) });
+
+   useEffect(() => {
+    const loadPreference = async () => {
+      const { value } = await Preferences.get({ key: 'darkMode' });
+      if (value !== null) {
+        applyTheme(value === 'true');
+      } else {
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        applyTheme(prefersDark);
+      }
     };
+    loadPreference();
+  }, [applyTheme]);
 
-    updateTheme();
-  }, [darkMode]);
-
-
-  useEffect(() => {
+  
+ useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-
     const handleSystemThemeChange = async (event: MediaQueryListEvent) => {
       const { value } = await Preferences.get({ key: 'darkMode' });
       if (value === null) {
-        setDarkMode(event.matches);
+        applyTheme(event.matches);
       }
     };
-
     mediaQuery.addEventListener('change', handleSystemThemeChange);
     return () => mediaQuery.removeEventListener('change', handleSystemThemeChange);
-  }, []);
+  }, [applyTheme]);
 
-  const toggleDarkMode = () => {
-    setDarkMode((prev) => !prev);
-  };
+  const toggleDarkMode = () => applyTheme(!darkMode);
+  const enableDarkMode = () => applyTheme(true);
+  const disableDarkMode = () => applyTheme(false);
 
   return (
-    <DarkModeContext.Provider value={{ darkMode, toggleDarkMode }}>
+    <DarkModeContext.Provider value={{ darkMode, toggleDarkMode, enableDarkMode, disableDarkMode}}>
       {children}
     </DarkModeContext.Provider>
   );

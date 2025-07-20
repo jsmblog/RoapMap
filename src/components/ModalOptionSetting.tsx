@@ -2,7 +2,6 @@ import {
   IonButton,
   IonButtons,
   IonContent,
-  IonFooter,
   IonHeader,
   IonIcon,
   IonItem,
@@ -15,6 +14,7 @@ import {
 import { close } from "ionicons/icons";
 import React, { useState } from "react";
 import { ModalOptionSettingProps } from "../Interfaces/iProps";
+import { useLanguage } from "../context/LanguageContext";
 
 const ModalOptionSetting: React.FC<ModalOptionSettingProps> = ({
   isOpen,
@@ -26,6 +26,7 @@ const ModalOptionSetting: React.FC<ModalOptionSettingProps> = ({
   const [selectedOptionIndex, setSelectedOptionIndex] = useState<number | null>(
     null
   );
+  const { changeLanguage, currentLang } = useLanguage();
 
   return (
     <IonModal
@@ -39,10 +40,14 @@ const ModalOptionSetting: React.FC<ModalOptionSettingProps> = ({
     >
       <IonHeader className="edit-profile-hearder">
         <IonToolbar className="modal-edit-profile-toolbar">
-          <IonButtons className="ion-buttons-modal-edit-profile" slot="start" onClick={onClose}>
-            <IonIcon className="chevron-icon" icon={close} />
+          <IonButtons
+            className="ion-buttons-modal-edit-profile"
+            slot="start"
+            onClick={onClose}
+          >
+            <IonIcon className="chevron-icon  iconos-oscuros" icon={close} />
           </IonButtons>
-          <IonTitle className="ion-title">{info.title}</IonTitle>
+          <IonTitle className="ion-title texto-quinto">{info.title}</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent className="animacion-slide-top">
@@ -52,22 +57,39 @@ const ModalOptionSetting: React.FC<ModalOptionSettingProps> = ({
             <IonItem
               key={index}
               button
-              onClick={() => setSelectedOptionIndex(index)}
-              className={selectedOptionIndex === index ? "option-selected-setting" : ""}
+              onClick={() => {
+                setSelectedOptionIndex(index);
+                // 🌓 Si hay una acción (como cambiar tema), se ejecúta
+                if (option.action) {
+                  option.action(); // cambia tema aquí
+                }
+                // 🌐 Si la opción tiene  isLanguage:true, se ejecuta
+                if (info.isLanguage && option.value) {
+                  changeLanguage(option.value);
+                }
+              }}
+              className={
+                (option.value && currentLang === option.value) ||
+                selectedOptionIndex === index
+                  ? "option-selected-setting"
+                  : ""
+              }
             >
               {option.icon === "none" ? (
-                <div>
-                  <IonLabel>
-                    {option.label}
-                  </IonLabel>
-                </div>
+                <IonLabel className="texto-quinto">{option.label}</IonLabel>
               ) : (
-                <>
-                  <IonIcon className="setting-icons" icon={option.icon} />
-                  <IonLabel>{option.label} </IonLabel>
-                </>
+                <IonButton
+                  className="button-options"
+                  fill="clear"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <IonIcon
+                    className="setting-icons iconos-oscuros"
+                    icon={option.icon}
+                  />
+                  <IonLabel className="texto-quinto">{option.label}</IonLabel>
+                </IonButton>
               )}
-              {/* Este span será el visto ✔️ */}
               <span className="checkmark">✔</span>
             </IonItem>
           ))}

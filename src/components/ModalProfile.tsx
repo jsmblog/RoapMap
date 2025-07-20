@@ -42,32 +42,30 @@ const ModalProfile: React.FC<ModalProfileProps> = ({ isOpen, onClose }) => {
             alt="avatar"
           />
           <IonCardHeader>
-            <IonCardTitle className="profile-name">
+            <IonCardTitle className="profile-name texto-quinto">
               {currentUserData?.name}{" "}
             </IonCardTitle>
           </IonCardHeader>
           <IonCardContent className="profile-info">
-            <IonCardSubtitle className="profile-subtitle">
+            <IonCardSubtitle className="profile-subtitle texto-quinto">
               Sobre mi
             </IonCardSubtitle>
-            <p className="profile-text">
+            <p className="profile-text texto-secundario">
               {currentUserData?.description?.replace(/\*/g, "")}
             </p>
-            <IonCardSubtitle className="profile-subtitle">
-              Ubicación
+            <IonCardSubtitle className="profile-subtitle texto-quinto">
+              Ubicación 
             </IonCardSubtitle>
-            <span className="profile-ubicacion">
+            <span className="profile-ubicacion texto-secundario">
                  <IonIcon className="location-icon" icon={location} /> 
               {locationDetails
                 ? `${locationDetails.city}, ${locationDetails.state}, ${locationDetails.country}`
                 : "Cargando ubicación"}
             </span>
-            <IonCardSubtitle className="profile-subtitle">
+            <IonCardSubtitle className="profile-subtitle texto-quinto">
               Logros
             </IonCardSubtitle>
-            <p>🏆 1000 puntos de experiencia</p>
-            <p>🏆 50 misiones completadas </p>
-            <p>🏆 10 amigos en la comunidad</p>
+          
           </IonCardContent>
         </IonCard>
 
