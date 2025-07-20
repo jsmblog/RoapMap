@@ -27,5 +27,5 @@ export interface SettingObjectType {
   title: string;
   subtitle?: string;
   options?: OptionSettingType[];
-  result1?: string;
+  isLanguage?: boolean;
 }
