@@ -121,48 +121,26 @@ const Community: React.FC = () => {
     nowPaused ? vid.pause() : vid.play().catch(() => { });
   };
 
-  const handleLike = async (postId: string) => {
-    if (!postId) {
-      showToast('Error: Post ID is missing', 3000, 'danger');
+  const handleLike = async (post: PostData) => {
+    const uid = currentUserData?.uid;
+    if (!uid) {
+      showToast('Debes iniciar sesión para dar like', 3000, 'danger');
       return;
     }
 
-    const idx = posts.findIndex(p => p.id === postId);
-    if (idx === -1) {
-      showToast('No se encontró la publicación', 3000, 'danger');
+    if (post.post.likes?.includes(uid)) {
+      showToast('Ya diste like a esta publicación', 3000, 'warning');
       return;
     }
-    const post = posts[idx];
-    const uid = currentUserData?.uid || '';
-    const likes = Array.isArray(post.post.likes) ? post.post.likes as string[] : [];
-
-    if (likes.includes(uid)) {
-      showToast('Ya has dado like a esta publicación', 3000, 'warning');
-      return;
-    }
-
-    const updatedPosts = [...posts];
-    updatedPosts[idx] = {
-      ...post,
-      post: {
-        ...post.post,
-        likes: [...likes, uid],
-      },
-    };
-    setPosts(updatedPosts);
-
     try {
-      // 5) Actualizo en Firestore usando arrayUnion
-      const postRef = doc(db, 'POSTS', uid, 'posts', postId);
+      const postRef = doc(db, 'POSTS', post.uid, 'posts', post.id);
       await updateDoc(postRef, {
         'post.likes': arrayUnion(uid),
       });
-      showToast('👍 Publicación marcada como me gusta', 2000, 'success');
+      showToast('Te gustó la publicación 👍', 2000, 'success');
     } catch (error) {
       console.error('Error al dar like:', error);
-      // 6) Rollback en caso de fallo
-      setPosts(posts);
-      showToast('Error al enviar tu like. Intenta de nuevo.', 3000, 'danger');
+      showToast('Error al dar like. Intenta nuevamente.', 3000, 'danger');
     }
   };
 
@@ -250,11 +228,11 @@ const Community: React.FC = () => {
                     </div>
 
                     <div className="video-overlay">
-                      <IonItem lines="none" className="user-info">
+                      <IonItem routerLink={`/profile/${post.uid}`} lines="none" className="user-info">
                         <IonAvatar slot="start" className="user-avatar">
                           <img src={post.post.img} alt={post.post.n} />
                         </IonAvatar>
-                        <IonLabel>
+                        <IonLabel className="user-name">
                           <h2 className="username">
                             @{post.post.n.replace(/\s+/g, '_')}
                           </h2>
@@ -282,7 +260,7 @@ const Community: React.FC = () => {
                           <IonIcon
                             icon={Array.isArray(post.post.likes) && post.post.likes.includes(currentUserData?.uid) ? heart : heartOutline}
                             className={`action-icon ${Array.isArray(post.post.likes) && post.post.likes.includes(currentUserData?.uid) ? 'liked' : ''}`}
-                            onClick={() => handleLike(post.id)}
+                            onClick={() => handleLike(post)}
                           />
                           <IonBadge>
                             {Array.isArray(post.post.likes)

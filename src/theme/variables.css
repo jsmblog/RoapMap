@@ -41,6 +41,7 @@
   --tema-oscuro: #1e1e1e;
   --Texto-primario: #e0e0e0;
   --Texto-secundario:#a0a0a0;
+  --co-red-1:#FB4141;
 }
 .ion-content-display-flex-column {
   display: flex;

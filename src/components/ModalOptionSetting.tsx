@@ -59,22 +59,14 @@ const ModalOptionSetting: React.FC<ModalOptionSettingProps> = ({
               button
               onClick={() => {
                 setSelectedOptionIndex(index);
-                // 🌓 Si hay una acción (como cambiar tema), se ejecúta
                 if (option.action) {
                   option.action(); // cambia tema aquí
                 }
-                // 🌐 Si la opción tiene  isLanguage:true, se ejecuta
-                if (info.isLanguage && option.value) {
-                  changeLanguage(option.value);
-                }
               }}
               className={
-                (option.value && currentLang === option.value) ||
-                selectedOptionIndex === index
-                  ? "option-selected-setting"
-                  : ""
+                selectedOptionIndex === index ? "option-selected-setting" : ""
               }
-            >
+            > 
               {option.icon === "none" ? (
                 <IonLabel className="texto-quinto">{option.label}</IonLabel>
               ) : (
@@ -83,10 +75,7 @@ const ModalOptionSetting: React.FC<ModalOptionSettingProps> = ({
                   fill="clear"
                   onClick={(e) => e.stopPropagation()}
                 >
-                  <IonIcon
-                    className="setting-icons iconos-oscuros"
-                    icon={option.icon}
-                  />
+                  <IonIcon className="setting-icons iconos-oscuros" icon={option.icon} />
                   <IonLabel className="texto-quinto">{option.label}</IonLabel>
                 </IonButton>
               )}

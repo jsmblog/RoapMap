@@ -196,7 +196,8 @@ const EditProfile: React.FC = () => {
       <IonHeader className="edit-profile-hearder">
         <IonToolbar className="edit-profile-toolbar tema-oscuro ">
           <IonButtons slot="start">
-            <IonBackButton defaultHref="/tab/home" className="iconos-oscuros" icon={chevronBack} />
+            <IonBackButton defaultHref="/tab/home" className="iconos-oscuros" icon={chevronBack} text='' />
+
           </IonButtons>
           <IonTitle className="ion-title texto-quinto">Editar Perfil</IonTitle>
         </IonToolbar>
