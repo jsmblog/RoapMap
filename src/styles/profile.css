@@ -1,29 +1,3 @@
-/* Profile.css - Instagram-style Profile with Custom Color Palette */
-
-:root {
-  --primary-color: #31572C;
-  --secondary-color: #B0DB9C;
-  --co-green-1: #4ade80;
-  --background-color: #ECFAE5;
-  --text-color: #333333;
-  --co-white: white;
-  --co-gray: #818080;
-  --co-back-gray: #ebebeb;
-  --co-back-gray-2: #f9f9f9f1;
-  --co-back-gray-3: #d4d2d0;
-  --co-back-gray-4: #f9f7f4;
-  --co-back-gray-5: #3d3c3c81;
-  --co-back-gray-6: #e2e8f0;
-  --co-back-gray-7: rgba(255, 255, 255, 0.219);
-  --co-back-gray-8: #2a2a2a;
-  --co-black-1: rgba(0, 0, 0, 0.893);
-  --co-black-2: rgba(0, 0, 0, 0.555);
-  --color-btns: #9FC87E;
-  --color-btns-text: #31572C;
-  --tema-oscuro: #1e1e1e;
-  --Texto-primario: #e0e0e0;
-  --Texto-secundario: #a0a0a0;
-}
 
 /* Page Layout */
 .profile-page {
@@ -330,7 +304,7 @@
   gap: 12px;
 }
 
-.place-card {
+.place-card-profile {
   display: flex;
   align-items: center;
   padding: 16px;
@@ -346,7 +320,7 @@
   transform: translateY(-1px);
 }
 
-.place-image {
+.place-image-profile {
   width: 50px;
   height: 50px;
   background: var(--co-back-gray-6);

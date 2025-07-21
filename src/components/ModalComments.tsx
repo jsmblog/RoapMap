@@ -61,6 +61,7 @@ const ModalComments: React.FC<ModalCommentsProps> = ({ post, isOpen, onClose }) 
       showToast('Error al enviar comentario', 2000, 'danger');
     } finally {
       setSubmitting(false);
+      onClose()
     }
   };
 

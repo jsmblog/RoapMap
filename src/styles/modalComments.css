@@ -65,7 +65,9 @@
 
 .comments-container {
   padding: 16px;
-  max-height: calc(100vh - 200px);
+  height: calc(100vh - 200px);
+  display: flex;
+  flex-direction: column;
   overflow-y: auto;
 }
 

@@ -92,7 +92,7 @@
 }
 
 .unfollow {
-    color: var(--co-red-1);
+    color: var(--co-gray);
     padding: 0;
     text-decoration: underline;
 }

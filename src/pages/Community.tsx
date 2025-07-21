@@ -164,8 +164,6 @@ const Community: React.FC = () => {
 
       <IonContent className="community-content">
         {ToastComponent}
-        {isLoading && <IonLoading isOpen message="Cargando publicaciones..." />}
-
         {!isLoading && posts.length === 0 && (
           <div className="no-posts">
             <p>¡¡ No hay publicaciones aún !!</p>

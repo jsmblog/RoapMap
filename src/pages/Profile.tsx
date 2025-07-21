@@ -272,8 +272,8 @@ const Profile: React.FC = () => {
                         <h3 className="section-title">Lugares Favoritos</h3>
                         <div className="places-grid">
                             {profile.fav.map((place, index) => (
-                                <div key={index} className="place-card">
-                                    <div className="place-image">
+                                <div key={index} className="place-card-profile">
+                                    <div className="place-image-profile">
                                         <IonIcon icon={locationOutline} />
                                     </div>
                                     <div className="place-info">

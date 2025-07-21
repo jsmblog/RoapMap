@@ -89,7 +89,7 @@ const WeatherCard: React.FC = () => {
 
   if (!weather) {
     return (
-      <div className="weather-box loading-container">
+      <div className="floading-container">
         <IonSpinner name="crescent" className='texto-terciario' />
         <p className='texto-terciario'>Obteniendo datos climáticos...</p>
       </div>
