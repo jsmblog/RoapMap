@@ -42,7 +42,6 @@ import { AUTH_USER } from "../Firebase/initializeApp";
 import { useDarkMode } from "../context/DarkModeContext";
 import { useTranslation } from "react-i18next";
 
-
 const Setting: React.FC = () => {
   const { showLoading, hideLoading } = useLoading();
   const router = useIonRouter();
@@ -68,7 +67,7 @@ const Setting: React.FC = () => {
     title: "",
     subtitle: "",
     options: [],
-    isLanguage:false,
+    isLanguage: false,
   });
   const openModalSetting = (settingOption: string) => {
     setIsOpenModalOptionSetting(true);
@@ -78,7 +77,7 @@ const Setting: React.FC = () => {
       title: "",
       subtitle: "",
       options: [],
-      isLanguage:false,
+      isLanguage: false,
     };
 
     switch (settingOption) {
@@ -86,37 +85,36 @@ const Setting: React.FC = () => {
         objectSetting = {
           initialBreakpoint: 0.39,
           breakpoints: 0.39,
-          title: "Cambiar tema de la app",
-          subtitle: "Escoge una opcion",
+          title: t("changeAppTheme"),
+          subtitle: t("chooseOption"),
           options: [
             {
               icon: sunny,
-              label: "Tema Claro",
+              label: t("lightTheme"),
               value: "",
               action: disableDarkMode,
             },
             {
               icon: moon,
-              label: "Tema Oscuro",
+              label: t("darkTheme"),
               value: "",
               action: enableDarkMode,
             },
           ],
-          isLanguage:false,
+          isLanguage: false,
         };
         break;
       case "idioma":
         objectSetting = {
           initialBreakpoint: 0.38,
           breakpoints: 0.38,
-
-          title: "Cambiar idioma de la app",
-          subtitle: "Escoge una opcion",
+          title: t("changeLanguage"),
+          subtitle: t("chooseOption"),
           options: [
             { icon: "none", label: "Español", value: "es" },
-            { icon: "none", label: "Inglés", value: "en" },
+            { icon: "none", label: "English", value: "en" },
           ],
-          isLanguage:true,
+          isLanguage: true,
         };
         break;
     }
@@ -135,7 +133,7 @@ const Setting: React.FC = () => {
             />
           </IonButtons>
           <IonTitle className="settings-ion-title texto-quinto">
-            Ajustes{" "}
+            {t("settings")}
           </IonTitle>
         </IonToolbar>
       </IonHeader>
@@ -143,7 +141,7 @@ const Setting: React.FC = () => {
         <IonList className="setting-options tema-oscuro2">
           {/* ---- Preferencias ---- */}
           <IonListHeader className="ion-list-header texto-quinto">
-            Preferencias
+            {t("preferences")}
           </IonListHeader>
           <IonItem
             className="options "
@@ -155,7 +153,7 @@ const Setting: React.FC = () => {
               slot="start"
               icon={colorPalette}
             />
-            <IonLabel>Tema del sistema</IonLabel>
+            <IonLabel>{t("systemTheme")}</IonLabel>
             <IonIcon
               className="setting-icons iconos-oscuros"
               slot="end"
@@ -172,7 +170,7 @@ const Setting: React.FC = () => {
               slot="start"
               icon={language}
             />
-            <IonLabel>Idioma</IonLabel>
+            <IonLabel>{t("language")}</IonLabel>
             <IonIcon
               className="setting-icons iconos-oscuros"
               slot="end"
@@ -182,7 +180,7 @@ const Setting: React.FC = () => {
 
           {/* ---- Notificaciones ---- */}
           <IonListHeader className="ion-list-header texto-quinto">
-            Notificaciones
+            {t("notifications")}
           </IonListHeader>
           <IonItem className="options" button>
             <IonIcon
@@ -190,7 +188,7 @@ const Setting: React.FC = () => {
               slot="start"
               icon={notifications}
             />
-            <IonLabel>Notificaciones</IonLabel>
+            <IonLabel>{t("notifications")}</IonLabel>
             <IonIcon
               className="setting-icons iconos-oscuros"
               slot="end"
@@ -200,7 +198,7 @@ const Setting: React.FC = () => {
 
           {/* ---- Tu Actividad ---- */}
           <IonListHeader className="ion-list-header texto-quinto">
-            Tu Actividad
+            {t("yourActivity")}
           </IonListHeader>
           <IonItem className="options" button>
             <IonIcon
@@ -208,8 +206,7 @@ const Setting: React.FC = () => {
               slot="start"
               icon={time}
             />
-            <IonLabel>Historial</IonLabel>
-
+            <IonLabel>{t("history")}</IonLabel>
             <IonIcon
               className="setting-icons iconos-oscuros"
               slot="end"
@@ -222,7 +219,7 @@ const Setting: React.FC = () => {
               slot="start"
               icon={heart}
             />
-            <IonLabel>Favoritos</IonLabel>
+            <IonLabel>{t("favorites")}</IonLabel>
             <IonIcon
               className="setting-icons iconos-oscuros"
               slot="end"
@@ -235,7 +232,7 @@ const Setting: React.FC = () => {
               slot="start"
               icon={bookmark}
             />
-            <IonLabel>Guardados</IonLabel>
+            <IonLabel>{t("saved")}</IonLabel>
             <IonIcon
               className="setting-icons iconos-oscuros"
               slot="end"
@@ -243,7 +240,7 @@ const Setting: React.FC = () => {
             />
           </IonItem>
           <IonListHeader className="ion-list-header texto-quinto">
-            Soporte
+            {t("support")}
           </IonListHeader>
           <IonItem className="options" button>
             <IonIcon
@@ -251,7 +248,7 @@ const Setting: React.FC = () => {
               slot="start"
               icon={helpCircleOutline}
             />
-            <IonLabel>Ayuda y soporte</IonLabel>
+            <IonLabel>{t("helpSupport")}</IonLabel>
             <IonIcon
               className="setting-icons iconos-oscuros"
               slot="end"
@@ -259,8 +256,7 @@ const Setting: React.FC = () => {
             />
           </IonItem>
           <IonListHeader className="ion-list-header texto-quinto">
-            Legal
-
+            {t("legal")}
           </IonListHeader>
           <IonItem className="options" button>
             <IonIcon
@@ -268,8 +264,7 @@ const Setting: React.FC = () => {
               slot="start"
               icon={server}
             />
-            <IonLabel>Política de Privacidad</IonLabel>
-
+            <IonLabel>{t("privacyPolicy")}</IonLabel>
             <IonIcon
               className="setting-icons iconos-oscuros"
               slot="end"
@@ -282,8 +277,7 @@ const Setting: React.FC = () => {
               slot="start"
               icon={documentText}
             />
-            <IonLabel>Términos y Condiciones</IonLabel>
-
+            <IonLabel>{t("termsConditions")}</IonLabel>
             <IonIcon
               className="setting-icons iconos-oscuros"
               slot="end"
@@ -296,7 +290,7 @@ const Setting: React.FC = () => {
               slot="start"
               icon={informationCircleOutline}
             />
-            <IonLabel>Informacion de la app</IonLabel>
+            <IonLabel>{t("appInfo")}</IonLabel>
             <IonIcon
               className="setting-icons iconos-oscuros"
               slot="end"
@@ -304,7 +298,7 @@ const Setting: React.FC = () => {
             />
           </IonItem>
           <IonListHeader className="ion-list-header texto-quinto">
-            Cuenta
+            {t("account")}
           </IonListHeader>
           <IonItem
             className="options"
@@ -316,7 +310,7 @@ const Setting: React.FC = () => {
               slot="start"
               icon={personCircleOutline}
             />
-            <IonLabel>Infomacion del pefil</IonLabel>
+            <IonLabel>{t("profileInfo")}</IonLabel>
             <IonIcon
               className="setting-icons iconos-oscuros"
               slot="end"
@@ -341,7 +335,6 @@ const Setting: React.FC = () => {
           isOpen={isOpenModalOptionSetting}
           onClose={() => setIsOpenModalOptionSetting(false)}
           info={info}
-          setInfo={setInfo}
         />
       </IonContent>
     </IonPage>

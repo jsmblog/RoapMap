@@ -18,7 +18,6 @@ export interface ModalOptionSettingProps{
   isOpen:boolean,
   onClose:() => void;
   info: SettingObjectType;
-  setInfo: React.Dispatch<React.SetStateAction<SettingObjectType>>;
 }
 type OptionSettingType = {icon:string, label:string, value: string, action?: () => void };
 export interface SettingObjectType {

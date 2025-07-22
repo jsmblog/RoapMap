@@ -299,5 +299,16 @@
       "title": "Colaborador",
       "description": "Has enviado una sugerencia o comentario al equipo."
     }
-  }
+  },
+
+  "chars": "caracteres",
+  "passwordsAlert":"Las contraseñas no coinciden",
+  "passwordsAlert2":"Contraseña actualizada exitosamente",
+  "lastNameAlert": "Añade tu apellido",
+  "successfullyAlert": "Campo actualizado con éxito",
+  "errorAlert": "Error al intentar actualizar"
+
+
+
+
 }

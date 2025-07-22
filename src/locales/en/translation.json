@@ -276,6 +276,15 @@
       "title": "Contributor",
       "description": "You sent feedback or a suggestion to the team."
     }
-  }
+  },
+
+  "chars": "chars",
+  "passwordsAlert":"Passwords do not match",
+  "passwordsAlert2":"Password updated successfully",
+  "lastNameAlert": "Add your last name",
+  "successfullyAlert": "Field updated successfully",
+  "errorAlert": "Error trying to update"
+
+
 
 }
