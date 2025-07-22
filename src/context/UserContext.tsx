@@ -76,6 +76,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           preferences: data.pre || [],
           verified: data.v,
           favorites:data.fav || [],
+          followers: data.f || [],
           location: data.loc || {},
           history: data.h || [],
           savedPlaces: data.sp || [],

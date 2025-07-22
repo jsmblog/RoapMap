@@ -16,6 +16,8 @@ import Wizard from "./components/Wizard";
 import { SplashScreen } from '@capacitor/splash-screen';
 import Community from "./pages/Community";
 import InformationApp from "./pages/InformationApp";
+import Profile from "./pages/Profile";
+import Friends from "./pages/Friends";
 
 setupIonicReact();
 
@@ -53,6 +55,18 @@ const App: React.FC = () => {
 
           <ProtectedRoute path="/community">
             <Community />
+          </ProtectedRoute>
+          
+          <ProtectedRoute path="/info-app">
+          <InformationApp/>
+          </ProtectedRoute>
+
+           <ProtectedRoute path="/friends">
+          <Friends/>
+          </ProtectedRoute>
+
+          <ProtectedRoute path="/profile/:uid">
+            <Profile />
           </ProtectedRoute>
           
           <ProtectedRoute path="/info-app">

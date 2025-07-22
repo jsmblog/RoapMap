@@ -6,6 +6,7 @@ import Home from '../pages/Home'
 import Setting from '../pages/Setting'
 import '../styles/tabs.css'
 import Community from '../pages/Community'
+import Friends from '../pages/Friends'
 const Tabs:React.FC = () => {
   return (
     <IonTabs>
@@ -13,7 +14,7 @@ const Tabs:React.FC = () => {
       <IonRouterOutlet> 
         <Route exact path="/tab/home" component={Home} />
          <Route exact path="/tab/discover"/>
-         <Route exact path="/tab/peopleGroup"/>
+         <Route exact path="/tab/friends" component={Friends} />
          <Route exact path= "/tab/community" component={Community} />
          <Route exact path="/tab/settings" component={Setting} />
         <Redirect exact from="/tab" to="/tab/home" />
@@ -26,7 +27,7 @@ const Tabs:React.FC = () => {
         <IonTabButton className="tabButton" tab="discover" href="/tab/descubir">
           <IonIcon className='icons-tab iconos-oscuros' icon={compass} />
         </IonTabButton>
-        <IonTabButton className="taButton" tab="peopleGroup" href="/tab/peopleGroup">
+        <IonTabButton className="taButton" tab="friends" href="/tab/friends">
           <IonIcon className='icons-tab iconos-oscuros' icon={people} />
         </IonTabButton>
         <IonTabButton className="taButton" tab="community" href="/tab/community">

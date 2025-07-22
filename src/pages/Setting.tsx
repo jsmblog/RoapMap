@@ -42,6 +42,7 @@ import { AUTH_USER } from "../Firebase/initializeApp";
 import { useDarkMode } from "../context/DarkModeContext";
 import { useTranslation } from "react-i18next";
 
+
 const Setting: React.FC = () => {
   const { showLoading, hideLoading } = useLoading();
   const router = useIonRouter();
@@ -85,18 +86,18 @@ const Setting: React.FC = () => {
         objectSetting = {
           initialBreakpoint: 0.39,
           breakpoints: 0.39,
-          title: t("changeAppTheme"),
-          subtitle: t("chooseOption"),
+          title: "Cambiar tema de la app",
+          subtitle: "Escoge una opcion",
           options: [
             {
               icon: sunny,
-              label: t("lightTheme"),
+              label: "Tema Claro",
               value: "",
               action: disableDarkMode,
             },
             {
               icon: moon,
-              label: t("darkTheme"),
+              label: "Tema Oscuro",
               value: "",
               action: enableDarkMode,
             },
@@ -108,11 +109,12 @@ const Setting: React.FC = () => {
         objectSetting = {
           initialBreakpoint: 0.38,
           breakpoints: 0.38,
-          title: t("changeLanguage"),
-          subtitle: t("chooseOption"),
+
+          title: "Cambiar idioma de la app",
+          subtitle: "Escoge una opcion",
           options: [
             { icon: "none", label: "Español", value: "es" },
-            { icon: "none", label: "English", value: "en" },
+            { icon: "none", label: "Inglés", value: "en" },
           ],
           isLanguage:true,
         };
@@ -133,7 +135,7 @@ const Setting: React.FC = () => {
             />
           </IonButtons>
           <IonTitle className="settings-ion-title texto-quinto">
-            {t("settings")}
+            Ajustes{" "}
           </IonTitle>
         </IonToolbar>
       </IonHeader>
@@ -141,7 +143,7 @@ const Setting: React.FC = () => {
         <IonList className="setting-options tema-oscuro2">
           {/* ---- Preferencias ---- */}
           <IonListHeader className="ion-list-header texto-quinto">
-            {t("preferences")}
+            Preferencias
           </IonListHeader>
           <IonItem
             className="options "
@@ -153,7 +155,7 @@ const Setting: React.FC = () => {
               slot="start"
               icon={colorPalette}
             />
-            <IonLabel>{t("systemTheme")}</IonLabel>
+            <IonLabel>Tema del sistema</IonLabel>
             <IonIcon
               className="setting-icons iconos-oscuros"
               slot="end"
@@ -170,7 +172,7 @@ const Setting: React.FC = () => {
               slot="start"
               icon={language}
             />
-            <IonLabel>{t("language")}</IonLabel>
+            <IonLabel>Idioma</IonLabel>
             <IonIcon
               className="setting-icons iconos-oscuros"
               slot="end"
@@ -180,7 +182,7 @@ const Setting: React.FC = () => {
 
           {/* ---- Notificaciones ---- */}
           <IonListHeader className="ion-list-header texto-quinto">
-            {t("notifications")}
+            Notificaciones
           </IonListHeader>
           <IonItem className="options" button>
             <IonIcon
@@ -188,7 +190,7 @@ const Setting: React.FC = () => {
               slot="start"
               icon={notifications}
             />
-            <IonLabel>{t("notifications")}</IonLabel>
+            <IonLabel>Notificaciones</IonLabel>
             <IonIcon
               className="setting-icons iconos-oscuros"
               slot="end"
@@ -198,7 +200,7 @@ const Setting: React.FC = () => {
 
           {/* ---- Tu Actividad ---- */}
           <IonListHeader className="ion-list-header texto-quinto">
-            {t("yourActivity")}
+            Tu Actividad
           </IonListHeader>
           <IonItem className="options" button>
             <IonIcon
@@ -206,7 +208,8 @@ const Setting: React.FC = () => {
               slot="start"
               icon={time}
             />
-            <IonLabel>{t("history")}</IonLabel>
+            <IonLabel>Historial</IonLabel>
+
             <IonIcon
               className="setting-icons iconos-oscuros"
               slot="end"
@@ -219,7 +222,7 @@ const Setting: React.FC = () => {
               slot="start"
               icon={heart}
             />
-            <IonLabel>{t("favorites")}</IonLabel>
+            <IonLabel>Favoritos</IonLabel>
             <IonIcon
               className="setting-icons iconos-oscuros"
               slot="end"
@@ -230,19 +233,17 @@ const Setting: React.FC = () => {
             <IonIcon
               className="setting-icons iconos-oscuros"
               slot="start"
-              icon={bookmark} 
+              icon={bookmark}
             />
-            <IonLabel>{t("saved")}</IonLabel>
+            <IonLabel>Guardados</IonLabel>
             <IonIcon
               className="setting-icons iconos-oscuros"
               slot="end"
               icon={chevronForward}
             />
           </IonItem>
-
-          {/* ---- Soporte ---- */}
-           <IonListHeader className="ion-list-header texto-quinto">
-            {t("support")}
+          <IonListHeader className="ion-list-header texto-quinto">
+            Soporte
           </IonListHeader>
           <IonItem className="options" button>
             <IonIcon
@@ -250,17 +251,16 @@ const Setting: React.FC = () => {
               slot="start"
               icon={helpCircleOutline}
             />
-           <IonLabel>{t("helpSupport")}</IonLabel>
+            <IonLabel>Ayuda y soporte</IonLabel>
             <IonIcon
               className="setting-icons iconos-oscuros"
               slot="end"
               icon={chevronForward}
             />
           </IonItem>
+          <IonListHeader className="ion-list-header texto-quinto">
+            Legal
 
-          {/* ---- Legal ---- */}
-           <IonListHeader className="ion-list-header texto-quinto">
-            {t("legal")}
           </IonListHeader>
           <IonItem className="options" button>
             <IonIcon
@@ -268,7 +268,8 @@ const Setting: React.FC = () => {
               slot="start"
               icon={server}
             />
-            <IonLabel>{t("privacyPolicy")}</IonLabel>
+            <IonLabel>Política de Privacidad</IonLabel>
+
             <IonIcon
               className="setting-icons iconos-oscuros"
               slot="end"
@@ -281,7 +282,8 @@ const Setting: React.FC = () => {
               slot="start"
               icon={documentText}
             />
-             <IonLabel>{t("termsConditions")}</IonLabel>
+            <IonLabel>Términos y Condiciones</IonLabel>
+
             <IonIcon
               className="setting-icons iconos-oscuros"
               slot="end"
@@ -294,16 +296,15 @@ const Setting: React.FC = () => {
               slot="start"
               icon={informationCircleOutline}
             />
-            <IonLabel>{t("appInfo")}</IonLabel>
+            <IonLabel>Informacion de la app</IonLabel>
             <IonIcon
               className="setting-icons iconos-oscuros"
               slot="end"
               icon={chevronForward}
             />
           </IonItem>
-          {/* ---- Cuenta ---- */}
-         <IonListHeader className="ion-list-header texto-quinto">
-            {t("account")}
+          <IonListHeader className="ion-list-header texto-quinto">
+            Cuenta
           </IonListHeader>
           <IonItem
             className="options"
@@ -315,7 +316,7 @@ const Setting: React.FC = () => {
               slot="start"
               icon={personCircleOutline}
             />
-            <IonLabel>{t("profileInfo")}</IonLabel>
+            <IonLabel>Infomacion del pefil</IonLabel>
             <IonIcon
               className="setting-icons iconos-oscuros"
               slot="end"

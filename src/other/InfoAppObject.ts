@@ -47,6 +47,6 @@ export const creditos = [
             },
         },
         portafolio: "none",
-        desarrollo: "FrontEnd - Diseño UX"
+        desarrollo: "FrontEnd - Diseño UI/UX"
     }
 ]

@@ -48,7 +48,6 @@ const Map: React.FC<
     destination: any;
     place: DetailedPlace | null;
   }>({ distance: "", duration: "", destination: null, place: null });
-  console.log(info)
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [expandedIdx, setExpandedIdx] = useState<number | null>(null);
 const { showToast, ToastComponent } = useToast();
