@@ -12,8 +12,10 @@ import {
 import React from "react";
 import { ModalProfileProps } from "../Interfaces/iProps";
 import img_privacy from "/img-privacy.webp";
+import { useTranslation } from "react-i18next";
 
 const ModalPrivacy: React.FC<ModalProfileProps> = ({ isOpen, onClose }) => {
+  const { t } = useTranslation();
   return (
     <IonModal
       className="modal-privacy"
@@ -27,23 +29,22 @@ const ModalPrivacy: React.FC<ModalProfileProps> = ({ isOpen, onClose }) => {
       <IonContent>
         <IonCard className="card-privacy">
           <IonCardHeader>
-            <IonCardTitle className="modal-title tile-privacity texto-primario">Nota de Privacidad</IonCardTitle>
+            <IonCardTitle className="modal-title tile-privacity texto-primario">
+              {t("privacyNote")}
+            </IonCardTitle>
             <IonImg
               className="imgPrivacy"
               src={img_privacy}
-              alt="Imagen de privacidad"
+              alt={t("privacyImageAlt")}
             />
           </IonCardHeader>
           <IonCardContent className="modal-privacy-content">
             <IonNote className="modal-note">
-            Tu perfil es visible para otros usuarios, tanto en chats,
-            comentarios y en el contenido que compartas con la comunidad, pero
-            no se compartirá tu correo electrónico ni tu número de teléfono.
-            Puedes editar tu perfil en cualquier momento.
-          </IonNote>
-          <IonButton onClick={onClose} className="btn-edit-profile">
-            Aceptar
-          </IonButton>
+              {t("privacyDescription")}
+            </IonNote>
+            <IonButton onClick={onClose} className="btn-edit-profile">
+              {t("accept")}
+            </IonButton>
           </IonCardContent>
         </IonCard>
       </IonContent>

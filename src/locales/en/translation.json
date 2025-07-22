@@ -22,5 +22,260 @@
   "account": "Account",
   "profileInfo": "Profile Information",
   "logout": "Logout",
-  "loggingOut": "Logging out..."
+  "loggingOut": "Logging out...",
+
+  "aboutMe": "About Me",
+  "location": "Location",
+  "loadingLocation": "Loading location",
+  "achievements": "Achievements",
+  "editProfile": "Edit Profile",
+  "privacyNote": "Privacy Notice",
+  "privacyImageAlt": "Privacy image",
+  "privacyDescription": "Your profile is visible to other users in chats, comments, and shared community content, but your email or phone number will not be shared. You can edit your profile at any time.",
+  "accept": "Accept",
+
+  "confirmation": "Confirmation",
+  "confirmProfileImageChange": "Do you want to update your profile with this image?",
+  "yes": "Yes",
+  "no": "No",
+
+  "name": "Name",
+  "gender": "Gender",
+  "birthdate": "Birthdate",
+  "description": "Description",
+  "password": "Password",
+
+  "editNameTitle": "Edit first and last name",
+  "firstName": "First Name",
+  "lastName": "Last Name",
+  "enterFirstName": "Enter your first name",
+  "enterLastName": "Enter your last name",
+
+  "editGenderTitle": "Edit gender",
+  "selectGender": "Select your gender",
+  "male": "Male",
+  "female": "Female",
+  "nonBinary": "Non-binary",
+  "lgbtq": "LBGTQ+",
+  "preferNotToSay": "Prefer not to say",
+
+  "editBirthdateTitle": "Edit birthdate",
+
+  "editDescriptionTitle": "Edit description",
+  "enterDescription": "Enter a short description",
+
+  "editPasswordTitle": "Edit password",
+  "newPassword": "New password",
+  "confirmPassword": "Confirm password",
+  "enterNewPassword": "Enter your new password",
+  "confirmNewPassword": "Confirm your new password",
+
+  "cancel": "Cancel",
+  "save": "Save",
+
+  "categories": {
+    "Restaurantes": "Restaurants",
+    "Cafeterías": "Cafes",
+    "Bares": "Bars",
+    "Supermercados": "Supermarkets",
+    "Tiendas de ropa": "Clothing Stores",
+    "Farmacias": "Pharmacies",
+    "Gasolineras": "Gas Stations",
+    "Hoteles": "Hotels",
+    "Hospitales": "Hospitals",
+    "Clínicas dentales": "Dental Clinics",
+    "Veterinarias": "Veterinary Clinics",
+    "Escuelas": "Schools",
+    "Universidades": "Universities",
+    "Bibliotecas": "Libraries",
+    "Cajeros automáticos": "ATMs",
+    "Bancos": "Banks",
+    "Estación de tren": "Train Station",
+    "Estación de bus": "Bus Station",
+    "Aeropuertos": "Airports",
+    "Parqueadero": "Parking",
+    "Cines": "Cinemas",
+    "Museos": "Museums",
+    "Parques": "Parks",
+    "Museos de arte": "Art Galleries",
+    "Atracciones": "Amusement Parks",
+    "Conciertos / Música": "Concerts / Music",
+    "Clubes nocturnos": "Night Clubs",
+    "Oficinas de correos": "Post Offices",
+    "Policía": "Police",
+    "Bomberos": "Fire Stations",
+    "Tiendas de conveniencia": "Convenience Stores"
+  },
+
+  "search": {
+    "placeholder": "What are you looking for?",
+    "title": "Search Filters",
+    "tabs": {
+      "categories": "Categories",
+      "features": "Features",
+      "preferences": "Preferences"
+    },
+    "categories": {
+      "title": "Place Types",
+      "description": "Select the categories you're interested in"
+    },
+    "features": {
+      "radiusTitle": "Search Radius",
+      "radiusSubTitle" : "Search radius",
+      "QualityAndPrice": "Quality and price",
+      "openNow": "Only open places",
+      "openNowDescription": "Show only currently open places",
+      "minRating": "Minimum rating",
+      "minRatingDescription": "Only places with good reviews",
+      "priceRange": "Price range",
+      "priceDescription": "Select the price levels that suit you",
+      "all": "All",
+      "priceLevels": {
+        "0": "Free",
+        "1": "Cheap",
+        "2": "Moderate",
+        "3": "Expensive",
+        "4": "Very expensive"
+      }
+    },
+    "preferences": {
+      "AdditionalServices": "Additional services",
+      "AdditionalServicesDeciption": "Special features you are looking for",
+      "accessible": "Accessible",
+      "accessibleDescription": "Places accessible for people with disabilities",
+      "parking": "Parking",
+      "parkingDescription": "Places with available parking",
+      "wifi": "Free WiFi",
+      "wifiDescription": "Internet connection available",
+      "takeout": "Takeout",
+      "takeoutDescription": "Places offering takeout food",
+      "delivery": "Delivery",
+      "deliveryDescription": "Delivery service available",
+      "all": "All",
+      "free": "Free"
+    },
+    "sort": {
+    "title": "Sort results",
+    "description": "How would you like to view the results?",
+    "relevance": {
+      "label": "Relevance",
+      "subtitle": "Most popular"
+    },
+    "distance": {
+      "label": "Distance",
+      "subtitle": "Nearest places"
+    },
+    "rating": {
+      "label": "Rating",
+      "subtitle": "Best rated"
+    },
+    "price": {
+      "label": "Price",
+      "subtitle": "Most affordable"
+    }
+    },
+    "clear": "Clear all",
+    "apply": "Apply filters"
+  },
+
+  "weather": {
+    "loading": "Fetching weather data...",
+    "loadingRecommendation": "Loading recommendation...",
+    "viewRecommendation": "View Recommendation",
+    "title": "Weather Recommendation",
+    "subtitle": "AI Recommendation",
+    "humidity": "Humidity",
+    "wind": "Wind",
+    "retry": "Retry",
+    "error": "Could not get the recommendation. Please try again later."
+  },
+
+  "achievement": {
+    "points": "points",
+    "welcome": {
+      "title": "Welcome to RoadMap!",
+      "description": "Your first action in RoadMap has been registered. Thank you for joining the journey!"
+    },
+    "first_change": {
+      "title": "First Change",
+      "description": "You've made your first change in the app."
+    },
+    "first_search": {
+      "title": "First Explorer",
+      "description": "You made your first place search."
+    },
+    "weather_checked": {
+      "title": "Weather Checked",
+      "description": "You checked the weather recommendation for the first time."
+    },
+    "five_searches": {
+      "title": "Frequent Explorer",
+      "description": "You've searched for places 5 times."
+    },
+    "ten_searches": {
+      "title": "Advanced Explorer",
+      "description": "You've searched for places 10 times."
+    },
+    "first_favorite": {
+      "title": "Favorite Saved",
+      "description": "You saved your first favorite place."
+    },
+    "five_favorites": {
+      "title": "Collector",
+      "description": "You saved 5 places as favorites."
+    },
+    "saved_place": {
+      "title": "Place Saved",
+      "description": "You saved a place to your list."
+    },
+    "five_saved_places": {
+      "title": "Place Explorer",
+      "description": "You saved 5 places to your list."
+    },
+    "share_location": {
+      "title": "Sharing the Journey",
+      "description": "You shared a place with someone."
+    },
+    "first_visit": {
+      "title": "Curious Visitor",
+      "description": "You marked or visited your first place."
+    },
+    "five_visits": {
+      "title": "Local Traveler",
+      "description": "You marked or visited 5 different places."
+    },
+    "visit_new_city": {
+      "title": "New Destination",
+      "description": "You visited a place in a different city."
+    },
+    "daily_user_3": {
+      "title": "Daily Explorer",
+      "description": "You used RoadMap for 3 days in a row."
+    },
+    "daily_user_7": {
+      "title": "Weekly Streak",
+      "description": "You used RoadMap for 7 consecutive days."
+    },
+    "daily_user_30": {
+      "title": "Map Legend",
+      "description": "You used RoadMap for 30 consecutive days."
+    },
+    "night_search": {
+      "title": "Night Search",
+      "description": "You searched for a place between 00:00 and 05:00."
+    },
+    "rural_explorer": {
+      "title": "Rural Explorer",
+      "description": "You searched for a place outside urban areas."
+    },
+    "top_contributor": {
+      "title": "Path Pioneer",
+      "description": "You contributed with new place information."
+    },
+    "feedback_sent": {
+      "title": "Contributor",
+      "description": "You sent feedback or a suggestion to the team."
+    }
+  }
+
 }

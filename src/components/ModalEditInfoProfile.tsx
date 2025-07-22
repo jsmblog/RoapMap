@@ -24,6 +24,8 @@ import { useAuthContext } from "../context/UserContext";
 import { useToast } from "../hooks/UseToast";
 import { updatePassword } from "firebase/auth";
 import { useAchievements } from "../hooks/UseAchievements";
+import { useTranslation } from "react-i18next";
+
 
 const ModalEditInfoProfile: React.FC<ModalEditInfoProfileProps> = ({
   isOpen,
@@ -33,7 +35,7 @@ const ModalEditInfoProfile: React.FC<ModalEditInfoProfileProps> = ({
 }) => {
   const { currentUserData } = useAuthContext();
   const { unlockAchievement,AchievementPopup, isAchievementUnlocked } = useAchievements();
-
+  const { t } = useTranslation();
   const { ToastComponent, showToast } = useToast();
 
   const handleSave = (field: "result1" | "result2") => (e: CustomEvent) => {
@@ -195,14 +197,14 @@ const ModalEditInfoProfile: React.FC<ModalEditInfoProfileProps> = ({
 
           <div className="modal-edit-profile-buttons">
             <IonButton onClick={handleCancel} className="cancel">
-              Cancelar
+               {t("cancel")}
             </IonButton>
             <IonButton
               disabled={!info.result1}
               onClick={upInfoUser}
               className="save btn-edit-profile"
             >
-              Guardar
+              {t("save")}
             </IonButton>
           </div>
         </form>

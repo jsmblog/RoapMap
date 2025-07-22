@@ -16,14 +16,15 @@ import { ModalProfileProps } from "../Interfaces/iProps";
 import { informationCircle, location } from "ionicons/icons";
 import { useAuthContext } from "../context/UserContext";
 import ModalPrivacy from "./ModalPrivacy";
+import { useTranslation } from "react-i18next";
+
 
 import "../styles/ModalProfile.css";
 
 const ModalProfile: React.FC<ModalProfileProps> = ({ isOpen, onClose }) => {
   const { currentUserData, locationDetails } = useAuthContext();
-
   const [isModalOpenPrivacy, setIsModalOpenPrivacy] = useState(false);
-
+   const { t } = useTranslation();
   return (
     <IonModal
       className="modal-profile"
@@ -43,27 +44,27 @@ const ModalProfile: React.FC<ModalProfileProps> = ({ isOpen, onClose }) => {
           />
           <IonCardHeader>
             <IonCardTitle className="profile-name texto-quinto">
-              {currentUserData?.name}{" "}
+              {currentUserData?.name}
             </IonCardTitle>
           </IonCardHeader>
           <IonCardContent className="profile-info">
             <IonCardSubtitle className="profile-subtitle texto-quinto">
-              Sobre mi
+              {t("aboutMe")}
             </IonCardSubtitle>
             <p className="profile-text texto-secundario">
               {currentUserData?.description?.replace(/\*/g, "")}
             </p>
             <IonCardSubtitle className="profile-subtitle texto-quinto">
-              Ubicación 
+             {t("location")}
             </IonCardSubtitle>
             <span className="profile-ubicacion texto-secundario">
                  <IonIcon className="location-icon" icon={location} /> 
               {locationDetails
                 ? `${locationDetails.city}, ${locationDetails.state}, ${locationDetails.country}`
-                : "Cargando ubicación"}
+                :  t("loadingLocation")}
             </span>
             <IonCardSubtitle className="profile-subtitle texto-quinto">
-              Logros
+              {t("achievements")}
             </IonCardSubtitle>
           
           </IonCardContent>
@@ -72,7 +73,7 @@ const ModalProfile: React.FC<ModalProfileProps> = ({ isOpen, onClose }) => {
         <IonFooter className="footer-profile">
           <IonToolbar className="toolbar-profile">
             <IonButton className="btn-edit-profile" routerLink="/edit-profile">
-              Editar Perfil
+               {t("editProfile")}
             </IonButton>
           </IonToolbar>
           <IonToolbar className="toolbar-icon">
