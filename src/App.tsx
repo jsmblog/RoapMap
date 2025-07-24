@@ -18,6 +18,7 @@ import Community from "./pages/Community";
 import InformationApp from "./pages/InformationApp";
 import Profile from "./pages/Profile";
 import Friends from "./pages/Friends";
+import Discover from "./pages/Discover";
 
 setupIonicReact();
 
@@ -67,6 +68,10 @@ const App: React.FC = () => {
 
           <ProtectedRoute path="/profile/:uid">
             <Profile />
+          </ProtectedRoute>
+
+          <ProtectedRoute path="/discover">
+            <Discover />
           </ProtectedRoute>
           
           <ProtectedRoute path="/info-app">
