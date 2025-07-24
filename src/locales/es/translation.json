@@ -22,5 +22,294 @@
   "account": "Cuenta",
   "profileInfo": "Información del perfil",
   "logout": "Cerrar sesión",
-  "loggingOut": "Cerrando sesión..."
+  "loggingOut": "Cerrando sesión...",
+
+  "aboutMe": "Sobre mí",
+  "location": "Ubicación",
+  "loadingLocation": "Cargando ubicación",
+  "achievements": "Logros",
+  "editProfile": "Editar perfil",
+  "privacyNote": "Nota de Privacidad",
+  "privacyImageAlt": "Imagen de privacidad",
+  "privacyDescription": "Tu perfil es visible para otros usuarios, tanto en chats, comentarios y en el contenido que compartas con la comunidad, pero no se compartirá tu correo electrónico ni tu número de teléfono. Puedes editar tu perfil en cualquier momento.",
+  "accept": "Aceptar",
+
+  "confirmation": "Confirmación",
+  "confirmProfileImageChange": "¿Deseas modificar tu perfil con esta imagen?",
+  "yes": "Sí",
+  "no": "No",
+
+  "name": "Nombre",
+  "gender": "Género",
+  "birthdate": "Fecha de Nacimiento",
+  "description": "Descripción",
+  "password": "Contraseña",
+
+  "editNameTitle": "Editar nombre y apellido",
+  "firstName": "Nombre",
+  "lastName": "Apellido",
+  "enterFirstName": "Ingresa tu nombre",
+  "enterLastName": "Ingresa tu apellido",
+
+  "editGenderTitle": "Editar género",
+  "selectGender": "Selecciona tu género",
+  "male": "Masculino",
+  "female": "Femenino",
+  "nonBinary": "No Binario",
+  "lgbtq": "LBGTQ+",
+  "preferNotToSay": "Prefiero no decirlo",
+
+  "editBirthdateTitle": "Editar fecha de nacimiento",
+
+  "editDescriptionTitle": "Editar descripción",
+  "enterDescription": "Ingresa una breve descripción",
+
+  "editPasswordTitle": "Editar contraseña",
+  "newPassword": "Nueva contraseña",
+  "confirmPassword": "Confirmar contraseña",
+  "enterNewPassword": "Ingresa tu nueva contraseña",
+  "confirmNewPassword": "Confirma tu nueva contraseña",
+
+  "cancel": "Cancelar",
+  "save": "Guardar",
+
+   "categories": {
+    "Restaurantes": "Restaurantes",
+    "Cafeterías": "Cafeterías",
+    "Bares": "Bares",
+    "Supermercados": "Supermercados",
+    "Tiendas de ropa": "Tiendas de ropa",
+    "Farmacias": "Farmacias",
+    "Gasolineras": "Gasolineras",
+    "Hoteles": "Hoteles",
+    "Hospitales": "Hospitales",
+    "Clínicas dentales": "Clínicas dentales",
+    "Veterinarias": "Veterinarias",
+    "Escuelas": "Escuelas",
+    "Universidades": "Universidades",
+    "Bibliotecas": "Bibliotecas",
+    "Cajeros automáticos": "Cajeros automáticos",
+    "Bancos": "Bancos",
+    "Estación de tren": "Estación de tren",
+    "Estación de bus": "Estación de bus",
+    "Aeropuertos": "Aeropuertos",
+    "Parqueadero": "Parqueadero",
+    "Cines": "Cines",
+    "Museos": "Museos",
+    "Parques": "Parques",
+    "Museos de arte": "Museos de arte",
+    "Atracciones": "Atracciones",
+    "Conciertos / Música": "Conciertos / Música",
+    "Clubes nocturnos": "Clubes nocturnos",
+    "Oficinas de correos": "Oficinas de correos",
+    "Policía": "Policía",
+    "Bomberos": "Bomberos",
+    "Tiendas de conveniencia": "Tiendas de conveniencia"
+  },
+  
+   "searchbar": {
+    "placeholder": "¿Qué estás buscando?"
+  },
+  "filters": {
+    "title": "Filtros de búsqueda",
+    "tabs": {
+      "categories": "Categorías",
+      "features": "Características",
+      "preferences": "Preferencias"
+    },
+    "openNow": "Abierto ahora",
+    "stars": "estrellas",
+    "priceLevels": {
+      "0": "Gratis",
+      "1": "Económico",
+      "2": "Moderado",
+      "3": "Caro",
+      "4": "Muy caro"
+    },
+    "clear": "Limpiar todo",
+    "apply": "Aplicar filtros"
+  },
+
+  "search": {
+    "placeholder": "¿Qué estás buscando?",
+    "title": "Filtros de búsqueda",
+    "tabs": {
+      "categories": "Categorías",
+      "features": "Características",
+      "preferences": "Preferencias"
+    },
+    "categories": {
+      "title": "Tipos de lugares",
+      "description": "Selecciona las categorías que te interesan"
+    },
+    "features": {
+      "radiusTitle": "Radio de búsqueda",
+      "radiusSubTitle" : "Radio de búsqueda",
+      "QualityAndPrice": "Calidad y precio",
+      "openNow": "Solo lugares abiertos",
+      "openNowDescription": "Mostrar únicamente lugares abiertos ahora",
+      "minRating": "Calificación mínima",
+      "minRatingDescription": "Solo lugares con buenas reseñas",
+      "priceRange": "Rango de precios",
+      "priceDescription": "Selecciona los precios que te convengan",
+      "all": "Todas",
+      "priceLevels": {
+        "0": "Gratis",
+        "1": "Económico",
+        "2": "Moderado",
+        "3": "Caro",
+        "4": "Muy caro"
+      }
+    },
+    "preferences": {
+      "AdditionalServices": "Servicios adicionales",
+      "AdditionalServicesDeciption": "Características especiales que buscas",
+      "accessible": "Accesible",
+      "accessibleDescription": "Lugares accesibles para personas con discapacidad",
+      "parking": "Estacionamiento",
+      "parkingDescription": "Lugares con parking disponible",
+      "wifi": "WiFi gratuito",
+      "wifiDescription": "Conexión a internet disponible",
+      "takeout": "Para llevar",
+      "takeoutDescription": "Lugares que ofrecen comida para llevar",
+      "delivery": "Entrega a domicilio",
+      "deliveryDescription": "Servicio de delivery disponible",
+      "all": "Todas",
+      "free": "Gratis"
+    },
+    "sort": {
+      "title": "Ordenar resultados",
+      "description": "¿Cómo prefieres ver los resultados?",
+      "relevance": {
+        "label": "Relevancia",
+        "subtitle": "Los más populares"
+      },
+      "distance": {
+        "label": "Distancia",
+        "subtitle": "Los más cercanos"
+      },
+      "rating": {
+        "label": "Calificación",
+        "subtitle": "Mejor valorados"
+      },
+      "price": {
+        "label": "Precio",
+        "subtitle": "Más económicos"
+      }
+    },
+    "clear": "Limpiar todo",
+    "apply": "Aplicar filtros"
+  },
+
+  "weather": {
+    "loading": "Obteniendo datos climáticos...",
+    "loadingRecommendation": "Cargando recomendación...",
+    "viewRecommendation": "Ver Recomendación",
+    "title": "Recomendación Climática",
+    "subtitle": "Recomendación con IA",
+    "humidity": "Humedad",
+    "wind": "Viento",
+    "retry": "Reintentar",
+    "error": "No se pudo obtener la recomendación. Intenta de nuevo más tarde."
+  },
+
+   "achievement": {
+    "points": "puntos",
+    "welcome": {
+      "title": "¡Bienvenido a RoadMap!",
+      "description": "Tu primera acción en RoadMap ha sido registrada. ¡Gracias por formar parte del camino!"
+    },
+    "first_change": {
+      "title": "Primer cambio",
+      "description": "Has realizado tu primer cambio en la app."
+    },
+    "first_search": {
+      "title": "Explorador inicial",
+      "description": "Realizaste tu primera búsqueda de un lugar."
+    },
+    "weather_checked": {
+      "title": "Clima consultado",
+      "description": "Has consultado la recomendación del clima por primera vez."
+    },
+    "five_searches": {
+      "title": "Explorador frecuente",
+      "description": "Has buscado lugares 5 veces."
+    },
+    "ten_searches": {
+      "title": "Explorador avanzado",
+      "description": "Has buscado lugares 10 veces."
+    },
+    "first_favorite": {
+      "title": "Favorito guardado",
+      "description": "Has guardado tu primer lugar como favorito."
+    },
+    "five_favorites": {
+      "title": "Coleccionista",
+      "description": "Has guardado 5 lugares como favoritos."
+    },
+    "saved_place": {
+      "title": "Lugar guardado",
+      "description": "Has guardado un lugar en tu lista."
+    },
+    "five_saved_places": {
+      "title": "Explorador de lugares",
+      "description": "Has guardado 5 lugares en tu lista."
+    },
+    "share_location": {
+      "title": "Compartiendo el camino",
+      "description": "Has compartido un lugar con alguien."
+    },
+    "first_visit": {
+      "title": "Visitante curioso",
+      "description": "Has marcado o visitado tu primer lugar."
+    },
+    "five_visits": {
+      "title": "Viajero local",
+      "description": "Has marcado o visitado 5 lugares distintos."
+    },
+    "visit_new_city": {
+      "title": "Nuevo destino",
+      "description": "Has visitado un lugar en una ciudad diferente."
+    },
+    "daily_user_3": {
+      "title": "Explorador diario",
+      "description": "Has usado RoadMap 3 días seguidos."
+    },
+    "daily_user_7": {
+      "title": "Constancia semanal",
+      "description": "Has usado RoadMap durante 7 días seguidos."
+    },
+    "daily_user_30": {
+      "title": "Leyenda del mapa",
+      "description": "Has usado RoadMap durante 30 días consecutivos."
+    },
+    "night_search": {
+      "title": "Búsqueda nocturna",
+      "description": "Has buscado un lugar entre las 00:00 y las 05:00."
+    },
+    "rural_explorer": {
+      "title": "Explorador rural",
+      "description": "Has buscado un lugar fuera de zonas urbanas."
+    },
+    "top_contributor": {
+      "title": "Pionero del camino",
+      "description": "Has contribuido con información de lugares nuevos."
+    },
+    "feedback_sent": {
+      "title": "Colaborador",
+      "description": "Has enviado una sugerencia o comentario al equipo."
+    }
+  },
+
+  "chars": "caracteres",
+  "passwordsAlert":"Las contraseñas no coinciden",
+  "passwordsAlert2":"Contraseña actualizada exitosamente",
+  "lastNameAlert": "Añade tu apellido",
+  "successfullyAlert": "Campo actualizado con éxito",
+  "errorAlert": "Error al intentar actualizar",
+  "notificationsPush": "Notificaciones Push"
+
+
+
+
 }

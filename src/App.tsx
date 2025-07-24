@@ -13,20 +13,23 @@ import "./theme/variables.css";
 import Unauthorized from "./utils/Unauthorized";
 import EditProfile from "./pages/EditProfile";
 import Wizard from "./components/Wizard";
-import { SplashScreen } from '@capacitor/splash-screen';
+import { SplashScreen } from "@capacitor/splash-screen";
 import Community from "./pages/Community";
 import InformationApp from "./pages/InformationApp";
 import Profile from "./pages/Profile";
 import Friends from "./pages/Friends";
 import Discover from "./pages/Discover";
+import Terms from "./pages/Terms";
+import PrivacyPolicy from "./pages/PrivacyPolicy ";
+import Soporte from "./pages/Soporte";
 
 setupIonicReact();
 
 const App: React.FC = () => {
   useEffect(() => {
     SplashScreen.hide();
-  }, [])
-  
+  }, []);
+
   return (
     <IonApp>
       <IonReactRouter>
@@ -57,13 +60,25 @@ const App: React.FC = () => {
           <ProtectedRoute path="/community">
             <Community />
           </ProtectedRoute>
-          
+
           <ProtectedRoute path="/info-app">
-          <InformationApp/>
+            <InformationApp />
           </ProtectedRoute>
 
-           <ProtectedRoute path="/friends">
-          <Friends/>
+          <ProtectedRoute path="/privacy-policy">
+            <PrivacyPolicy />
+          </ProtectedRoute>
+
+          <ProtectedRoute path="/terms">
+            <Terms />
+          </ProtectedRoute>
+
+          <ProtectedRoute path="/soporte">
+            <Soporte />
+          </ProtectedRoute>
+
+          <ProtectedRoute path="/friends">
+            <Friends />
           </ProtectedRoute>
 
           <ProtectedRoute path="/profile/:uid">
@@ -75,7 +90,7 @@ const App: React.FC = () => {
           </ProtectedRoute>
           
           <ProtectedRoute path="/info-app">
-          <InformationApp/>
+            <InformationApp />
           </ProtectedRoute>
 
           {/** 4) Vistas de error */}
@@ -88,7 +103,6 @@ const App: React.FC = () => {
       </IonReactRouter>
     </IonApp>
   );
-}
-
+};
 
 export default App;

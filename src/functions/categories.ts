@@ -10,7 +10,6 @@ import {
   bandageOutline,
   bookOutline,
   shirtOutline,
-  barbellOutline,
   gameControllerOutline,
   leafOutline,
   musicalNoteOutline,
@@ -24,7 +23,6 @@ import {
   mailOutline,
   pawOutline,
   carOutline,
-  busSharp,
   homeOutline,
 } from 'ionicons/icons';
 

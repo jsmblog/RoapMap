@@ -24,6 +24,9 @@ import { useAuthContext } from "../context/UserContext";
 import { useToast } from "../hooks/UseToast";
 import { updatePassword } from "firebase/auth";
 import { useAchievements } from "../hooks/UseAchievements";
+import { useTranslation } from "react-i18next";
+
+
 
 const ModalEditInfoProfile: React.FC<ModalEditInfoProfileProps> = ({
   isOpen,
@@ -33,7 +36,7 @@ const ModalEditInfoProfile: React.FC<ModalEditInfoProfileProps> = ({
 }) => {
   const { currentUserData } = useAuthContext();
   const { unlockAchievement,AchievementPopup, isAchievementUnlocked } = useAchievements();
-
+  const { t } = useTranslation();
   const { ToastComponent, showToast } = useToast();
 
   const handleSave = (field: "result1" | "result2") => (e: CustomEvent) => {
@@ -54,27 +57,27 @@ const ModalEditInfoProfile: React.FC<ModalEditInfoProfileProps> = ({
 
       if (field === "pass" && AUTH_USER.currentUser) {
         if (value !== result2) {
-          showToast("Las contraseñas no coinciden", 3000, "danger");
+          showToast(t("passwordsAlert"), 3000, "danger");
           return;
         }
         await updatePassword(AUTH_USER.currentUser, value);
-        showToast("Contraseña actualizada", 3000, "success");
+        showToast(t("passwordsAlert2"), 3000, "success");
         return;
       }
 
       if (field === "n") {
         if (!result2) {
-          return showToast("Añade tu apellido", 3000, "danger");
+          return showToast(t("lastNameAlert"), 3000, "danger");
         }
         value = `${value} ${result2}`;
       }
       
       const refDocUser = doc(db, "USERS", currentUserData.uid);
       await setDoc(refDocUser, { [field]: value }, { merge: true });
-      showToast("Campo actualizado con éxito", 3000, "success");
+      showToast(t("successfullyAlert"), 3000, "success");
     } catch (error) {
       console.error(error);
-      showToast("Error al intentar actualizar", 3000, "danger");
+      showToast(t("errorAlert"), 3000, "danger");
     } finally {
       onClose();
       setInfo(
@@ -188,21 +191,21 @@ const ModalEditInfoProfile: React.FC<ModalEditInfoProfileProps> = ({
                 onIonInput={handleSave("result1")}
               ></IonTextarea>
               <p className="char-counter">
-                {info.result1?.length} / 500 caracteres
+                {info.result1?.length} / 500 {t("chars")}
               </p>
             </>
           ) : null}
 
           <div className="modal-edit-profile-buttons">
             <IonButton onClick={handleCancel} className="cancel">
-              Cancelar
+               {t("cancel")}
             </IonButton>
             <IonButton
               disabled={!info.result1}
               onClick={upInfoUser}
               className="save btn-edit-profile"
             >
-              Guardar
+              {t("save")}
             </IonButton>
           </div>
         </form>

@@ -92,8 +92,8 @@ body.dark-mode {
 }
 .dark-mode .label-text-wrapper,
 .dark-mode .label-floating,
-.dark-mode .inputs-background::placeholder,
-.dark-mode .IonTextarea::placeholder{
+.dark-mode .IonTextarea,
+.dark-mode .inputs-background::placeholder{
   color: var(--Texto-secundario) !important;
 }
 /* falta Estilo para los textos superiores del IonDatetime (mes, año, días) */
