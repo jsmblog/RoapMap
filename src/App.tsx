@@ -18,6 +18,7 @@ import Community from "./pages/Community";
 import InformationApp from "./pages/InformationApp";
 import Profile from "./pages/Profile";
 import Friends from "./pages/Friends";
+import Discover from "./pages/Discover";
 import Terms from "./pages/Terms";
 import PrivacyPolicy from "./pages/PrivacyPolicy ";
 import Soporte from "./pages/Soporte";
@@ -84,6 +85,10 @@ const App: React.FC = () => {
             <Profile />
           </ProtectedRoute>
 
+          <ProtectedRoute path="/discover">
+            <Discover />
+          </ProtectedRoute>
+          
           <ProtectedRoute path="/info-app">
             <InformationApp />
           </ProtectedRoute>

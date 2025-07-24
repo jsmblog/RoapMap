@@ -7,13 +7,13 @@ import Setting from '../pages/Setting'
 import '../styles/tabs.css'
 import Community from '../pages/Community'
 import Friends from '../pages/Friends'
+import Discover from '../pages/Discover'
 const Tabs:React.FC = () => {
   return (
     <IonTabs>
-    {/**esto logra la redireccion */}
       <IonRouterOutlet> 
         <Route exact path="/tab/home" component={Home} />
-         <Route exact path="/tab/discover"/>
+         <Route exact path="/tab/discover" component={Discover} />
          <Route exact path="/tab/friends" component={Friends} />
          <Route exact path= "/tab/community" component={Community} />
          <Route exact path="/tab/settings" component={Setting} />
@@ -24,7 +24,7 @@ const Tabs:React.FC = () => {
         <IonTabButton className="tabButton" tab="home" href="/tab/home">
           <IonIcon className='icons-tab iconos-oscuros' icon={home} />
         </IonTabButton>
-        <IonTabButton className="tabButton" tab="discover" href="/tab/descubir">
+        <IonTabButton className="tabButton" tab="discover" href="/tab/discover">
           <IonIcon className='icons-tab iconos-oscuros' icon={compass} />
         </IonTabButton>
         <IonTabButton className="taButton" tab="friends" href="/tab/friends">
