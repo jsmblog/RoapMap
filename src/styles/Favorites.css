@@ -1,0 +1,206 @@
+/* Estado vacío */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 40px;
+  text-align: center;
+  color: #7f8c8d;
+}
+
+.empty-icon {
+  font-size: 64px;
+  margin-bottom: 24px;
+  opacity: 0.4;
+  color: #bdc3c7;
+}
+
+.empty-state h3 {
+  margin: 0 0 12px 0;
+  font-size: 22px;
+  font-weight: 600;
+  color: #34495e;
+}
+
+.empty-state p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.5;
+  max-width: 280px;
+}
+.favorite-content{
+   --background: var(--background-color);
+}
+/* Lista de favoritos */
+.favorites-list {
+  background: var(--background-color);
+  padding: 0 16px;
+}
+
+/* Cards de favoritos */
+.favorite-card {
+  margin-top: 10px;
+  margin-bottom: 16px;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  height: 150px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.favorite-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* Header del card */
+.card-header {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  padding: 20px;
+  background: transparent;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  height: 159px;
+  gap: 16px;
+}
+.place-info {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  flex: 1;
+}
+.category-icon {
+  font-size: 10px;
+  color: var(--primary-color);
+  background: rgba(39, 174, 96, 0.1);
+  padding: 12px;
+  border-radius: 12px;
+  min-width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.text-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.place-name {
+  font-size: 16px !important;
+  font-weight: 700;
+  color: var(--co-black-1)!important;
+  margin: 0 0 8px 0;
+  line-height: 1.3;
+}
+
+.place-vicinity {
+  font-size: 10px !important;
+  color: var(--co-back-gray-3);
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Botones de acción */
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.action-btn {
+  --border-radius: 12px;
+  --padding-start: 12px;
+  --padding-end: 12px;
+  width: 44px;
+  height: 44px;
+  margin: 0;
+}
+
+.remove-btn {
+  --color: var(--co-red-1);
+  --background-hover: rgba(231, 76, 60, 0.1);
+}
+  
+.action-btn {
+  background: linear-gradient(
+    135deg,
+    #a8e06385 0%,
+    #56ab2f85 50%,
+    #0bab63a9 100%
+  );
+}
+
+.favorite-icon {
+  font-size: 20px !important;
+  color: var(--primary-color);
+  transition: color 0.3s ease;
+}
+
+/* Animaciones */
+.favorite-card {
+  animation: slideInUp 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsivo */
+@media (min-width: 768px) {
+  .favorites-list {
+    padding: 0 32px;
+  }
+
+  .favorite-card {
+    max-width: 600px;
+    margin: 0 auto 20px auto;
+  }
+
+  .action-buttons {
+    flex-direction: row;
+  }
+}
+
+@media (min-width: 1024px) {
+  .favorite-content {
+    --padding-start: 20px;
+    --padding-end: 20px;
+  }
+}
+
+/* Mejoras de accesibilidad */
+.action-btn:focus {
+  outline: 2px solid var(--ion-color-primary);
+  outline-offset: 2px;
+}
+
+/* Transiciones suaves para todos los elementos interactivos */
+.action-btn,
+.favorite-card,
+.category-icon {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Estados hover para botones */
+.action-btn:hover {
+  transform: scale(1.05);
+}

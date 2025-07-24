@@ -62,7 +62,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           setIsLoading(false);
           return;
         }
-        const data = docSnap.data();
+        const data = docSnap.data()
         setCurrentUserData({
           achievements: data.ach || [],
           name: data.n || "",

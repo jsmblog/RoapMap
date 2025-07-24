@@ -1,10 +1,10 @@
-.edit-profile-hearder{
+.edit-profile-hearder {
   box-shadow: none;
 }
 .edit-profile-toolbar {
   --background: var(--background-color);
   --color: var(--primary-color);
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 .ion-title {
   font-size: 20px;
@@ -16,6 +16,11 @@
   --padding: 1rem;
   --padding-top: 16px;
 }
+.edit-profile-list {
+  background: var(--background-color);
+  width: 100%;
+  height: 100%;
+}
 .edit-profile-info-container {
   display: flex;
   flex-direction: column;
@@ -23,6 +28,7 @@
   padding: 16px;
   width: 100%;
   height: 100%;
+  background-color: transparent !important;
 }
 .edit-profile-avatar {
   width: 130px;
@@ -92,7 +98,7 @@
   border-top-right-radius: 20px;
   overflow: hidden;
 }
-.modal-edit-profile-toolbar{
+.modal-edit-profile-toolbar {
   padding: 0.5rem !important;
   --color: var(--primary-color);
 }
@@ -138,11 +144,11 @@
   border-radius: 12px;
 }
 
-.IonTextarea{
+.IonTextarea {
   width: 100%;
-  min-height: 150px; 
-  max-height: 250px; 
-  resize: vertical;  
+  min-height: 150px;
+  max-height: 250px;
+  resize: vertical;
   --padding-start: 12px;
   --padding-end: 12px;
   --border-radius: 12px;
@@ -151,16 +157,16 @@
   position: relative;
   margin-bottom: 3px;
 }
-.ion-buttons-modal-edit-profile{
- width: 30px !important;
- margin: 1em;
+.ion-buttons-modal-edit-profile {
+  width: 30px !important;
+  margin: 1em;
 }
-.ion-list-ubicion{
-  display:flex ;
+.ion-list-ubicion {
+  display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
-.ion-list-ubicion p{
+.ion-list-ubicion p {
   font-size: 15px !important;
   padding-left: 1rem;
 }
@@ -179,10 +185,10 @@
 }
 .cancel {
   --background: none;
-   --color: red;
-   --box-shadow: none;
-   text-transform: none;
-   font-size: 1.2rem;
+  --color: red;
+  --box-shadow: none;
+  text-transform: none;
+  font-size: 1.2rem;
 }
 .char-counter {
   font-size: 12px;
@@ -191,4 +197,3 @@
   padding-top: 2px;
   margin-right: 4px;
 }
-

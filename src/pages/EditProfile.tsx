@@ -55,7 +55,7 @@ const EditProfile: React.FC = () => {
   const [previewURL, setPreviewURL] = useState<string>("");
   const [previewBlob, setPreviewBlob] = useState<Blob | null>(null);
   const [showConfirmAlert, setShowConfirmAlert] = useState(false);
-  const { showToast, ToastComponent } = useToast();
+  const { showToast } = useToast();
   const handleCameraClick = () => {
     fileInputRef.current?.click();
   };
@@ -207,8 +207,8 @@ const EditProfile: React.FC = () => {
       </IonHeader>
 
       <IonContent className="edit-profile-content tema-oscuro" fullscreen>
-        <IonList>
-          <div className="edit-profile-info-container tema-oscuro">
+        <IonList className="edit-profile-list tema-oscuro2">
+          <div className="edit-profile-info-container">
             <div className="edit-profile-avatar-wrapper tema-oscuro">
               <IonAvatar className="edit-profile-avatar">
                 <IonImg

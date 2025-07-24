@@ -1,6 +1,7 @@
 import { IonAccordion, IonAccordionGroup, IonBackButton, IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonLabel, IonList, IonListHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react'
 import { book, chevronBack, chevronForward, helpCircleOutline, mail } from 'ionicons/icons'
 import React from 'react'
+import '../styles/Suport.css'
 import { FAQsObject } from '../other/FAQsObject'
 const Soporte: React.FC = () => {
     return (

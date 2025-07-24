@@ -214,7 +214,7 @@ const Setting: React.FC = () => {
           <IonListHeader className="ion-list-header texto-quinto">
             {t("yourActivity")}
           </IonListHeader>
-          <IonItem className="options" button>
+          <IonItem className="options" button routerLink="/tab/record">
             <IonIcon
               className="setting-icons iconos-oscuros"
               slot="start"
@@ -227,7 +227,7 @@ const Setting: React.FC = () => {
               icon={chevronForward}
             />
           </IonItem>
-          <IonItem className="options" button>
+          <IonItem className="options" button routerLink="/tab/favorite">
             <IonIcon
               className="setting-icons iconos-oscuros"
               slot="start"
@@ -240,7 +240,7 @@ const Setting: React.FC = () => {
               icon={chevronForward}
             />
           </IonItem>
-          <IonItem className="options" button>
+          <IonItem className="options" button routerLink="/tab/saved">
             <IonIcon
               className="setting-icons iconos-oscuros"
               slot="start"

@@ -40,4 +40,14 @@ export interface User {
   email: string;
   name: string;
 }
-   
+
+/*interfaz para la pantalla de favoritos */
+export  interface FavoriteItem {
+    name: string;
+    vicinity: string;
+    type: 'restaurant' | 'cafe' | 'store' | 'library' | 'gym' | 'clinic';
+}
+
+export interface currentUserData {
+    favorites: FavoriteItem[];
+}
