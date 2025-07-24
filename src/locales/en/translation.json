@@ -283,7 +283,8 @@
   "passwordsAlert2":"Password updated successfully",
   "lastNameAlert": "Add your last name",
   "successfullyAlert": "Field updated successfully",
-  "errorAlert": "Error trying to update"
+  "errorAlert": "Error trying to update",
+  "notificationsPush": "Push Notifications"
 
 
 

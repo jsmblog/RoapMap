@@ -20,6 +20,7 @@ import Profile from "./pages/Profile";
 import Friends from "./pages/Friends";
 import Terms from "./pages/Terms";
 import PrivacyPolicy from "./pages/PrivacyPolicy ";
+import Soporte from "./pages/Soporte";
 
 setupIonicReact();
 
@@ -69,6 +70,10 @@ const App: React.FC = () => {
 
           <ProtectedRoute path="/terms">
             <Terms />
+          </ProtectedRoute>
+
+          <ProtectedRoute path="/soporte">
+            <Soporte />
           </ProtectedRoute>
 
           <ProtectedRoute path="/friends">

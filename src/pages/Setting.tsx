@@ -30,6 +30,7 @@ import {
   sunny,
   moon,
   informationCircleOutline,
+  megaphone,
 } from "ionicons/icons";
 import React, { useState } from "react";
 import "../styles/Setting.css";
@@ -195,6 +196,19 @@ const Setting: React.FC = () => {
               icon={chevronForward}
             />
           </IonItem>
+          <IonItem className="options" button>
+            <IonIcon
+              className="setting-icons iconos-oscuros"
+              slot="start"
+              icon={megaphone}
+            />
+            <IonLabel>{t("notificationsPush")}</IonLabel>
+            <IonIcon
+              className="setting-icons iconos-oscuros"
+              slot="end"
+              icon={chevronForward}
+            />
+          </IonItem>
 
           {/* ---- Tu Actividad ---- */}
           <IonListHeader className="ion-list-header texto-quinto">
@@ -239,10 +253,12 @@ const Setting: React.FC = () => {
               icon={chevronForward}
             />
           </IonItem>
+
+          {/* ---- Soporte ---- */}
           <IonListHeader className="ion-list-header texto-quinto">
             {t("support")}
           </IonListHeader>
-          <IonItem className="options" button>
+          <IonItem className="options" button routerLink="/soporte">
             <IonIcon
               className="setting-icons iconos-oscuros"
               slot="start"
@@ -255,6 +271,8 @@ const Setting: React.FC = () => {
               icon={chevronForward}
             />
           </IonItem>
+
+          {/* ---- Legal ---- */}
           <IonListHeader className="ion-list-header texto-quinto">
             {t("legal")}
           </IonListHeader>
@@ -297,6 +315,8 @@ const Setting: React.FC = () => {
               icon={chevronForward}
             />
           </IonItem>
+
+          {/* ---- Tu cuenta ---- */}
           <IonListHeader className="ion-list-header texto-quinto">
             {t("account")}
           </IonListHeader>

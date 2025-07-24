@@ -306,7 +306,8 @@
   "passwordsAlert2":"Contraseña actualizada exitosamente",
   "lastNameAlert": "Añade tu apellido",
   "successfullyAlert": "Campo actualizado con éxito",
-  "errorAlert": "Error al intentar actualizar"
+  "errorAlert": "Error al intentar actualizar",
+  "notificationsPush": "Notificaciones Push"
 
 
 
