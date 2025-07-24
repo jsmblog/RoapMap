@@ -13,19 +13,21 @@ import "./theme/variables.css";
 import Unauthorized from "./utils/Unauthorized";
 import EditProfile from "./pages/EditProfile";
 import Wizard from "./components/Wizard";
-import { SplashScreen } from '@capacitor/splash-screen';
+import { SplashScreen } from "@capacitor/splash-screen";
 import Community from "./pages/Community";
 import InformationApp from "./pages/InformationApp";
 import Profile from "./pages/Profile";
 import Friends from "./pages/Friends";
+import Terms from "./pages/Terms";
+import PrivacyPolicy from "./pages/PrivacyPolicy ";
 
 setupIonicReact();
 
 const App: React.FC = () => {
   useEffect(() => {
     SplashScreen.hide();
-  }, [])
-  
+  }, []);
+
   return (
     <IonApp>
       <IonReactRouter>
@@ -56,21 +58,29 @@ const App: React.FC = () => {
           <ProtectedRoute path="/community">
             <Community />
           </ProtectedRoute>
-          
+
           <ProtectedRoute path="/info-app">
-          <InformationApp/>
+            <InformationApp />
           </ProtectedRoute>
 
-           <ProtectedRoute path="/friends">
-          <Friends/>
+          <ProtectedRoute path="/privacy-policy">
+            <PrivacyPolicy />
+          </ProtectedRoute>
+
+          <ProtectedRoute path="/terms">
+            <Terms />
+          </ProtectedRoute>
+
+          <ProtectedRoute path="/friends">
+            <Friends />
           </ProtectedRoute>
 
           <ProtectedRoute path="/profile/:uid">
             <Profile />
           </ProtectedRoute>
-          
+
           <ProtectedRoute path="/info-app">
-          <InformationApp/>
+            <InformationApp />
           </ProtectedRoute>
 
           {/** 4) Vistas de error */}
@@ -83,7 +93,6 @@ const App: React.FC = () => {
       </IonReactRouter>
     </IonApp>
   );
-}
-
+};
 
 export default App;

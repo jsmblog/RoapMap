@@ -258,7 +258,7 @@ const Setting: React.FC = () => {
           <IonListHeader className="ion-list-header texto-quinto">
             {t("legal")}
           </IonListHeader>
-          <IonItem className="options" button>
+          <IonItem className="options" button routerLink="/privacy-policy">
             <IonIcon
               className="setting-icons iconos-oscuros"
               slot="start"
@@ -271,7 +271,7 @@ const Setting: React.FC = () => {
               icon={chevronForward}
             />
           </IonItem>
-          <IonItem className="options" button>
+          <IonItem className="options" button routerLink="/terms">
             <IonIcon
               className="setting-icons iconos-oscuros"
               slot="start"
