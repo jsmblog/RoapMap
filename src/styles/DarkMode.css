@@ -79,7 +79,7 @@ body.dark-mode {
   color: var(--co-black-1);
 }
 .dark-mode .texto-quinto {
-  color: var(--color-btns);
+  color: var(--color-btns) !important;
 }
 .dark-mode .recommendation-button {
   --color: black;

@@ -214,7 +214,7 @@ const Setting: React.FC = () => {
           <IonListHeader className="ion-list-header texto-quinto">
             {t("yourActivity")}
           </IonListHeader>
-          <IonItem className="options" button routerLink="/tab/record">
+          <IonItem className="options" button routerLink="/tab/history">
             <IonIcon
               className="setting-icons iconos-oscuros"
               slot="start"
