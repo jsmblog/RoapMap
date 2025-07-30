@@ -155,6 +155,7 @@ const Community: React.FC = () => {
           <span className="tab-text">Crear</span>
         </IonButton>
         <IonButton
+          routerLink='/chats'
           fill="clear"
           className="community-tab-button active"
         >

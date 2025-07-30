@@ -11,6 +11,10 @@ import {
   IonButton,
   IonChip,
   IonHeader,
+  IonModal,
+  IonToolbar,
+  IonTitle,
+  IonButtons,
 } from '@ionic/react';
 import { Preferences } from '@capacitor/preferences';
 import '../styles/discover.css';
@@ -36,16 +40,19 @@ type Review = {
 };
 
 type SavedPlace = {
+  geometry: {
+    location: {
+      lat: number;
+      lng: number;
+    }
+  };
   name: string;
-  vicinity: string;
-  rating?: number;
   photoUrl?: string;
+  place_id: string;
+  rating?: number;
+  types: string[];
   user_ratings_total?: number;
-  opening_hours?: { open_now: boolean };
-  types?: string[];
-  formatted_phone_number?: string;
-  website?: string;
-  reviews?: Review[];
+  vicinity: string;
 };
 
 type PlaceCategory = {
@@ -59,11 +66,12 @@ const Discover: React.FC = () => {
   const [categories, setCategories] = useState<PlaceCategory[]>([]);
   const carouselRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
   const [generating, setGenerating] = useState<boolean>(false);
-  const [recommendationAi, setRecommendationAi] = useState();
+  const [recommendationAi, setRecommendationAi] = useState<SavedPlace[] | null>(null);
+
   console.log(recommendationAi)
   const { currentUserData } = useAuthContext();
-  const { weather } = UseOpenWeather();
   const { showToast, ToastComponent } = useToast();
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const loadPlaces = async () => {
@@ -185,30 +193,59 @@ const Discover: React.FC = () => {
   };
 
   const handleCreateRecommendation = async () => {
-    if (!currentUserData || !weather || !places) {
-      return showToast('Por favor, asegúrate de estar autenticado y de que los datos del clima y lugares estén disponibles.', 6000, 'danger');
+    if (!currentUserData || !places) {
+      return showToast(
+        'Por favor, asegúrate de estar autenticado y de que los datos del clima y lugares estén disponibles.',
+        6000,
+        'danger'
+      );
     }
+
     setGenerating(true);
     try {
-      const payload = {
-        mod: 'places_recommendation',
-        data_to_analyze: {
-          places,
-          preferences: currentUserData.preferences,
-          weather,
-        },
-      };
+      const allowedCategories = [
+        'hoteles',
+        'restaurantes',
+        'cafeterías',
+        'parques',
+        'centros comerciales',
+        'belleza y bienestar',
+        'vida nocturna',
+        'bares',
+        'entretenimiento',
+      ];
+const paredPlaces = categories
+  .filter(category =>
+    allowedCategories.includes(category.title.toLowerCase())
+  )
+  .flatMap(category => category.places)
+  .filter(place =>
+    place.rating && place.rating > 4 &&
+    place.types.every(type => type !== 'supermarket' && type !== 'grocery_or_supermarket')
+  );
 
-      const { data } = await connection.post('/send/request/ai', payload);
-      setRecommendationAi(data.message);
+      if (paredPlaces.length === 0) {
+        return showToast("No hay lugares disponibles para generar una recomendación.", 6000, 'warning');
+      }
+      const uniquePlaces = Array.from(
+  new Map(paredPlaces.map(item => [item.place_id, item])).values()
+).sort((a, b) => (b.rating || 0) - (a.rating || 0));
+
+setRecommendationAi(uniquePlaces);
+
+
+      setRecommendationAi(uniquePlaces);
+
+      setShowModal(true);
       showToast('Recomendación generada exitosamente.', 6000, 'success');
+
     } catch (error) {
-      console.log(error);
+      console.error(error);
       showToast('Error al generar la recomendación. Inténtalo de nuevo más tarde.', 6000, 'danger');
     } finally {
       setGenerating(false);
     }
-  }
+  };
 
   return (
     <IonPage>
@@ -277,12 +314,6 @@ const Discover: React.FC = () => {
                           </div>
                         )}
 
-                        {place.opening_hours && (
-                          <IonBadge className={place.opening_hours.open_now ? 'open' : 'closed'}>
-                            {place.opening_hours.open_now ? 'Abierto' : 'Cerrado'}
-                          </IonBadge>
-                        )}
-
                         <div className="card-overlay">
                           <div className="overlay-content">
                             <h3>{place.name}</h3>
@@ -296,16 +327,6 @@ const Discover: React.FC = () => {
                             )}
 
                             <div className="overlay-actions">
-                              {place.formatted_phone_number && (
-                                <button className="action-btn">
-                                  <IonIcon icon={callOutline} />
-                                </button>
-                              )}
-                              {place.website && (
-                                <button className="action-btn">
-                                  <IonIcon icon={globeOutline} />
-                                </button>
-                              )}
                               <button className="action-btn primary">
                                 visitar
                               </button>
@@ -321,6 +342,43 @@ const Discover: React.FC = () => {
           </div>
         )}
       </IonContent>
+      <IonModal isOpen={showModal} onDidDismiss={() => setShowModal(false)}>
+        <IonHeader>
+          <IonToolbar>
+            <IonTitle>Recomendaciones</IonTitle>
+            <IonButtons slot="end">
+              <IonButton onClick={() => setShowModal(false)}>X</IonButton>
+            </IonButtons>
+          </IonToolbar>
+        </IonHeader>
+        <IonContent className="recommendation-modal-content">
+          {recommendationAi && (recommendationAi as SavedPlace[]).length > 0 ? (
+            (recommendationAi as SavedPlace[]).map((place, idx) => (
+              <IonCard key={idx} className="recommendation-card">
+                {place.photoUrl ? (
+                  <IonImg src={place.photoUrl} alt={place.name} />
+                ) : (
+                  <div className="no-image">
+                    <IonIcon icon={location} />
+                  </div>
+                )}
+                <IonCardContent>
+                  <h3>{place.name}</h3>
+                  <p>{place.vicinity}</p>
+                  {place.rating && (
+                    <IonBadge color="warning">
+                      <IonIcon icon={star} /> {place.rating}
+                    </IonBadge>
+                  )}
+                </IonCardContent>
+              </IonCard>
+            ))
+          ) : (
+            <p style={{ padding: '1rem' }}>No hay recomendaciones.</p>
+          )}
+        </IonContent>
+      </IonModal>
+
     </IonPage>
   );
 };

@@ -35,6 +35,10 @@ const Friends: React.FC = () => {
     }
   };
 
+  const NavigateToChats = () => {
+    router.push('/chats');
+  }
+
   return (
     <IonPage>
       <IonContent>
@@ -61,7 +65,10 @@ const Friends: React.FC = () => {
                   <div className="friend-info">
                     <h3 className="friend-name">{friend.n || 'Usuario'}</h3>
                     <h5
-                      onClick={() => handleUnFollowing(friend.uid, friend.n)}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleUnFollowing(friend.uid, friend.n)
+                      }}
                       className="unfollow"
                     >
                       Dejar de seguir
@@ -69,7 +76,7 @@ const Friends: React.FC = () => {
                   </div>
 
                   <div className="friend-actions">
-                    <button className="action-btn message-btn">
+                    <button onClick={NavigateToChats} className="action-btn-friends message-btn">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="18"
@@ -87,7 +94,7 @@ const Friends: React.FC = () => {
 
                     <button
                       onClick={() => handleProfileClick(friend.uid)}
-                      className="action-btn profile-btn"
+                      className="action-btn-friends profile-btn"
                     >
                       <IonIcon className="co-icon-nav-friend" icon={people} />
                     </button>

@@ -104,9 +104,9 @@
   flex-shrink: 0;
 }
 
-.action-btn {
-  width: 40px;
-  height: 40px;
+.action-btn-friends {
+  width: 30px;
+  height: 30px;  
   border-radius: 12px;
   border: none;
   display: flex;
@@ -121,9 +121,11 @@
 .message-btn {
   background-color: var(--color-btns);
   color: var(--color-btns-text);
+  padding: .2rem;
 }
 
 .profile-btn {
+  padding: .2rem;
   background: var(--co-back-gray-6);
   color: var(--co-gray);
 }

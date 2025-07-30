@@ -266,7 +266,6 @@ const Profile: React.FC = () => {
                     </div>
                 )}
 
-                {/* Favorite Places Section */}
                 {profile.fav && profile.fav.length > 0 && (
                     <div className="favorites-section">
                         <h3 className="section-title">Lugares Favoritos</h3>

@@ -166,8 +166,8 @@ const SearchBar: React.FC<SearchBarProps> = ({
             >
               <IonImg
                 src={
-                  currentUserData.photo
-                    ? currentUserData.photo
+                  currentUserData?.photo
+                    ? currentUserData?.photo
                     : "https://ionicframework.com/docs/img/demos/avatar.svg"
                 }
                 alt="avatar"

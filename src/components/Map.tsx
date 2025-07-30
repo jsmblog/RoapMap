@@ -138,7 +138,7 @@ const Map: React.FC<
         placesService!.nearbySearch(
           {
             location: userLocation,
-            radius: 300000, // 300 km
+            radius: 100000, // 100 km
           },
           procesarPagina
         );
@@ -185,7 +185,7 @@ const Map: React.FC<
 
             const request: google.maps.places.PlaceSearchRequest = {
               location: center,
-              radius: 300000, // 300 km
+              radius: 100000, // 100 km
             };
 
             placesService.nearbySearch(request, (results, status) => {
@@ -277,7 +277,7 @@ const Map: React.FC<
       placesService.nearbySearch(
         {
           location: new google.maps.LatLng(userLocation.lat, userLocation.lng),
-          radius: 300000, // 300 km
+          radius: 100000, // 100 km
           type: selectedCategory.toLowerCase(),
           keyword: selectedCategory,
         },
