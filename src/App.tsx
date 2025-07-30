@@ -22,6 +22,7 @@ import Discover from "./pages/Discover";
 import Terms from "./pages/Terms";
 import PrivacyPolicy from "./pages/PrivacyPolicy ";
 import Soporte from "./pages/Soporte";
+import Chats from "./pages/Chats";
 
 setupIonicReact();
 
@@ -80,7 +81,9 @@ const App: React.FC = () => {
           <ProtectedRoute path="/friends">
             <Friends />
           </ProtectedRoute>
-
+          <ProtectedRoute path="/chats">
+            <Chats />
+          </ProtectedRoute>
           <ProtectedRoute path="/profile/:uid">
             <Profile />
           </ProtectedRoute>
@@ -88,7 +91,7 @@ const App: React.FC = () => {
           <ProtectedRoute path="/discover">
             <Discover />
           </ProtectedRoute>
-          
+
           <ProtectedRoute path="/info-app">
             <InformationApp />
           </ProtectedRoute>

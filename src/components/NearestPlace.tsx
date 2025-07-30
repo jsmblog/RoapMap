@@ -18,6 +18,7 @@ import { useAuthContext } from '../context/UserContext';
 import { arrayUnion, doc, setDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../Firebase/initializeApp';
 import { useToast } from '../hooks/UseToast';
+import { generateUUID } from '../functions/uuid';
 
 const NearestPlace: React.FC<NearestPlaceProps> = ({ info, setInfo }) => {
   const { unlockAchievement, AchievementPopup, isAchievementUnlocked } = useAchievements();
@@ -68,14 +69,16 @@ const NearestPlace: React.FC<NearestPlaceProps> = ({ info, setInfo }) => {
     interface FavPlace {
       name: string;
       vicinity: string;
+      id:string;
     }
 
     const hasAddPlaceFav: boolean = currentUserData.favorites.some((pl: FavPlace) => pl.name === place.name);
     if(hasAddPlaceFav) {
       return showToast("Ya tienes este lugar en favoritos",3000,'danger');
     }
- 
+    const id = generateUUID();
     const favPlace = {
+      id,
       name: place.name,
       vicinity: place.vicinity,
       loc:info.destination,

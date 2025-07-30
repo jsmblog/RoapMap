@@ -514,6 +514,23 @@ ion-card-subtitle {
 .action-btn ion-icon {
   font-size: 0.9rem;
 }
+.recommendation-modal-content {
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.recommendation-card {
+  margin-bottom: 1rem;
+}
+
+.no-image {
+  height: 200px;
+  background-color: #e0e0e0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #777;
+}
 
 /* Mobile Responsive */
 @media (max-width: 768px) {
