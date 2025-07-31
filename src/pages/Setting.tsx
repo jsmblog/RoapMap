@@ -54,7 +54,7 @@ const Setting: React.FC = () => {
     try {
       await signOut(AUTH_USER);
       await hideLoading();
-      router.push("/", "root");
+      router.push("/");
     } catch {
       await hideLoading();
     }

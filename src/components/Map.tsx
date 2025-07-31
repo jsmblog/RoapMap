@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { Capacitor } from "@capacitor/core";
 import { useAuthContext } from "../context/UserContext";
 import { Preferences } from '@capacitor/preferences';
-import { getDistance } from 'geolib';
 import { useRequestLocationPermission } from "../hooks/UseRequestLocationPermission";
 import { GoogleMap } from "@capacitor/google-maps";
 import { VITE_API_KEY_GOOGLE } from "../config/config";
@@ -39,7 +38,7 @@ const Map: React.FC<
       isAchievementUnlocked, AchievementPopup } = useAchievements();
     const [jsMap, setJsMap] = useState<google.maps.Map>();
     const [placesService, setPlacesService] =
-      useState<google.maps.places.PlacesService>();
+      useState<google.maps.places.PlacesService | null>(null);
     const [places, setPlaces] = useState<DetailedPlace[]>([]);
 
     const [directionsRenderer, setDirectionsRenderer] =
