@@ -10,10 +10,6 @@ import {
     IonToolbar,
     IonList,
     IonIcon,
-    IonCard,
-    IonCardHeader,
-    IonCardTitle,
-    IonCardSubtitle,
     IonButton,
     IonItem,
     IonListHeader,
@@ -31,8 +27,8 @@ import { useAlert } from '../hooks/UseAlert';
 
 const Favorite: React.FC = () => {
     const { currentUserData } = useAuthContext();
-    const { showAlert, AlertComponent} = useAlert();
-    
+    const { showAlert, AlertComponent } = useAlert();
+
 
 
     const handleRemoveFavorite = (index: number) => {
@@ -65,7 +61,7 @@ const Favorite: React.FC = () => {
                 </IonToolbar>
             </IonHeader>
 
-            <IonContent className="favorite-content ">
+            <IonContent className="favorite-content tema-oscuro">
                 {!currentUserData.favorites || currentUserData.favorites.length === 0 ? (
                     <div className="empty-state">
                         <IonIcon icon={heart} size="large" className="empty-icon" />
@@ -75,18 +71,15 @@ const Favorite: React.FC = () => {
                 ) : (
                     <IonList className="favorites-list tema-oscuro2">
                         {currentUserData.favorites.map((favorite: FavoriteItem, index: number) => (
-                            <IonItem key={index} className="favorite-card ">
-                                <IonListHeader className="card-header">
+                            <IonItem key={index} className='favorite-content tema-oscuro'>
                                     <div className="header-content">
-                                        <div className="place-info">                                            <IonIcon
-                                            icon={locationOutline}
-                                            className="category-icon"
-                                        />
+                                        <div className="place-info">
+                                        <IonIcon className="category-icon texto-quinto" icon={locationOutline}/>
                                             <div className="text-content">
-                                                <IonLabel className="place-name">
+                                                <IonLabel className="place-name texto-primario">
                                                     {favorite.name}
                                                 </IonLabel>
-                                                <IonLabel className="place-vicinity texto-terciario">
+                                                <IonLabel className="place-vicinity texto-secundario">
                                                     {favorite.vicinity}
                                                 </IonLabel>
                                             </div>
@@ -98,13 +91,11 @@ const Favorite: React.FC = () => {
                                                 onClick={() => handleRemoveFavorite(index)}
                                                 aria-label={`Quitar ${favorite.name} de favoritos`}
                                             >
-                                                <IonIcon icon={heartDislike} className='favorite-icon' />
+                                                <IonIcon icon={heartDislike} className='favorite-icon texto-quinto' />
                                             </IonButton>
                                         </div>
 
                                     </div>
-
-                                </IonListHeader>
                             </IonItem>
                         ))}
                     </IonList>

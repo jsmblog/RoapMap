@@ -45,9 +45,22 @@ export interface User {
 export  interface FavoriteItem {
     name: string;
     vicinity: string;
-    type: 'restaurant' | 'cafe' | 'store' | 'library' | 'gym' | 'clinic';
+    location: {
+    lat: number
+    lng: number
+  };
 }
-
+/*interfacz para la pantalla de guardados */
+export interface SavedItem {
+    name: string;
+    location: {
+        lat: number;
+        lng: number;
+    };
+    
+}
 export interface currentUserData {
     favorites: FavoriteItem[];
+    saved: SavedItem[];
 }
+

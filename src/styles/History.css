@@ -1,0 +1,17 @@
+.history-list{
+    background: var(--background-color);
+    padding: 0 5px;
+}
+
+.history-item{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  height: 80px;
+  gap: 16px;
+  --background: var(--background-color);
+}
+.place-name-history{
+    padding-left: 10px;
+}

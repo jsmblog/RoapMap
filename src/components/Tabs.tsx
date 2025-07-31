@@ -8,9 +8,9 @@ import '../styles/tabs.css'
 import Community from '../pages/Community'
 import Friends from '../pages/Friends'
 import Discover from '../pages/Discover'
-import Record from '../pages/Record'
 import Saved from '../pages/Saved'
 import Favorite from '../pages/Favorite'
+import History from '../pages/History'
 const Tabs:React.FC = () => {
   return (
     <IonTabs>
@@ -20,7 +20,7 @@ const Tabs:React.FC = () => {
          <Route exact path="/tab/friends" component={Friends} />
          <Route exact path= "/tab/community" component={Community} />
          <Route exact path="/tab/settings" component={Setting} />
-          <Route exact path="/tab/record" component={Record} />
+          <Route exact path="/tab/history" component={History} />
           <Route exact path="/tab/saved" component={Saved} />
           <Route exact path="/tab/favorite" component={Favorite} />
         <Redirect exact from="/tab" to="/tab/home" />
