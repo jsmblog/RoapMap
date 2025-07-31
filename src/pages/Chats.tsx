@@ -10,23 +10,18 @@ import {
     IonItem,
     IonLabel,
     IonInput,
-    IonTextarea,
-    IonBadge,
     IonIcon,
     IonSpinner,
     IonModal,
     IonButtons,
-    IonMenuButton,
     IonCard,
     IonCardHeader,
     IonCardTitle,
-    IonCardSubtitle,
     IonCardContent
 } from '@ionic/react';
-import { 
-    sendOutline, 
-    peopleOutline, 
-    addOutline, 
+import {
+    peopleOutline,
+    addOutline,
     enterOutline,
     chatbubbleOutline,
     closeOutline,
@@ -40,44 +35,19 @@ import {
     doc,
     setDoc,
     updateDoc,
-    addDoc,
     onSnapshot,
     query,
     orderBy,
     serverTimestamp,
     arrayUnion,
-    arrayRemove,
     QueryDocumentSnapshot,
     DocumentData,
 } from 'firebase/firestore';
 import { db } from '../Firebase/initializeApp';
 import { useToast } from '../hooks/UseToast';
 import { generateUUID } from '../functions/uuid';
-
-// Tipado
-interface Follower {
-    uid: string;
-    n: string;
-    pt: string;
-}
-
-interface Group {
-    id: string;
-    name: string;
-    admin: string;
-    code: string;
-    members: Follower[];
-    requests: Follower[];
-}
-
-interface Message {
-    id: string;
-    senderId: string;
-    senderName: string;
-    text: string;
-    type: string;
-    timestamp: any;
-}
+import { Follower, Group, Message } from '../Interfaces/iChats';
+import Chat from '../components/Chat';
 
 const Chats: React.FC = () => {
     const { currentUserData } = useAuthContext();
@@ -93,20 +63,16 @@ const Chats: React.FC = () => {
     const [groupCode, setGroupCode] = useState<string>('');
     const [groups, setGroups] = useState<Group[]>([]);
     const [selectedGroup, setSelectedGroup] = useState<Group | null>(null);
-    const [messageText, setMessageText] = useState<string>('');
     const [messages, setMessages] = useState<Message[]>([]);
-    const [loading, setLoading] = useState<boolean>(true); 
-    const [sendingMessage, setSendingMessage] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(true);
+
     const [showGroupModal, setShowGroupModal] = useState<boolean>(false);
     const [showOptions, setShowOptions] = useState<boolean>(false);
     const [modalType, setModalType] = useState<'create' | 'join' | null>(null);
     const { showToast, ToastComponent } = useToast();
-    
-    const messagesEndRef = useRef<HTMLDivElement>(null);
-    const messageInputRef = useRef<HTMLIonTextareaElement>(null);
-    const sliderRef = useRef<HTMLDivElement>(null);
-    const [onBoxChats, setOnBoxChats] = useState<boolean>(false);
 
+    const sliderRef = useRef<HTMLDivElement>(null);
+    const messagesEndRef = useRef<HTMLDivElement>(null);
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
     };
@@ -145,7 +111,7 @@ const Chats: React.FC = () => {
         return () => unsub();
     }, [selectedGroup]);
 
-    const userGroups = groups?.filter(g => 
+    const userGroups = groups?.filter(g =>
         g.members?.some(m => m.uid === user.uid)
     ) || [];
 
@@ -181,7 +147,7 @@ const Chats: React.FC = () => {
             showToast('Ingresa un código de grupo', 3000, 'warning');
             return;
         }
-        
+
         const target = groups?.find(g => g.code === groupCode.trim());
         if (!target) {
             showToast('Código de grupo inválido', 4000, 'warning');
@@ -212,82 +178,19 @@ const Chats: React.FC = () => {
         }
     };
 
-    // Aceptar solicitud
-    const acceptRequest = async (grp: Group, member: Follower) => {
-        try {
-            const groupRef = doc(db, 'CHATS', grp.id);
-            await updateDoc(groupRef, {
-                members: arrayUnion(member),
-                requests: arrayRemove(member),
-            });
-            showToast(`${member.n} se unió al grupo`, 4000, 'success');
-        } catch {
-            showToast('Error al aceptar solicitud', 4000, 'danger');
-        }
-    };
-
-    // Remover miembro
-    const removeMember = async (grp: Group, member: Follower) => {
-        try {
-            const groupRef = doc(db, 'CHATS', grp.id);
-            await updateDoc(groupRef, { members: arrayRemove(member) });
-            showToast(`${member.n} fue eliminado del grupo`, 4000, 'success');
-        } catch {
-            showToast('Error al eliminar miembro', 4000, 'danger');
-        }
-    };
-
-    const sendMessage = async () => {
-        if (!messageText.trim() || !selectedGroup) return;
-        
-        setSendingMessage(true);
-        try {
-            await addDoc(collection(db, 'CHATS', selectedGroup.id, 'MESSAGES'), {
-                senderId: user.uid,
-                senderName: user.n,
-                photo:user.pt,
-                text: messageText.trim(),
-                type: 'text',
-                timestamp: serverTimestamp(),
-            });
-            setMessageText('');
-            messageInputRef.current?.setFocus();
-        } catch {
-            showToast('Error al enviar mensaje', 4000, 'danger');
-        } finally {
-            setSendingMessage(false);
-        }
-    };
-
-    // Manejar Enter para enviar mensaje
-    const handleKeyPress = (e: any) => {
-        if (e.key === 'Enter' && !e.shiftKey) {
-            e.preventDefault();
-            sendMessage();
-        }
-    };
-
-    const formatTime = (timestamp: any) => {
-        if (!timestamp) return '';
-        const date = timestamp.toDate();
-        return date.toLocaleTimeString('es-ES', { 
-            hour: '2-digit', 
-            minute: '2-digit' 
-        });
-    };
 
     return (
         <IonPage className="chat-container">
             <IonHeader className="chat-header">
                 <IonToolbar>
                     <IonButtons slot="start">
-                                        <IonButton routerLink='/' >
-                                            <IonIcon icon={chevronBackOutline} />
-                                        </IonButton>
+                        <IonButton routerLink='/' >
+                            <IonIcon icon={chevronBackOutline} />
+                        </IonButton>
                     </IonButtons>
                     <IonTitle className="chat-title">
                         <IonIcon icon={chatbubbleOutline} />
-                        Comunidad 
+                        Comunidad
                     </IonTitle>
                     <IonButtons slot="end">
                         <IonButton onClick={() => setShowOptions(!showOptions)}>
@@ -303,7 +206,7 @@ const Chats: React.FC = () => {
                     <div className="group-options-popup">
                         <div className="popup-header">
                             <IonButton fill="clear" onClick={() => setShowOptions(false)}>
-                               Cerrar <IonIcon icon={closeOutline} />
+                                Cerrar <IonIcon icon={closeOutline} />
                             </IonButton>
                         </div>
                         <div className="popup-content">
@@ -407,93 +310,7 @@ const Chats: React.FC = () => {
                     </IonContent>
                 </IonModal>
 
-                {/* Modal para chat de grupo */}
-                <IonModal 
-                    isOpen={!!selectedGroup} 
-                    onDidDismiss={() => setSelectedGroup(null)}
-                    className="chat-modal"
-                >
-                    {selectedGroup && (
-                        <>
-                            <IonHeader>
-                                <IonToolbar>
-                                    <IonButtons slot="start">
-                                        <IonButton className='btn-actions-chat' onClick={() => setSelectedGroup(null)}>
-                                            <IonIcon icon={chevronBackOutline} />
-                                        </IonButton>
-                                    </IonButtons>
-                                    <IonTitle>{selectedGroup.name}</IonTitle>
-                                    <IonBadge slot="end" color="primary">
-                                        <IonButton onClick={() => setOnBoxChats(!onBoxChats)} className='btn-actions-chat'>
-                                            <IonIcon icon={ellipsisVertical} />
-                                        </IonButton>
-                                        {
-                                            onBoxChats && <div>
-                                                <IonButton>
-                                                    miembros
-                                                </IonButton>
-                                            </div>
-                                        }
-                                    </IonBadge>
-                                </IonToolbar>
-                            </IonHeader>
-                            <IonContent>
-                                <div className="chat-container-modal">
-                                    <div className="messages-container">
-                                        {messages.length > 0 ? (
-                                            messages.map(msg => (
-                                                <div key={msg.id} className={`message ${msg.senderId === user.uid ? 'msg-out' : 'msg-in'}`}>
-                                                    {msg.senderId !== user.uid && (
-                                                        <div className="message-sender">{msg.senderName}</div>
-                                                    )}
-                                                    <div className="message-bubble">
-                                                        <p className="message-text">{msg.text}</p>
-                                                        <div className="message-time">
-                                                            {formatTime(msg.timestamp)}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            ))
-                                        ) : (
-                                            <div className="empty-state">
-                                                <div className="empty-state-icon">💭</div>
-                                                <div className="empty-state-text">No hay mensajes aún</div>
-                                                <div className="empty-state-subtext">Sé el primero en escribir algo</div>
-                                            </div>
-                                        )}
-                                        <div ref={messagesEndRef} />
-                                    </div>
-                                    
-                                    <div className="message-input-container">
-                                        <IonTextarea
-                                            ref={messageInputRef}
-                                            className="message-input"
-                                            placeholder="Escribe un mensaje..."
-                                            value={messageText}
-                                            onIonInput={e => setMessageText(e.detail.value!)}
-                                            onKeyPress={handleKeyPress}
-                                            disabled={sendingMessage}
-                                            autoGrow={true}
-                                            rows={1}
-                                        />
-                                        <IonButton
-                                            className="send-button-chats"
-                                            onClick={sendMessage}
-                                            disabled={!messageText.trim() || sendingMessage}
-                                        >
-                                            {sendingMessage ? (
-                                                <IonSpinner name="crescent" />
-                                            ) : (
-                                                <IonIcon icon={sendOutline} />
-                                            )}
-                                        </IonButton>
-                                    </div>
-                                </div>
-                            </IonContent>
-                        </>
-                    )}
-                </IonModal>
-
+                <Chat selectedGroup={selectedGroup} setSelectedGroup={setSelectedGroup} messages={messages} messagesEndRef={messagesEndRef} />
                 <div className="chat-section">
                     <div className="section-header">
                         <IonIcon icon={peopleOutline} />
@@ -506,9 +323,9 @@ const Chats: React.FC = () => {
                                     <div key={f.uid} className="follower-slide">
                                         <div className="follower-card">
                                             {f.pt && f.pt.trim() ? (
-                                                <img 
-                                                    src={f.pt} 
-                                                    alt={f.n} 
+                                                <img
+                                                    src={f.pt}
+                                                    alt={f.n}
                                                     className="follower-avatar"
                                                 />
                                             ) : (
@@ -545,9 +362,9 @@ const Chats: React.FC = () => {
                         ) : userGroups.length > 0 ? (
                             <div className="groups-grid">
                                 {userGroups.map(g => (
-                                    <IonCard 
-                                        key={g.id} 
-                                        className="group-card" 
+                                    <IonCard
+                                        key={g.id}
+                                        className="group-card"
                                         onClick={() => setSelectedGroup(g)}
                                     >
                                         <IonCardHeader>
