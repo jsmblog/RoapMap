@@ -34,7 +34,6 @@ const Saved: React.FC = () => {
                 <IonItem key={index} className="history-item tema-oscuro">
                   <IonIcon className="category-icon texto-quinto" icon={locationOutline} />
                   <IonLabel className='place-name place-name-history texto-primario'>{place.name}</IonLabel>
-                  <p className="place-vicinity texto-secundario">Latitud: {place.location.lat}, Longitud: {place.location.lng}</p>
                 </IonItem>
               ))
             )

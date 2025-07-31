@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../styles/Favorites.css'
 import {
     IonBackButton,
@@ -12,7 +12,6 @@ import {
     IonIcon,
     IonButton,
     IonItem,
-    IonListHeader,
     IonLabel,
 } from '@ionic/react'
 import {
@@ -29,7 +28,7 @@ const Favorite: React.FC = () => {
     const { currentUserData } = useAuthContext();
     const { showAlert, AlertComponent } = useAlert();
 
-
+    const [isCheckMark, setIsCheckMark] = useState(false);
 
     const handleRemoveFavorite = (index: number) => {
         // Aquí iría la lógica para remover el favorito
