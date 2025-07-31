@@ -13,36 +13,80 @@ import {
     IonButton,
     IonItem,
     IonLabel,
+    IonCheckbox,
 } from '@ionic/react'
 import {
     chevronBack,
     heart,
     locationOutline,
-    heartDislike,
 } from 'ionicons/icons'
 import { useAuthContext } from '../context/UserContext';
 import { FavoriteItem } from '../Interfaces/iUser';
 import { useAlert } from '../hooks/UseAlert';
+import { doc, updateDoc } from 'firebase/firestore';
+import { db } from '../Firebase/initializeApp';
 
 const Favorite: React.FC = () => {
     const { currentUserData } = useAuthContext();
     const { showAlert, AlertComponent } = useAlert();
 
     const [isCheckMark, setIsCheckMark] = useState(false);
+    const [btnAction, setBtnAction] = useState(true)
+    const [OnConfirm, setOnConfirm] = useState(false);
+    const [onCancel, setOnCancel] = useState(false);
+    const [isDeleteAll, setIsDeleteAll] = useState<string[]>([]);
 
-    const handleRemoveFavorite = (index: number) => {
-        // Aquí iría la lógica para remover el favorito
-        console.log('Remover favorito:', index);
-        showAlert(
-            '¿Eliminar favorito?',
-            '¿Estás segura que quieres quitar este lugar de tus favoritos?',
-            'dark',
-            () => {
-                // Aquí iría la lógica real para eliminar el favorito usando el índice
-                console.log('Favorito eliminado:', index);
-            }
-        );
+    const handleRemoveFavorite = () => {
+        try {
+            const todosLosIds = currentUserData.favorites?.map((favorite: FavoriteItem) => favorite.id) || [];
+            setIsDeleteAll(todosLosIds);  // ← esto marca todos los checkboxes
+            setOnConfirm(true);
+            setOnCancel(true);
+            setIsCheckMark(true);
+            setBtnAction(false);
+
+        } catch (error) {
+            console.log("Ocurrio un error al querer eliminar", error)
+        }
     };
+
+    const handleSelectFavorite = (id: string, checked: boolean) => {
+        if (checked) {
+            setIsDeleteAll(prev => [...prev, id]); // lo agrega si está marcado
+        } else {
+            setIsDeleteAll(prev => prev.filter(favId => favId !== id)); // lo quita si lo desmarca
+        }
+    };
+
+    const ConfirmDeletFavorites = async () => {
+        try {
+
+            console.log("Favoritos Eliminados:", isDeleteAll)
+            const favFilter = currentUserData.favorites.filter((fav: FavoriteItem) => !isDeleteAll.includes(fav.id))
+
+            const refDocument = doc(db, 'USERS', currentUserData.uid);
+            await updateDoc(refDocument, { fav: favFilter })
+
+            showAlert(
+                'Elimación Correcta',
+                'Se han eliminado correctamente tus favoritos ✨'
+            );
+            setIsCheckMark(false);
+            setOnConfirm(false)
+            setIsDeleteAll([]); // limpia selección
+            setBtnAction(true);
+        } catch (error) {
+            console.log("Ocurrio un error al querer eliminar", error)
+        }
+    }
+    console.log("Todos los ids a eliminar:", isDeleteAll)
+    const CalcelDeletFavorites = () => {
+        setIsCheckMark(false);
+        setOnConfirm(false);
+        setOnCancel(false);
+        setBtnAction(true);
+        setIsDeleteAll([]); // limpia selección
+    }
 
     return (
         <IonPage>
@@ -56,7 +100,20 @@ const Favorite: React.FC = () => {
                             icon={chevronBack}
                         />
                     </IonButtons>
-                    <IonTitle className="settings-ion-title texto-quinto">Favoritos ({currentUserData.favorites?.length || 0} )</IonTitle>
+                    <IonTitle className="settings-ion-title texto-quinto">Favoritos ({currentUserData.favorites?.length || 0})</IonTitle>
+                    {
+                        btnAction && (
+                            <IonButton
+                                onClick={handleRemoveFavorite}
+                                disabled={currentUserData.favorites.length === 0}
+                                fill="outline"
+                                className="btn-action btn-delete"
+                                slot="end"
+                            >
+                                Eliminar todo
+                            </IonButton>
+                        )
+                    }
                 </IonToolbar>
             </IonHeader>
 
@@ -68,12 +125,45 @@ const Favorite: React.FC = () => {
                         <p>Marca lugares como favoritos desde el mapa para verlos aquí</p>
                     </div>
                 ) : (
+
                     <IonList className="favorites-list tema-oscuro2">
-                        {currentUserData.favorites.map((favorite: FavoriteItem, index: number) => (
-                            <IonItem key={index} className='favorite-content tema-oscuro'>
+                        <>
+                            <div className="button-container">
+
+                                {
+                                    OnConfirm && (
+                                        <IonButton
+                                            onClick={ConfirmDeletFavorites}
+                                            fill="solid"
+                                            color="success"
+                                            className="btn-action btn-confirm"
+                                        >
+                                            Confirmar
+                                        </IonButton>
+                                    )
+                                }
+                                {
+                                    onCancel && (
+                                        <IonButton
+                                            onClick={CalcelDeletFavorites}
+                                            fill="outline"
+                                            color="danger"
+                                            className="btn-action btn-cancel">
+                                            Cancelar
+                                        </IonButton>
+                                    )
+                                }
+                            </div>
+                            {currentUserData.favorites.map((favorite: FavoriteItem, index: number) => (
+
+                                <IonItem
+                                    key={index}
+                                    className='favorite-content tema-oscuro'
+
+                                >
                                     <div className="header-content">
                                         <div className="place-info">
-                                        <IonIcon className="category-icon texto-quinto" icon={locationOutline}/>
+                                            <IonIcon className="category-icon texto-quinto" icon={locationOutline} />
                                             <div className="text-content">
                                                 <IonLabel className="place-name texto-primario">
                                                     {favorite.name}
@@ -81,22 +171,19 @@ const Favorite: React.FC = () => {
                                                 <IonLabel className="place-vicinity texto-secundario">
                                                     {favorite.vicinity}
                                                 </IonLabel>
+                                                {isCheckMark && (
+                                                    <IonCheckbox
+                                                        checked={isDeleteAll.includes(favorite.id)}
+                                                        onIonChange={(e) => handleSelectFavorite(favorite.id, e.detail.checked)}
+                                                    />
+                                                )}
+
                                             </div>
                                         </div>
-                                        <div className="action-buttons">
-                                            <IonButton
-                                                fill="clear"
-                                                className="action-btn remove-btn"
-                                                onClick={() => handleRemoveFavorite(index)}
-                                                aria-label={`Quitar ${favorite.name} de favoritos`}
-                                            >
-                                                <IonIcon icon={heartDislike} className='favorite-icon texto-quinto' />
-                                            </IonButton>
-                                        </div>
-
                                     </div>
-                            </IonItem>
-                        ))}
+                                </IonItem>
+                            ))}
+                        </>
                     </IonList>
                 )}
             </IonContent>

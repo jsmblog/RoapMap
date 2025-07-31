@@ -8,18 +8,15 @@ export function useAlert() {
   const [message, setMessage] = useState<string>('');
   const [type, setType] = useState<string>('dark');
   const [header, setHeader] = useState<string>('');
-  const [onConfirm, setOnConfirm] = useState<ButtonHandler>(() => () => {});
 
   const showAlert = (
     header: string,
     msg: string,
     type: string = 'dark',
-    confirmHandler: ButtonHandler = () => {},
   ) => {
     setHeader(header);
     setMessage(msg);
     setType(type);
-    setOnConfirm(() => confirmHandler);
     setIsOpen(true);
   };
 
@@ -31,17 +28,9 @@ export function useAlert() {
       message={message}
       buttons={[
         {
-          text: 'Cancelar',
-          role: 'cancel',
-          handler: () => {
-            setIsOpen(false);
-          },
-        },
-        {
-          text: 'Confirmar',
+          text: 'Aceptar',
           role: 'confirm',
           handler: () => {
-            onConfirm();
             setIsOpen(false);
           },
         },

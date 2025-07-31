@@ -15,3 +15,95 @@
 .place-name-history{
     padding-left: 10px;
 }
+
+/* Contenedor principal */
+.button-container {
+  display: flex;
+  flex-direction: row !important;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 10px !important;
+
+}
+
+/* Estilos base para todos los botones */
+.btn-action {
+  width: 140px !important;
+  font-weight: 12px !important;
+  transition: all 0.2s ease-in-out;
+  border-radius: 8px;
+  text-transform: none;
+}
+
+.btn-delete {
+  --color: var(--primary-color);
+  --border-color: var(--secondary-color);
+  background: linear-gradient(
+    135deg,
+    #a8e06385 0%,
+    #56ab2f85 50%,
+    #0bab63a9 100%
+  );
+  transition: all 0.4s ease-in-out;
+}
+
+.btn-delete:hover:not(:disabled) {
+  --color: #ffffff;
+  background: linear-gradient(
+    135deg,
+    #a8e06385 0%,
+    #56ab2f85 50%,
+    #0bab63a9 100%
+  );
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.2);
+  transition: all 0.4s ease-in-out;
+}
+
+.btn-delete:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transition: all 0.4s ease-in-out;
+}
+
+/* Botón confirmar */
+.btn-confirm {
+  --background: #16a34a;
+  --color: var(--Texto-primario);
+  transition: all 0.4s ease-in-out;
+}
+
+.btn-confirm:hover {
+  --background: #15803d;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(22, 163, 74, 0.2);
+  transition: all 0.4s ease-in-out;
+}
+
+/* Botón cancelar */
+.btn-cancel {
+  --background: transparent !important;
+  --color: var(--Texto-primario) !important;
+  transition: all 0.4s ease-in-out;
+}
+
+.btn-cancel:hover {
+  --color: #374151;
+  --background: rgba(107, 114, 128, 0.1);
+  transform: translateY(-1px);
+}
+
+/* Responsivo */
+@media (max-width: 480px) {
+  .button-container {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .btn-action {
+    min-width: 120px;
+    width: 100%;
+    max-width: 200px;
+  }
+}

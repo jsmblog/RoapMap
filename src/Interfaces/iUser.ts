@@ -42,7 +42,8 @@ export interface User {
 }
 
 /*interfaz para la pantalla de favoritos */
-export  interface FavoriteItem {
+export  interface FavoriteItem {  
+    id: string;
     name: string;
     vicinity: string;
     location: {
@@ -52,6 +53,7 @@ export  interface FavoriteItem {
 }
 /*interfacz para la pantalla de guardados */
 export interface SavedItem {
+    id: string;
     name: string;
     location: {
         lat: number;
