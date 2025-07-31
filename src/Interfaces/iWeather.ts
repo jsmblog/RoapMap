@@ -1,30 +1,42 @@
-export  interface IWeatherData {
-    // Add only the fields you need from the OpenWeather API response
+export interface IWeatherData {
+    coord?: {
+        lat: number;
+        lon: number;
+    };
     weather?: { 
         description: string; 
-        icon: string,
-        id: number
-        main: string,
-
+        icon: string;
+        id: number;
+        main: string;
     }[];
-    wind?: { 
-        deg: number,
-        gust: number; 
-        speed: number; 
-    };
+    base?: string;
     main?: { 
         feels_like: number;
         grnd_level: number;
         humidity: number;
         pressure: number;
+        sea_level?: number;
         temp: number;
         temp_max: number;
         temp_min: number;
     };
-    name?: string;
+    visibility?: number;
+    wind?: { 
+        deg: number;
+        gust: number; 
+        speed: number; 
+    };
+    clouds?: {
+        all: number;
+    };
+    dt?: number;
     sys?: { 
         country: string; 
         sunrise: number; 
-        sunset: number 
+        sunset: number;
     };
-  }
+    timezone?: number;
+    id?: number;
+    name?: string;
+    cod?: number;
+}

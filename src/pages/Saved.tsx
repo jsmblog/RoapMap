@@ -81,7 +81,7 @@ const Saved: React.FC = () => {
               icon={chevronBack}
             />
           </IonButtons>
-          <IonTitle className="settings-ion-title texto-quinto">Guardados</IonTitle>
+          <IonTitle className="settings-ion-title texto-quinto">Guardados ({currentUserData.savedPlaces?.length || 0})</IonTitle>
           {
             btnAction && (
               <IonButton

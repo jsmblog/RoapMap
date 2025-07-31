@@ -1,0 +1,343 @@
+.modal-clima {
+  --background: linear-gradient(135deg, #4ade80ab, #b0db9c, #ecfae5);
+  --height: 100%;
+  --width: 100%;
+  --max-width: 500px;
+}
+
+/* Header */
+.clima-toolbar {
+  --background: transparent;
+  --color: var(--co-white);
+  --border-color: transparent;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.clima-title {
+  font-weight: 700;
+  font-size: 1.2rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  color: var(--primary-color);
+}
+
+.close-icon {
+  font-size: 24px;
+  color: var(--primary-color);
+  border-radius: 50%;
+  padding: 8px;
+  transition: all 0.3s ease;
+}
+
+.close-icon:hover {
+  background: rgba(135, 233, 159, 0.767);
+  transform: scale(1.1);
+}
+
+/* Content */
+.clima-content {
+  --background: transparent;
+  --padding-top: 0;
+  --padding-bottom: 20px;
+}
+
+.clima-background {
+  min-height: 100%;
+  padding: 16px;
+  backdrop-filter: blur(20px) !important;
+}
+
+/* Main weather card */
+.clima-main-card {
+  background: var(--fondo-backdrop-filter);
+  border-radius: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 32px rgba(49, 87, 44, 0.1);
+  backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(0, 0, 0, 0.2) !important;
+  height: 350px;
+}
+.ciudad-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  width: 250px;
+}
+.location-icon {
+  font-size: 20px !important;
+  color: var(--primary-color) !important;
+}
+.ciudad-nombre {
+  font-size: 1.5rem !important;
+  font-weight: 700;
+  margin: 0;
+  color: var(--primary-color);
+}
+.pais {
+  margin: 0;
+  color: var(--primary-color);
+  font-size: 1.2rem !important;
+}
+.weather-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.weather-icon-container {
+  flex-shrink: 0;
+}
+.weather-icon-large {
+  width: 100px;
+  height: 100px;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+.temp-info {
+  flex: 1;
+  text-align: right;
+}
+.temp-actual {
+  font-size: 3.5rem;
+  font-weight: 300;
+  color: var(--primary-color);
+  display: block;
+  line-height: 1;
+}
+.weather-desc h3 {
+  margin: 8px 0 4px 0;
+  color: var(--text-color);
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+.weather-desc p {
+  margin: 0;
+  color: var(--co-gray);
+  font-size: 0.9rem;
+  text-transform: capitalize;
+}
+
+/* Grid cards */
+.clima-grid {
+  padding: 0;
+}
+.stat-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--fondo-backdrop-filter);
+  box-shadow: 0 4px 20px rgba(49, 87, 44, 0.08);
+  backdrop-filter: blur(20px);
+  border-radius: 16px;
+  margin: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.2) !important;
+  transition: all 0.3s ease;
+  height: 160px !important;
+}
+/* Header de cada tarjeta */
+.ion-carda-header-modal-clima {
+  padding: 10px 16px;
+}
+/* Título dentro de cada card */
+.stat-title {
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  color: var(--primary-color);
+}
+/* Íconos */
+.icon-modal-clima-temp,
+.icon-modal-clima-Humidity,
+.icon-modal-clima-Wind,
+.icon-modal-clima-pressure,
+.icon-modal-clima-clouds,
+.icon-modal-clima-visibility,
+.icon-modal-clima-coords {
+  font-size: 15px;
+  color: var(--primary-color);
+}
+
+/*contenido de cada card*/
+.ion-card-content-modal-clima {
+  padding: 10px 16px 12px;
+}
+
+/*temperatura card*/
+.temp-item {
+  display: flex;
+  justify-content: space-between;
+}
+.temp-label {
+  color: var(--primary-color);
+  font-size: 0.85rem;
+}
+.temp-value {
+  color: var(--text-color);
+  font-weight: 600;
+}
+.temp-range {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+.temp-min,
+.temp-max {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-color);
+}
+.temp-bar {
+  flex: 1;
+  height: 4px;
+  background: linear-gradient(to right, var(--co-green-1), var(--co-red-1));
+  border-radius: 2px;
+}
+
+/* Humidity card */
+.humidity-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  display: block;
+  margin-bottom: 8px;
+}
+.humidity-bar {
+  height: 6px;
+  background: var(--co-back-gray-6);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.humidity-fill {
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    var(--co-green-1),
+    var(--secondary-color)
+  );
+  border-radius: 3px;
+  transition: width 1s ease;
+}
+
+/* Wind card */
+.wind-speed {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-color);
+}
+.direction-chip {
+  --background: var(--color-btns);
+  --color: var(--color-btns-text);
+  font-weight: 600;
+  margin: 0;
+}
+.wind-gust {
+  font-size: 0.8rem;
+  color: var(--co-gray);
+  margin-top: 4px;
+}
+
+/* Pressure card */
+.pressure-main {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-color);
+  margin-bottom: 8px;
+}
+.pressure-detail {
+  font-size: 0.8rem;
+  color: var(--co-gray);
+  margin-bottom: 2px;
+}
+
+/* Clouds card */
+.clouds-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-color);
+  height: 70px !important;
+  display: block;
+}
+
+/* Visibility card */
+.visibility-value {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  display: block;
+}
+
+/* Coordinates card */
+
+.coord-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+.coord-label {
+  color: var(--co-gray);
+  font-size: 0.8rem;
+}
+.coord-value {
+  color: var(--text-color);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .weather-main {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+  }
+
+  .temp-info {
+    text-align: center;
+  }
+
+  .temp-actual {
+    font-size: 3rem;
+  }
+
+  .stat-card {
+    height: auto;
+    min-height: 120px;
+  }
+}
+
+/* Animation for modal entrance */
+.modal-clima.show-modal {
+  animation: slideInUp 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Loading states */
+.loading-shimmer {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
