@@ -47,7 +47,9 @@ const NearestPlace: React.FC<NearestPlaceProps> = ({ info, setInfo }) => {
   const handleSave = async () => {
     if (!info.place) return;
     try {
+      const id = generateUUID();
       const savedPlace = {
+        id,
         name: info.place.name,
         loc: info.destination,
       };
