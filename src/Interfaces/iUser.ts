@@ -61,8 +61,16 @@ export interface SavedItem {
     };
     
 }
+/*interfaz para la pantalla de historial */
+export interface HistoryItem{
+  id:string;
+  date: string;
+  name:string
+
+}
 export interface currentUserData {
     favorites: FavoriteItem[];
     saved: SavedItem[];
+    history: HistoryItem[];
 }
 
