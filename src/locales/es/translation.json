@@ -614,7 +614,12 @@
         }
       ]
     }
-  }
+  },
+
+  "events":"Eventos",
+  "myEvents":"Mis Eventos",
+  "eventDes":"Administra tus eventos programados",
+  "noEvent":"No tienes eventos programados"
 
 
 

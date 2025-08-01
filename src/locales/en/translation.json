@@ -592,7 +592,15 @@
         }
       ]
     }
-  }
+  },
+
+  "events":"Events",
+  "myEvents":"My Events",
+  "eventDes":"Manage your scheduled events",
+  "noEvent":"You have no scheduled events"
+
+
+
  
 
 

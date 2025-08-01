@@ -31,7 +31,6 @@ import {
   moon,
   informationCircleOutline,
   megaphone,
-  timeOutline,
   calendar,
 } from "ionicons/icons";
 import React, { useState } from "react";
@@ -262,7 +261,7 @@ const Setting: React.FC = () => {
               slot="start"
               icon={calendar}
             />
-            <IonLabel>{t("saved")}</IonLabel>
+            <IonLabel>{t("events")}</IonLabel>
             <IonIcon
               className="setting-icons iconos-oscuros"
               slot="end"
