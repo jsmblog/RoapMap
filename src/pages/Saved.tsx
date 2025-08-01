@@ -6,7 +6,10 @@ import { SavedItem } from '../Interfaces/iUser';
 import { doc, updateDoc } from 'firebase/firestore';
 import { db } from '../Firebase/initializeApp';
 import { useAlert } from '../hooks/UseAlert';
+import { useTranslation } from 'react-i18next';
 const Saved: React.FC = () => {
+  const { t } = useTranslation();
+
   const { currentUserData } = useAuthContext();
   const { showAlert, AlertComponent } = useAlert();
 
@@ -49,13 +52,15 @@ const Saved: React.FC = () => {
       await updateDoc(refDocument, { sp: savedFilter })
 
       showAlert(
-        'Elimación Correcta',
-        'Se han eliminado correctamente tus guardados ✨'
+        t('saveds.deletedTitle'),
+        t('saveds.deletedMessage')
       );
       setIsCheckMark(false);
       setOnConfirm(false)
       setIsDeleteAll([]); // limpia selección
       setBtnAction(true);
+      setOnCancel(false);
+
     } catch (error) {
       console.log("Ocurrio un error al querer eliminar", error)
     }
@@ -81,7 +86,7 @@ const Saved: React.FC = () => {
               icon={chevronBack}
             />
           </IonButtons>
-          <IonTitle className="settings-ion-title texto-quinto">Guardados ({currentUserData.savedPlaces?.length || 0})</IonTitle>
+          <IonTitle className="settings-ion-title texto-quinto">{t('saveds.title')} ({currentUserData.savedPlaces?.length || 0})</IonTitle>
           {
             btnAction && (
               <IonButton
@@ -91,7 +96,7 @@ const Saved: React.FC = () => {
                 className="btn-action btn-delete"
                 slot='end'
               >
-                Eliminar todo
+                {t('saveds.deleteAll')}
               </IonButton>
             )
           }
@@ -110,7 +115,7 @@ const Saved: React.FC = () => {
                     color="success"
                     className="btn-action btn-confirm"
                   >
-                    Confirmar
+                    {t('saveds.confirm')}
                   </IonButton>
                 )
               }
@@ -122,7 +127,7 @@ const Saved: React.FC = () => {
                     color="danger"
                     className="btn-action btn-cancel"
                   >
-                    Cancelar
+                    {t('saveds.cancel')}
                   </IonButton>
                 )
               }
@@ -131,21 +136,21 @@ const Saved: React.FC = () => {
               !currentUserData.savedPlaces || currentUserData.savedPlaces.length === 0 ? (
                 <div className="empty-state">
                   <IonIcon icon={bookmark} size="large" className="empty-icon" />
-                  <h2>No tienes lugares guardados.</h2>
-                  <p>Busca lugares desde la barra de búsqueda que está en la pantalla principal para guardarlos aquí.</p>
+                  <h2>{t('saveds.emptyTitle')}</h2>
+                  <p>{t('saveds.emptyMessage')}</p>
                 </div>
               ) : (
                 currentUserData.savedPlaces.map((place: SavedItem, index: number) => (
                   <IonItem key={index} className="history-item tema-oscuro">
-                    <div  className="header-content">
+                    <div className="header-content">
                       <IonIcon className="category-icon texto-quinto" icon={locationOutline} />
-                    <IonLabel className='place-name place-name-history texto-primario'>{place.name}</IonLabel>
-                    {isCheckMark && (
-                      <IonCheckbox
-                        checked={isDeleteAll.includes(place.id)}
-                        onIonChange={(e) => handleSelectSaved(place.id, e.detail.checked)}
-                      />
-                    )}
+                      <IonLabel className='place-name place-name-history texto-primario'>{place.name}</IonLabel>
+                      {isCheckMark && (
+                        <IonCheckbox
+                          checked={isDeleteAll.includes(place.id)}
+                          onIonChange={(e) => handleSelectSaved(place.id, e.detail.checked)}
+                        />
+                      )}
                     </div>
                   </IonItem>
                 ))

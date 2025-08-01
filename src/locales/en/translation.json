@@ -288,7 +288,314 @@
   "friend":"Friends",
   "place":"Places",
   "profile":"Profile",
-  "Ach":"Ach"
+  "Ach":"Ach",
+  "alert":"Profile picture updated successfully",
+  "alertError":"Error updating profile picture",
+  "alertError2":"Error processing image",
+  "confir":"Confirmation",
+  "messageConfir":"Do you want to modify your profile with this image?",
+
+  "terms": {
+    "title": "Terms and Conditions",
+    "lastUpdate": "Last updated",
+    "description": "By using the RoadMap mobile app, you agree to the following Terms and Conditions:",
+    "acceptance": {
+      "title": "Acceptance of terms",
+      "description": "By registering and using the app, you agree to comply with these conditions and our Privacy Policy."
+    },
+    "permittedUse": {
+      "title": "Permitted use",
+      "subtitle": "You may use RoadMap to:",
+      "list": [
+        "Discover places and events according to your preferences.",
+        "Save favorites, mark visits, and attend events.",
+        "Post honest and respectful reviews."
+      ]
+    },
+    "prohibitedUse": {
+      "title": "Prohibited use",
+      "subtitle": "You are not allowed to:",
+      "list": [
+        "Post offensive, illegal content, or infringe third-party rights.",
+        "Use the app for unauthorized commercial purposes.",
+        "Manipulate or interfere with the app's operation.",
+        "Share other users' personal information without consent."
+      ]
+    },
+    "userAccount": {
+      "title": "User account",
+      "subtitle": "You are responsible for:",
+      "list": [
+        "Keeping your credentials confidential.",
+        "Verifying the accuracy of the information you provide.",
+        "Reporting any unauthorized use of your account."
+      ]
+    },
+    "intellectualProperty": {
+      "title": "Intellectual property",
+      "description": "All app content (logos, texts, code, interface) is the property of RoadMap or its respective authors. You may not reproduce or modify such content without permission."
+    },
+    "externalIntegrations": {
+      "title": "External integrations",
+      "description": "RoadMap may integrate third-party services (such as Google Maps, native calendar). Use of these services is subject to their own policies and terms."
+    },
+    "limitationOfLiability": {
+      "title": "Limitation of liability",
+      "subtitle": "ExploreLocal is not responsible for:",
+      "list": [
+        "Cancellations or changes to events by third parties.",
+        "Inaccuracies in information about external places.",
+        "Errors in information provided by third parties.",
+        "Technical or connection failures beyond the app's control."
+      ]
+    },
+    "modifications": {
+      "title": "Modifications to the terms",
+      "description": "RoadMap may update these terms at any time. You will be notified in the app or by email of significant changes, and your continued use implies acceptance of the new terms."
+    }
+  },
+
+  "privacy": {
+    "title": "Privacy Policy",
+    "lastUpdate": "Last updated",
+    "description": "At Roadmap, we are committed to protecting our users' privacy. This Privacy Policy describes how we collect, use, store, and protect your personal information when you use our mobile app.",
+    "informationCollection": {
+      "title": "Information we collect",
+      "subtitle": "We collect the following information:",
+      "list": [
+        {
+          "title": "1. Personal information",
+          "description": "Name, email address, password (encrypted)."
+        },
+        {
+          "title": "2. Geolocation data",
+          "description": "Real-time location to show nearby places and events."
+        },
+        {
+          "title": "3. Preferences",
+          "description": "Device type, operating system, granted permissions, usage preferences."
+        },
+        {
+          "title": "4. Usage data",
+          "description": "Interactions with the app, pages visited, location history, attended events, reviews and ratings."
+        },
+        {
+          "title": "5. Device data",
+          "description": "Device type, operating system, granted permissions."
+        }
+      ]
+    },
+    "informationUse": {
+      "title": "How we use your information",
+      "subtitle": "We use the collected information to:",
+      "list": [
+        "Personalize recommendations for places and events.",
+        "Show relevant content based on your location and preferences.",
+        "Sync your personal calendar with events.",
+        "Send notifications and reminders.",
+        "Improve the user experience and app functionality."
+      ]
+    },
+    "dataSharing": {
+      "title": "Information sharing",
+      "subtitle": "RoadMap does not sell or share your personal information with third parties, except in the following cases:",
+      "list": [
+        "Compliance with legal obligations or requests from competent authorities.",
+        "Integrated third-party services (e.g., Google Maps, native calendar).",
+        "To protect the rights, property, or safety of Roadmap, our users, or others."
+      ]
+    },
+    "dataSecurity": {
+      "title": "Data security",
+      "subtitle": "We protect your information with technical and organizational measures such as:",
+      "list": [
+        "Password encryption.",
+        "Restricted access to personal information.",
+        "Authentication via JWT tokens.",
+        "Secure data transmission (HTTPS).",
+        "Validation and access controls."
+      ]
+    },
+    "dataRetention": {
+      "title": "Data retention",
+      "description": "We keep your information while your account is active. You can delete your account at any time from the app, which will permanently remove your data."
+    },
+    "userRights": {
+      "title": "User rights",
+      "subtitle": "You have the following rights over your personal information:",
+      "list": [
+        "Access your personal information.",
+        "Correct inaccurate or incomplete data.",
+        "Delete your account and all associated data.",
+        "Request the correction or deletion of your data.",
+        "Withdraw consent for certain uses."
+      ],
+      "infocantac": "To exercise these rights, contact us at: roadmap_ec@gamil.com"
+    }
+  },
+
+  "infoApp": {
+    "title": "App Information",
+    "descriptionTitle": "Description",
+    "projectDescription": "RoadMap is a hybrid app (Android/Web/iOS) designed to help you discover nearby places and events based on your location, preferences, and available time. Ideal for travelers and locals.",
+    "versionTitle": "Version",
+    "developersTitle": "Developers",
+    "area": "Area",
+    "portfolio": "Portfolio",
+    "contact": "Contact",
+    "licenseTitle": "License",
+    "licenseDescription": "This app was developed as part of an academic project for the Mobile App Development course. It is for educational and non-commercial use.",
+    "roles": {
+      "jeff": "FrontEnd - BackEnd - Recommendation Logic",
+      "salome": "FrontEnd - UI/UX Design"
+    }
+  },
+
+  "favorite": {
+    "title": "Favorites",
+    "deleteAll": "Delete all",
+    "emptyTitle": "No favorites yet",
+    "emptyMessage": "Mark places as favorites from the map to see them here",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "deletedTitle": "Successfully deleted",
+    "deletedMessage": "Your favorites have been successfully deleted ✨"
+  },
+
+  "historys": {
+    "title": "History",
+    "deleteAll": "Delete all",
+    "emptyTitle": "You don't have any visited places history.",
+    "emptyMessage": "Search for places from the main screen's search bar to see them here.",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "deletedTitle": "Successfully deleted",
+    "deletedMessage": "Your history has been successfully deleted ✨"
+  },
+
+  "saveds": {
+    "title": "Saveds",
+    "deleteAll": "Delete all",
+    "emptyTitle": "You don't have any saved items yet.",
+    "emptyMessage": "Search for places from the main screen's search bar to see them here.",
+    "raf": "Ráfagas",
+    "cancel": "Cancel",
+    "deletedTitle": "Successfully deleted",
+    "deletedMessage": "Your saves  has been successfully deleted ✨"
+  },
+
+  "wearther": {
+    "title": "Climate Statistics",
+    "tem": "Temperature",
+    "sen":"Sensation",
+    "hum": "Humidity",
+    "vient": "Wind",
+    "rasf":"Gusts",
+    "pres": "Pressure",
+    "mar":"Sea",
+    "suelo":"Soil",
+    "nub": "Clouds",
+    "visi": "Visibility",
+    "coor": "Coords"
+  },
+
+ "supports": {
+    "title": "Support",
+    "faqTitle": "Frequently Asked Questions",
+    "faqDescription": "Here you'll find answers to the most common questions about the app.",
+    "contactTitle": "Contact Support",
+    "contactText1": "If you need help, write to us at:",
+    "contactText2": "We'll respond within 24 business hours.",
+    "guide": "Quick Guide",
+
+    "AccountAndProfile": {
+      "title": "Account and Profile",
+      "subtitle": "Information on managing your account and profile.",
+      "list": [
+        {
+          "question": "How do I create an account?",
+          "answer": "Go to settings and select 'Log Out'. You'll be redirected to the Welcome screen where you can register."
+        },
+        {
+          "question": "How can I edit my profile?",
+          "answer": "Tap your profile picture or go to settings > 'Profile Information'."
+        },
+        {
+          "question": "How do I change my password?",
+          "answer": "Go to 'Edit Profile', tap 'Password', and follow the on-screen instructions."
+        }
+      ]
+    },
+    "ExplorationAndRecommendations": {
+      "title": "Exploration and Recommendations",
+      "subtitle": "Tips to enhance your experience.",
+      "list": [
+        {
+          "question": "How are recommendations generated?",
+          "answer": "Based on your preferences, current location, and weather."
+        },
+        {
+          "question": "Can I save my favorite places?",
+          "answer": "Yes, tap the heart icon. You'll find them under 'Favorites'."
+        },
+        {
+          "question": "Where can I find personalized recommendations?",
+          "answer": "In the 'Recommendations' section, second on the navigation bar."
+        }
+      ]
+    },
+    "Events": {
+      "title": "Events",
+      "subtitle": "Information about events and activities.",
+      "list": [
+        {
+          "question": "How can I see nearby events?",
+          "answer": "In the 'Recommendations' section, second on the navigation bar."
+        },
+        {
+          "question": "How do I create an event?",
+          "answer": "Tap 'Create Event' in the 'Recommendations' section."
+        },
+        {
+          "question": "How do I join an event?",
+          "answer": "Click 'Join Event' on the event details screen."
+        },
+        {
+          "question": "How do I cancel an event?",
+          "answer": "Tap 'Cancel Participation' in the event details."
+        },
+        {
+          "question": "How can I view events I joined?",
+          "answer": "In the 'My Events' section of your profile."
+        },
+        {
+          "question": "How do I get reminders?",
+          "answer": "Enable push notifications on your device."
+        }
+      ]
+    },
+    "PrivacyAndSecurity": {
+      "title": "Privacy and Security",
+      "subtitle": "How we protect your information.",
+      "list": [
+        {
+          "question": "How is my personal information protected?",
+          "answer": "With data encryption and two-factor authentication."
+        },
+        {
+          "question": "How can I delete my account?",
+          "answer": "Not available yet — coming in future updates."
+        },
+        {
+          "question": "How do I contact support?",
+          "answer": "Through the 'Support' section in the settings screen."
+        }
+      ]
+    }
+  }
+ 
+
+
 
 
 

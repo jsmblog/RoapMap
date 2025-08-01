@@ -21,9 +21,11 @@ import { ModalProfileProps } from '../Interfaces/iProps';
 import { close, locationOutline, thermometerOutline, waterOutline, speedometerOutline, compassOutline, cloudOutline, eyeOutline } from 'ionicons/icons';
 import { UseOpenWeather } from '../hooks/UseOpenWeather';
 import '../styles/ModalClima.css';
+import { useTranslation } from 'react-i18next';
 
 const ModalClima: React.FC<ModalProfileProps> = ({ isOpen, onClose }) => {
     const { weather } = UseOpenWeather();
+    const { t } = useTranslation();
 
     const weatherInfo = weather?.weather?.[0];
 
@@ -41,7 +43,7 @@ const ModalClima: React.FC<ModalProfileProps> = ({ isOpen, onClose }) => {
                     <IonButtons slot="start" onClick={onClose}>
                         <IonIcon className="close-icon texto-quinto " icon={close} />
                     </IonButtons>
-                    <IonTitle className="clima-title texto-quinto ">Estadísticas del Clima</IonTitle>
+                    <IonTitle className="clima-title texto-quinto ">{t('wearther.title')}</IonTitle>
                 </IonToolbar>
             </IonHeader>
 
@@ -85,12 +87,12 @@ const ModalClima: React.FC<ModalProfileProps> = ({ isOpen, onClose }) => {
                                     <IonCardHeader className='ion-carda-header-modal-clima'>
                                         <IonCardTitle className="stat-title texto-primario ">
                                             <IonIcon className='icon-modal-clima-temp texto-quinto ' icon={thermometerOutline} />
-                                            Temperatura
+                                            {t('wearther.tem')}
                                         </IonCardTitle>
                                     </IonCardHeader>
                                     <IonCardContent className='ion-card-content-modal-clima'>
                                         <div className="temp-item">
-                                            <span className="temp-label texto-primario">Sensación</span>
+                                            <span className="temp-label texto-primario">{t('wearther.sen')}</span>
                                             <span className="temp-value texto-quinto">{kelvinToCelsius(weather?.main?.feels_like || 0)}°C</span>
                                         </div>
                                         <div className="temp-range">
@@ -107,7 +109,7 @@ const ModalClima: React.FC<ModalProfileProps> = ({ isOpen, onClose }) => {
                                     <IonCardHeader className='ion-carda-header-modal-clima'>
                                         <IonCardTitle className="stat-title texto-primario">
                                             <IonIcon className='icon-modal-clima-Humidity texto-quinto ' icon={waterOutline} />
-                                            Humedad
+                                            {t('wearther.hum')}
                                         </IonCardTitle>
                                     </IonCardHeader>
                                     <IonCardContent className='ion-card-content-modal-clima'>
@@ -129,7 +131,7 @@ const ModalClima: React.FC<ModalProfileProps> = ({ isOpen, onClose }) => {
                                     <IonCardHeader className='ion-carda-header-modal-clima'>
                                         <IonCardTitle className="stat-title texto-primario">
                                             <IonIcon className='icon-modal-clima-Wind texto-quinto ' icon={compassOutline} />
-                                            Viento
+                                            {t('wearther.vient')}
                                         </IonCardTitle>
                                     </IonCardHeader >
                                     <IonCardContent className='ion-card-content-modal-clima'>
@@ -141,7 +143,7 @@ const ModalClima: React.FC<ModalProfileProps> = ({ isOpen, onClose }) => {
                                                 </IonChip>
                                             </div>
                                             {weather?.wind?.gust && (
-                                                <div className="wind-gust texto-quinto ">Ráfagas: {weather.wind.gust} m/s</div>
+                                                <div className="wind-gust texto-quinto "> {t('wearther.rasf')}: {weather.wind.gust} m/s</div>
                                             )}
                                         </div>
                                     </IonCardContent>
@@ -153,17 +155,17 @@ const ModalClima: React.FC<ModalProfileProps> = ({ isOpen, onClose }) => {
                                     <IonCardHeader className='ion-carda-header-modal-clima'>
                                         <IonCardTitle className="stat-title texto-primario">
                                             <IonIcon className='icon-modal-clima-pressure texto-quinto ' icon={speedometerOutline} />
-                                            Presión
+                                            {t('wearther.pres')}
                                         </IonCardTitle>
                                     </IonCardHeader>
                                     <IonCardContent className='ion-card-content-modal-clima'>
                                         <div className="pressure-info">
                                             <div className="pressure-main texto-quinto ">{weather?.main?.pressure} hPa</div>
                                             {weather?.main?.sea_level && (
-                                                <div className="pressure-detail texto-secundario">Mar: {weather.main.sea_level} hPa</div>
+                                                <div className="pressure-detail texto-secundario"> {t('wearther.mar')}: {weather.main.sea_level} hPa</div>
                                             )}
                                             {weather?.main?.grnd_level && (
-                                                <div className="pressure-detail texto-secundario">Suelo: {weather.main.grnd_level} hPa</div>
+                                                <div className="pressure-detail texto-secundario"> {t('wearther.suelo')}: {weather.main.grnd_level} hPa</div>
                                             )}
                                         </div>
                                     </IonCardContent>
@@ -177,7 +179,7 @@ const ModalClima: React.FC<ModalProfileProps> = ({ isOpen, onClose }) => {
                                     <IonCardHeader className='ion-carda-header-modal-clima'>
                                         <IonCardTitle className="stat-title texto-primario">
                                             <IonIcon className='icon-modal-clima-clouds texto-quinto ' icon={cloudOutline} />
-                                            Nubosidad
+                                            {t('wearther.nub')}
                                         </IonCardTitle>
                                     </IonCardHeader>
                                     <IonCardContent className='ion-card-content-modal-clima'>
@@ -191,7 +193,7 @@ const ModalClima: React.FC<ModalProfileProps> = ({ isOpen, onClose }) => {
                                     <IonCardHeader className='ion-carda-header-modal-clima'>
                                         <IonCardTitle className="stat-title texto-primario">
                                             <IonIcon className='icon-modal-clima-visibility texto-quinto ' icon={eyeOutline} />
-                                            Visibilidad
+                                             {t('wearther.visi')}
                                         </IonCardTitle>
                                     </IonCardHeader>
                                     <IonCardContent className='ion-card-content-modal-clima'>
@@ -205,7 +207,7 @@ const ModalClima: React.FC<ModalProfileProps> = ({ isOpen, onClose }) => {
                                     <IonCardHeader className='ion-carda-header-modal-clima'>
                                         <IonCardTitle className="stat-title texto-primario">
                                             <IonIcon className='icon-modal-clima-coords texto-quinto ' icon={locationOutline} />
-                                            Coordenadas
+                                             {t('wearther.coor')}
                                         </IonCardTitle>
                                     </IonCardHeader>
                                     <IonCardContent className='ion-card-content-modal-clima'>

@@ -3,24 +3,23 @@ import {
   IonButtons,
   IonContent,
   IonHeader,
-  IonItem,
-  IonLabel,
-  IonList,
-  IonListHeader,
   IonPage,
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
 import { chevronBack } from "ionicons/icons";
 import React from "react";
-import '../styles/PolicyAndTerms.css'
-import {Policy} from '../other/PolicyAndTermsObject'
+import "../styles/PolicyAndTerms.css";
+import { Policy } from "../other/PolicyAndTermsObject";
+import { useTranslation } from "react-i18next";
 
 const PrivacyPolicy: React.FC = () => {
+  const { t } = useTranslation();
+
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar>
+        <IonToolbar className="privacy-toolbar tema-oscuro">
           <IonButtons slot="start">
             <IonBackButton
               defaultHref="/tab/settings"
@@ -28,74 +27,107 @@ const PrivacyPolicy: React.FC = () => {
               icon={chevronBack}
             />
           </IonButtons>
-          <IonTitle>Politicas de Privacidad</IonTitle>
+          <IonTitle className="privacy-title texto-quinto ">{t("privacy.title")}</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent>
-        <IonList>
-      <IonListHeader>
-       Ultima fecha de actualización: {Policy.DateUpdated} 
-       </IonListHeader>
-      <IonItem>{Policy.Description} </IonItem>
 
-       <IonListHeader>{Policy.InformationCollection.title} </IonListHeader>
-       <IonLabel> {Policy.InformationCollection.subtitle} </IonLabel>
-       {
-          Policy.InformationCollection.list.map((item, index) => (
-            <> 
-            <IonLabel>{item.title}</IonLabel>
-            <IonItem key={index}>
-             ✔ {item.description}
-            </IonItem>
-          </>
-          ))
-       }
+      <IonContent className="privacy-content tema-oscuro">
+        <div className="privacy-wrapper">
 
-        <IonListHeader>{Policy.InformationUse.title} </IonListHeader>
-        <IonLabel> {Policy.InformationUse.subtitle} </IonLabel>
-        {
-          Policy.InformationUse.list.map((item, index) => (
-            <IonItem key={index}>
-              ✔ {item.description}
-            </IonItem>
-          ))
-        }
+          {/* Header info */}
+          <div className="privacy-header">
+            <div className="last-update">
+              <span className="update-label texto-quinto">{t("privacy.lastUpdate")}</span>
+              <span className="update-date texto-secundario">{Policy.DateUpdated}</span>
+            </div>
+            <p className="privacy-description texto-secundario">{t("privacy.description")}</p>
+          </div>
 
-        <IonListHeader>{Policy.DataSharing.title} </IonListHeader>
-        <IonLabel> {Policy.DataSharing.subtitle} </IonLabel>
-        {
-          Policy.DataSharing.list.map((item, index) => (
-            <IonItem key={index}>
-              ✔ {item.description}
-            </IonItem>
-          ))
-        }
+          {/* Information Collection */}
+          <section className="privacy-section">
+            <h2 className="section-title texto-quinto">{t("privacy.informationCollection.title")}</h2>
+            <p className="section-subtitle texto-secundario">{t("privacy.informationCollection.subtitle")}</p>
+            <div className="subsection-list">
+              {Policy.InformationCollection.list.map((_, index) => (
+                <div key={index} className="subsection-item">
+                  <h3 className="subsection-title texto-quinto">
+                    {t(`privacy.informationCollection.list.${index}.title`)}
+                  </h3>
+                  <div className="list-item texto-secundario">
+                    <span className="check-icon">✓</span>
+                    {t(`privacy.informationCollection.list.${index}.description`)}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
 
-        <IonListHeader>{Policy.DataSecurity.title} </IonListHeader>
-        <IonLabel> {Policy.DataSecurity.subtitle} </IonLabel>
-        {
-          Policy.DataSecurity.list.map((item, index) => (
-            <IonItem key={index}>
-              ✔ {item.description}
-            </IonItem>
-          ))
-        }
+          {/* Information Use */}
+          <section className="privacy-section">
+            <h2 className="section-title texto-quinto">{t("privacy.informationUse.title")}</h2>
+            <p className="section-subtitle texto-secundario">{t("privacy.informationUse.subtitle")}</p>
+            <ul className="privacy-list">
+              {Policy.InformationUse.list.map((_, index) => (
+                <li key={index} className="list-item texto-secundario">
+                  <span className="check-icon">✓</span>
+                  {t(`privacy.informationUse.list.${index}`)}
+                </li>
+              ))}
+            </ul>
+          </section>
 
-        <IonListHeader>{Policy.DataRetention.title} </IonListHeader>
-        <IonLabel> {Policy.DataRetention.description} </IonLabel>
+          {/* Data Sharing */}
+          <section className="privacy-section">
+            <h2 className="section-title texto-quinto">{t("privacy.dataSharing.title")}</h2>
+            <p className="section-subtitle texto-secundario">{t("privacy.dataSharing.subtitle")}</p>
+            <ul className="privacy-list">
+              {Policy.DataSharing.list.map((_, index) => (
+                <li key={index} className="list-item texto-secundario">
+                  <span className="check-icon">✓</span>
+                  {t(`privacy.dataSharing.list.${index}`)}
+                </li>
+              ))}
+            </ul>
+          </section>
 
-        <IonListHeader>{Policy.UserRights.title} </IonListHeader>
-        <IonLabel> {Policy.UserRights.subtitle} </IonLabel>
-        {
-          Policy.UserRights.list.map((item, index) => (
-            <IonItem key={index}>
-              ✔ {item.description}
-            </IonItem>
-          ))
-        }
-        <IonLabel>{Policy.UserRights.infocantac}</IonLabel>
+          {/* Data Security */}
+          <section className="privacy-section">
+            <h2 className="section-title texto-quinto">{t("privacy.dataSecurity.title")}</h2>
+            <p className="section-subtitle texto-secundario">{t("privacy.dataSecurity.subtitle")}</p>
+            <ul className="privacy-list">
+              {Policy.DataSecurity.list.map((_, index) => (
+                <li key={index} className="list-item texto-secundario">
+                  <span className="check-icon">✓</span>
+                  {t(`privacy.dataSecurity.list.${index}`)}
+                </li>
+              ))}
+            </ul>
+          </section>
 
-        </IonList>
+          {/* Data Retention */}
+          <section className="privacy-section">
+            <h2 className="section-title texto-quinto">{t("privacy.dataRetention.title")}</h2>
+            <p className="section-text texto-secundario">{t("privacy.dataRetention.description")}</p>
+          </section>
+
+          {/* User Rights */}
+          <section className="privacy-section">
+            <h2 className="section-title texto-quinto">{t("privacy.userRights.title")}</h2>
+            <p className="section-subtitle texto-secundario">{t("privacy.userRights.subtitle")}</p>
+            <ul className="privacy-list">
+              {Policy.UserRights.list.map((_, index) => (
+                <li key={index} className="list-item texto-secundario">
+                  <span className="check-icon">✓</span>
+                  {t(`privacy.userRights.list.${index}`)}
+                </li>
+              ))}
+            </ul>
+            <div className="contact-info ">
+              <p className="contact-text">{t("privacy.userRights.infocantac")}</p>
+            </div>
+          </section>
+
+        </div>
       </IonContent>
     </IonPage>
   );

@@ -70,7 +70,7 @@ const EditProfile: React.FC = () => {
     if (file.type.startsWith("image/")) {
       const webp = await convertToWebP(file);
       if (!webp) {
-        alert("Error al procesar la imagen");
+        alert(t("alertError2"));
         return;
       }
       blob = webp;
@@ -93,14 +93,14 @@ const EditProfile: React.FC = () => {
       const storageRef = ref(STORAGE, path);
 
       await uploadBytes(storageRef, previewBlob);
-      const fileURL = await getDownloadURL(storageRef);
+      const fileURL = await getDownloadURL(storageRef); 
 
       const userDoc = doc(db, "USERS", currentUserData.uid);
       await setDoc(userDoc, { pt: fileURL }, { merge: true });
-      showToast("Foto de perfil actualizada correctamente", 3000, "success");
+      showToast(t("alert"), 3000, "success");
     } catch (error) {
       console.log(error);
-      showToast("Error al actualizar la foto de perfil", 3000, "danger");
+      showToast(t("alertError"), 3000, "danger");
     } finally {
       setProfileURL("");
       setPreviewURL("");
@@ -238,8 +238,8 @@ const EditProfile: React.FC = () => {
 
             <IonAlert
               isOpen={showConfirmAlert}
-              header="Confirmación"
-              message="¿Deseas modificar tu perfil con esta imagen?"
+              header= {t("confir")}
+              message={t("messageConfir")}
               buttons={[
                 {
                   text: t("no"),

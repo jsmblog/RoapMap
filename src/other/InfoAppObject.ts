@@ -1,52 +1,55 @@
 import {
-    logoLinkedin, logoGithub
+  logoLinkedin,
+  logoGithub
 } from "ionicons/icons";
-import photoGimbly from "/photoGimbly.webp"
+import photoGimbly from "/photoGimbly.webp";
+import gimblyJoel from "/gimblyJoel.webp";
 
 export const InfoApp = {
-    info: {
-        logo: "",
-        name: "RoadMap",
-        version: "1.0.0",
-        AcercaDelProyecto: "RoadMap es una aplicacion hibrida es decir para Android/Web/IOS creada especialmente facilitar descubrir lugares, eventos cercanos según tu ubicación, preferencias y tiempo disponible. Es Ideal para viajeros y locales"
-    },
-    licencia: {
-        title: "Licencia",
-        description: " Esta aplicación fue desarrollada como parte de un proyecto académico para la asignatura Desarrollo de Aplicaciones Móviles.Su uso es educativo y no comercial."
-    },
-}
+  info: {
+    logo: "",
+    name: "RoadMap",
+    version: "1.0.0",
+  },
+  licencia: {
+    title: "infoApp.licenseTitle",
+    description: "infoApp.licenseDescription",
+  },
+};
 
 export const creditos = [
-    {
-        photo: "",
-        name: "Jefferson Joel Saldarriga Mera",
-        contacto: {
-            linkedin: {
-                icon: logoLinkedin,
-                url: "none"
-            },
-            github: {
-                icon:logoGithub,
-                url: "none"
-            },
-        },
-        portafolio: "",
-        desarrollo: "FrontEnd - BackEnd - Logica de Recomendación"
+  {
+    photo: gimblyJoel,
+    name: "Jefferson Joel Saldarriga Mera",
+    contacto: {
+      linkedin: {
+        icon: logoLinkedin,
+        url: "https://www.linkedin.com/in/jefferson-m-8194a8360/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+      },
+      github: {
+        icon: logoGithub,
+        url: "https://github.com/jsmblog",
+      },
     },
-    {
-        photo: photoGimbly,
-        name: "María Salomé Loor Vélez",
-        contacto: {
-            linkedin: {
-                icon: logoLinkedin,
-                url: "none"
-            },
-            github: {
-                icon:logoGithub,
-                url: "none"
-            },
-        },
-        portafolio: "none",
-        desarrollo: "FrontEnd - Diseño UI/UX"
-    }
-]
+    portafolio: "",
+    desarrollo: "FrontEnd - BackEnd - Logica de Recomendación",
+    roleKey: "jeff",
+  },
+  {
+    photo: photoGimbly,
+    name: "María Salomé Loor Vélez",
+    contacto: {
+      linkedin: {
+        icon: logoLinkedin,
+        url: "https://www.linkedin.com/in/salome-loor-717587318/",
+      },
+      github: {
+        icon: logoGithub,
+        url: "https://github.com/SalomeLoor",
+      },
+    },
+    portafolio: "none",
+    desarrollo: "FrontEnd - Diseño UI/UX",
+    roleKey: "salome",
+  },
+];

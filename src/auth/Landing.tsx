@@ -1,6 +1,5 @@
 import React from 'react'
-import { IonButton, IonButtons, IonIcon, IonImg, IonPage, IonSegment, useIonRouter } from '@ionic/react';
-import { fingerPrint, person } from 'ionicons/icons';
+import { IonButton, IonButtons, IonImg, IonPage, IonSegment, useIonRouter } from '@ionic/react';
 import '../styles/landing.css';
 const Landing: React.FC = () => {
     const navigate = useIonRouter();
@@ -8,27 +7,24 @@ const Landing: React.FC = () => {
         navigate.push(`auth/${route}`, 'forward', 'push');
     };
     return (
-        <IonPage className='home-page'>
+        <IonPage className='home-page tema-oscuro2'>
             <div className='ion-content-display-flex-column'>
-               <h1 translate="no" lang="zxx" className="secular-one title-app">RoadMap</h1>
+               <h1 translate="no" lang="zxx" className="secular-one title-app texto-quinto">RoadMap</h1>
                 <IonImg src='/Directions.gif' />
                 <IonSegment className='ion-segment'>
-                    <IonButtons
+                    <IonButton
                         onClick={() => handleLoginClick('login')}
-                        className='ion-btn-display-flex-column'>
-                        <IonIcon className='ion-width-icon-home' icon={person} />
-                        <h5>Usuario y contraseña</h5>
-                    </IonButtons>
-                    <IonButtons className='ion-btn-display-flex-column'>
-                        <IonIcon
-                            className='ion-width-icon-home' icon={fingerPrint} />
-                        <h5>Huella /
-                            Face ID</h5>
-                    </IonButtons>
+                        className='btnInicioSesion'>
+                        <h5>Iniciar Sesión</h5>
+                    </IonButton>
+                    <IonButton 
+                    routerLink="/auth/signup" 
+                    className='btnRegistro'>
+                        <h5>Registrarse</h5>
+                    </IonButton>
                 </IonSegment>
-                <IonButton className='ion-nav-link' routerLink="/auth/signup" fill="clear">¿ Aún no tiene una cuenta ?,  <span className='register-txt'> Regístrese</span></IonButton>
             </div>
-        </IonPage>
+        </IonPage> 
     )
 }
 

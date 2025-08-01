@@ -1,0 +1,581 @@
+/*componente terminos y condiciones*/
+.terms-title {
+  --color: var(--primary-color);
+  font-weight: 500;
+  font-size: 18px;
+} 
+.terms-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  line-height: 1.6;
+}
+/* Header de términos */
+.terms-header {
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--co-back-gray-6);
+}
+
+.last-update {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.update-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--co-gray);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.update-date {
+  font-size: 14px;
+  color: var(--primary-color);
+  font-weight: 500;
+}
+
+.terms-description {
+  font-size: 16px;
+  color: var(--text-color);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Secciones */
+.terms-section {
+  margin-bottom: 3rem;
+}
+
+.section-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin: 0 0 1rem 0;
+  letter-spacing: -0.3px;
+}
+
+.section-subtitle {
+  font-size: 14px;
+  color: var(--co-gray);
+  margin: 0 0 1.5rem 0;
+  font-style: italic;
+}
+
+.section-text {
+  font-size: 15px;
+  color: var(--text-color);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Listas de términos */
+.terms-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.list-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.75rem 0;
+  font-size: 15px;
+  color: var(--text-color);
+  line-height: 1.5;
+  border-bottom: 1px solid var(--co-back-gray-6);
+}
+
+.list-item:last-child {
+  border-bottom: none;
+}
+
+/* Iconos de check y cross */
+.check-icon,
+.cross-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+.check-icon {
+  background: var(--co-green-1);
+  color: var(--co-white);
+}
+
+.cross-icon {
+  background: var(--co-red-1);
+  color: var(--co-white);
+}
+
+/* Hover effects para lista items */
+.list-item:hover {
+  background: var(--co-back-gray-4);
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  border-radius: 4px;
+  margin: 0 -0.5rem;
+  transition: all 0.2s ease;
+}
+
+/* Estilos diferenciados para tipos de lista */
+.terms-list.permitted .list-item {
+  border-left: 2px solid var(--co-green-1);
+  padding-left: 1rem;
+  margin-left: 0.5rem;
+}
+
+.terms-list.prohibited .list-item {
+  border-left: 2px solid var(--co-red-1);
+  padding-left: 1rem;
+  margin-left: 0.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .terms-wrapper {
+    padding: 1.5rem 1rem;
+  }
+  
+  .section-title {
+    font-size: 18px;
+  }
+  
+  .terms-description,
+  .section-text {
+    font-size: 15px;
+  }
+  
+  .list-item {
+    font-size: 14px;
+    gap: 0.5rem;
+  }
+  
+  .check-icon,
+  .cross-icon {
+    width: 18px;
+    height: 18px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .terms-wrapper {
+    padding: 1rem 0.75rem;
+  }
+  
+  .terms-title {
+    font-size: 16px;
+  }
+  
+  .section-title {
+    font-size: 16px;
+  }
+  
+  .terms-description,
+  .section-text {
+    font-size: 14px;
+  }
+  
+  .list-item {
+    font-size: 13px;
+    padding: 0.5rem 0;
+  }
+  
+  .terms-list.permitted .list-item,
+  .terms-list.prohibited .list-item {
+    margin-left: 0;
+    padding-left: 0.75rem;
+  }
+  
+  .last-update {
+    text-align: center;
+  }
+}
+
+/* Animaciones sutiles */
+.terms-section {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInUp 0.3s ease-out forwards;
+}
+
+.terms-section:nth-child(2) { animation-delay: 0.1s; }
+.terms-section:nth-child(3) { animation-delay: 0.2s; }
+.terms-section:nth-child(4) { animation-delay: 0.3s; }
+.terms-section:nth-child(5) { animation-delay: 0.4s; }
+.terms-section:nth-child(6) { animation-delay: 0.5s; }
+.terms-section:nth-child(7) { animation-delay: 0.6s; }
+.terms-section:nth-child(8) { animation-delay: 0.7s; }
+.terms-section:nth-child(9) { animation-delay: 0.8s; }
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Estados de focus para accesibilidad */
+.list-item:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* Mejoras tipográficas */
+.terms-wrapper h2 {
+  line-height: 1.3;
+}
+
+.terms-wrapper p {
+  hyphens: auto;
+  word-wrap: break-word;
+}
+
+/* Separadores visuales */
+.terms-section + .terms-section {
+  border-top: 1px solid var(--co-back-gray-6);
+  padding-top: 2rem;
+}
+
+
+/*componente politicas de privacidad*/
+/* Header minimalista */
+.terms-toolbar,
+.privacy-toolbar {
+  --background: var(--background-color);
+  --border-color: var(--co-back-gray-6);
+  --color: var(--primary-color);
+}
+
+.terms-title,
+.privacy-title {
+  --color: var(--primary-color);
+  font-weight: 500;
+  font-size: 20px !important;
+}
+
+/* Contenido principal */
+.terms-content,
+.privacy-content {
+  --background: var(--background-color);
+}
+
+.terms-wrapper,
+.privacy-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  line-height: 1.6;
+}
+
+/* Header de términos y privacidad */
+.terms-header,
+.privacy-header {
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--co-back-gray-6);
+}
+
+.last-update {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.update-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--co-gray);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.update-date {
+  font-size: 14px;
+  color: var(--primary-color);
+  font-weight: 500;
+}
+
+.terms-description,
+.privacy-description {
+  font-size: 16px;
+  color: var(--text-color);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Secciones */
+.terms-section,
+.privacy-section {
+  margin-bottom: 3rem;
+}
+
+.section-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin: 0 0 1rem 0;
+  letter-spacing: -0.3px;
+}
+
+.section-subtitle {
+  font-size: 14px;
+  color: var(--co-gray);
+  margin: 0 0 1.5rem 0;
+  font-style: italic;
+}
+
+.section-text {
+  font-size: 15px;
+  color: var(--text-color);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Listas de términos y privacidad */
+.terms-list,
+.privacy-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.list-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.75rem 0;
+  font-size: 15px;
+  color: var(--text-color);
+  line-height: 1.5;
+  border-bottom: 1px solid var(--co-back-gray-6);
+}
+
+.list-item:last-child {
+  border-bottom: none;
+}
+
+/* Iconos de check y cross */
+.check-icon,
+.cross-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+.check-icon {
+  background: var(--co-green-1);
+  color: var(--co-white);
+}
+
+.cross-icon {
+  background: var(--co-red-1);
+  color: var(--co-white);
+}
+
+/* Hover effects para lista items */
+.list-item:hover {
+  background: var(--co-back-gray-4);
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  border-radius: 4px;
+  margin: 0 -0.5rem;
+  transition: all 0.2s ease;
+}
+
+/* Estilos diferenciados para tipos de lista */
+.terms-list.permitted .list-item,
+.privacy-list .list-item {
+  border-left: 2px solid var(--co-green-1);
+  padding-left: 1rem;
+  margin-left: 0.5rem;
+}
+
+.terms-list.prohibited .list-item {
+  border-left: 2px solid var(--co-red-1);
+  padding-left: 1rem;
+  margin-left: 0.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .terms-wrapper,
+  .privacy-wrapper {
+    padding: 1.5rem 1rem;
+  }
+  
+  .section-title {
+    font-size: 18px;
+  }
+  
+  .terms-description,
+  .privacy-description,
+  .section-text {
+    font-size: 15px;
+  }
+  
+  .list-item {
+    font-size: 14px;
+    gap: 0.5rem;
+  }
+  
+  .check-icon,
+  .cross-icon {
+    width: 18px;
+    height: 18px;
+    font-size: 11px;
+  }
+  
+  .subsection-title {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .terms-wrapper,
+  .privacy-wrapper {
+    padding: 1rem 0.75rem;
+  }
+  
+  .terms-title,
+  .privacy-title {
+    font-size: 16px;
+  }
+  
+  .section-title {
+    font-size: 16px;
+  }
+  
+  .terms-description,
+  .privacy-description,
+  .section-text {
+    font-size: 14px;
+  }
+  
+  .list-item {
+    font-size: 13px;
+    padding: 0.5rem 0;
+  }
+  
+  .terms-list.permitted .list-item,
+  .terms-list.prohibited .list-item,
+  .privacy-list .list-item {
+    margin-left: 0;
+    padding-left: 0.75rem;
+  }
+  
+  .last-update {
+    text-align: center;
+  }
+  
+  .subsection-title {
+    font-size: 14px;
+  }
+}
+
+/* Animaciones sutiles */
+.terms-section,
+.privacy-section {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInUp 0.3s ease-out forwards;
+}
+
+.terms-section:nth-child(2) { animation-delay: 0.1s; }
+.terms-section:nth-child(3) { animation-delay: 0.2s; }
+.terms-section:nth-child(4) { animation-delay: 0.3s; }
+.terms-section:nth-child(5) { animation-delay: 0.4s; }
+.terms-section:nth-child(6) { animation-delay: 0.5s; }
+.terms-section:nth-child(7) { animation-delay: 0.6s; }
+.terms-section:nth-child(8) { animation-delay: 0.7s; }
+.terms-section:nth-child(9) { animation-delay: 0.8s; }
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Estados de focus para accesibilidad */
+.terms-back,
+.privacy-back,
+.list-item:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* Mejoras tipográficas */
+.terms-wrapper h2,
+.privacy-wrapper h2 {
+  line-height: 1.3;
+}
+
+.terms-wrapper p,
+.privacy-wrapper p {
+  hyphens: auto;
+  word-wrap: break-word;
+}
+
+/* Separadores visuales */
+.terms-section + .terms-section,
+.privacy-section + .privacy-section {
+  border-top: 1px solid var(--co-back-gray-6);
+  padding-top: 2rem;
+}
+
+/* Estilos específicos para Privacy Policy */
+
+/* Subsecciones con títulos anidados */
+.subsection-list {
+  margin-top: 1rem;
+}
+
+.subsection-item {
+  margin-bottom: 2rem;
+}
+
+.subsection-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin: 0 0 0.75rem 0;
+  letter-spacing: -0.2px;
+}
+
+/* Información de contacto */
+.contact-info {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: var(--co-back-gray-4);
+  border-radius: 8px;
+  border-left: 3px solid var(--primary-color);
+}
+
+.contact-text {
+  font-size: 14px;
+  color: var(--text-color);
+  margin: 0;
+  line-height: 1.5;
+  font-style: italic;
+}

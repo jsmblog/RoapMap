@@ -108,7 +108,7 @@
   },
   
    "searchbar": {
-    "placeholder": "¿Qué estás buscando?"
+    "placeholder": "Qué estás buscando?"
   },
   "filters": {
     "title": "Filtros de búsqueda",
@@ -263,7 +263,7 @@
       "title": "Visitante curioso",
       "description": "Has marcado o visitado tu primer lugar."
     },
-    "five_visits": {
+    "five_visits": { 
       "title": "Viajero local",
       "description": "Has marcado o visitado 5 lugares distintos."
     },
@@ -311,9 +311,310 @@
   "friend":"Amigos",
   "place":"Lugares",
   "profile":"Perfil",
-  "Ach":"Logros"
+  "Ach":"Logros",
+  "alert":"Foto de perfil actualizada correctamente",
+  "alertError":"Error al actualizar la foto de perfil",
+  "confir":"Confirmación",
+  "messageConfir":"¿Deseas modificar tu perfil con esta imagen?",
 
+   "terms": {
+    "title": "Términos y Condiciones",
+    "lastUpdate": "Última actualización",
+    "description": "Al utilizar la aplicación móvil RoadMap, aceptas los siguientes Términos y Condiciones:",
+    "acceptance": {
+      "title": "Aceptación de los términos",
+      "description": "Al registrarte y usar la app, aceptas cumplir con estas condiciones y con nuestra Política de Privacidad."
+    },
+    "permittedUse": {
+      "title": "Uso permitido",
+      "subtitle": "Puedes utilizar RoadMap para:",
+      "list": [
+        "Descubrir lugares y eventos según tus gustos.",
+        "Guardar favoritos, marcar visitas, y asistir a eventos.",
+        "Publicar reseñas honestas y respetuosas."
+      ]
+    },
+    "prohibitedUse": {
+      "title": "Uso prohibido",
+      "subtitle": "Queda prohibido:",
+      "list": [
+        "Publicar contenido ofensivo, ilegal o que infrinja derechos de terceros.",
+        "Utilizar la app para actividades comerciales no autorizadas.",
+        "Manipular o interferir con el funcionamiento de la app.",
+        "Compartir información personal de otros usuarios sin su consentimiento."
+      ]
+    },
+    "userAccount": {
+      "title": "Cuenta de usuario",
+      "subtitle": "Eres responsable de:",
+      "list": [
+        "Mantener la confidencialidad de tus credenciales.",
+        "Verificar la veracidad de la información ingresada.",
+        "Notificar cualquier uso no autorizado de tu cuenta."
+      ]
+    },
+    "intellectualProperty": {
+      "title": "Propiedad intelectual",
+      "description": "Todo el contenido de la app (logos, textos, código, interfaz) es propiedad de RoadMap o sus respectivos autores. No puedes reproducir ni modificar dicho contenido sin autorización."
+    },
+    "externalIntegrations": {
+      "title": "Integraciones externas",
+      "description": "RoadMap puede integrar servicios de terceros (como Google Maps, calendario nativo). El uso de estos servicios está sujeto a sus propias políticas y términos."
+    },
+    "limitationOfLiability": {
+      "title": "Limitación de responsabilidad",
+      "subtitle": "ExploreLocal no se responsabiliza por:",
+      "list": [
+        "Cancelaciones o cambios en eventos por parte de terceros.",
+        "Inexactitudes en la información de lugares externos.",
+        "Errores en la información proporcionada por terceros.",
+        "Fallas técnicas o de conexión ajenas a la app."
+      ]
+    },
+    "modifications": {
+      "title": "Modificaciones a los términos",
+      "description": "RoadMap puede actualizar estos términos en cualquier momento. Se te notificará en la app o por correo electrónico sobre cambios significativos y tu uso continuado de la app implica aceptación de los nuevos términos."
+    }
+  },
 
+  "privacy": {
+    "title": "Políticas de Privacidad",
+    "lastUpdate": "Última fecha de actualización",
+    "description": "En Roadmap, nos comprometemos a proteger la privacidad de nuestros usuarios. Esta Política de Privacidad describe cómo recopilamos, usamos, almacenamos y protegemos tu información personal cuando usas nuestra aplicación móvil.",
+    "informationCollection": {
+      "title": "Información que recopilamos",
+      "subtitle": "Recopilamos la siguiente información:",
+      "list": [
+        {
+          "title": "1. Información personal",
+          "description": "Nombre, correo electrónico, contraseña (encriptada)."
+        },
+        {
+          "title": "2. Datos de geolocalización",
+          "description": "Ubicación en tiempo real para mostrar lugares y eventos cercanos."
+        },
+        {
+          "title": "3. Preferencias",
+          "description": "Tipo de dispositivo, sistema operativo, permisos otorgados, preferencias de uso."
+        },
+        {
+          "title": "4. Datos de uso",
+          "description": "Interacciones con la aplicación, páginas visitadas, historial de lugares visitados, eventos asistidos, reseñas y calificaciones."
+        },
+        {
+          "title": "5. Datos del dispositivo",
+          "description": "Tipo de dispositivo, sistema operativo, permisos otorgados."
+        }
+      ]
+    },
+    "informationUse": {
+      "title": "Cómo usamos tu información",
+      "subtitle": "Utilizamos la información recopilada para:",
+      "list": [
+        "Personalizar recomendaciones de lugares y eventos.",
+        "Mostrar contenido relevante basado en tu ubicación y preferencias.",
+        "Sincronizar tu calendario personal con eventos.",
+        "Enviar notificaciones y recordatorios.",
+        "Mejorar la experiencia del usuario y la funcionalidad de la aplicación."
+      ]
+    },
+    "dataSharing": {
+      "title": "Compartir información",
+      "subtitle": "RoadMap no vende ni comparte tu información personal con terceros, salvo en los siguientes casos:",
+      "list": [
+        "Cumplimiento de obligaciones legales o solicitudes de autoridades competentes.",
+        "Servicios de terceros integrados (por ejemplo, Google Maps, calendario nativo).",
+        "Para proteger los derechos, propiedad o seguridad de Roadmap, nuestros usuarios u otros."
+      ]
+    },
+    "dataSecurity": {
+      "title": "Seguridad de datos",
+      "subtitle": "Protegemos tu información con medidas técnicas y organizativas como:",
+      "list": [
+        "Encriptación de contraseñas.",
+        "Acceso restringido a la información personal.",
+        "Autenticación mediante tokens JWT.",
+        "Seguridad en la transmisión de datos (HTTPS).",
+        "Validaciones y controles de acceso."
+      ]
+    },
+    "dataRetention": {
+      "title": "Retención de datos",
+      "description": "Guardamos tu información mientras mantengas tu cuenta activa. Puedes eliminar tu cuenta en cualquier momento desde la app, lo cual eliminará tus datos de forma permanente."
+    },
+    "userRights": {
+      "title": "Derechos del usuario",
+      "subtitle": "Tienes los siguientes derechos sobre tu información personal:",
+      "list": [
+        "Acceder a tu información personal.",
+        "Rectificar datos incorrectos o incompletos.",
+        "Eliminar tu cuenta y toda la información asociada.",
+        "Solicitar la corrección o eliminación de tus datos.",
+        "Revocar el consentimiento para ciertos usos."
+      ],
+      "infocantac": "Para ejercer estos derechos, contáctanos en: roadmap_ec@gamil.com"
+    }
+  },
+
+   "infoApp": {
+    "title": "Información de la App",
+    "descriptionTitle": "Descripción",
+    "projectDescription": "RoadMap es una aplicación híbrida (Android/Web/iOS) creada para facilitar el descubrimiento de lugares y eventos cercanos según tu ubicación, preferencias y tiempo disponible. Ideal para viajeros y locales.",
+    "versionTitle": "Versión",
+    "developersTitle": "Desarrolladores",
+    "area": "Área",
+    "portfolio": "Portafolio",
+    "contact": "Contacto",
+    "licenseTitle": "Licencia",
+    "licenseDescription": "Esta aplicación fue desarrollada como parte de un proyecto académico para la asignatura Desarrollo de Aplicaciones Móviles. Su uso es educativo y no comercial.",
+    "roles": {
+      "jeff": "FrontEnd - BackEnd - Lógica de recomendación",
+      "salome": "FrontEnd - Diseño UI/UX"
+    }
+  },
+
+   "favorite": {
+    "title": "Favoritos",
+    "deleteAll": "Eliminar todo",
+    "emptyTitle": "Sin favoritos aún",
+    "emptyMessage": "Marca lugares como favoritos desde el mapa para verlos aquí",
+    "confirm": "Confirmar",
+    "cancel": "Cancelar",
+    "deletedTitle": "Eliminación correcta",
+    "deletedMessage": "Se han eliminado correctamente tus favoritos ✨"
+  },
+
+  "historys": {
+    "title": "Historial",
+    "deleteAll": "Eliminar todo",
+    "emptyTitle": "No tienes historial de lugares visitados.",
+    "emptyMessage": "Busca lugares desde la barra de búsqueda que está en la pantalla principal para verlos aquí.",
+    "confirm": "Confirmar",
+    "cancel": "Cancelar",
+    "deletedTitle": "Eliminación correcta",
+    "deletedMessage": "Se ha eliminado correctamente tu historial ✨"
+  },
+
+   "saveds": {
+    "title": "Guardados",
+    "deleteAll": "Eliminar todo",
+    "emptyTitle": "No tienes guardados aun.",
+    "emptyMessage": "Busca lugares desde la barra de búsqueda que está en la pantalla principal para verlos aquí.",
+    "confirm": "Confirmar",
+    "cancel": "Cancelar",
+    "deletedTitle": "Eliminación correcta",
+    "deletedMessage": "Se ha eliminado correctamente tus guardados ✨"
+  },
+
+  "wearther": {
+    "title": "Estadísticas del Clima",
+    "tem": "Temperatura",
+    "sem":"Sensación",
+    "hum": "Humedad",
+    "vient": "Viento",
+    "rasf":"Rafagas",
+    "pres": "Presión",
+    "mar":"Mar",
+    "suelo":"Suelo",
+    "nub": "Nubosidad",
+    "visi": "Visibilidad",
+    "coor": "Coordenadas"
+  },
+  
+  "supports": {
+    "title": "Soporte",
+    "faqTitle": "Preguntas Frecuentes",
+    "faqDescription": "Aquí encontrarás respuestas a las preguntas más comunes sobre la aplicación.",
+    "contactTitle": "Contactar con Soporte",
+    "contactText1": "Si necesitas ayuda, escríbenos a:",
+    "contactText2": "Responderemos en menos de 24 horas hábiles.",
+    "guide": "Guía Rápida",
+
+    "AccountAndProfile": {
+      "title": "Cuenta y Perfil",
+      "subtitle": "Información sobre la gestión de tu cuenta y perfil.",
+      "list": [
+        {
+          "question": "¿Cómo creo una cuenta?",
+          "answer": "Para crear una cuenta, ve a la pantalla de ajustes y selecciona 'Cerrar Sesión'. Automáticamente serás redirigido a la pantalla de Bienvenida donde podrás registrarte."
+        },
+        {
+          "question": "¿Cómo puedo editar mi perfil?",
+          "answer": "Puedes editar tu perfil dando clic en tu foto de perfil o desde ajustes en la opción 'Información del Perfil'."
+        },
+        {
+          "question": "¿Cómo cambio mi contraseña?",
+          "answer": "Ve a 'Editar Perfil', luego selecciona la opción de 'Contraseña' y sigue las instrucciones en pantalla."
+        }
+      ]
+    },
+    "ExplorationAndRecommendations": {
+      "title": "Exploración y Recomendaciones",
+      "subtitle": "Sugerencias para mejorar tu experiencia.",
+      "list": [
+        {
+          "question": "¿Cómo se generan las recomendaciones?",
+          "answer": "Se basan en tus preferencias al registrarte, tu ubicación y el clima."
+        },
+        {
+          "question": "¿Puedo guardar mis lugares favoritos?",
+          "answer": "Sí, toca el ícono de corazón. Luego los verás en la sección 'Favoritos'."
+        },
+        {
+          "question": "¿Dónde puedo encontrar recomendaciones personalizadas?",
+          "answer": "En la sección 'Recomendaciones', segunda opción de la barra de navegación."
+        }
+      ]
+    },
+    "Events": {
+      "title": "Eventos",
+      "subtitle": "Información sobre eventos y actividades.",
+      "list": [
+        {
+          "question": "¿Cómo puedo ver los eventos cercanos?",
+          "answer": "En la sección 'Recomendaciones', segunda opción de la barra de navegación."
+        },
+        {
+          "question": "¿Cómo puedo crear un evento?",
+          "answer": "Desde 'Crear Evento' en la sección 'Recomendaciones'."
+        },
+        {
+          "question": "¿Cómo puedo unirme a un evento?",
+          "answer": "Haz clic en 'Unirse al Evento' en los detalles del evento."
+        },
+        {
+          "question": "¿Cómo puedo cancelar un evento?",
+          "answer": "Toca 'Cancelar Participación' en los detalles del evento."
+        },
+        {
+          "question": "¿Cómo puedo ver los eventos a los que me he unido?",
+          "answer": "En la sección 'Mis Eventos' de tu perfil."
+        },
+        {
+          "question": "¿Cómo recibo recordatorios?",
+          "answer": "Activa las notificaciones push para recibirlos."
+        }
+      ]
+    },
+    "PrivacyAndSecurity": {
+      "title": "Privacidad y Seguridad",
+      "subtitle": "Cómo protegemos tu información.",
+      "list": [
+        {
+          "question": "¿Cómo se protege mi información personal?",
+          "answer": "Con cifrado de datos y autenticación de dos factores."
+        },
+        {
+          "question": "¿Cómo puedo eliminar mi cuenta?",
+          "answer": "Próximamente disponible en futuras actualizaciones."
+        },
+        {
+          "question": "¿Cómo puedo contactar al soporte técnico?",
+          "answer": "Desde la sección 'Soporte' en la pantalla de ajustes."
+        }
+      ]
+    }
+  }
 
 
 

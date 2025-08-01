@@ -1,21 +1,18 @@
 .login-content {
   --background: var(--background-color);
-  height: 10dvh;
+  height: 100% !important;
+  width: 100%;
 }
-
 .illustration-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 40vh;
+  height: 35%;
   background: var(--background-color);
 }
-
 .forest-image {
-  max-width: 100%;
-  max-height: 100%;
-  width: auto;
-  height: auto;
+  width: 250px;
+  height: 250px;
   object-fit: contain;
 }
 
@@ -24,7 +21,6 @@
   border-radius: 24px 24px 0 0;
   padding: 1rem !important;
   width: 100%;
-  z-index: 10;
   height: 60vh;
   display: flex;
   flex-direction: column;
@@ -32,7 +28,10 @@
   gap: .5rem;
   box-shadow: 0 -1px 10px 1px var(--secondary-color);
 }
-
+.form-container form{
+ width: 100%;
+ height: 100%;
+}
 .welcome-text {
   text-align: center;
 }
@@ -64,16 +63,12 @@
   --min-height: 70px;
   width: 100%;
   border: 1px solid var(--co-back-gray) !important;
-  /* background-color: var(--background-color) !important; */
-}
-
-
-.email-input ion-input,
-.password-input ion-input {
   --placeholder-color: #a0aec0;
   --color: #2d3748;
   font-size: 16px;
+  /* background-color: var(--background-color) !important; */
 }
+
 
 .password-toggle {
   color: var(--primary-color);
@@ -144,24 +139,24 @@
   text-transform: none;
 }
 
-.google-button ion-icon {
+.google-button .icon-google {
   font-size: 20px;
   margin-right: 8px;
 }
 
 /* Header personalizado */
-ion-header.ion-no-border {
+.ion-no-border {
   box-shadow: none;
   background-color: var(--background-color);
   /* position: fixed; */
 }
 
-ion-toolbar[color="transparent"] {
+.toolbar-auth[color="transparent"] {
   --background: transparent;
   --color: #2d3748;
 }
 
-ion-back-button {
+.back-button-auth {
   --color: #2d3748;
 }
 .input-icon {

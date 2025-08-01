@@ -141,12 +141,12 @@ const Auth: React.FC = () => {
   }, []);
 
   return (
-    <IonPage>
+    <IonPage> 
       {ToastComponent}
       <IonHeader className="ion-no-border">
-        <IonToolbar color="transparent">
+        <IonToolbar className='toolbar-auth' color="transparent">
           <IonButtons slot="start">
-            <IonBackButton icon={chevronBackOutline} defaultHref="/" color="dark" text="" />
+            <IonBackButton className='back-button-auth' icon={chevronBackOutline} defaultHref="/" color="dark" text="" />
           </IonButtons>
         </IonToolbar>
       </IonHeader>
@@ -154,7 +154,7 @@ const Auth: React.FC = () => {
         <div className="illustration-container">
           <img src="/Forest.gif" alt="Forest" className="forest-image" draggable={false} />
         </div>
-        <div className="form-container">
+        <form className="form-container">
           <div className="welcome-text">
             <h1 className="secular-one">{title}</h1>
             <p>{subtitle}</p>
@@ -200,12 +200,12 @@ const Auth: React.FC = () => {
               <div className="auth-divider"><span>O</span></div>
               <IonButton expand="block" fill="outline" className="google-button"
                 onClick={() => console.log('Google login')}>
-                <IonIcon slot="start" icon={logoGoogle} />
+                <IonIcon className='icon-google' slot="start" icon={logoGoogle} />
                 <span>Continuar con Google</span>
               </IonButton>
             </>
           {/* )} */}
-        </div>
+        </form>
       </IonContent>
     </IonPage>
   );
