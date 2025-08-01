@@ -31,7 +31,11 @@ import {
     peopleOutline,
     personAddOutline,
     checkmarkCircleOutline,
-    closeCircleOutline
+    closeCircleOutline,
+    paperPlane,
+    terminal,
+    terminalOutline,
+    trash
 } from 'ionicons/icons';
 import React, { useRef, useState } from 'react';
 import { db } from '../Firebase/initializeApp';
@@ -73,7 +77,7 @@ const Chat: React.FC<Props> = ({ selectedGroup, setSelectedGroup, messages, mess
             showToast(`${member.n} se unió al grupo`, 4000, 'success');
         } catch {
             showToast('Error al aceptar solicitud', 4000, 'danger');
-        }finally{
+        } finally {
             setSelectedGroup(null)
             closeModal()
         }
@@ -89,7 +93,7 @@ const Chat: React.FC<Props> = ({ selectedGroup, setSelectedGroup, messages, mess
             showToast(`${member.n} fue ${action}`, 4000, 'success');
         } catch {
             showToast('Error al procesar solicitud', 4000, 'danger');
-        }finally {
+        } finally {
             setSelectedGroup(null)
             closeModal()
         }
@@ -129,7 +133,7 @@ const Chat: React.FC<Props> = ({ selectedGroup, setSelectedGroup, messages, mess
         const date = timestamp.toDate();
         const now = new Date();
         const isToday = date.toDateString() === now.toDateString();
-        
+
         if (isToday) {
             return date.toLocaleTimeString('es-ES', {
                 hour: '2-digit',
@@ -172,14 +176,14 @@ const Chat: React.FC<Props> = ({ selectedGroup, setSelectedGroup, messages, mess
                         <IonHeader className="chat-header">
                             <IonToolbar className="chat-toolbar">
                                 <IonButtons slot="start">
-                                    <IonButton 
-                                        className="header-button back-button" 
+                                    <IonButton
+                                        className="header-button back-button"
                                         onClick={() => setSelectedGroup(null)}
                                     >
                                         <IonIcon icon={chevronBackOutline} />
                                     </IonButton>
                                 </IonButtons>
-                                
+
                                 <div className="chat-title-container">
                                     <div className="group-avatar">
                                         {getInitials(selectedGroup.name)}
@@ -193,8 +197,8 @@ const Chat: React.FC<Props> = ({ selectedGroup, setSelectedGroup, messages, mess
                                 </div>
 
                                 <IonButtons slot="end">
-                                    <IonButton 
-                                        className="header-button menu-button" 
+                                    <IonButton
+                                        className="header-button menu-button"
                                         onClick={handlePopoverClick}
                                     >
                                         <IonIcon icon={ellipsisVertical} />
@@ -202,16 +206,16 @@ const Chat: React.FC<Props> = ({ selectedGroup, setSelectedGroup, messages, mess
                                 </IonButtons>
                             </IonToolbar>
                         </IonHeader>
-                         {ToastComponent}
+                        {ToastComponent}
                         <IonContent className="chat-content">
                             <div className="chat-container-improved">
                                 <div className="messages-container-improved">
                                     {messages.length > 0 ? (
                                         messages.map((msg, index) => {
                                             const isCurrentUser = msg.senderId === user.uid;
-                                            const showSender = !isCurrentUser && 
+                                            const showSender = !isCurrentUser &&
                                                 (index === 0 || messages[index - 1].senderId !== msg.senderId);
-                                            
+
                                             return (
                                                 <div key={msg.id} className={`message-wrapper ${isCurrentUser ? 'message-out' : 'message-in'}`}>
                                                     {showSender && (
@@ -286,8 +290,8 @@ const Chat: React.FC<Props> = ({ selectedGroup, setSelectedGroup, messages, mess
                 className="chat-popover"
             >
                 <div className="popover-content">
-                    <IonButton 
-                        fill="clear" 
+                    <IonButton
+                        fill="clear"
                         className="popover-option"
                         onClick={() => handleShowModal('mem')}
                     >
@@ -295,8 +299,8 @@ const Chat: React.FC<Props> = ({ selectedGroup, setSelectedGroup, messages, mess
                         Ver miembros
                         <div className="member-badge">{selectedGroup?.members?.length || 0}</div>
                     </IonButton>
-                    <IonButton 
-                        fill="clear" 
+                    <IonButton
+                        fill="clear"
                         className="popover-option"
                         onClick={() => handleShowModal('req')}
                     >
@@ -304,11 +308,23 @@ const Chat: React.FC<Props> = ({ selectedGroup, setSelectedGroup, messages, mess
                         Solicitudes
                         <div className="request-badge">{selectedGroup?.requests?.length || 0}</div>
                     </IonButton>
+                    <IonButton
+                        fill="clear"
+                        className="popover-option"
+                        onClick={() => {
+                            navigator.clipboard.writeText(selectedGroup?.code || '');
+                            showToast('Código copiado al portapapeles', 2000, 'success');
+                        }}
+                    >
+                        <IonIcon icon={terminalOutline} slot="start" />
+                        Código
+                    </IonButton>
+
                 </div>
             </IonPopover>
 
-            <IonModal 
-                isOpen={!!modalDataType} 
+            <IonModal
+                isOpen={!!modalDataType}
                 onDidDismiss={closeModal}
                 className="members-modal"
             >
@@ -318,7 +334,7 @@ const Chat: React.FC<Props> = ({ selectedGroup, setSelectedGroup, messages, mess
                             {modalDataType === 'mem' ? 'Miembros del grupo' : 'Solicitudes pendientes'}
                         </IonTitle>
                         <IonButtons slot="end">
-                            <IonButton 
+                            <IonButton
                                 className="close-button"
                                 onClick={closeModal}
                                 fill="clear"
@@ -330,8 +346,9 @@ const Chat: React.FC<Props> = ({ selectedGroup, setSelectedGroup, messages, mess
                 </IonHeader>
                 <IonContent className="modal-content">
                     <div className="members-list">
-                        {(modalDataType === 'mem' ? selectedGroup?.members : selectedGroup?.requests)?.map((member: Follower) => (
-                            <div key={member.uid} className="member-item">
+                        {(modalDataType === 'mem' ? selectedGroup?.members : selectedGroup?.requests)?.map((member: Follower) => {
+                            const amI = member.uid === currentUserData?.uid;
+                            return <div key={member.uid} className="member-item">
                                 <div className="member-info">
                                     <div className="member-avatar">
                                         {member.pt ? (
@@ -346,17 +363,31 @@ const Chat: React.FC<Props> = ({ selectedGroup, setSelectedGroup, messages, mess
                                             <span className="you-badge">Tú</span>
                                         )}
                                     </div>
+                                    {!amI && (
+                                        <div className="action-buttons">
+                                            <IonButton
+                                                className="remove-button"
+                                                size="small"
+                                                onClick={() => removeMember(selectedGroup!, member, 'members')}
+                                            >
+                                                <IonIcon icon={trash} />
+                                            </IonButton>
+                                        </div>
+                                    )}
+                                    {amI && (
+                                        <div className="you-label">(admin)</div>
+                                    )}
                                 </div>
                                 {modalDataType === 'req' && (
                                     <div className="action-buttons">
-                                        <IonButton 
+                                        <IonButton
                                             className="accept-button"
                                             onClick={() => acceptRequest(selectedGroup!, member)}
                                             size="small"
                                         >
                                             <IonIcon icon={checkmarkCircleOutline} />
                                         </IonButton>
-                                        <IonButton 
+                                        <IonButton
                                             className="reject-button"
                                             onClick={() => removeMember(selectedGroup!, member, 'requests')}
                                             size="small"
@@ -366,14 +397,14 @@ const Chat: React.FC<Props> = ({ selectedGroup, setSelectedGroup, messages, mess
                                     </div>
                                 )}
                             </div>
-                        ))}
+                        })}
                         {((modalDataType === 'mem' ? selectedGroup?.members : selectedGroup?.requests)?.length === 0) && (
                             <div className="empty-list">
                                 <div className="empty-icon">
                                     {modalDataType === 'mem' ? '👥' : '📋'}
                                 </div>
                                 <p>
-                                    {modalDataType === 'mem' 
+                                    {modalDataType === 'mem'
                                         ? 'No hay miembros en este grupo'
                                         : 'No hay solicitudes pendientes'
                                     }

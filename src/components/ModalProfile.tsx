@@ -61,7 +61,7 @@ const ModalProfile: React.FC<ModalProfileProps> = ({ isOpen, onClose }) => {
               <img
                 className="modal-profile-avatar"
                 src={
-                  currentUserData.photo
+                  currentUserData?.photo
                     ? currentUserData.photo
                     : "https://ionicframework.com/docs/img/demos/avatar.svg"
                 }
