@@ -17,6 +17,8 @@ import { db } from "../Firebase/initializeApp";
 import { useAchievements } from "../hooks/UseAchievements";
 import { useToast } from "../hooks/UseToast";
 import { Filters } from "../Interfaces/iPlacesResults";
+import { generateUUID } from "../functions/uuid";
+import { formatDateTime } from "../functions/formatDate";
 
 const Map: React.FC<
   MapProps & {
@@ -225,9 +227,14 @@ const Map: React.FC<
 
           // Guardar en historial de Firestore
           try {
+            const objectHistory = {
+              id: generateUUID(),
+              name:place.name,
+              date: formatDateTime(new Date())
+            } 
             await setDoc(
               doc(db, 'USERS', authUser.uid),
-              { h: arrayUnion(place.name || input.value) },
+              { h: arrayUnion(objectHistory) },
               { merge: true }
             );
             if (!isAchievementUnlocked("first_search")) {

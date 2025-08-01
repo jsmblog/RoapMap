@@ -24,6 +24,7 @@ import { connection } from "../connection/connection_to_backend";
 import "../styles/weatherCard.css";
 import { useAchievements } from "../hooks/UseAchievements";
 import { useTranslation } from "react-i18next";
+import ModalClima from "./ModalClima";
 
 const WeatherCard: React.FC = () => {
   const { t } = useTranslation();
@@ -33,14 +34,15 @@ const WeatherCard: React.FC = () => {
   const { unlockAchievement, AchievementPopup, isAchievementUnlocked } =
     useAchievements();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [applyAnimation, setApplyAnimation] = useState(false);
 
   const weatherKey = weather
     ? `${weather.weather[0].id}-${Math.round(weather.main.temp)}-${Math.round(
-        weather.main.humidity
-      )}`
+      weather.main.humidity
+    )}`
     : null;
 
   const handleOpenCardRecommendation = () => {
@@ -109,15 +111,20 @@ const WeatherCard: React.FC = () => {
   return (
     <>
       <div className="weather-box">
-        <IonImg
-          className="weather-icon"
-          alt={`Clima: ${weather.weather[0].description}`}
-          src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@4x.png`}
-        />
-        <p className="weather-temp">
-          <IonIcon icon={thermometerOutline} />{" "}
-          {convertToCelsius(weather.main.temp)}°C
-        </p>
+        <IonButton
+          fill="clear"
+          onClick={() => setIsOpen(true)}
+        >
+          <IonImg
+            className="weather-icon"
+            alt={`Clima: ${weather.weather[0].description}`}
+            src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@4x.png`}
+          />
+          <p className="weather-temp">
+            <IonIcon icon={thermometerOutline} />{" "}
+            {convertToCelsius(weather.main.temp)}°C
+          </p>
+        </IonButton>
 
         {loading && (
           <IonButton fill="clear" className="recommendation-button">
@@ -140,9 +147,8 @@ const WeatherCard: React.FC = () => {
         {recommendation && !loading && (
           <IonButton
             fill="clear"
-            className={`recommendation-button ${
-              !applyAnimation ? "heartbeat" : ""
-            }`}
+            className={`recommendation-button ${!applyAnimation ? "heartbeat" : ""
+              }`}
             onClick={handleOpenCardRecommendation}
           >
             <IonIcon icon={informationCircleOutline} />
@@ -217,8 +223,13 @@ const WeatherCard: React.FC = () => {
               </div>
             </IonCardContent>
           </IonCard>
+
+
         </IonContent>
       </IonModal>
+      <ModalClima isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+      />
     </>
   );
 };

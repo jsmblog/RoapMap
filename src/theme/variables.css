@@ -19,29 +19,38 @@
 }
 
 :root {
-    --primary-color: #31572C;
-    --secondary-color: #B0DB9C;
-    --co-green-1:#4ade80;
-    --background-color: #ECFAE5;
-    --text-color: #333333;
-    --co-white: white;
-    --co-gray: #818080;
-    --co-back-gray: #ebebeb;
-    --co-back-gray-2: #f9f9f9f1;
-    --co-back-gray-3: #d4d2d0;
-    --co-back-gray-4: #f9f7f4;
-    --co-back-gray-5: #3d3c3c81;
-    --co-back-gray-6: #e2e8f0;
-    --co-back-gray-7: rgba(255, 255, 255, 0.219);
-    --co-back-gray-8: #2a2a2a;
-    --co-black-1:rgba(0, 0, 0, 0.893);
-  --co-black-2:rgba(0, 0, 0, 0.555);
-  --color-btns:#9FC87E;
-  --color-btns-text:#31572C;
+  --primary-color: #31572c;
+  --secondary-color: #b0db9c;
+  --co-green-1: #4ade80;
+  --background-color: #ecfae5;
+  --text-color: #333333;
+  --co-white: white;
+  --co-gray: #818080;
+  --co-back-gray: #ebebeb;
+  --co-back-gray-2: #f9f9f9f1;
+  --co-back-gray-3: #d4d2d0;
+  --co-back-gray-4: #f9f7f4;
+  --co-back-gray-5: #3d3c3c81;
+  --co-back-gray-6: #e2e8f0;
+  --co-back-gray-7: rgba(255, 255, 255, 0.219);
+  --co-back-gray-8: #2a2a2a;
+  --co-black-1: rgba(0, 0, 0, 0.893);
+  --co-black-2: rgba(0, 0, 0, 0.555);
+  --color-btns: #9fc87e;
+  --color-btns-text: #31572c;
   --tema-oscuro: #1e1e1e;
   --Texto-primario: #e0e0e0;
-  --Texto-secundario:#a0a0a0;
-  --co-red-1:#FB4141;
+  --Texto-secundario: #a0a0a0;
+  --co-red-1: #fb4141;
+  --linear-gradiente: linear-gradient(135deg, #a8e063, #56ab2f, #0bab63);
+  --linear-gradiente2: linear-gradient(
+    135deg,
+   #31572c,
+    #b0db9c,
+    #ecfae5
+  );
+  --fondo-backdrop-filter:#f0f0f054;
+
 }
 .ion-content-display-flex-column {
   display: flex;
@@ -77,26 +86,26 @@
 }
 
 .animacion-slide-top {
-	-webkit-animation: slide-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-	        animation: slide-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  -webkit-animation: slide-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 @-webkit-keyframes slide-top {
   0% {
     -webkit-transform: translateY(0);
-            transform: translateY(0);
+    transform: translateY(0);
   }
   100% {
     -webkit-transform: translateY(10px);
-            transform: translateY(10px);
+    transform: translateY(10px);
   }
 }
 @keyframes slide-top {
   0% {
     -webkit-transform: translateY(0);
-            transform: translateY(0);
+    transform: translateY(0);
   }
   100% {
     -webkit-transform: translateY(10px);
-            transform: translateY(10px);
+    transform: translateY(10px);
   }
 }

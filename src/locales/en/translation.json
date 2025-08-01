@@ -284,7 +284,11 @@
   "lastNameAlert": "Add your last name",
   "successfullyAlert": "Field updated successfully",
   "errorAlert": "Error trying to update",
-  "notificationsPush": "Push Notifications"
+  "notificationsPush": "Push Notifications",
+  "friend":"Friends",
+  "place":"Places",
+  "profile":"Profile",
+  "Ach":"Ach"
 
 
 
