@@ -82,6 +82,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           savedPlaces: data.sp || [],
           uid: data.uid,
           photo: data.pt || "",
+          googleToken:data.gt || null,
+          events:data.ev || []
         });
         setIsLoading(false);
       },

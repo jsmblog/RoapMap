@@ -75,7 +75,7 @@ body.dark-mode {
 .dark-mode .feature-title {
   color: var(--primary-color) !important;
 }
-.dark-mode .texto-cuaternario{
+.dark-mode .texto-cuaternario {
   color: var(--co-black-1);
 }
 .dark-mode .texto-quinto {
@@ -85,7 +85,7 @@ body.dark-mode {
   --color: black;
 }
 .dark-mode .iconos-oscuros {
- color: var(--color-btns);
+  color: var(--color-btns);
 }
 .dark-mode .inputs-background {
   --background: var(--co-back-gray-8);
@@ -93,7 +93,7 @@ body.dark-mode {
 .dark-mode .label-text-wrapper,
 .dark-mode .label-floating,
 .dark-mode .IonTextarea,
-.dark-mode .inputs-background::placeholder{
+.dark-mode .inputs-background::placeholder {
   color: var(--Texto-secundario) !important;
 }
 /* falta Estilo para los textos superiores del IonDatetime (mes, año, días) */
@@ -131,41 +131,44 @@ body.dark-mode {
   color: var(--Texto-secundario) !important;
 }
 
-/*dark mode favoritos*/
+/*dark mode favoritos saved , history*/
 
- .dark-mode .title-favorite,
- .dark-mode .iconos-oscuros {
-    --color: #ffffff;
-  }
+.dark-mode .title-favorite,
+.dark-mode .iconos-oscuros {
+  --color: #ffffff;
+}
 
- .dark-mode .favorite-card {
+.dark-mode .favorite-card {
   --background: var(--co-back-gray-6);
-  }
+}
 
-  .dark-mode.card-header {
-    background: linear-gradient(135deg, #333333 0%, #2c2c2c 100%);
-    border-bottom-color: rgba(255, 255, 255, 0.1);
-  }
+.dark-mode.card-header {
+  background: linear-gradient(135deg, #333333 0%, #2c2c2c 100%);
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
 
- .dark-mode .place-name {
-    color: #ffffff;
-  }
+.dark-mode .place-name {
+  color: #ffffff;
+}
 
-  .dark-mode.place-vicinity {
-    color: #b0b0b0;
-  }
-  .dark-mode.category-icon {
-    background: rgba(39, 174, 96, 0.2);
-  }
+.dark-mode.place-vicinity {
+  color: #b0b0b0;
+}
+.dark-mode.category-icon {
+  background: rgba(39, 174, 96, 0.2);
+}
 
- .dark-mode .empty-state h3 {
-    color: #ffffff;
-  }
+.dark-mode .empty-state h3 {
+  color: #ffffff;
+}
 
- .dark-mode .empty-state p {
-    color: #b0b0b0;
-  }
-
+.dark-mode .empty-state p {
+  color: #b0b0b0;
+}
+.dark-mode .btn-delete {
+  --color: var(--Texto-primario);
+  --border-color: var(--Texto-primario);
+}
 /*tab bar*/
 .dark-mode .tab {
   background: var(--co-back-gray-8);

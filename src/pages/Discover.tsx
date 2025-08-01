@@ -39,6 +39,11 @@ import {
 } from 'ionicons/icons';
 import { useAuthContext } from '../context/UserContext';
 import { useToast } from '../hooks/UseToast';
+import axios from 'axios';
+import { VITE_LINK_FIREBASE_FUNCTIONS } from '../config/config';
+import { generateUUID } from '../functions/uuid';
+import { arrayUnion, doc, setDoc } from 'firebase/firestore';
+import { db } from '../Firebase/initializeApp';
 
 type SavedPlace = {
   geometry: {
@@ -78,6 +83,7 @@ const Discover: React.FC = () => {
   const { currentUserData } = useAuthContext();
   const { showToast, ToastComponent } = useToast();
   const [showModal, setShowModal] = useState(false);
+  const [isProgrammingEv, setIsProgrammingEv] = useState<boolean>(false)
   const router = useIonRouter()
   useEffect(() => {
     const loadPlaces = async () => {
@@ -118,7 +124,7 @@ const Discover: React.FC = () => {
 
   const calculateDistance = (place: SavedPlace): number => {
     if (!userLocation) return 0;
-    
+
     const distance = getDistance(
       { latitude: userLocation.lat, longitude: userLocation.lng },
       { latitude: place.geometry.location.lat, longitude: place.geometry.location.lng }
@@ -293,6 +299,13 @@ const Discover: React.FC = () => {
   };
 
   const openEventModal = (place: SavedPlace) => {
+    if (currentUserData?.googleToken === null) {
+      showToast("Debes estar conectado a Google para poder ver los eventos.", 3000, 'warning');
+      setTimeout(() => {
+        router.push('/auth/google/calendar', 'forward')
+      }, 3000);
+      return;
+    }
     setSelectedPlace(place);
     setEventTitle(`Visita a ${place.name}`);
     setEventDescription('');
@@ -300,23 +313,54 @@ const Discover: React.FC = () => {
     setShowEventModal(true);
   };
 
-  const saveEvent = () => {
+  const saveEvent = async () => {
     if (!eventTitle || !selectedPlace) {
       showToast('Por favor completa el título del evento', 3000, 'warning');
       return;
     }
+    setIsProgrammingEv(true);
+    try {
+      const reserveData = {
+        id: currentUserData?.uid,
+        summary: eventTitle,
+        description: eventDescription ? eventDescription : `¡${currentUserData?.name} haz programado un evento para visitar ${selectedPlace.name}!`,
+        eventDate: `${eventDate}-07:00`,
+        duration: 60,
+        country: "Ecuador"
+      };
 
-    // Aquí puedes agregar la lógica para guardar en Google Calendar
-    console.log('Evento a guardar:', {
-      title: eventTitle,
-      description: eventDescription,
-      date: eventDate,
-      place: selectedPlace
-    });
-
-    showToast('Evento guardado exitosamente', 3000, 'success');
-    router.push('/auth/google/calendar','forward')
-    setShowEventModal(false);
+      const response = await axios.post(`${VITE_LINK_FIREBASE_FUNCTIONS}/manage-calendar`, reserveData)
+      if (response.status === 500) {
+        return showToast("Ha ocurrido un error , por favor intentelo nuevamente.")
+      }
+      if (response.status === 409) {
+        return showToast("Ya haz programado un evento en esta fecha", 4000, "warning")
+      }
+      console.log("Datos de programación: ", response)
+      const eventId = response?.data?.eventId;
+      if (!eventId) {
+        return showToast("Hubo un error, intentelo nuevamente...")
+      }
+      const date = eventDate.split("T")[0];
+      const time = eventDate.split("T")[1];
+      const event = {
+        id: eventId,
+        sm: reserveData.summary,
+        d: reserveData.description,
+        dt: date,
+        dr: reserveData.duration,
+        t: time.slice(0, 5)
+      }
+      const docRef = doc(db, "USERS", currentUserData?.uid);
+      await setDoc(docRef, { ev: arrayUnion(event) }, { merge: true })
+      showToast('Evento guardado exitosamente', 3000, 'success');
+      setShowEventModal(false);
+      setIsProgrammingEv(false)
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setIsProgrammingEv(false)
+    }
   };
 
   return (
@@ -401,7 +445,7 @@ const Discover: React.FC = () => {
                             {place.distance && (
                               <div className="distance">
                                 <IonIcon icon={navigateOutline} />
-                                <span>{place.distance} km</span>
+                                <span>{place.distance} km {place.distance <= 20 ? "¡estas cerca!" : null}</span>
                               </div>
                             )}
 
@@ -461,7 +505,7 @@ const Discover: React.FC = () => {
                       {place.distance && (
                         <div className="stat-item distance-stat">
                           <IonIcon icon={navigateOutline} />
-                          <span>{place.distance} km</span>
+                          <span>{place.distance} km {place.distance <= 20 ? "¡estas cerca!" : null}</span>
                         </div>
                       )}
                     </div>
@@ -522,7 +566,7 @@ const Discover: React.FC = () => {
               <IonTextarea
                 value={eventDescription}
                 onIonInput={(e) => setEventDescription(e.detail.value!)}
-                placeholder="Descripción del evento"
+                placeholder="Descripción del evento (opcional)"
                 rows={3}
               />
             </IonItem>
@@ -531,6 +575,7 @@ const Discover: React.FC = () => {
               <IonLabel position="stacked">Fecha y hora</IonLabel>
               <IonDatetime
                 value={eventDate}
+                min={new Date().toISOString().split('T')[0]}
                 onIonChange={(e) => setEventDate(e.detail.value as string)}
                 presentation="date-time"
               />
@@ -541,8 +586,9 @@ const Discover: React.FC = () => {
                 expand="block"
                 onClick={saveEvent}
                 className="save-btn"
+                disabled={isProgrammingEv}
               >
-                Guardar Evento
+                {isProgrammingEv ? "Guardando..." : "Guardar Evento"}
               </IonButton>
             </div>
           </div>

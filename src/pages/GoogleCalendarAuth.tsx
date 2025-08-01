@@ -1,16 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import {
   IonPage,
   IonContent,
-  IonHeader,
-  IonToolbar,
-  IonTitle,
-  IonButtons,
   IonButton,
   IonIcon,
   IonCard,
   IonCardContent,
-  IonText,
   IonSpinner,
   IonCheckbox,
   IonItem,
@@ -28,57 +23,58 @@ import {
 } from 'ionicons/icons';
 import '../styles/GoogleCalendarAuth.css';
 import { useToast } from '../hooks/UseToast';
+import { useAuthContext } from '../context/UserContext';
+import { useLocation } from 'react-router-dom';
+import { VITE_LINK_FIREBASE_FUNCTIONS } from '../config/config';
+
+const useQuery = () => {
+  const { search } = useLocation();
+  return useMemo(() => new URLSearchParams(search), [search]);
+};
 
 interface GoogleCalendarAuthProps {
   onClose?: () => void;
-  onAuthSuccess?: (authData: any) => void;
+  onAuthSuccess?: () => void;
 }
 
-const GoogleCalendarAuth: React.FC<GoogleCalendarAuthProps> = ({ 
-  onClose, 
-  onAuthSuccess 
-}) => {
+const GoogleCalendarAuth: React.FC<GoogleCalendarAuthProps> = ({ onClose, onAuthSuccess }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [currentStep, setCurrentStep] = useState<'intro' | 'permissions' | 'loading' | 'success'>('intro');
   const [acceptedTerms, setAcceptedTerms] = useState(false);
   const [acceptedPrivacy, setAcceptedPrivacy] = useState(false);
   const { showToast, ToastComponent } = useToast();
+  const { currentUserData } = useAuthContext();
+  const query = useQuery();
 
-  const handleGoogleAuth = async () => {
+  useEffect(() => {
+    const success = query.get('success');
+    const error = query.get('error');
+
+    if (success === 'true') {
+      setCurrentStep('success');
+      showToast('¡Calendario vinculado exitosamente!', 3000, 'success');
+      if (onAuthSuccess) onAuthSuccess();
+    } else if (error) {
+      setCurrentStep('intro');
+      showToast(`Error al vincular: ${decodeURIComponent(error)}`, 5000, 'danger');
+    }
+  }, [query]);
+
+  const handleGoogleAuth = () => {
     if (!acceptedTerms || !acceptedPrivacy) {
       showToast('Por favor acepta los términos y condiciones', 4000, 'warning');
+      return;
+    }
+    if (!currentUserData?.uid) {
+      showToast('Usuario no autenticado', 4000, 'danger');
       return;
     }
 
     setIsLoading(true);
     setCurrentStep('loading');
 
-    try {
-      // Aquí irá la lógica real de autenticación con Google
-      // Por ahora simulamos el proceso
-      await new Promise(resolve => setTimeout(resolve, 3000));
-      
-      // Simular respuesta exitosa
-      const mockAuthData = {
-        accessToken: 'mock_access_token',
-        email: 'usuario@gmail.com',
-        name: 'Usuario',
-        calendarAccess: true
-      };
-
-      setCurrentStep('success');
-      setTimeout(() => {
-        onAuthSuccess?.(mockAuthData);
-        showToast('¡Autenticación exitosa! Ahora puedes crear eventos.', 5000, 'success');
-      }, 2000);
-
-    } catch (error) {
-      console.error('Error en autenticación:', error);
-      showToast('Error al conectar con Google. Inténtalo de nuevo.', 5000, 'danger');
-      setCurrentStep('intro');
-    } finally {
-      setIsLoading(false);
-    }
+    const encodedUserId = encodeURIComponent(currentUserData.uid);
+    window.location.href = `${VITE_LINK_FIREBASE_FUNCTIONS}/start-oauth?userId=${encodedUserId}`;
   };
 
   const renderIntroStep = () => (
@@ -101,7 +97,7 @@ const GoogleCalendarAuth: React.FC<GoogleCalendarAuthProps> = ({
             <p>Crea eventos directamente desde las recomendaciones</p>
           </div>
         </div>
-        
+
         <div className="feature-item">
           <IonIcon icon={lockClosedOutline} />
           <div className="feature-text">
@@ -109,7 +105,7 @@ const GoogleCalendarAuth: React.FC<GoogleCalendarAuthProps> = ({
             <p>Tus datos están protegidos y encriptados</p>
           </div>
         </div>
-        
+
         <div className="feature-item">
           <IonIcon icon={shieldCheckmarkOutline} />
           <div className="feature-text">
@@ -148,7 +144,7 @@ const GoogleCalendarAuth: React.FC<GoogleCalendarAuthProps> = ({
             <p>Para crear y gestionar eventos</p>
           </IonLabel>
         </IonItem>
-        
+
         <IonItem className="permission-item">
           <IonIcon icon={shieldCheckmarkOutline} slot="start" color="success" />
           <IonLabel>
@@ -162,18 +158,18 @@ const GoogleCalendarAuth: React.FC<GoogleCalendarAuthProps> = ({
         <IonItem className="terms-item">
           <IonCheckbox
             checked={acceptedTerms}
-            onIonChange={(e) => setAcceptedTerms(e.detail.checked)}
+            onIonChange={e => setAcceptedTerms(e.detail.checked)}
             slot="start"
           />
           <IonLabel>
             <p>Acepto los <span className="link">términos y condiciones</span></p>
           </IonLabel>
         </IonItem>
-        
+
         <IonItem className="terms-item">
           <IonCheckbox
             checked={acceptedPrivacy}
-            onIonChange={(e) => setAcceptedPrivacy(e.detail.checked)}
+            onIonChange={e => setAcceptedPrivacy(e.detail.checked)}
             slot="start"
           />
           <IonLabel>
@@ -191,14 +187,14 @@ const GoogleCalendarAuth: React.FC<GoogleCalendarAuthProps> = ({
           <IonIcon icon={arrowBackOutline} slot="start" />
           Atrás
         </IonButton>
-        
+
         <IonButton
           className="google-auth-btn"
           onClick={handleGoogleAuth}
-          disabled={!acceptedTerms || !acceptedPrivacy}
+          disabled={!acceptedTerms || !acceptedPrivacy || isLoading}
         >
           <IonIcon icon={logoGoogle} slot="start" />
-          Conectar con Google
+          {isLoading ? 'Procesando...' : 'Conectar con Google'}
         </IonButton>
       </div>
     </div>
@@ -214,10 +210,10 @@ const GoogleCalendarAuth: React.FC<GoogleCalendarAuthProps> = ({
           <IonIcon icon={calendarOutline} className="calendar-icon" />
         </div>
       </div>
-      
+
       <h2>Conectando...</h2>
       <p>Estamos estableciendo la conexión con Google Calendar</p>
-      
+
       <div className="loading-steps">
         <div className="step active">
           <span className="step-number">1</span>
@@ -240,10 +236,10 @@ const GoogleCalendarAuth: React.FC<GoogleCalendarAuthProps> = ({
       <div className="success-animation">
         <IonIcon icon={checkmarkCircleOutline} className="success-icon" />
       </div>
-      
+
       <h2>¡Conexión Exitosa!</h2>
       <p>Tu Google Calendar está conectado correctamente</p>
-      
+
       <div className="success-features">
         <div className="success-item">
           <IonIcon icon={calendarOutline} />
@@ -254,6 +250,10 @@ const GoogleCalendarAuth: React.FC<GoogleCalendarAuthProps> = ({
           <span>Sincronización en tiempo real</span>
         </div>
       </div>
+
+      <IonButton expand="block" onClick={onClose || (() => { })}>
+        Cerrar
+      </IonButton>
     </div>
   );
 

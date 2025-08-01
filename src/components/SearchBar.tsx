@@ -176,7 +176,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
           </div>
         </div>
 
-        {getActiveFiltersCount() > 0 && (
+        {/* {getActiveFiltersCount() > 0 && (
           <div className="active-filters">
             {selectedTypes.size > 0 && (
               <IonChip className="filter-chip">
@@ -216,7 +216,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
               </IonChip>
             )}
           </div>
-        )}
+        )} */}
       </div>
 
       <IonModal

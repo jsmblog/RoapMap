@@ -10,7 +10,8 @@ import {
 import { useParams } from 'react-router';
 import { useToast } from '../hooks/UseToast';
 import {
-  createUserWithEmailAndPassword, sendEmailVerification,
+  createUserWithEmailAndPassword, getAuth, sendEmailVerification,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword
 } from 'firebase/auth';
 import { AUTH_USER, db } from '../Firebase/initializeApp';
@@ -28,6 +29,7 @@ const Auth: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const {location,getLocation} = useRequestLocationPermission();
   const router = useIonRouter();
+  const auth = getAuth();
 
   const [showPassword, setShowPassword] = useState(false);
   const [form, setForm] = useState({ name: '', email: '', password: '' });
@@ -136,6 +138,20 @@ const Auth: React.FC = () => {
     },
   ].filter(Boolean), [form, isLogin, showPassword]);
 
+  const handleResetPassword = async () => {
+    if (!form.email) {
+      showToast('Por favor, ingrese su correo electrónico para recuperar la contraseña.',4000,'warning');
+      return;
+    }
+    try {
+      await sendPasswordResetEmail(auth, form.email);
+      showToast('Se ha enviado un correo de restablecimiento de contraseña. Por favor, revisa tu bandeja de entrada.');
+    } catch (error) {
+      console.error('Error al enviar el correo de restablecimiento:', error);
+      showToast('Hubo un error al intentar enviar el correo. Verifica el correo ingresado.',5000,'danger');
+    }
+  };
+
    useEffect(() => {
     if(!isLogin) getLocation();
   }, []);
@@ -186,9 +202,12 @@ const Auth: React.FC = () => {
             ))}
           </div>
           {isLogin && (
-            <div className="forgot-password">
+            <button onClick={(e) => {
+                e.preventDefault();
+                handleResetPassword();
+              }} className="forgot-password">
               <span>¿Olvidaste tu contraseña?</span>
-            </div>
+            </button>
           )}
           <IonButton expand="block" 
           disabled={loading} 
