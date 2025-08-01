@@ -73,11 +73,416 @@
 .no-image {
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, var(--secondary-color), var(--co-green-1));
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
+.no-image ion-icon {
+  font-size: 3rem;
+  color: var(--co-white);
+  opacity: 0.8;
+}
+
+/* Status Badge */
+.card-image ion-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  border-radius: 16px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  z-index: 5;
+}
+
+.card-image ion-badge.open {
+  --background: var(--co-green-1);
+  --color: var(--co-white);
+}
+
+.card-image ion-badge.closed {
+  --background: var(--co-red-1);
+  --color: var(--co-white);
+}
+
+.card-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, var(--co-black-1));
+  padding: 40px 16px 16px 16px;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+
+.carousel-card:hover .card-overlay {
+  transform: translateY(0);
+}
+
+.overlay-content h3 {
+  color: var(--co-white);
+  text-shadow: 1px 1px 1px var(--co-black-1);
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0 0 4px 0;
+  line-height: 1.2;
+}
+
+.overlay-content p {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.85rem;
+  margin: 0 0 8px 0;
+}
+
+/* Rating in Overlay */
+.overlay-content .rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 8px;
+  background: var(--co-back-gray-7);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.overlay-content .rating ion-icon {
+  color: #fbbf24;
+  font-size: 0.9rem;
+}
+
+.overlay-content .rating span {
+  color: var(--co-white);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* Distance in Overlay */
+.overlay-content .distance {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 12px;
+  background: var(--co-back-gray-7);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.overlay-content .distance ion-icon {
+  color: var(--primary-color);
+  font-size: 0.9rem;
+}
+
+.overlay-content .distance span {
+  color: var(--co-white);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.overlay-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.action-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: var(--co-white);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.action-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+.action-btn.primary {
+  background: var(--primary-color);
+  width: 50px;
+  border-radius: 10px;
+}
+
+.action-btn.primary:hover {
+  background: var(--co-green-1);
+}
+
+.action-btn ion-icon {
+  font-size: 0.9rem;
+}
+
+/* ENHANCED RECOMMENDATION MODAL STYLES - ONLY IMPROVEMENTS HERE */
+.recommendation-modal-content {
+  padding: 1rem;
+  overflow-y: auto;
+  --background: var(--background-color);
+}
+
+.recommendations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  padding: 0.5rem;
+}
+
+.recommendation-card-enhanced {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  background: var(--co-white);
+  transition: all 0.3s ease;
+  margin: 0;
+}
+
+.recommendation-card-enhanced:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.card-header {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+}
+
+.card-header ion-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.recommendation-card-enhanced:hover .card-header ion-img {
+  transform: scale(1.05);
+}
+
+.no-image-rec {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.no-image-rec ion-icon {
+  font-size: 3rem;
+  color: var(--co-white);
+  opacity: 0.8;
+}
+
+.recommendation-card-enhanced ion-card-content {
+  padding: 1.5rem;
+}
+
+.place-name {
+  color: var(--primary-color);
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.3;
+}
+
+.place-vicinity {
+  color: var(--Texto-secundario);
+  font-size: 0.95rem;
+  margin: 0 0 1rem 0;
+  line-height: 1.4;
+}
+
+.place-stats {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.rating-stat {
+  background: rgba(251, 191, 36, 0.1);
+  color: #d97706;
+}
+
+.rating-stat ion-icon {
+  color: #fbbf24;
+}
+
+.distance-stat {
+  background: rgba(var(--primary-color-rgb), 0.1);
+  color: var(--primary-color);
+}
+
+.distance-stat ion-icon {
+  color: var(--primary-color);
+}
+
+.program-btn {
+  --background: var(--secondary-color);
+  --color: var(--primary-color);
+  --border-radius: 12px;
+  height: 48px;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.program-btn:hover {
+  --background: var(--primary-color);
+  --color: var(--co-white);
+  transform: translateY(-2px);
+}
+
+/* EVENT MODAL STYLES */
+.event-modal {
+  --background: var(--background-color);
+}
+
+.event-form-container {
+  padding: 1rem;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.selected-place-info {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  padding: 1.5rem;
+  border-radius: 16px;
+  margin-bottom: 2rem;
+  color: var(--co-white);
+  text-align: center;
+}
+
+.selected-place-info h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.selected-place-info p {
+  margin: 0 0 1rem 0;
+  opacity: 0.9;
+}
+
+.distance-badge {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.event-form-container ion-item {
+  --background: var(--co-white);
+  --border-radius: 12px;
+  margin-bottom: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.event-form-container ion-label {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.event-actions {
+  margin-top: 2rem;
+}
+
+.save-btn {
+  --background: var(--primary-color);
+  --color: var(--co-white);
+  --border-radius: 12px;
+  height: 52px;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .category-header {
+    padding: 0 16px 12px 16px;
+  }
+  
+  .category-title {
+    font-size: 1.2rem;
+  }
+  
+  .carousel-controls {
+    display: none;
+  }
+  
+  .places-carousel {
+    padding: 0 16px;
+    gap: 12px;
+  }
+  
+  .carousel-card {
+    flex: 0 0 280px;
+    height: 180px;
+  }
+  
+  .generate-recommendation-btn {
+    margin: 12px;
+    height: 45px;
+  }
+
+  .recommendations-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .recommendation-card-enhanced {
+    margin-bottom: 1rem;
+  }
+
+  .program-btn {
+    height: 44px;
+    font-size: 0.9rem;
+  }
+
+  .event-form-container {
+    padding: 0.5rem;
+  }
+
+  .selected-place-info {
+    padding: 1rem;
+  }
+
+  .save-btn {
+    height: 48px;
+  }
+}
+
+/* Smooth scrolling for touch devices */
+@media (hover: none) and (pointer: coarse) {
+  .carousel-card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+  
+  .carousel-card:hover .card-overlay {
+    transform: translateY(100%);
+  }
+  
+  .carousel-card:active .card-overlay {
+    transform: translateY(0);
+  }
 
 .no-image ion-icon {
   font-size: 2.5rem;
@@ -141,6 +546,29 @@ ion-card-subtitle {
 }
 
 .rating span {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+/* Distance */
+.distance {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 12px;
+  background: var(--background-color);
+  padding: 6px 12px;
+  border-radius: 20px;
+  width: fit-content;
+}
+
+.distance ion-icon {
+  color: var(--primary-color);
+  font-size: 1rem;
+}
+
+.distance span {
   font-size: 0.9rem;
   font-weight: 600;
   color: var(--primary-color);
@@ -391,206 +819,4 @@ ion-card-subtitle {
 .no-image {
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.no-image ion-icon {
-  font-size: 3rem;
-  color: var(--co-white);
-  opacity: 0.8;
-}
-
-/* Status Badge */
-.card-image ion-badge {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  border-radius: 16px;
-  font-size: 0.7rem;
-  font-weight: 600;
-  z-index: 5;
-}
-
-.card-image ion-badge.open {
-  --background: var(--co-green-1);
-  --color: var(--co-white);
-}
-
-.card-image ion-badge.closed {
-  --background: var(--co-red-1);
-  --color: var(--co-white);
-}
-
-.card-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: linear-gradient(transparent, var(--co-black-1));
-  padding: 40px 16px 16px 16px;
-  transform: translateY(100%);
-  transition: transform 0.3s ease;
-}
-
-.carousel-card:hover .card-overlay {
-  transform: translateY(0);
-}
-
-.overlay-content h3 {
-  color: var(--co-white);
-  text-shadow: 1px 1px 1px var(--co-black-1);
-  font-size: 1.1rem;
-  font-weight: 700;
-  margin: 0 0 4px 0;
-  line-height: 1.2;
-}
-
-.overlay-content p {
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 0.85rem;
-  margin: 0 0 8px 0;
-}
-
-/* Rating in Overlay */
-.overlay-content .rating {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  margin-bottom: 12px;
-  background: var(--co-back-gray-7);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-}
-
-.overlay-content .rating ion-icon {
-  color: #fbbf24;
-  font-size: 0.9rem;
-}
-
-.overlay-content .rating span {
-  color: var(--co-white);
-  font-size: 0.85rem;
-  font-weight: 600;
-}
-
-.overlay-actions {
-  display: flex;
-  gap: 8px;
-}
-
-.action-btn {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  border: none;
-  background: rgba(255, 255, 255, 0.2);
-  color: var(--co-white);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-}
-
-.action-btn:hover {
-  background: rgba(255, 255, 255, 0.3);
-  transform: scale(1.1);
-}
-
-.action-btn.primary {
-  background: var(--primary-color);
-  width: 50px;
-  border-radius: 10px;
-}
-
-.action-btn.primary:hover {
-  background: var(--co-green-1);
-}
-
-.action-btn ion-icon {
-  font-size: 0.9rem;
-}
-.recommendation-modal-content {
-  padding: 1rem;
-  overflow-y: auto;
-}
-
-.recommendation-card {
-  margin-bottom: 1rem;
-}
-
-.no-image {
-  height: 200px;
-  background-color: #e0e0e0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #777;
-}
-
-/* Mobile Responsive */
-@media (max-width: 768px) {
-  .category-header {
-    padding: 0 16px 12px 16px;
-  }
-  
-  .category-title {
-    font-size: 1.2rem;
-  }
-  
-  .carousel-controls {
-    display: none;
-  }
-  
-  .places-carousel {
-    padding: 0 16px;
-    gap: 12px;
-  }
-  
-  .carousel-card {
-    flex: 0 0 280px;
-    height: 180px;
-  }
-  
-  .generate-recommendation-btn {
-    margin: 12px;
-    height: 45px;
-  }
-}
-
-/* Smooth scrolling for touch devices */
-@media (hover: none) and (pointer: coarse) {
-  .carousel-card:hover {
-    transform: none;
-    box-shadow: none;
-  }
-  
-  .carousel-card:hover .card-overlay {
-    transform: translateY(100%);
-  }
-  
-  .carousel-card:active .card-overlay {
-    transform: translateY(0);
-  }
-}
-
-
-/* Mobile Responsive */
-@media (max-width: 768px) {
-  .discover-content {
-    padding: 12px;
-  }
-  
-  .places-container {
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-  
-  .image-container {
-    height: 160px;
-  }
-}
+}}

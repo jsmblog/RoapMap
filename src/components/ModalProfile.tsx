@@ -61,7 +61,7 @@ const ModalProfile: React.FC<ModalProfileProps> = ({ isOpen, onClose }) => {
               <img
                 className="modal-profile-avatar"
                 src={
-                  currentUserData.photo
+                  currentUserData?.photo
                     ? currentUserData.photo
                     : "https://ionicframework.com/docs/img/demos/avatar.svg"
                 }
@@ -85,9 +85,7 @@ const ModalProfile: React.FC<ModalProfileProps> = ({ isOpen, onClose }) => {
                 <p className="stat-number texto-secundario">{currentUserData.followers.length || 0}</p>
                 <p className="stat-label texto-secundario">{t("friend")}</p>
               </div>
-          </div>
-    
-
+          </div>    
           <IonCardHeader>
             <IonCardTitle className="profile-name texto-quinto">
               {currentUserData?.name}

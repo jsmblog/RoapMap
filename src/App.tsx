@@ -23,6 +23,9 @@ import Terms from "./pages/Terms";
 import PrivacyPolicy from "./pages/PrivacyPolicy ";
 import Soporte from "./pages/Soporte";
 import Chats from "./pages/Chats";
+import GoogleCalendarAuth from "./pages/GoogleCalendarAuth";
+import CalendarLinked from "./pages/CalendarLinked";
+import Event from "./pages/Event";
 
 setupIonicReact();
 
@@ -87,7 +90,15 @@ const App: React.FC = () => {
           <ProtectedRoute path="/profile/:uid">
             <Profile />
           </ProtectedRoute>
-
+          <ProtectedRoute path="/auth/google/calendar">
+            <GoogleCalendarAuth />
+          </ProtectedRoute>
+          <ProtectedRoute path="/events">
+            <Event />
+          </ProtectedRoute>
+          <ProtectedRoute path="/:userId/calendar-linked">
+            <CalendarLinked />
+          </ProtectedRoute>
           <ProtectedRoute path="/discover">
             <Discover />
           </ProtectedRoute>

@@ -13,6 +13,7 @@ import {
   IonAvatar,
   IonCard,
   IonCardContent,
+  useIonRouter,
 } from '@ionic/react';
 import { chatbubbleOutline } from 'ionicons/icons';
 import { doc, updateDoc, arrayUnion } from 'firebase/firestore';
@@ -35,6 +36,7 @@ const ModalComments: React.FC<ModalCommentsProps> = ({ post, isOpen, onClose }) 
   const [submitting, setSubmitting] = useState(false);
   const { showToast, ToastComponent } = useToast();
   const { currentUserData } = useAuthContext();
+  const router = useIonRouter()
 
   const handleSubmit = async () => {
     const text = commentText.trim();
@@ -44,6 +46,7 @@ const ModalComments: React.FC<ModalCommentsProps> = ({ post, isOpen, onClose }) 
     }
     setSubmitting(true);
     const comment = {
+      id:currentUserData?.uid,
       p: currentUserData.photo || '',
       n: currentUserData.name,
       txt: text,
@@ -104,7 +107,7 @@ const ModalComments: React.FC<ModalCommentsProps> = ({ post, isOpen, onClose }) 
                       <img src={c.p || '/default-avatar.png'} alt="avatar" />
                     </IonAvatar>
                     <div className="comment-info">
-                      <h3 className="comment-username">@{c.n.replace(/\s+/g, '_')}</h3>
+                      <h3 onClick={() => router.push(`/profile/${c.id}`)} className="comment-username">@{c.n.replace(/\s+/g, '_')}</h3>
                       <IonText className="comment-time">
                        hace: {getTimeAgo(c.c)}
                       </IonText>

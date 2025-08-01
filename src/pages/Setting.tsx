@@ -31,6 +31,8 @@ import {
   moon,
   informationCircleOutline,
   megaphone,
+  timeOutline,
+  calendar,
 } from "ionicons/icons";
 import React, { useState } from "react";
 import "../styles/Setting.css";
@@ -54,7 +56,7 @@ const Setting: React.FC = () => {
     try {
       await signOut(AUTH_USER);
       await hideLoading();
-      router.push("/", "root");
+      router.push("/");
     } catch {
       await hideLoading();
     }
@@ -131,6 +133,7 @@ const Setting: React.FC = () => {
               defaultHref="/tab/home"
               className="iconos-oscuros"
               icon={chevronBack}
+              text=''
             />
           </IonButtons>
           <IonTitle className="settings-ion-title texto-quinto">
@@ -245,6 +248,19 @@ const Setting: React.FC = () => {
               className="setting-icons iconos-oscuros"
               slot="start"
               icon={bookmark}
+            />
+            <IonLabel>{t("saved")}</IonLabel>
+            <IonIcon
+              className="setting-icons iconos-oscuros"
+              slot="end"
+              icon={chevronForward}
+            />
+          </IonItem>
+          <IonItem className="options" button routerLink="/events">
+            <IonIcon
+              className="setting-icons iconos-oscuros"
+              slot="start"
+              icon={calendar}
             />
             <IonLabel>{t("saved")}</IonLabel>
             <IonIcon

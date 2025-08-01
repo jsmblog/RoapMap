@@ -16,7 +16,7 @@ export interface NearestPlaceProps {
   setInfo: (info: any) => void;
 }
 
-export interface FilterOptions {
+export interface Filters {
   types: string[];
   radius: number;
   openNow: boolean;
@@ -34,5 +34,5 @@ export interface SearchBarProps {
   setIsModalOpen: (open: boolean) => void;
   searchInputRef: React.RefObject<HTMLIonSearchbarElement | null>;
   onClear: () => void;
-  onFilterChange?: (options: FilterOptions) => void;
+  onFilterChange?: (options: Filters) => void;
 }

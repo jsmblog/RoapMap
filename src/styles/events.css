@@ -1,0 +1,240 @@
+:root {
+  --card-radius: 16px;
+  --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  --card-padding: 24px;
+  --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  --hover-shadow: 0 14px 28px rgba(0, 0, 0, 0.15);
+}
+
+.event-content {
+  --background: var(--background-color);
+}
+
+.event-header {
+  text-align: center;
+  padding: 30px 0 20px;
+}
+
+.event-header h1 {
+  color: var(--primary-color);
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin-bottom: 12px;
+  letter-spacing: -0.5px;
+}
+
+.event-header p {
+  color: var(--co-gray);
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.no-events {
+  text-align: center;
+  padding: 60px 20px;
+  margin: 20px auto;
+  max-width: 600px;
+}
+
+.no-events p {
+  color: var(--co-gray);
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.event-list {
+  background: transparent;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.event-container {
+  margin-bottom: 20px;
+}
+
+.event-card {
+  --background: var(--co-white);
+  border-radius: var(--card-radius);
+  padding: 2px;
+  transition: var(--transition);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  min-height: 160px;
+  position: relative;
+}
+
+.event-info {
+  flex: 1;
+}
+
+.event-title {
+  color: var(--primary-color);
+  font-weight: 700;
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.event-title:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50px;
+  height: 3px;
+  background: var(--secondary-color);
+  border-radius: 3px;
+}
+
+.event-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.event-date, .event-time, .event-duration {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  color: var(--co-gray);
+  font-weight: 500;
+}
+
+.meta-icon {
+  margin-right: 10px;
+  font-size: 1.2rem;
+  color: var(--primary-color);
+  background: var(--co-back-gray-4);
+  padding: 6px;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.time-container {
+  display: flex;
+  gap: 20px;
+}
+
+.event-description {
+  color: var(--text-color);
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-top: 15px;
+  padding: 15px;
+  background: var(--co-back-gray-2);
+  border-radius: 12px;
+  border-left: 3px solid var(--secondary-color);
+}
+
+.event-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 10px;
+}
+
+.action-btn-evt {
+  --border-radius: 12px;
+  --padding-start: 12px;
+  --padding-end: 12px;
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+  transition: var(--transition);
+}
+
+.action-icon-evt {
+  font-size: 1.4rem;
+}
+
+/* Formulario de edición */
+.edit-form {
+  width: 100%;
+}
+
+.custom-input, .custom-textarea, .custom-select {
+  --background: var(--co-white);
+  --border-radius: 12px;
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --highlight-color-focused: var(--primary-color);
+  margin-bottom: 20px;
+  --border-color: var(--co-back-gray-3);
+  --border-width: 1px;
+  --border-style: solid;
+  transition: var(--transition);
+}
+
+.custom-input:focus-within, 
+.custom-textarea:focus-within, 
+.custom-select:focus-within {
+  --border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(49, 87, 44, 0.1);
+}
+
+.custom-textarea {
+  min-height: 120px;
+}
+
+.date-time-container {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.date-picker, .time-picker {
+  flex: 1;
+}
+
+.date-picker ion-datetime-button, 
+.time-picker ion-datetime-button {
+  --background: var(--co-white);
+  --border-radius: 12px;
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --padding-top: 14px;
+  --padding-bottom: 14px;
+  border: 1px solid var(--co-back-gray-3);
+  font-weight: 500;
+}
+
+.edit-actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.cancel-button {
+  --background: transparent;
+  --color: var(--co-red-1);
+  --border-color: var(--co-red-1);
+  --border-width: 1px;
+  --border-style: solid;
+  flex: 1;
+}
+
+.save-button {
+  --background: var(--primary-color);
+  --color: var(--co-white);
+  flex: 2;
+  font-weight: 600;
+  box-shadow: 0 4px 10px rgba(49, 87, 44, 0.3);
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.event-card {
+  animation: fadeIn 0.6s ease forwards;
+}

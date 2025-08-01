@@ -20,4 +20,5 @@ export interface Message {
     text: string;
     type: string;
     timestamp: any;
+    photo: string;
 }
