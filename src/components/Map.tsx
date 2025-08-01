@@ -17,8 +17,6 @@ import { db } from "../Firebase/initializeApp";
 import { useAchievements } from "../hooks/UseAchievements";
 import { useToast } from "../hooks/UseToast";
 import { Filters } from "../Interfaces/iPlacesResults";
-import { generateUUID } from "../functions/uuid";
-import { formatDateTime } from "../functions/formatDate";
 
 const Map: React.FC<
   MapProps & {
@@ -227,14 +225,9 @@ const Map: React.FC<
 
           // Guardar en historial de Firestore
           try {
-            const objectHistory = {
-              id: generateUUID(),
-              name:place.name,
-              date: formatDateTime(new Date())
-            } 
             await setDoc(
               doc(db, 'USERS', authUser.uid),
-              { h: arrayUnion(objectHistory) },
+              { h: arrayUnion(place.name || input.value) },
               { merge: true }
             );
             if (!isAchievementUnlocked("first_search")) {
@@ -272,56 +265,10 @@ const Map: React.FC<
       setPlaceMarkers([]);
       setPlaces([]);
       setExpandedIdx(null);
-      directionsRenderer?.setDirections({ routes: [] } as any);
+      setInfo({ distance: "", duration: "", destination: null, place: null });
       setInfo({ distance: "", duration: "", destination: null, place: null });
     };
-  
-useEffect(() => {
-    if (!jsMap || !placesService || !userLocation) return;
-    clearMarkersAndRoute();
 
-    const request: google.maps.places.PlaceSearchRequest = {
-      location: new google.maps.LatLng(userLocation.lat, userLocation.lng),
-      radius: filters.radius,
-      openNow: filters.openNow || undefined,
-      type: filters.types.length > 0 ? filters.types[0] : undefined,
-      keyword: filters.types.length > 1 ? filters.types.join('|') : undefined,
-      minPriceLevel: filters.priceLevels.length ? Math.min(...filters.priceLevels) : undefined,
-      maxPriceLevel: filters.priceLevels.length ? Math.max(...filters.priceLevels) : undefined,
-    };
-
-    placesService.nearbySearch(request, (results, status) => {
-      if (status !== google.maps.places.PlacesServiceStatus.OK || !results) {
-        showToast('No se encontraron lugares con los filtros aplicados', 3000, 'warning');
-        return;
-      }
-
-      let filtered = results;
-      if (filters.minRating > 0) filtered = filtered.filter(r => (r.rating || 0) >= filters.minRating);
-
-      // Sort
-      filtered.sort((a, b) => {
-        switch (filters.sortBy) {
-          case 'rating': return (b.rating || 0) - (a.rating || 0);
-          case 'price': return (a.price_level || 0) - (b.price_level || 0);
-          case 'distance': {
-            const da = google.maps.geometry.spherical.computeDistanceBetween(a.geometry!.location!, new google.maps.LatLng(userLocation.lat, userLocation.lng));
-            const db = google.maps.geometry.spherical.computeDistanceBetween(b.geometry!.location!, new google.maps.LatLng(userLocation.lat, userLocation.lng));
-            return da - db;
-          }
-          default: return 0;
-        }
-      });
-
-      // Markers and details
-      const markers = filtered.map(r => new google.maps.Marker({ map: jsMap, position: r.geometry!.location!, title: r.name }));
-      setPlaceMarkers(markers);
-
-      const fields: (keyof google.maps.places.PlaceResult)[] = ['name', 'vicinity', 'rating', 'user_ratings_total', 'photos', 'opening_hours', 'types'];
-      Promise.all(filtered.map(r => new Promise<DetailedPlace>(resolve => placesService.getDetails({ placeId: r.place_id!, fields }, detail => resolve(detail as DetailedPlace)))))
-        .then(enriched => setPlaces(enriched));
-    });
-  }, [jsMap, placesService, userLocation, filters]);
     // Búsqueda por categoría
     useEffect(() => {
       if (!selectedCategory || !jsMap || !placesService || !userLocation) {
