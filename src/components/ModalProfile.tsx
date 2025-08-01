@@ -10,7 +10,6 @@ import {
   IonFooter,
   IonHeader,
   IonIcon,
-  IonItem,
   IonLabel,
   IonModal,
   IonTitle,
@@ -35,6 +34,10 @@ const ModalProfile: React.FC<ModalProfileProps> = ({ isOpen, onClose }) => {
       className="modal-profile"
       isOpen={isOpen}
       onDidDismiss={onClose}
+      backdropDismiss={true}
+      initialBreakpoint={0.98} // Altura fija: 58% del alto de pantalla
+      breakpoints={[0, 0.98]} // 👈 Solo permite bajar (cerrar), no subir
+      handleBehavior="none" 
     >
       <IonHeader>
         <IonToolbar className="tema-oscuro">
@@ -44,48 +47,21 @@ const ModalProfile: React.FC<ModalProfileProps> = ({ isOpen, onClose }) => {
           <IonTitle className="settings-ion-title texto-quinto">
             {t("profile")}
           </IonTitle>
-          <IonButton
-            slot="end"
-            onClick={() => setIsModalOpenPrivacy(true)}
-            fill="clear"
-          >
-            <IonIcon className="icon-information" icon={informationCircle} />
-          </IonButton>
+
         </IonToolbar>
       </IonHeader>
 
       <IonContent className="ion-padding" fullscreen={true}>
         <IonCard className="card-profile">
-          <div className="container-avatar-more-info">
-            <div className="avatar-wrapper">
-              <img
-                className="modal-profile-avatar"
-                src={
-                  currentUserData?.photo
-                    ? currentUserData.photo
-                    : "https://ionicframework.com/docs/img/demos/avatar.svg"
-                }
-                alt="avatar"
-              />
-              {currentUserData.verified && (
-                <IonIcon icon={checkmarkCircle} className="verified-badge" />
-              )}
-            </div>
-            <div className="profile-user-more-info">
-              <div className="stat-item">
-                <p className="stat-number texto-secundario ">{currentUserData.favorites.length || 0}</p>
-                <p className="stat-label texto-secundario">{t("place")}</p>
-              </div>
-              <div className="stat-item">
-                <p className="stat-number texto-secundario ">{currentUserData.achievements.length || 0}</p>
-                <p className="stat-label texto-secundario">{t("Ach")}</p>
-              </div>
-            </div>
-             <div className="stat-item">
-                <p className="stat-number texto-secundario">{currentUserData.followers.length || 0}</p>
-                <p className="stat-label texto-secundario">{t("friend")}</p>
-              </div>
-          </div>    
+          <img
+            className="modal-profile-avatar"
+            src={
+              currentUserData?.photo
+                ? currentUserData.photo
+                : "https://ionicframework.com/docs/img/demos/avatar.svg"
+            }
+            alt="avatar"
+          />
           <IonCardHeader>
             <IonCardTitle className="profile-name texto-quinto">
               {currentUserData?.name}
@@ -106,31 +82,43 @@ const ModalProfile: React.FC<ModalProfileProps> = ({ isOpen, onClose }) => {
               {locationDetails
                 ? `${locationDetails.city}, ${locationDetails.state}, ${locationDetails.country}`
                 : t("loadingLocation")}
-            </span>  
+            </span>
           </IonCardContent>
         </IonCard>
-       <div className="modal-profile-container-logros">
+        <div className="modal-profile-container-logros">
           <IonLabel className="profile-subtitle texto-quinto ionlabelSubtitle"> {t("achievements")}</IonLabel>
-        {currentUserData.achievements && currentUserData.achievements.length > 0 && (
-              <div className="highlights-section tema-oscuro2">
-                <div className="highlights-container modal-profile-logros">
-                  {currentUserData.achievements.map((achievement: string, index: number) => (
-                    <div key={index} className="highlight-item">
-                      <div className="highlight-circle">
-                        <IonIcon icon={checkmarkCircle} />
-                      </div>
-                      <span className="highlight-label texto-primario ">{achievement}</span>
+          {currentUserData.achievements && currentUserData.achievements.length > 0 && (
+            <div className="highlights-section logros-contenedor tema-oscuro2">
+              <div className="highlights-container modal-profile-logros">
+                {currentUserData.achievements.map((achievement: string, index: number) => (
+                  <div key={index} className="highlight-item">
+                    <div className="highlight-circle">
+                      <IonIcon icon={checkmarkCircle} />
                     </div>
-                  ))}
-                </div>
+                    <span className="highlight-label texto-primario ">{achievement}</span>
+                  </div>
+                ))}
               </div>
-            )}
-       </div>
+            </div>
+          )}
+        </div>
 
         <IonFooter className="footer-profile">
           <IonToolbar className="toolbar-profile">
             <IonButton className="btn-edit-profile " routerLink="/edit-profile">
               {t("editProfile")}
+            </IonButton>
+          </IonToolbar>
+          <IonToolbar>
+            <IonButton
+              slot="end"
+              onClick={() => {
+                setIsModalOpenPrivacy(true);
+                onClose(); // <- aquí cierras la modal actual
+              }}
+              fill="clear"
+            >
+              <IonIcon className="icon-information" icon={informationCircle} />
             </IonButton>
           </IonToolbar>
         </IonFooter>
